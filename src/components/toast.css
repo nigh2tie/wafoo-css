@@ -1,0 +1,195 @@
+@layer components {
+  /* Toast - Lightweight notification component */
+  .wf-toast {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--wf-space-3);
+    padding: var(--wf-space-3) var(--wf-space-4);
+    background: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border);
+    border-left: 3px solid var(--wf-color-accent);
+    border-radius: var(--wf-radius-md);
+    box-shadow: var(--wf-shadow-md);
+    min-width: 280px;
+    max-width: 480px;
+  }
+
+  .wf-toast__content {
+    flex: 1;
+    font-size: var(--wf-font-sm);
+    line-height: var(--wf-leading-normal);
+    color: var(--wf-color-text);
+  }
+
+  .wf-toast__title {
+    font-weight: 700;
+    margin-bottom: var(--wf-space-1);
+    color: var(--wf-color-text);
+  }
+
+  .wf-toast__close {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--wf-color-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--wf-radius-sm);
+    transition: color var(--wf-duration-fast) var(--wf-ease-out);
+  }
+
+  .wf-toast__close:hover {
+    color: var(--wf-color-text);
+    background: var(--wf-surface-muted);
+  }
+
+  .wf-toast__close:focus-visible {
+    outline: 2px solid var(--wf-focus);
+    outline-offset: 2px;
+  }
+
+  /* Toast variants */
+  .wf-toast--success {
+    border-left-color: var(--wf-success);
+    background: var(--wf-surface-base);
+  }
+
+  .wf-toast--success .wf-toast__title {
+    color: var(--wf-success);
+  }
+
+  .wf-toast--warning {
+    border-left-color: var(--wf-warning);
+    background: var(--wf-surface-base);
+  }
+
+  .wf-toast--warning .wf-toast__title {
+    color: var(--wf-warning);
+  }
+
+  .wf-toast--danger {
+    border-left-color: var(--wf-danger);
+    background: var(--wf-surface-base);
+  }
+
+  .wf-toast--danger .wf-toast__title {
+    color: var(--wf-danger);
+  }
+
+  /* Toast container (for positioning multiple toasts) */
+  .wf-toast-container {
+    position: fixed;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-space-3);
+    padding: var(--wf-space-4);
+    pointer-events: none;
+  }
+
+  .wf-toast-container .wf-toast {
+    pointer-events: auto;
+    animation: wf-toast-in var(--wf-duration-base) var(--wf-ease-out);
+  }
+
+  /* Container positions */
+  .wf-toast-container--top-right {
+    top: 0;
+    right: 0;
+  }
+
+  .wf-toast-container--top-left {
+    top: 0;
+    left: 0;
+  }
+
+  .wf-toast-container--bottom-right {
+    bottom: 0;
+    right: 0;
+  }
+
+  .wf-toast-container--bottom-left {
+    bottom: 0;
+    left: 0;
+  }
+
+  .wf-toast-container--top-center {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .wf-toast-container--bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* Animations */
+  @keyframes wf-toast-in {
+    from {
+      opacity: 0;
+      transform: translateY(-8px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .wf-toast.is-removing {
+    animation: wf-toast-out var(--wf-duration-base) var(--wf-ease-in) forwards;
+  }
+
+  @keyframes wf-toast-out {
+    from {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    to {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.95);
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .wf-toast-container .wf-toast {
+      animation: none;
+    }
+
+    .wf-toast.is-removing {
+      animation: none;
+      opacity: 0;
+    }
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 600px) {
+    .wf-toast {
+      min-width: 0;
+      max-width: 100%;
+    }
+
+    .wf-toast-container {
+      left: var(--wf-space-2);
+      right: var(--wf-space-2);
+      padding: var(--wf-space-2);
+    }
+
+    .wf-toast-container--top-center,
+    .wf-toast-container--bottom-center {
+      left: var(--wf-space-2);
+      right: var(--wf-space-2);
+      transform: none;
+    }
+  }
+}

@@ -613,5 +613,72 @@
     document.querySelectorAll(".wf-table").forEach(table => {
       if (table.querySelector(".wf-sort")) sortableTable(table);
     });
+
+    // Code blocks with copy button: auto-detect [data-wf-codeblock]
+    document.querySelectorAll("[data-wf-codeblock]").forEach(pre => codeblock(pre));
   });
+
+  function codeblock(pre) {
+    if (!pre) return;
+
+    // Add copy button if not already present
+    if (pre.querySelector(".wf-code-copy")) return;
+
+    pre.classList.add("wf-code-block--copy");
+
+    const btn = document.createElement("button");
+    btn.className = "wf-code-copy";
+    btn.textContent = "コピー";
+    btn.type = "button";
+    btn.setAttribute("aria-label", "コードをコピー");
+
+    pre.appendChild(btn);
+
+    on(btn, "click", async () => {
+      const code = pre.querySelector("code") || pre;
+      const text = code.textContent || code.innerText;
+
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          // Fallback for older browsers
+          const textarea = document.createElement("textarea");
+          textarea.value = text;
+          textarea.style.position = "fixed";
+          textarea.style.opacity = "0";
+          document.body.appendChild(textarea);
+          textarea.select();
+          document.execCommand("copy");
+          document.body.removeChild(textarea);
+        }
+
+        // Visual feedback
+        const originalText = btn.textContent;
+        btn.textContent = "コピーしました！";
+        btn.classList.add("is-copied");
+
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.classList.remove("is-copied");
+        }, 2000);
+      } catch (err) {
+        btn.textContent = "コピー失敗";
+        setTimeout(() => {
+          btn.textContent = "コピー";
+        }, 2000);
+      }
+    });
+  }
+
+  window.WFUI = {
+    tooltip,
+    popover,
+    dropdown,
+    modal,
+    offcanvas,
+    tabs,
+    sortableTable,
+    codeblock
+  };
 })();

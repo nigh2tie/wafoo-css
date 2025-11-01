@@ -15,17 +15,17 @@
     position: relative;
     box-shadow:
       0 4px 6px rgba(0, 0, 0, 0.1),
-      inset 0 0 30px rgba(var(--wf-koubai-rgb), 0.05);
+      inset 0 0 30px var(--wf-overlay-light);
   }
 
-  /* Decorative corner borders (飾り枠) */
+  /* Decorative corner borders (飾り枠) - uses theme accent color */
   .wf-card-washi::before,
   .wf-card-washi::after {
     content: "";
     position: absolute;
     width: 30px;
     height: 30px;
-    border: 2px solid var(--wf-koubai);
+    border: 2px solid var(--wf-color-accent);
   }
 
   .wf-card-washi::before {

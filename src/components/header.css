@@ -16,7 +16,7 @@
     letter-spacing: 0.2em;
   }
 
-  /* Traditional color stripe (伝統色ストライプ) */
+  /* Theme color stripe (テーマカラーストライプ) */
   .wf-header-noren::after {
     content: "";
     position: absolute;
@@ -26,12 +26,12 @@
     height: 4px;
     background: repeating-linear-gradient(
       90deg,
-      var(--wf-koubai),
-      var(--wf-koubai) 10px,
-      var(--wf-sakura) 10px,
-      var(--wf-sakura) 20px,
-      var(--wf-fuji) 20px,
-      var(--wf-fuji) 30px
+      var(--wf-color-accent),
+      var(--wf-color-accent) 10px,
+      var(--wf-surface-subtle) 10px,
+      var(--wf-surface-subtle) 20px,
+      var(--wf-color-accent) 20px,
+      var(--wf-color-accent) 30px
     );
   }
 }

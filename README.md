@@ -81,10 +81,13 @@ bash scripts/build.sh
 - **Noto Serif JP（明朝体）** - 日本語に最適化されたタイポグラフィ
 - **和紙テクスチャ** - 背景全体に和紙のような質感
 - **伝統色パレット** - 紅梅・藤・桜・白百合・墨・灰
+- **完全なテーマシステム** - 10種類のテーマ（桜、紅梅、萌黄、菊、氷、柳、紅葉、藤、鶯、雪）で全コンポーネントが正しく色継承
 - **テーマ対応グラデーション** - 各テーマに最適化された配色
 - **和風コンポーネント** - 判子（ハンコ）、暖簾ヘッダー、和紙風カード
 - **漢数字サポート** - 壱・弐・参・肆などの表示
-- **10種類のテーマ** - 桜、紅梅、萌黄、菊、氷、柳、紅葉、藤、鶯、雪
+- **拡張されたデザイントークン** - 行間、シャドウ、アニメーション時間、イージング関数を体系化
+- **軽量** - gzip圧縮後わずか9.6KB（10KB予算内）
+- **自動初期化** - `data-wf-*`属性による宣言的なコンポーネント制御
 
 ## 含まれるファイル
 
@@ -99,7 +102,7 @@ wafoo-css/
 ├── src/
 │   ├── tokens.css       # デザイントークン（色、スペーシング等）
 │   ├── base.css         # ベーススタイル
-│   ├── components/      # コンポーネントCSS（26ファイル）
+│   ├── components/      # コンポーネントCSS（29ファイル）
 │   ├── utilities.css    # ユーティリティクラス
 │   └── themes.css       # 10種類のテーマ
 │
@@ -127,7 +130,7 @@ bash scripts/build.sh
 
 このコマンドは以下を実行します。
 
-1. src/の30個のCSSファイルを1つに結合
+1. src/の33個のCSSファイルを1つに結合
 2. PostCSSでautoprefixerを適用
 3. cssnanoで圧縮して dist/wafoo.min.css を生成
 
@@ -340,6 +343,8 @@ npm run lint:css:fix  # 自動修正
 
 これらのコンポーネントは `dist/wafoo.js` が必要です。
 
+**自動初期化**: `data-wf-*`属性を使用することで、JavaScriptコードを書かずにコンポーネントが自動的に初期化されます。
+
 #### Tabs
 
 ```html
@@ -429,6 +434,60 @@ npm run lint:css:fix  # 自動修正
   <span class="wf-sr-only">読み込み中…</span>
 </div>
 ```
+
+### Toast（通知）
+
+```html
+<!-- 基本 -->
+<div class="wf-toast">
+  <div class="wf-toast__content">
+    <div class="wf-toast__title">お知らせ</div>
+    新しいメッセージが届きました
+  </div>
+  <button class="wf-toast__close" aria-label="閉じる">×</button>
+</div>
+
+<!-- 成功/警告/エラー -->
+<div class="wf-toast wf-toast--success">...</div>
+<div class="wf-toast wf-toast--warning">...</div>
+<div class="wf-toast wf-toast--danger">...</div>
+```
+
+### Divider（区切り線）
+
+```html
+<!-- 水平線 -->
+<hr class="wf-divider">
+
+<!-- テキスト付き -->
+<div class="wf-divider wf-divider--text">または</div>
+
+<!-- 垂直線 -->
+<div style="display: flex; align-items: center;">
+  <span>項目A</span>
+  <div class="wf-divider wf-divider--vertical"></div>
+  <span>項目B</span>
+</div>
+```
+
+### KBD / Code
+
+```html
+<!-- キーボードキー -->
+<kbd class="wf-kbd">Ctrl</kbd> + <kbd class="wf-kbd">S</kbd>
+
+<!-- インラインコード -->
+<code class="wf-code">const name = "wafoo"</code>
+
+<!-- コードブロック（コピー機能付き） -->
+<pre class="wf-code-block" data-wf-codeblock><code>
+function greet(name) {
+  return `こんにちは、${name}さん`;
+}
+</code></pre>
+```
+
+`data-wf-codeblock`属性を付けると、自動的に「コピー」ボタンが追加され、クリックでコードをクリップボードにコピーできます。Clipboard API対応ブラウザで動作します。
 
 ### 和風コンポーネント
 
@@ -554,7 +613,7 @@ wafoo-cssには10種類の伝統的な日本の色テーマが含まれていま
 </body>
 ```
 
-利用可能なテーマ
+### 利用可能なテーマ
 
 - `theme-sakura`（桜）- 桜色の優しいピンク
 - `theme-koubai`（紅梅）- 紅梅の鮮やかなピンク
@@ -566,6 +625,27 @@ wafoo-cssには10種類の伝統的な日本の色テーマが含まれていま
 - `theme-fuji`（藤）- 藤の薄紫
 - `theme-uguisu`（鶯）- 鶯色の渋い緑
 - `theme-yuki`（雪）- 雪のような白とグレー
+
+### 完全なテーマ継承
+
+全てのテーマには、以下の完全な変数セットが含まれています：
+
+- **基本色**: `--wf-color-accent`, `--wf-color-bg`, `--wf-primary-bg`
+- **派生色**: hover/active状態、境界線（通常/subtle/strong）、サーフェス（base/subtle/muted）
+- **グラデーション**: テーマ専用の開始色/終了色
+
+これにより、ボタンのホバー効果、カードの装飾枠、フォームのラベル、グラデーションボタンなど、**全てのコンポーネント**がテーマ切り替えに正しく反応します。
+
+### JavaScriptでテーマ切り替え
+
+```javascript
+// テーマを動的に変更
+document.body.className = 'theme-momiji';
+
+// 複数クラスがある場合
+document.body.classList.remove('theme-sakura');
+document.body.classList.add('theme-koori');
+```
 
 ## 作者
 

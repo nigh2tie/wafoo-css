@@ -36,6 +36,9 @@ FILES=(
   "$ROOT_DIR/src/components/floating-label.css"
   "$ROOT_DIR/src/components/tooltip.css"
   "$ROOT_DIR/src/components/popover.css"
+  "$ROOT_DIR/src/components/toast.css"
+  "$ROOT_DIR/src/components/divider.css"
+  "$ROOT_DIR/src/components/code.css"
   "$ROOT_DIR/src/utilities.css"
 )
 

@@ -76,22 +76,28 @@
     --wf-font-md: 1rem;
     --wf-font-lg: 1.125rem;
 
+    /* Line heights */
+    --wf-leading-none: 1;
+    --wf-leading-tight: 1.25;
+    --wf-leading-normal: 1.5;
+    --wf-leading-relaxed: 1.75;
+
     /* Radius scale */
     --wf-radius-sm: 4px;
     --wf-radius-md: 8px;
     --wf-radius-lg: 12px;
     --wf-radius-full: 9999px;
 
-    /* Spacing scale */
-    --wf-space-half: 2px;
-    --wf-space-1: 4px;
-    --wf-space-2: 8px;
-    --wf-space-3: 12px;
-    --wf-space-4: 16px;
-    --wf-space-6: 24px;
-    --wf-space-8: 32px;
-    --wf-space-10: 40px;
-    --wf-space-12: 48px;
+    /* Spacing scale (4px base unit for precision, aligned with 8px grid) */
+    --wf-space-half: 2px; /* 0.5x */
+    --wf-space-1: 4px; /* 1x base */
+    --wf-space-2: 8px; /* 2x = 8px grid */
+    --wf-space-3: 12px; /* 3x */
+    --wf-space-4: 16px; /* 4x = 2 * 8px */
+    --wf-space-6: 24px; /* 6x = 3 * 8px */
+    --wf-space-8: 32px; /* 8x = 4 * 8px */
+    --wf-space-10: 40px; /* 10x = 5 * 8px */
+    --wf-space-12: 48px; /* 12x = 6 * 8px */
 
     /* Breakpoints */
     --wf-breakpoint-sm: 600px;
@@ -113,9 +119,9 @@
     --wf-btn-gap-md: var(--wf-space-2);
     --wf-btn-gap-lg: var(--wf-space-3);
 
-    /* Gradient button colors */
-    --wf-gradient-start: var(--wf-koubai);
-    --wf-gradient-end: var(--wf-fuji);
+    /* Gradient button colors (theme-aware) */
+    --wf-gradient-start: var(--wf-primary-bg);
+    --wf-gradient-end: var(--wf-color-accent);
 
     /* Stamp */
     --wf-stamp-color: var(--wf-primary-bg);
@@ -145,12 +151,29 @@
     --wf-surface-subtle: #faf7f5;
     --wf-surface-muted: #f5f2ef;
 
-    /* Shadow & overlay opacity */
+    /* Shadows - layered depth system */
+    --wf-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    --wf-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --wf-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+    --wf-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+
+    /* Legacy shadow (keep for compatibility) */
     --wf-shadow-subtle: rgba(0, 0, 0, 0.08);
     --wf-overlay-light: rgba(255, 255, 255, 0.06);
 
     /* Disabled state */
     --wf-disabled-bg: #f0f0f0;
     --wf-disabled-fg: #999999;
+
+    /* Animation & Transition durations */
+    --wf-duration-fast: 150ms;
+    --wf-duration-base: 250ms;
+    --wf-duration-slow: 350ms;
+    --wf-duration-slower: 500ms;
+
+    /* Easing functions */
+    --wf-ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --wf-ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --wf-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }

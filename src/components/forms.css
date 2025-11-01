@@ -10,7 +10,7 @@
   /* Japanese decorative marker (和風装飾) */
   .wf-label::before {
     content: "◆";
-    color: var(--wf-koubai);
+    color: var(--wf-color-accent);
     margin-right: 0.5rem;
   }
   .wf-input,

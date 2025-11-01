@@ -1,0 +1,137 @@
+@layer components {
+  /* Code - Inline code and keyboard elements */
+
+  /* Inline code */
+  .wf-code,
+  code {
+    display: inline-block;
+    padding: 2px var(--wf-space-2);
+    font-family:
+      ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.875em;
+    line-height: var(--wf-leading-tight);
+    color: var(--wf-color-text);
+    background: var(--wf-surface-muted);
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-sm);
+  }
+
+  /* Keyboard key */
+  .wf-kbd,
+  kbd {
+    display: inline-block;
+    padding: 2px var(--wf-space-2);
+    font-family:
+      ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: 0.875em;
+    font-weight: 600;
+    line-height: var(--wf-leading-none);
+    color: var(--wf-color-text);
+    background: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border-strong);
+    border-bottom-width: 2px;
+    border-radius: var(--wf-radius-sm);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.08);
+    white-space: nowrap;
+  }
+
+  /* Code block (for pre > code) */
+  .wf-code-block,
+  pre {
+    position: relative;
+    display: block;
+    padding: var(--wf-space-4);
+    margin: var(--wf-space-4) 0;
+    font-family:
+      ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    font-size: var(--wf-font-sm);
+    line-height: var(--wf-leading-relaxed);
+    color: var(--wf-color-text);
+    background: var(--wf-surface-muted);
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-md);
+    overflow-x: auto;
+  }
+
+  /* Code block with copy button */
+  .wf-code-block--copy,
+  pre.wf-code-block--copy {
+    padding-top: var(--wf-space-10);
+  }
+
+  /* Copy button */
+  .wf-code-copy {
+    position: absolute;
+    top: var(--wf-space-2);
+    right: var(--wf-space-2);
+    padding: var(--wf-space-2) var(--wf-space-3);
+    font-size: var(--wf-font-sm);
+    font-family: var(--wf-font-family-sans);
+    color: var(--wf-color-muted);
+    background: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-sm);
+    cursor: pointer;
+    transition: all var(--wf-duration-fast) var(--wf-ease-out);
+  }
+
+  .wf-code-copy:hover {
+    color: var(--wf-color-text);
+    background: var(--wf-surface-subtle);
+    border-color: var(--wf-color-border-strong);
+  }
+
+  .wf-code-copy:focus-visible {
+    outline: 2px solid var(--wf-focus);
+    outline-offset: 2px;
+  }
+
+  .wf-code-copy.is-copied {
+    color: var(--wf-success);
+    border-color: var(--wf-success);
+  }
+
+  pre code,
+  .wf-code-block code {
+    padding: 0;
+    background: transparent;
+    border: none;
+    font-size: inherit;
+  }
+
+  /* Small variant */
+  .wf-code--sm,
+  .wf-kbd--sm {
+    font-size: 0.75em;
+    padding: 1px 4px;
+  }
+
+  /* Large variant */
+  .wf-code--lg,
+  .wf-kbd--lg {
+    font-size: 1em;
+    padding: 4px var(--wf-space-3);
+  }
+
+  /* Keyboard combination */
+  .wf-kbd-combo {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  .wf-kbd-combo .wf-kbd,
+  .wf-kbd-combo kbd {
+    margin: 0;
+  }
+
+  .wf-kbd-combo::before {
+    content: "+";
+    color: var(--wf-color-muted);
+    font-weight: 400;
+  }
+
+  .wf-kbd-combo:first-child::before {
+    content: none;
+  }
+}
