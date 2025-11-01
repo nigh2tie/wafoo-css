@@ -248,7 +248,7 @@ function generate() {
 
   const outputPath = path.join(__dirname, "..", "src", "utilities.css");
   fs.writeFileSync(outputPath, output, "utf8");
-  console.log(`✅ Generated: ${outputPath}`);
+  console.log(`Generated: ${outputPath}`);
 }
 
 // Run if called directly

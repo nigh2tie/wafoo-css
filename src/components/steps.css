@@ -27,6 +27,17 @@
     font-size: var(--wf-step-bullet-font);
     font-weight: 700;
   }
+
+  /* Kanji numbers support (漢数字) */
+  /* Use data-kanji attribute: <span class="wf-step__bullet" data-kanji="壱">1</span> */
+  .wf-step__bullet[data-kanji] {
+    font-size: 0;
+  }
+
+  .wf-step__bullet[data-kanji]::before {
+    content: attr(data-kanji);
+    font-size: var(--wf-step-bullet-font);
+  }
   .wf-step.is-current .wf-step__bullet {
     border-color: var(--wf-color-accent);
     color: var(--wf-color-accent);

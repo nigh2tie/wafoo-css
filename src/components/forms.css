@@ -3,7 +3,15 @@
   .wf-label {
     display: block;
     margin: 0 0 var(--wf-space-2);
-    font-weight: 600;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+  }
+
+  /* Japanese decorative marker (和風装飾) */
+  .wf-label::before {
+    content: "◆";
+    color: var(--wf-koubai);
+    margin-right: 0.5rem;
   }
   .wf-input,
   .wf-textarea,

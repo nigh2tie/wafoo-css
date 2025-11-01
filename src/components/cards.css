@@ -8,15 +8,37 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   }
   .wf-card-washi {
-    background: repeating-linear-gradient(
-      45deg,
-      var(--wf-surface-base),
-      var(--wf-surface-base) 10px,
-      var(--wf-surface-subtle) 10px,
-      var(--wf-surface-subtle) 20px
-    );
-    border: 1px solid var(--wf-color-border);
-    border-radius: var(--wf-radius-md);
-    padding: var(--wf-space-4);
+    background: var(--wf-surface-base);
+    border: none;
+    border-radius: 0;
+    padding: 3rem;
+    position: relative;
+    box-shadow:
+      0 4px 6px rgba(0, 0, 0, 0.1),
+      inset 0 0 30px rgba(var(--wf-koubai-rgb), 0.05);
+  }
+
+  /* Decorative corner borders (飾り枠) */
+  .wf-card-washi::before,
+  .wf-card-washi::after {
+    content: "";
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--wf-koubai);
+  }
+
+  .wf-card-washi::before {
+    top: 10px;
+    left: 10px;
+    border-right: none;
+    border-bottom: none;
+  }
+
+  .wf-card-washi::after {
+    bottom: 10px;
+    right: 10px;
+    border-left: none;
+    border-top: none;
   }
 }

@@ -49,10 +49,14 @@
     color: var(--wf-color-muted);
     padding: var(--wf-space-1);
     border-radius: var(--wf-radius-sm);
+    transition:
+      color 0.2s ease,
+      background-color 0.2s ease;
   }
   .wf-modal__close:hover,
   .wf-modal__close:focus-visible {
-    color: var(--wf-color-text);
+    color: var(--wf-color-accent);
+    background: var(--wf-surface-muted);
   }
 
   .wf-modal__body {

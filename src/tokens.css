@@ -1,8 +1,28 @@
 /* Design Tokens */
 @layer tokens, base, components, utilities;
 
+/* Import Japanese serif font */
+@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&display=swap");
+
 @layer tokens {
   :root {
+    /* Typography - Japanese serif for wa-fu aesthetics */
+    --wf-font-family: "Noto Serif JP", serif;
+    --wf-font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    /* Traditional colors (十二単の伝統色) */
+    --wf-koubai: #f4a7b9; /* 紅梅 - red plum */
+    --wf-fuji: #b28fce; /* 藤 - wisteria */
+    --wf-sakura: #fddede; /* 桜 - cherry blossom */
+    --wf-shirayuri: #f8f4e6; /* 白百合 - white lily */
+    --wf-sumi: #2c2c2c; /* 墨 - ink */
+    --wf-hai: #828282; /* 灰 - ash */
+
+    /* RGB values for gradients */
+    --wf-koubai-rgb: 244, 167, 185;
+    --wf-fuji-rgb: 178, 143, 206;
+    --wf-sakura-rgb: 253, 222, 222;
+
     /* Color primitives */
     --wf-ink-900: #1f1f1f;
     --wf-ink-700: #444444;
@@ -92,6 +112,10 @@
     --wf-btn-gap-sm: var(--wf-space-2);
     --wf-btn-gap-md: var(--wf-space-2);
     --wf-btn-gap-lg: var(--wf-space-3);
+
+    /* Gradient button colors */
+    --wf-gradient-start: var(--wf-koubai);
+    --wf-gradient-end: var(--wf-fuji);
 
     /* Stamp */
     --wf-stamp-color: var(--wf-primary-bg);

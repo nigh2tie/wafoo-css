@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "description": "Japanese-inspired CSS framework (MVP)",
-  "author": "Masashi Yokoyama",
+  "author": "Q_Q",
   "license": "MIT",
   "scripts": {
     "build": "bash scripts/build.sh",

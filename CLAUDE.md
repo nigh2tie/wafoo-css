@@ -2,6 +2,18 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+## ⚠️ CRITICAL: Git Operations
+
+**NEVER push to remote repositories without explicit user permission.**
+
+When the user asks to "create a commit" or "prepare for release":
+1. STOP before running `git push`
+2. Show the user what will be committed
+3. ASK for explicit permission: "May I push to GitHub?"
+4. ONLY push if the user explicitly says "yes" or "push it"
+
+**Violations of this rule cause serious problems and must be avoided at all costs.**
+
 ## Project Overview
 
 **wafoo-css** is a Japanese-inspired (和風) CSS framework providing components styled with traditional Japanese aesthetics. The project is currently in MVP phase with plans for expansion. It includes buttons, cards, forms, alerts, and unique components like stamps (判子) and noren headers (暖簾).
@@ -41,6 +53,7 @@ gzip -c dist/wafoo.min.css | wc -c  # Target: <10KB
 ```
 src/
 ├── tokens.css              # Design tokens (colors, spacing, typography)
+├── themes.css              # 10 traditional Japanese color themes
 ├── base.css                # Reset, typography, layout containers
 ├── components/             # Component styles
 │   ├── buttons.css         # Button variants & states
@@ -50,8 +63,7 @@ src/
 │   ├── header.css          # Noren (暖簾) header
 │   ├── steps.css           # Progress steps
 │   └── alerts.css          # Alert/status messages
-├── utilities.css           # Spacing utilities
-└── themes.css              # Color theme overrides
+└── utilities.css           # Spacing utilities
 
 dist/                       # Build output (do not edit directly)
 docs/                       # Documentation & demos
@@ -61,11 +73,12 @@ examples/                   # Usage examples
 ### Build Order
 The build script concatenates CSS in this specific order (important for cascade):
 1. tokens.css
-2. base.css
-3. components/* (buttons, stamp, cards, forms, header, steps, alerts)
-4. utilities.css
+2. themes.css (10 traditional Japanese color themes)
+3. base.css
+4. components/* (buttons, stamp, cards, forms, header, steps, alerts, etc.)
+5. utilities.css
 
-Note: `themes.css` is standalone and must be included separately after the main CSS.
+All themes are bundled into the main `dist/wafoo.css` file - no separate inclusion needed.
 
 ### Design Token System
 
@@ -246,15 +259,15 @@ Follow Conventional Commits format:
 ## Project Status & Roadmap
 
 **Current Phase**: MVP (v0.1.0) - Accessibility & DX Improvements
-- ✅ Core components (buttons, cards, forms, alerts, tabs, tables, modals, tooltips, etc.)
-- ✅ Design token system
-- ✅ Unique Japanese-inspired elements (stamp, noren header)
-- ✅ 10 traditional color themes
-- ✅ PostCSS build pipeline with autoprefixer and cssnano
-- ✅ WFUI auto-initialization for interactive components
-- ✅ Comprehensive accessibility: skip links, ARIA landmarks, keyboard navigation, screen reader support
-- ✅ Stylelint + Prettier setup with CI/CD
-- ✅ Utility class generator script
+- Core components (buttons, cards, forms, alerts, tabs, tables, modals, tooltips, etc.)
+- Design token system
+- Unique Japanese-inspired elements (stamp, noren header)
+- 10 traditional color themes
+- PostCSS build pipeline with autoprefixer and cssnano
+- WFUI auto-initialization for interactive components
+- Comprehensive accessibility: skip links, ARIA landmarks, keyboard navigation, screen reader support
+- Stylelint + Prettier setup with CI/CD
+- Utility class generator script
 
 **Next Phase**: Growth (v0.5.0)
 - Grid system

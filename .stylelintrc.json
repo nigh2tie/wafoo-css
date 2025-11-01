@@ -14,8 +14,9 @@
     "property-no-vendor-prefix": null,
     "value-keyword-case": [
       "lower",
-      { "ignoreKeywords": ["currentColor"] }
+      { "ignoreKeywords": ["currentColor", "BlinkMacSystemFont"] }
     ],
+    "custom-property-pattern": null,
     "color-hex-length": null,
     "color-function-notation": null,
     "alpha-value-notation": null,

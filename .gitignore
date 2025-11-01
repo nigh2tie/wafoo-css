@@ -18,9 +18,14 @@ NOTES-private.md
 CHANGELOG.md
 AGENTS.md
 
-# Development Tools
-# ------------------
+# Development Files (Internal Use Only)
+# --------------------------------------
+CLAUDE.md
+examples/
 devserver/
+docs/
+.github/
+test-app/
 
 # AI Assistants & Tools
 # ----------------------

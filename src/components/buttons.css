@@ -40,6 +40,36 @@
     background: var(--wf-primary-bg-active);
   }
 
+  /* Japanese gradient button (和風グラデーション) */
+  .wf-btn-gradient {
+    background: linear-gradient(135deg, var(--wf-gradient-start), var(--wf-gradient-end));
+    border-color: transparent;
+    color: #ffffff;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .wf-btn-gradient::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+  }
+
+  .wf-btn-gradient:hover::before {
+    left: 100%;
+  }
+
+  .wf-btn-gradient:hover {
+    filter: brightness(1.1);
+  }
+
   .wf-btn-outline {
     background: var(--wf-surface-base);
     color: var(--wf-link-color);

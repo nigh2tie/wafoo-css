@@ -11,6 +11,8 @@
   --wf-surface-base: #ffffff;
   --wf-surface-subtle: #fff5f7;
   --wf-surface-muted: #ffe8ed;
+  --wf-gradient-start: #f4b3c2;
+  --wf-gradient-end: #fddede;
 }
 
 .theme-koubai {
@@ -24,6 +26,8 @@
   --wf-surface-base: #ffffff;
   --wf-surface-subtle: #fff8fa;
   --wf-surface-muted: #ffe5ed;
+  --wf-gradient-start: #e35c8d;
+  --wf-gradient-end: #b28fce;
 }
 
 .theme-moe {
@@ -37,6 +41,8 @@
   --wf-surface-base: #ffffff;
   --wf-surface-subtle: #fffcf0;
   --wf-surface-muted: #f5f0d6;
+  --wf-gradient-start: #a9d18e;
+  --wf-gradient-end: #d4e8a0;
 }
 
 .theme-kiku {
@@ -50,19 +56,23 @@
   --wf-surface-base: #ffffff;
   --wf-surface-subtle: #f9f7fb;
   --wf-surface-muted: #ede8f3;
+  --wf-gradient-start: #967bb6;
+  --wf-gradient-end: #bca7e8;
 }
 
 .theme-koori {
-  --wf-color-bg: #ffffff;
-  --wf-color-accent: #e4f1f9;
-  --wf-link-color: #4f4560; /* fallback darker link for contrast */
-  --wf-primary-bg: #e4f1f9;
-  --wf-primary-fg: #2a2a2a;
-  --wf-focus: #4f4560;
-  --wf-outline-color-hover: #4f4560;
+  --wf-color-bg: #f0f8fb;
+  --wf-color-accent: #7eb8d4; /* ice blue - 氷の青 */
+  --wf-link-color: #7eb8d4;
+  --wf-primary-bg: #7eb8d4;
+  --wf-primary-fg: #1f1f1f;
+  --wf-focus: #7eb8d4;
+  --wf-outline-color-hover: #6aa3bf;
   --wf-surface-base: #ffffff;
   --wf-surface-subtle: #f7fbfd;
-  --wf-surface-muted: #e8f3f8;
+  --wf-surface-muted: #e1f0f6;
+  --wf-gradient-start: #7eb8d4;
+  --wf-gradient-end: #a8d5e8;
 }
 
 .theme-yanagi {
@@ -76,6 +86,8 @@
   --wf-surface-base: #ffffff;
   --wf-surface-subtle: #f5faf2;
   --wf-surface-muted: #e3f0dc;
+  --wf-gradient-start: #93c572;
+  --wf-gradient-end: #7c8c4b;
 }
 
 .theme-momiji {
@@ -89,6 +101,8 @@
   --wf-surface-base: #ffffff;
   --wf-surface-subtle: #fdf8f0;
   --wf-surface-muted: #f5ebd9;
+  --wf-gradient-start: #c94c28;
+  --wf-gradient-end: #e67e50;
 }
 
 .theme-fuji {
@@ -102,6 +116,8 @@
   --wf-surface-base: #ffffff;
   --wf-surface-subtle: #fcfaff;
   --wf-surface-muted: #f0ebf7;
+  --wf-gradient-start: #bca7e8;
+  --wf-gradient-end: #d4c8f0;
 }
 
 .theme-uguisu {
@@ -115,17 +131,21 @@
   --wf-surface-base: #ffffff;
   --wf-surface-subtle: #fcfbf3;
   --wf-surface-muted: #efeeda;
+  --wf-gradient-start: #7c8c4b;
+  --wf-gradient-end: #a9b76c;
 }
 
 .theme-yuki {
-  --wf-color-bg: #cfd9de;
-  --wf-color-accent: #ffffff;
-  --wf-link-color: #4f4560;
-  --wf-primary-bg: #cfd9de; /* use sub-color for buttons */
-  --wf-primary-fg: #2a2a2a;
-  --wf-focus: #4f4560;
-  --wf-outline-color-hover: #4f4560;
+  --wf-color-bg: #e8eef2;
+  --wf-color-accent: #5a7a8f; /* winter sky - 冬の空 */
+  --wf-link-color: #5a7a8f;
+  --wf-primary-bg: #5a7a8f;
+  --wf-primary-fg: #ffffff;
+  --wf-focus: #5a7a8f;
+  --wf-outline-color-hover: #4a6678;
   --wf-surface-base: #ffffff;
-  --wf-surface-subtle: #f5f8fa;
-  --wf-surface-muted: #dde6ea;
+  --wf-surface-subtle: #f7fafb;
+  --wf-surface-muted: #dce5ea;
+  --wf-gradient-start: #5a7a8f;
+  --wf-gradient-end: #7a9aaf;
 }
