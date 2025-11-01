@@ -1,0 +1,109 @@
+# ============================================
+# wafoo-css .gitignore (Public Repository)
+# ============================================
+
+# Dependencies
+# ------------
+node_modules/
+# NOTE: package-lock.json は含める（依存関係の再現性のため）
+
+# Private Documents & Notes
+# --------------------------
+private_docs/
+TODO-private.md
+notes-private.md
+NOTES-private.md
+*-private.md
+.personal/
+CHANGELOG.md
+AGENTS.md
+
+# Development Tools
+# ------------------
+devserver/
+
+# AI Assistants & Tools
+# ----------------------
+.claude/
+.cursor/
+.aider*
+.copilot/
+.codeium/
+ai-*.md
+*-ai.md
+prompts/
+.prompts/
+
+# Environment & Secrets
+# ---------------------
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+*.cert
+*secret*
+*password*
+credentials.json
+config.local.*
+
+# Logs
+# ----
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+pnpm-debug.log*
+
+# OS Generated Files
+# ------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+.AppleDouble
+.LSOverride
+[Tt]humbs.db
+[Dd]esktop.ini
+$RECYCLE_BIN/
+.directory
+.Trash-*
+
+# Editor & IDE
+# ------------
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.classpath
+.settings/
+*.sublime-project
+*.sublime-workspace
+
+# Temporary & Cache
+# -----------------
+*.tmp
+*.temp
+.cache/
+.temp/
+.tmp/
+*.bak
+*.old
+*.backup
+
+# Test Coverage
+# -------------
+coverage/
+.nyc_output/
+
+# Build artifacts
+# ---------------
+# NOTE: dist/ は含めます（ユーザーが直接使えるCSS配布物のため）
+# node_modules/ は除外（開発依存のみ）

@@ -1,0 +1,58 @@
+@layer components {
+  /* Offcanvas */
+  .wf-offcanvas-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: none;
+  }
+  .wf-offcanvas-overlay.is-open {
+    display: block;
+  }
+  .wf-offcanvas {
+    position: fixed;
+    background: var(--wf-surface-base);
+    color: var(--wf-color-text);
+    border: 1px solid var(--wf-color-border);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    display: none;
+  }
+  .wf-offcanvas.is-open {
+    display: block;
+  }
+  .wf-offcanvas-start {
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: min(92vw, 320px);
+  }
+  .wf-offcanvas-end {
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: min(92vw, 320px);
+  }
+  .wf-offcanvas-top {
+    left: 0;
+    right: 0;
+    top: 0;
+    height: min(60vh, 420px);
+  }
+  .wf-offcanvas-bottom {
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: min(60vh, 420px);
+  }
+  .wf-offcanvas__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--wf-space-2);
+    padding: var(--wf-space-3) var(--wf-space-4);
+    border-bottom: 1px solid var(--wf-color-border);
+  }
+  .wf-offcanvas__body {
+    padding: var(--wf-space-4);
+  }
+}

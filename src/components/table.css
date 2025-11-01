@@ -1,0 +1,94 @@
+@layer components {
+  /* Table */
+  .wf-table-wrap {
+    overflow: auto;
+  }
+  .wf-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--wf-surface-base);
+  }
+  .wf-table th,
+  .wf-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--wf-color-border);
+    text-align: left;
+  }
+  .wf-table thead th {
+    background: var(--wf-surface-base);
+    position: relative;
+  }
+  .wf-table thead th[aria-sort="ascending"]::after {
+    content: "▲";
+    font-size: 0.75em;
+    margin-left: 6px;
+    color: var(--wf-color-muted);
+  }
+  .wf-table thead th[aria-sort="descending"]::after {
+    content: "▼";
+    font-size: 0.75em;
+    margin-left: 6px;
+    color: var(--wf-color-muted);
+  }
+  .wf-table .wf-sort {
+    background: none;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .wf-table .wf-sort:hover {
+    color: var(--wf-color-accent);
+  }
+
+  /* Variants */
+  .wf-table-striped tbody tr:nth-child(odd) {
+    background: var(--wf-surface-muted);
+  }
+  .wf-table-hover tbody tr:hover {
+    background: var(--wf-surface-subtle);
+  }
+  .wf-table-bordered {
+    border: 1px solid var(--wf-color-border);
+  }
+  .wf-table-bordered th,
+  .wf-table-bordered td {
+    border-right: 1px solid var(--wf-color-border);
+  }
+  .wf-table-bordered td:last-child,
+  .wf-table-bordered th:last-child {
+    border-right: 0;
+  }
+  .wf-table-sticky thead th {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+
+  /* Sizes */
+  .wf-table-sm th,
+  .wf-table-sm td {
+    padding: 6px 8px;
+    font-size: var(--wf-font-sm);
+  }
+  .wf-table-lg th,
+  .wf-table-lg td {
+    padding: 14px 16px;
+    font-size: var(--wf-font-lg);
+  }
+  .wf-table-dense th,
+  .wf-table-dense td {
+    padding: 6px 8px;
+    font-size: var(--wf-font-sm);
+  }
+  .wf-table-loose th,
+  .wf-table-loose td {
+    padding: 14px 16px;
+    font-size: var(--wf-font-lg);
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json.schemastore.org/stylelintrc",
+  "extends": [
+    "stylelint-config-standard"
+  ],
+  "ignoreFiles": [
+    "dist/**",
+    "old/**",
+    "**/node_modules/**"
+  ],
+  "rules": {
+    "no-descending-specificity": null,
+    "declaration-block-single-line-max-declarations": null,
+    "property-no-vendor-prefix": null,
+    "value-keyword-case": [
+      "lower",
+      { "ignoreKeywords": ["currentColor"] }
+    ],
+    "color-hex-length": null,
+    "color-function-notation": null,
+    "alpha-value-notation": null,
+    "custom-property-empty-line-before": null,
+    "declaration-empty-line-before": null,
+    "comment-empty-line-before": null,
+    "at-rule-empty-line-before": null,
+    "media-feature-range-notation": null,
+    "media-query-no-invalid": null,
+    "number-max-precision": 6,
+    "selector-class-pattern": [
+      "^(wf-[a-z0-9-]+(?:__(?:[a-z0-9-]+))?(?:--[a-z0-9-]+)?|is-[a-z0-9-]+|has-[a-z0-9-]+|theme-[a-z0-9-]+)$",
+      { "message": "Expected class selector to follow wf-/is-/has-/theme- pattern" }
+    ],
+    "rule-empty-line-before": null
+  }
+}

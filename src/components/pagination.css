@@ -1,0 +1,29 @@
+@layer components {
+  /* Pagination */
+  .wf-pagination {
+    display: flex;
+    align-items: center;
+    gap: var(--wf-space-2);
+  }
+  .wf-page-link {
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-md);
+    color: var(--wf-color-text);
+    text-decoration: none;
+  }
+  .wf-page-link:hover,
+  .wf-page-link:focus-visible {
+    background: var(--wf-surface-muted);
+  }
+  .wf-page-link.is-active {
+    background: var(--wf-color-accent);
+    color: var(--wf-surface-base);
+    border-color: var(--wf-color-accent);
+  }
+  .wf-page-link.is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}

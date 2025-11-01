@@ -1,0 +1,22 @@
+@layer components {
+  /* Cards */
+  .wf-card {
+    background: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-md);
+    padding: var(--wf-space-4);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+  }
+  .wf-card-washi {
+    background: repeating-linear-gradient(
+      45deg,
+      var(--wf-surface-base),
+      var(--wf-surface-base) 10px,
+      var(--wf-surface-subtle) 10px,
+      var(--wf-surface-subtle) 20px
+    );
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-md);
+    padding: var(--wf-space-4);
+  }
+}

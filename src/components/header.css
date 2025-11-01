@@ -1,0 +1,31 @@
+@layer components {
+  /* Header - Noren */
+  .wf-header-noren {
+    background: var(--wf-primary-bg);
+    color: var(--wf-surface-base);
+    padding: var(--wf-space-4);
+    border-bottom: 4px solid var(--wf-shadow-subtle);
+    background-image: repeating-linear-gradient(
+      -45deg,
+      var(--wf-overlay-light) 0,
+      var(--wf-overlay-light) 6px,
+      transparent 6px,
+      transparent 12px
+    );
+    position: relative;
+  }
+  .wf-header-noren h1,
+  .wf-header-noren h2 {
+    margin: 0;
+    font-weight: 700;
+  }
+  .wf-header-noren::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -2px;
+    height: 2px;
+    background: var(--wf-shadow-subtle);
+  }
+}

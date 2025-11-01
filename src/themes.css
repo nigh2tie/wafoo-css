@@ -1,0 +1,131 @@
+/* Theme overrides (based on 配色参考資料.md) */
+
+.theme-sakura {
+  --wf-color-bg: #ffffff;
+  --wf-color-accent: #f4b3c2;
+  --wf-link-color: #f4b3c2;
+  --wf-primary-bg: #f4b3c2;
+  --wf-primary-fg: #2a2a2a;
+  --wf-focus: #f4b3c2;
+  --wf-outline-color-hover: #f4b3c2;
+  --wf-surface-base: #ffffff;
+  --wf-surface-subtle: #fff5f7;
+  --wf-surface-muted: #ffe8ed;
+}
+
+.theme-koubai {
+  --wf-color-bg: #fff1f5;
+  --wf-color-accent: #e35c8d;
+  --wf-link-color: #e35c8d;
+  --wf-primary-bg: #e35c8d;
+  --wf-primary-fg: #ffffff;
+  --wf-focus: #e35c8d;
+  --wf-outline-color-hover: #e35c8d;
+  --wf-surface-base: #ffffff;
+  --wf-surface-subtle: #fff8fa;
+  --wf-surface-muted: #ffe5ed;
+}
+
+.theme-moe {
+  --wf-color-bg: #fef4b5;
+  --wf-color-accent: #a9d18e;
+  --wf-link-color: #a9d18e;
+  --wf-primary-bg: #a9d18e;
+  --wf-primary-fg: #1f1f1f;
+  --wf-focus: #a9d18e;
+  --wf-outline-color-hover: #a9d18e;
+  --wf-surface-base: #ffffff;
+  --wf-surface-subtle: #fffcf0;
+  --wf-surface-muted: #f5f0d6;
+}
+
+.theme-kiku {
+  --wf-color-bg: #ffffff;
+  --wf-color-accent: #967bb6;
+  --wf-link-color: #967bb6;
+  --wf-primary-bg: #967bb6;
+  --wf-primary-fg: #ffffff;
+  --wf-focus: #967bb6;
+  --wf-outline-color-hover: #967bb6;
+  --wf-surface-base: #ffffff;
+  --wf-surface-subtle: #f9f7fb;
+  --wf-surface-muted: #ede8f3;
+}
+
+.theme-koori {
+  --wf-color-bg: #ffffff;
+  --wf-color-accent: #e4f1f9;
+  --wf-link-color: #4f4560; /* fallback darker link for contrast */
+  --wf-primary-bg: #e4f1f9;
+  --wf-primary-fg: #2a2a2a;
+  --wf-focus: #4f4560;
+  --wf-outline-color-hover: #4f4560;
+  --wf-surface-base: #ffffff;
+  --wf-surface-subtle: #f7fbfd;
+  --wf-surface-muted: #e8f3f8;
+}
+
+.theme-yanagi {
+  --wf-color-bg: #e9f5e3;
+  --wf-color-accent: #93c572;
+  --wf-link-color: #93c572;
+  --wf-primary-bg: #93c572;
+  --wf-primary-fg: #1f1f1f;
+  --wf-focus: #93c572;
+  --wf-outline-color-hover: #93c572;
+  --wf-surface-base: #ffffff;
+  --wf-surface-subtle: #f5faf2;
+  --wf-surface-muted: #e3f0dc;
+}
+
+.theme-momiji {
+  --wf-color-bg: #f9e4cc;
+  --wf-color-accent: #c94c28;
+  --wf-link-color: #c94c28;
+  --wf-primary-bg: #c94c28;
+  --wf-primary-fg: #ffffff;
+  --wf-focus: #c94c28;
+  --wf-outline-color-hover: #c94c28;
+  --wf-surface-base: #ffffff;
+  --wf-surface-subtle: #fdf8f0;
+  --wf-surface-muted: #f5ebd9;
+}
+
+.theme-fuji {
+  --wf-color-bg: #f8f4ff;
+  --wf-color-accent: #bca7e8;
+  --wf-link-color: #5e516f; /* darker for contrast */
+  --wf-primary-bg: #bca7e8;
+  --wf-primary-fg: #2a2a2a;
+  --wf-focus: #5e516f;
+  --wf-outline-color-hover: #5e516f;
+  --wf-surface-base: #ffffff;
+  --wf-surface-subtle: #fcfaff;
+  --wf-surface-muted: #f0ebf7;
+}
+
+.theme-uguisu {
+  --wf-color-bg: #f7f6e7;
+  --wf-color-accent: #7c8c4b;
+  --wf-link-color: #7c8c4b;
+  --wf-primary-bg: #7c8c4b;
+  --wf-primary-fg: #ffffff;
+  --wf-focus: #7c8c4b;
+  --wf-outline-color-hover: #7c8c4b;
+  --wf-surface-base: #ffffff;
+  --wf-surface-subtle: #fcfbf3;
+  --wf-surface-muted: #efeeda;
+}
+
+.theme-yuki {
+  --wf-color-bg: #cfd9de;
+  --wf-color-accent: #ffffff;
+  --wf-link-color: #4f4560;
+  --wf-primary-bg: #cfd9de; /* use sub-color for buttons */
+  --wf-primary-fg: #2a2a2a;
+  --wf-focus: #4f4560;
+  --wf-outline-color-hover: #4f4560;
+  --wf-surface-base: #ffffff;
+  --wf-surface-subtle: #f5f8fa;
+  --wf-surface-muted: #dde6ea;
+}

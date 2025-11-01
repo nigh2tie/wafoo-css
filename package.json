@@ -1,0 +1,31 @@
+{
+  "name": "wafoo-css",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Japanese-inspired CSS framework (MVP)",
+  "author": "Masashi Yokoyama",
+  "license": "MIT",
+  "scripts": {
+    "build": "bash scripts/build.sh",
+    "build:css": "postcss dist/wafoo.css -o dist/wafoo.min.css",
+    "build:full": "bash scripts/build.sh && gzip -c dist/wafoo.min.css | wc -c",
+    "generate:utils": "node scripts/generate-utilities.js",
+    "size": "gzip -c dist/wafoo.min.css | wc -c",
+    "format": "prettier --write \"{src,docs,examples,devserver,scripts}/**/*.{css,html,js,md}\"",
+    "format:check": "prettier -c \"{src,docs,examples,devserver,scripts}/**/*.{css,html,js,md}\"",
+    "lint:css": "stylelint \"src/**/*.css\"",
+    "lint:css:fix": "stylelint \"src/**/*.css\" --fix",
+    "lint:html": "html-validate \"docs/**/*.html\" \"examples/**/*.html\"",
+    "lint": "npm run lint:css"
+  },
+  "devDependencies": {
+    "autoprefixer": "^10.4.21",
+    "cssnano": "^7.1.2",
+    "html-validate": "^8.24.1",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "prettier": "^3.6.2",
+    "stylelint": "^15.11.0",
+    "stylelint-config-standard": "^34.0.0"
+  }
+}

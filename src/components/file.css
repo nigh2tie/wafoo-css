@@ -1,0 +1,11 @@
+@layer components {
+  /* File input */
+  .wf-file {
+    display: block;
+    width: 100%;
+    padding: var(--wf-space-2) var(--wf-space-3);
+    border: 1px solid var(--wf-color-border-strong);
+    border-radius: var(--wf-radius-md);
+    background: var(--wf-surface-base);
+  }
+}

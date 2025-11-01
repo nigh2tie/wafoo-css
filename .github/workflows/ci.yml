@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install deps
+        run: npm ci
+
+      - name: Prettier check
+        run: npm run format:check
+
+      - name: Lint CSS
+        run: npm run lint:css
+
+      - name: Lint HTML
+        run: npm run lint:html
+
+      - name: Build CSS
+        run: npm run build
+
+      - name: Minify via PostCSS
+        run: npm run build:css
+
+      - name: Check gzip size <= 10000 bytes
+        run: |
+          SIZE=$(gzip -c dist/wafoo.min.css | wc -c)
+          echo "gzip size: $SIZE bytes"
+          if [ "$SIZE" -gt 10000 ]; then
+            echo "Size budget exceeded (>$SIZE)" && exit 1
+          fi
+

@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>通知一覧 - wafoo-css</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="stylesheet" href="../dist/wafoo.css" />
+    <script src="../docs/theme.js"></script>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const list = document.getElementById("ntfList");
+        const unreadOnly = document.getElementById("unreadOnly");
+        const q = document.getElementById("q");
+        const counter = document.getElementById("counter");
+        function render() {
+          const only = unreadOnly.checked;
+          const text = (q.value || "").toLowerCase();
+          let unread = 0;
+          list.querySelectorAll("li").forEach(li => {
+            const isUnread = li.getAttribute("data-read") !== "true";
+            const match = li.getAttribute("data-text").includes(text);
+            li.style.display = (!only || isUnread) && match ? "" : "none";
+            if (isUnread) unread++;
+            li.querySelector(".badge").hidden = !isUnread;
+          });
+          counter.textContent = String(unread);
+        }
+        list.addEventListener("click", e => {
+          const btn = e.target.closest("[data-action]");
+          if (!btn) return;
+          const li = btn.closest("li");
+          const act = btn.getAttribute("data-action");
+          if (act === "read") {
+            li.setAttribute("data-read", "true");
+          }
+          if (act === "unread") {
+            li.setAttribute("data-read", "false");
+          }
+          if (act === "remove") {
+            li.remove();
+          }
+          render();
+        });
+        document.getElementById("markAll").addEventListener("click", () => {
+          list.querySelectorAll("li").forEach(li => li.setAttribute("data-read", "true"));
+          render();
+        });
+        q.addEventListener("input", render);
+        unreadOnly.addEventListener("change", render);
+        render();
+      });
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+    <header class="wf-header-noren" role="banner">
+      <div class="wf-container" style="padding: 0"><h1>通知一覧</h1></div>
+    </header>
+    <main class="wf-container" role="main" id="main">
+      <div class="wf-row wf-g-2 wf-mb-2">
+        <div class="wf-col-12 wf-col-md-6">
+          <div class="wf-input-group">
+            <span class="wf-input-group__prepend wf-input-group__text">🔎</span>
+            <input id="q" class="wf-input" placeholder="検索（タイトル/本文）" />
+          </div>
+        </div>
+        <div class="wf-col-12 wf-col-md-6 wf-flex wf-items-center wf-justify-end">
+          <label class="wf-switch__label wf-mr-2">
+            <input id="unreadOnly" type="checkbox" class="wf-switch" role="switch" />
+            未読のみ
+          </label>
+          <button id="markAll" class="wf-btn wf-btn-outline wf-btn-sm">すべて既読に</button>
+        </div>
+      </div>
+      <p class="wf-text-sm wf-text-muted">
+        未読
+        <strong id="counter">0</strong>
+        件
+      </p>
+      <ul id="ntfList" class="wf-mt-2" aria-label="通知一覧" style="max-width: 760px">
+        <li class="wf-card wf-mb-2" data-read="false" data-text="アップデート 新機能 0.1.0">
+          <div class="wf-flex wf-justify-between wf-items-center">
+            <strong>新機能リリース 0.1.0</strong>
+            <span class="wf-badge wf-badge-success badge">NEW</span>
+          </div>
+          <div class="wf-text-sm">ダッシュボードに新しいウィジェットが追加されました。</div>
+          <div class="wf-flex wf-gap-2 wf-mt-1">
+            <button class="wf-btn wf-btn-outline wf-btn-sm" data-action="read">既読</button>
+            <button class="wf-btn wf-btn-sm" data-action="remove">削除</button>
+            <span class="wf-text-sm wf-text-muted" style="margin-left: auto">5分前</span>
+          </div>
+        </li>
+        <li class="wf-card wf-mb-2" data-read="true" data-text="メンテナンス 完了">
+          <div class="wf-flex wf-justify-between wf-items-center">
+            <strong>メンテナンス完了</strong>
+            <span class="wf-badge wf-badge-success badge" hidden>NEW</span>
+          </div>
+          <div class="wf-text-sm">昨夜のメンテナンスは正常に完了しました。</div>
+          <div class="wf-flex wf-gap-2 wf-mt-1">
+            <button class="wf-btn wf-btn-outline wf-btn-sm" data-action="unread">未読に戻す</button>
+            <button class="wf-btn wf-btn-sm" data-action="remove">削除</button>
+            <span class="wf-text-sm wf-text-muted" style="margin-left: auto">昨日</span>
+          </div>
+        </li>
+        <li class="wf-card wf-mb-2" data-read="false" data-text="警告 エラー 失敗">
+          <div class="wf-flex wf-justify-between wf-items-center">
+            <strong>エラー通知</strong>
+            <span class="wf-badge wf-badge-success badge">NEW</span>
+          </div>
+          <div class="wf-alert wf-alert-danger wf-mt-1">一部の処理に失敗しました。</div>
+          <div class="wf-flex wf-gap-2 wf-mt-1">
+            <button class="wf-btn wf-btn-outline wf-btn-sm" data-action="read">既読</button>
+            <button class="wf-btn wf-btn-sm" data-action="remove">削除</button>
+            <span class="wf-text-sm wf-text-muted" style="margin-left: auto">1時間前</span>
+          </div>
+        </li>
+      </ul>
+      <p class="wf-text-sm wf-text-muted wf-mt-4">
+        <a class="wf-link" href="../docs/index.html">ドキュメントへ戻る</a>
+      </p>
+    </main>
+  </body>
+</html>

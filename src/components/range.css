@@ -1,0 +1,45 @@
+@layer components {
+  /* Range */
+  .wf-range {
+    width: 100%;
+    appearance: none;
+    /* internal sizing tokens for this component */
+    --_track-h: 4px;
+    --_thumb: 16px;
+    /* make the control box as tall as the thumb so vertical centering is natural */
+    height: var(--_thumb);
+    background: transparent;
+    outline: none;
+  }
+  /* WebKit track */
+  .wf-range::-webkit-slider-runnable-track {
+    height: var(--_track-h);
+    background: var(--wf-color-border);
+    border-radius: var(--wf-radius-full);
+  }
+  .wf-range::-webkit-slider-thumb {
+    appearance: none;
+    width: var(--_thumb);
+    height: var(--_thumb);
+    border-radius: 50%;
+    background: var(--wf-color-accent);
+    cursor: pointer;
+    border: 2px solid var(--wf-surface-base);
+    /* center the thumb over the track */
+    margin-top: calc((var(--_thumb) - var(--_track-h)) / -2);
+  }
+  /* Firefox track */
+  .wf-range::-moz-range-track {
+    height: var(--_track-h);
+    background: var(--wf-color-border);
+    border-radius: var(--wf-radius-full);
+  }
+  .wf-range::-moz-range-thumb {
+    width: var(--_thumb);
+    height: var(--_thumb);
+    border-radius: 50%;
+    background: var(--wf-color-accent);
+    cursor: pointer;
+    border: 2px solid var(--wf-surface-base);
+  }
+}

@@ -1,0 +1,43 @@
+@layer components {
+  /* Accordion */
+  .wf-accordion {
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-md);
+    background: var(--wf-surface-base);
+  }
+  .wf-accordion__item + .wf-accordion__item {
+    border-top: 1px solid var(--wf-color-border);
+  }
+  .wf-accordion__header {
+    width: 100%;
+    text-align: left;
+    padding: var(--wf-space-3) var(--wf-space-4);
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  /* Visual marker for open/closed state */
+  .wf-accordion__header::after {
+    content: "▼";
+    font-weight: 700;
+    color: var(--wf-color-muted);
+    font-size: 14px;
+    line-height: 1;
+    transition: color 0.2s ease;
+  }
+  .wf-accordion__header[aria-expanded="true"]::after {
+    content: "▲";
+    color: var(--wf-color-text);
+  }
+  .wf-accordion__header:hover,
+  .wf-accordion__header:focus-visible {
+    background: var(--wf-surface-muted);
+  }
+  .wf-accordion__panel {
+    padding: var(--wf-space-4);
+  }
+}

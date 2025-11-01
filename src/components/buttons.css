@@ -1,0 +1,160 @@
+@layer components {
+  /* Buttons */
+  .wf-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--wf-btn-gap-md);
+    padding: var(--wf-btn-py-md) var(--wf-btn-px-md);
+    border: 1px solid var(--wf-color-border-strong);
+    border-radius: var(--wf-radius-md);
+    background: var(--wf-surface-base);
+    color: var(--wf-color-text);
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      filter 0.15s ease,
+      background-color 0.15s ease,
+      border-color 0.15s ease;
+  }
+  .wf-btn:hover {
+    filter: brightness(0.98);
+  }
+  .wf-btn .wf-icon {
+    width: var(--wf-icon-md);
+    height: var(--wf-icon-md);
+    display: inline-block;
+    line-height: 1;
+    flex: 0 0 auto;
+  }
+
+  .wf-btn-primary {
+    background: var(--wf-primary-bg);
+    border-color: transparent;
+    color: var(--wf-primary-fg);
+  }
+  .wf-btn-primary:hover,
+  .wf-btn-primary:focus-visible {
+    background: var(--wf-primary-bg-hover);
+  }
+  .wf-btn-primary:active {
+    background: var(--wf-primary-bg-active);
+  }
+
+  .wf-btn-outline {
+    background: var(--wf-surface-base);
+    color: var(--wf-link-color);
+    border-color: var(--wf-link-color);
+  }
+  .wf-btn-outline:hover,
+  .wf-btn-outline:focus-visible {
+    color: var(--wf-outline-color-hover);
+    border-color: var(--wf-outline-color-hover);
+  }
+  .wf-btn-subtle {
+    background: var(--wf-surface-subtle);
+    color: var(--wf-color-text);
+    border-color: var(--wf-color-border);
+  }
+
+  /* Status buttons */
+  .wf-btn-success {
+    background: var(--wf-success);
+    color: var(--wf-success-fg);
+    border-color: transparent;
+  }
+  .wf-btn-warning {
+    background: var(--wf-warning);
+    color: var(--wf-warning-fg);
+    border-color: transparent;
+  }
+  .wf-btn-danger {
+    background: var(--wf-danger);
+    color: var(--wf-danger-fg);
+    border-color: transparent;
+  }
+  /* Outline status buttons */
+  .wf-btn-outline-success,
+  .wf-btn-outline-warning,
+  .wf-btn-outline-danger {
+    background: var(--wf-surface-base);
+  }
+  .wf-btn-outline-success {
+    color: var(--wf-success);
+    border-color: var(--wf-success);
+  }
+  .wf-btn-outline-warning {
+    color: var(--wf-warning);
+    border-color: var(--wf-warning);
+  }
+  .wf-btn-outline-danger {
+    color: var(--wf-danger);
+    border-color: var(--wf-danger);
+  }
+
+  /* Sizes */
+  .wf-btn-sm {
+    padding: var(--wf-btn-py-sm) var(--wf-btn-px-sm);
+    font-size: var(--wf-font-sm);
+    gap: var(--wf-btn-gap-sm);
+  }
+  .wf-btn-lg {
+    padding: var(--wf-btn-py-lg) var(--wf-btn-px-lg);
+    font-size: var(--wf-font-lg);
+    gap: var(--wf-btn-gap-lg);
+  }
+  .wf-btn-sm .wf-icon {
+    width: var(--wf-icon-sm);
+    height: var(--wf-icon-sm);
+  }
+  .wf-btn-lg .wf-icon {
+    width: var(--wf-icon-lg);
+    height: var(--wf-icon-lg);
+  }
+  .wf-btn-icon {
+    padding-left: var(--wf-btn-py-md);
+    padding-right: var(--wf-btn-py-md);
+    gap: 0;
+  }
+  .wf-btn-icon.wf-btn-sm {
+    padding-left: var(--wf-btn-py-sm);
+    padding-right: var(--wf-btn-py-sm);
+  }
+  .wf-btn-icon.wf-btn-lg {
+    padding-left: var(--wf-btn-py-lg);
+    padding-right: var(--wf-btn-py-lg);
+  }
+
+  /* Loading */
+  .wf-btn.is-loading {
+    position: relative;
+    pointer-events: none;
+    color: transparent;
+  }
+  .wf-btn.is-loading::after {
+    content: "";
+    position: absolute;
+    inset: 50% auto auto 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-top-color: currentColor;
+    animation: wf-spin 0.8s linear infinite;
+  }
+  @keyframes wf-spin {
+    to {
+      transform: translate(-50%, -50%) rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wf-btn.is-loading::after {
+      animation: none;
+    }
+  }
+
+  .wf-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+}

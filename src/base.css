@@ -1,0 +1,137 @@
+@layer base {
+  /* Reset / Base */
+  * {
+    box-sizing: border-box;
+  }
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+  html {
+    line-height: 1.5;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    font-family:
+      system-ui,
+      -apple-system,
+      "Noto Sans JP",
+      "Hiragino Kaku Gothic ProN",
+      Meiryo,
+      sans-serif;
+    color: var(--wf-color-text);
+    background: var(--wf-color-bg);
+  }
+
+  /* Typography */
+  h1,
+  h2,
+  h3 {
+    line-height: 1.25;
+    margin: 0 0 var(--wf-space-8);
+  }
+  h4,
+  h5,
+  h6 {
+    line-height: 1.25;
+    margin: 0 0 var(--wf-space-4);
+  }
+  h1 {
+    font-size: 2rem;
+  }
+  h2 {
+    font-size: 1.5rem;
+  }
+  h3 {
+    font-size: 1.25rem;
+  }
+  h4 {
+    font-size: 1.125rem;
+  }
+  h5 {
+    font-size: 1rem;
+  }
+  h6 {
+    font-size: 0.875rem;
+  }
+  p {
+    margin: 0 0 var(--wf-space-4);
+  }
+  ul,
+  ol {
+    margin: 0 0 var(--wf-space-4);
+    padding-left: 1.25rem;
+  }
+  hr {
+    border: 0;
+    border-top: 1px solid var(--wf-color-border);
+    margin: var(--wf-space-6) 0;
+  }
+
+  a {
+    color: var(--wf-link-color);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+  }
+  a:hover {
+    border-bottom-color: currentColor;
+    color: var(--wf-link-color-hover);
+  }
+  :focus {
+    outline: 2px solid var(--wf-focus);
+    outline-offset: 2px;
+  }
+  :focus:not(:focus-visible) {
+    outline: none;
+  }
+  :focus-visible {
+    outline: 2px solid var(--wf-focus);
+    outline-offset: 2px;
+  }
+
+  /* Code / Preformatted */
+  code,
+  kbd,
+  samp {
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-size: 0.95em;
+  }
+  code {
+    background: var(--wf-surface-muted);
+    padding: 0 4px;
+    border-radius: var(--wf-radius-sm);
+  }
+  pre {
+    background: var(--wf-surface-muted);
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-md);
+    padding: var(--wf-space-4);
+    overflow: auto;
+  }
+  pre code {
+    background: transparent;
+    padding: 0;
+  }
+
+  /* Blockquote */
+  blockquote {
+    margin: 0 0 var(--wf-space-4);
+    padding-left: var(--wf-space-3);
+    border-left: 3px solid var(--wf-color-border-strong);
+    color: var(--wf-color-muted);
+  }
+
+  /* Layout */
+  .wf-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--wf-space-4);
+  }
+  @media (max-width: 600px) {
+    .wf-container {
+      padding: var(--wf-space-3);
+    }
+  }
+}

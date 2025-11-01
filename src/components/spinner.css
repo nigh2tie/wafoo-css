@@ -1,0 +1,41 @@
+@layer components {
+  /* Spinner */
+  .wf-spinner {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    /* Track uses theme border color; indicator uses accent */
+    border: 2px solid var(--wf-color-border);
+    border-top-color: var(--wf-color-accent);
+    animation: wf-spin 0.8s linear infinite;
+    display: inline-block;
+  }
+  .wf-spinner-sm {
+    width: 16px;
+    height: 16px;
+  }
+  /* Status variants */
+  .wf-spinner-success {
+    border-top-color: var(--wf-success);
+  }
+  .wf-spinner-warning {
+    border-top-color: var(--wf-warning);
+  }
+  .wf-spinner-danger {
+    border-top-color: var(--wf-danger);
+  }
+  .wf-spinner-lg {
+    width: 28px;
+    height: 28px;
+  }
+  @keyframes wf-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .wf-spinner {
+      animation: none;
+    }
+  }
+}

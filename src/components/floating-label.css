@@ -1,0 +1,26 @@
+@layer components {
+  /* Floating Label */
+  .wf-form-floating {
+    position: relative;
+  }
+  .wf-form-floating > .wf-input,
+  .wf-form-floating > .wf-textarea {
+    padding-top: calc(var(--wf-space-4) + 6px);
+  }
+  .wf-form-floating > label {
+    position: absolute;
+    top: 8px;
+    left: 12px;
+    color: var(--wf-color-muted);
+    background: transparent;
+    transition: all 0.12s ease;
+    pointer-events: none;
+  }
+  .wf-form-floating > .wf-input:focus + label,
+  .wf-form-floating > .wf-input:not(:placeholder-shown) + label,
+  .wf-form-floating > .wf-textarea:focus + label,
+  .wf-form-floating > .wf-textarea:not(:placeholder-shown) + label {
+    transform: translateY(-8px) scale(0.9);
+    color: var(--wf-color-accent);
+  }
+}

@@ -1,0 +1,18 @@
+@layer components {
+  /* Stamp (判子) */
+  .wf-stamp {
+    display: inline-block;
+    padding: var(--wf-stamp-py) var(--wf-stamp-px);
+    border: var(--wf-stamp-weight) solid var(--wf-stamp-color);
+    color: var(--wf-stamp-color);
+    background: var(--wf-surface-base);
+    border-radius: var(--wf-radius-full);
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-decoration: none;
+    line-height: 1;
+  }
+  .wf-stamp:hover {
+    filter: saturate(1.1);
+  }
+}

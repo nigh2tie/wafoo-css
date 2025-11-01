@@ -1,0 +1,47 @@
+@layer components {
+  /* Popover */
+  .wf-popover {
+    position: absolute;
+    z-index: 1200;
+    background: var(--wf-surface-base);
+    color: var(--wf-color-text);
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-md);
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+    width: 260px;
+    display: none;
+  }
+  .wf-popover.is-open {
+    display: block;
+  }
+  .wf-popover__header {
+    padding: var(--wf-space-3) var(--wf-space-4);
+    border-bottom: 1px solid var(--wf-color-border);
+    font-weight: 700;
+  }
+  .wf-popover__body {
+    padding: var(--wf-space-4);
+  }
+
+  /* Arrow */
+  .wf-popover::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border: 8px solid transparent;
+  }
+  /* JS controls position; use transform translateX(-50%) so arrow aligns center */
+  .wf-popover.is-arrow-top::after {
+    border-top-color: var(--wf-surface-base);
+    top: -8px;
+    left: calc(50% + var(--wf-arrow-x, 0px));
+    transform: translateX(-50%);
+  }
+  .wf-popover.is-arrow-bottom::after {
+    border-bottom-color: var(--wf-surface-base);
+    bottom: -8px;
+    left: calc(50% + var(--wf-arrow-x, 0px));
+    transform: translateX(-50%);
+  }
+}

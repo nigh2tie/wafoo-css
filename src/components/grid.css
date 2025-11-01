@@ -1,0 +1,216 @@
+@layer components {
+  /* Grid System (12 columns, flex-based) */
+  .wf-row {
+    display: flex;
+    flex-wrap: wrap;
+    --wf-gx: 0px;
+    --wf-gy: 0px;
+    margin-left: calc(-1 * var(--wf-gx));
+    margin-right: calc(-1 * var(--wf-gx));
+    row-gap: var(--wf-gy);
+  }
+
+  /* Gutters */
+  .wf-g-0 {
+    --wf-gx: 0px;
+    --wf-gy: 0px;
+  }
+  .wf-g-1 {
+    --wf-gx: var(--wf-space-1);
+    --wf-gy: var(--wf-space-1);
+  }
+  .wf-g-2 {
+    --wf-gx: var(--wf-space-2);
+    --wf-gy: var(--wf-space-2);
+  }
+  .wf-g-3 {
+    --wf-gx: var(--wf-space-3);
+    --wf-gy: var(--wf-space-3);
+  }
+  .wf-g-4 {
+    --wf-gx: var(--wf-space-4);
+    --wf-gy: var(--wf-space-4);
+  }
+  .wf-g-5 {
+    --wf-gx: var(--wf-space-6);
+    --wf-gy: var(--wf-space-6);
+  }
+
+  /* Columns */
+  [class^="wf-col-"],
+  [class*=" wf-col-"] {
+    padding-left: var(--wf-gx);
+    padding-right: var(--wf-gx);
+  }
+  .wf-col-1 {
+    flex: 0 0 auto;
+    width: 8.333333%;
+  }
+  .wf-col-2 {
+    flex: 0 0 auto;
+    width: 16.666667%;
+  }
+  .wf-col-3 {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+  .wf-col-4 {
+    flex: 0 0 auto;
+    width: 33.333333%;
+  }
+  .wf-col-5 {
+    flex: 0 0 auto;
+    width: 41.666667%;
+  }
+  .wf-col-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  .wf-col-7 {
+    flex: 0 0 auto;
+    width: 58.333333%;
+  }
+  .wf-col-8 {
+    flex: 0 0 auto;
+    width: 66.666667%;
+  }
+  .wf-col-9 {
+    flex: 0 0 auto;
+    width: 75%;
+  }
+  .wf-col-10 {
+    flex: 0 0 auto;
+    width: 83.333333%;
+  }
+  .wf-col-11 {
+    flex: 0 0 auto;
+    width: 91.666667%;
+  }
+  .wf-col-12 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+
+  /* Auto layout (equal flexible columns) */
+  .wf-col-auto { flex: 1 1 0; width: auto; }
+
+  /* Offsets (subset for demo) */
+  .wf-offset-1 { margin-left: 8.333333%; }
+  .wf-offset-2 { margin-left: 16.666667%; }
+  .wf-offset-3 { margin-left: 25%; }
+  .wf-offset-4 { margin-left: 33.333333%; }
+
+  /* Breakpoint: sm */
+  @media (min-width: var(--wf-breakpoint-sm)) {
+    .wf-col-sm-1 {
+      flex: 0 0 auto;
+      width: 8.333333%;
+    }
+    .wf-col-sm-2 {
+      flex: 0 0 auto;
+      width: 16.666667%;
+    }
+    .wf-col-sm-3 {
+      flex: 0 0 auto;
+      width: 25%;
+    }
+    .wf-col-sm-4 {
+      flex: 0 0 auto;
+      width: 33.333333%;
+    }
+    .wf-col-sm-5 {
+      flex: 0 0 auto;
+      width: 41.666667%;
+    }
+    .wf-col-sm-6 {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+    .wf-col-sm-7 {
+      flex: 0 0 auto;
+      width: 58.333333%;
+    }
+    .wf-col-sm-8 {
+      flex: 0 0 auto;
+      width: 66.666667%;
+    }
+    .wf-col-sm-9 {
+      flex: 0 0 auto;
+      width: 75%;
+    }
+    .wf-col-sm-10 {
+      flex: 0 0 auto;
+      width: 83.333333%;
+    }
+    .wf-col-sm-11 {
+      flex: 0 0 auto;
+      width: 91.666667%;
+    }
+    .wf-col-sm-12 {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+    .wf-col-sm-auto { flex: 1 1 0; width: auto; }
+    .wf-offset-sm-1 { margin-left: 8.333333%; }
+    .wf-offset-sm-2 { margin-left: 16.666667%; }
+    .wf-offset-sm-3 { margin-left: 25%; }
+    .wf-offset-sm-4 { margin-left: 33.333333%; }
+  }
+
+  /* Breakpoint: md */
+  @media (min-width: var(--wf-breakpoint-md)) {
+    .wf-col-md-1 {
+      flex: 0 0 auto;
+      width: 8.333333%;
+    }
+    .wf-col-md-2 {
+      flex: 0 0 auto;
+      width: 16.666667%;
+    }
+    .wf-col-md-3 {
+      flex: 0 0 auto;
+      width: 25%;
+    }
+    .wf-col-md-4 {
+      flex: 0 0 auto;
+      width: 33.333333%;
+    }
+    .wf-col-md-5 {
+      flex: 0 0 auto;
+      width: 41.666667%;
+    }
+    .wf-col-md-6 {
+      flex: 0 0 auto;
+      width: 50%;
+    }
+    .wf-col-md-7 {
+      flex: 0 0 auto;
+      width: 58.333333%;
+    }
+    .wf-col-md-8 {
+      flex: 0 0 auto;
+      width: 66.666667%;
+    }
+    .wf-col-md-9 {
+      flex: 0 0 auto;
+      width: 75%;
+    }
+    .wf-col-md-10 {
+      flex: 0 0 auto;
+      width: 83.333333%;
+    }
+    .wf-col-md-11 {
+      flex: 0 0 auto;
+      width: 91.666667%;
+    }
+    .wf-col-md-12 {
+      flex: 0 0 auto;
+      width: 100%;
+    }
+    .wf-col-md-auto { flex: 1 1 0; width: auto; }
+    .wf-offset-md-1 { margin-left: 8.333333%; }
+    .wf-offset-md-2 { margin-left: 16.666667%; }
+    .wf-offset-md-3 { margin-left: 25%; }
+    .wf-offset-md-4 { margin-left: 33.333333%; }
+  }
+}

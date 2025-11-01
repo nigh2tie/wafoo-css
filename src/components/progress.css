@@ -1,0 +1,32 @@
+@layer components {
+  /* Progress */
+  .wf-progress {
+    width: 100%;
+    background: var(--wf-surface-muted);
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-md);
+    overflow: hidden;
+    height: 12px;
+  }
+  .wf-progress__bar {
+    height: 100%;
+    background: var(--wf-color-accent);
+    width: 0;
+    transition: width 0.2s ease;
+  }
+  .wf-progress-sm {
+    height: 8px;
+  }
+  .wf-progress-lg {
+    height: 16px;
+  }
+  .wf-progress-success .wf-progress__bar {
+    background: var(--wf-success);
+  }
+  .wf-progress-warning .wf-progress__bar {
+    background: var(--wf-warning);
+  }
+  .wf-progress-danger .wf-progress__bar {
+    background: var(--wf-danger);
+  }
+}

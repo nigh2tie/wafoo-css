@@ -1,0 +1,49 @@
+@layer components {
+  /* Switch */
+  .wf-switch {
+    appearance: none;
+    width: 38px;
+    height: 22px;
+    border: 2px solid var(--wf-color-border-strong);
+    border-radius: 9999px;
+    background: var(--wf-surface-base);
+    position: relative;
+    cursor: pointer;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .wf-switch::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: var(--wf-color-border-strong);
+    border-radius: 50%;
+    transition:
+      transform 0.2s ease,
+      background 0.2s ease;
+    transform: translateY(-50%);
+  }
+  .wf-switch:checked {
+    background: var(--wf-color-accent);
+    border-color: var(--wf-color-accent);
+  }
+  .wf-switch:checked::after {
+    /* Move horizontally by innerWidth - knobWidth - leftOffset*2 = 34 - 16 - 2*2 = 14px */
+    transform: translate(14px, -50%);
+    background: var(--wf-surface-base);
+  }
+  .wf-switch:focus {
+    outline: 2px solid var(--wf-focus);
+    outline-offset: 2px;
+  }
+  .wf-switch__label {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--wf-space-2);
+    cursor: pointer;
+  }
+}
