@@ -565,7 +565,767 @@
     });
   }
 
-  window.WFUI = { tooltip, popover, dropdown, modal, offcanvas, tabs, sortableTable };
+  function schedule(root, opts) {
+    if (!root) return;
+    const cfg = Object.assign(
+      {
+        mode: "daily", // 'daily' or 'weekly'
+        timeInterval: 60, // minutes: 15, 30, or 60
+        timeRange: "all-day", // 'all-day', 'work1', 'work2'
+        selectedDate: null, // ISO date string (YYYY-MM-DD)
+        onSelect: null, // callback when selection changes
+        onGenerate: null // callback to generate text
+      },
+      opts || {}
+    );
+
+    const timeRangePatterns = {
+      "all-day": { label: "24時間表示", start: 0, end: 23 },
+      work1: { label: "勤怠：ノーマル", start: 8, end: 18 },
+      work2: { label: "勤怠：モダン", start: 10, end: 20 }
+    };
+
+    function getInitialWeekStart() {
+      const today = new Date();
+      const monday = new Date(today);
+      monday.setDate(today.getDate() - today.getDay() + 1);
+      if (monday.getDay() === 0) monday.setDate(monday.getDate() - 7); // Sunday -> previous Monday
+      return monday;
+    }
+
+    const state = {
+      selectedSlots: new Set(),
+      isSelecting: false,
+      displayMode: cfg.mode,
+      selectedDate: cfg.selectedDate || new Date().toISOString().split("T")[0],
+      currentWeekStart: getInitialWeekStart(),
+      timeInterval: cfg.timeInterval,
+      timeRangePattern: cfg.timeRange,
+      isMobile: /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+        navigator.userAgent
+      ),
+      lastSelectedSlot: null,
+      rangeSelectionStart: null,
+      isRangeSelecting: false
+    };
+
+    function generateTimeSlots() {
+      const pattern = timeRangePatterns[state.timeRangePattern];
+      const slots = [];
+      for (let hour = pattern.start; hour <= pattern.end; hour++) {
+        for (let minute = 0; minute < 60; minute += state.timeInterval) {
+          if (hour === pattern.end && minute > 0) break;
+          const timeString = `${hour.toString().padStart(2, "0")}:${minute.toString().padStart(2, "0")}`;
+          slots.push(timeString);
+        }
+      }
+      return slots;
+    }
+
+    function getWeekDates() {
+      const dates = [];
+      for (let i = 0; i < 7; i++) {
+        const date = new Date(state.currentWeekStart);
+        date.setDate(state.currentWeekStart.getDate() + i);
+        dates.push(date);
+      }
+      return dates;
+    }
+
+    function getSlotKey(date, time) {
+      let dateStr;
+      if (date instanceof Date) {
+        dateStr = date.toISOString().split("T")[0];
+      } else {
+        dateStr = date;
+      }
+      return `${dateStr}-${time}`;
+    }
+
+    function getWeekdayLabel(date) {
+      const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
+      return weekdays[date.getDay()];
+    }
+
+    function isSlotSelected(date, time) {
+      return state.selectedSlots.has(getSlotKey(date, time));
+    }
+
+    function toggleSlot(date, time, forceSelect = false) {
+      const key = getSlotKey(date, time);
+      if (forceSelect || !state.selectedSlots.has(key)) {
+        state.selectedSlots.add(key);
+      } else if (!forceSelect) {
+        state.selectedSlots.delete(key);
+      }
+      updateDisplay();
+      if (cfg.onSelect) cfg.onSelect(Array.from(state.selectedSlots));
+    }
+
+    function handleTimeSlotMouseDown(date, time) {
+      if (!state.isMobile) {
+        state.isSelecting = true;
+        toggleSlot(date, time);
+        state.lastSelectedSlot = getSlotKey(date, time);
+        document.addEventListener("mouseup", handleGlobalMouseUp);
+      }
+    }
+
+    function handleTimeSlotMouseEnter(date, time) {
+      if (!state.isMobile && state.isSelecting) {
+        const currentSlot = getSlotKey(date, time);
+        if (currentSlot !== state.lastSelectedSlot) {
+          toggleSlot(date, time);
+          state.lastSelectedSlot = currentSlot;
+        }
+      }
+    }
+
+    function handleGlobalMouseUp() {
+      state.isSelecting = false;
+      state.lastSelectedSlot = null;
+      document.removeEventListener("mouseup", handleGlobalMouseUp);
+    }
+
+    function handleTimeSlotClick(date, time) {
+      if (state.isMobile) {
+        handleMobileTimeSlotClick(date, time);
+      } else {
+        handleTimeSlotMouseDown(date, time);
+      }
+    }
+
+    function handleMobileTimeSlotClick(date, time) {
+      const key = getSlotKey(date, time);
+      if (!state.isRangeSelecting) {
+        if (state.selectedSlots.has(key)) {
+          toggleSlot(date, time);
+        } else {
+          state.rangeSelectionStart = { date, time };
+          state.isRangeSelecting = true;
+          updateDisplay();
+        }
+      } else {
+        if (state.rangeSelectionStart) {
+          selectTimeRange(
+            state.rangeSelectionStart.date,
+            state.rangeSelectionStart.time,
+            date,
+            time
+          );
+        }
+        state.rangeSelectionStart = null;
+        state.isRangeSelecting = false;
+        updateDisplay();
+      }
+    }
+
+    function selectTimeRange(startDate, startTime, endDate, endTime) {
+      const timeSlots = generateTimeSlots();
+      const startKey = getSlotKey(startDate, startTime);
+      const endKey = getSlotKey(endDate, endTime);
+      const startDateStr = startKey.split("-").slice(0, 3).join("-");
+      const endDateStr = endKey.split("-").slice(0, 3).join("-");
+
+      if (startDateStr === endDateStr) {
+        const startIndex = timeSlots.indexOf(startTime);
+        const endIndex = timeSlots.indexOf(endTime);
+        const minIndex = Math.min(startIndex, endIndex);
+        const maxIndex = Math.max(startIndex, endIndex);
+        for (let i = minIndex; i <= maxIndex; i++) {
+          toggleSlot(startDate, timeSlots[i], true);
+        }
+      } else {
+        toggleSlot(endDate, endTime);
+      }
+    }
+
+    function updateDisplay() {
+      const dailyGrid = root.querySelector(".wf-schedule__time-grid");
+      const weeklyGrid = root.querySelector(".wf-schedule__calendar-grid");
+      const weeklyHeader = root.querySelector(".wf-schedule__calendar-header");
+      const dailySection = root.querySelector(".wf-schedule__daily");
+      const weeklySection = root.querySelector(".wf-schedule__weekly");
+      const weekTitle = root.querySelector(".wf-schedule__week-title");
+      const helpText = root.querySelector(".wf-schedule__help");
+
+      // Mode switching
+      if (dailySection) {
+        dailySection.classList.toggle("is-hidden", state.displayMode !== "daily");
+      }
+      if (weeklySection) {
+        weeklySection.classList.toggle("is-hidden", state.displayMode !== "weekly");
+      }
+
+      // Week title
+      if (weekTitle && state.displayMode === "weekly") {
+        weekTitle.textContent = `${state.currentWeekStart.getFullYear()}年${state.currentWeekStart.getMonth() + 1}月 週間表示`;
+      }
+
+      // Daily grid
+      if (dailyGrid && state.displayMode === "daily") {
+        const timeSlots = generateTimeSlots();
+        const cols = state.timeInterval === 15 ? "4" : state.timeInterval === 30 ? "6" : "8";
+        dailyGrid.className = `wf-schedule__time-grid cols-${cols}`;
+        dailyGrid.innerHTML = timeSlots
+          .map(time => {
+            const selected = isSlotSelected(state.selectedDate, time);
+            const isRangeStart =
+              state.isRangeSelecting &&
+              state.rangeSelectionStart &&
+              state.rangeSelectionStart.time === time &&
+              getSlotKey(state.rangeSelectionStart.date, time) === getSlotKey(state.selectedDate, time);
+            let className = `wf-schedule__time-slot ${selected ? "is-selected" : ""}`;
+            if (isRangeStart) className += " is-range-start";
+            const eventHandlers = state.isMobile
+              ? `onclick="handleTimeSlotClick('${state.selectedDate}', '${time}')"`
+              : `onmousedown="handleTimeSlotMouseDown('${state.selectedDate}', '${time}')" onmouseenter="handleTimeSlotMouseEnter('${state.selectedDate}', '${time}')"`;
+            return `<div class="${className}" data-time="${time}" ${eventHandlers}>${time}</div>`;
+          })
+          .join("");
+
+        if (!state.isMobile) {
+          dailyGrid.addEventListener("mouseleave", () => {
+            state.isSelecting = false;
+            state.lastSelectedSlot = null;
+          });
+          dailyGrid.addEventListener("selectstart", e => e.preventDefault());
+          dailyGrid.addEventListener("contextmenu", e => {
+            if (state.isSelecting) e.preventDefault();
+          });
+        }
+      }
+
+      // Weekly calendar
+      if (weeklyGrid && state.displayMode === "weekly") {
+        const timeSlots = generateTimeSlots();
+        const weekDates = getWeekDates();
+
+        // Header
+        if (weeklyHeader) {
+          weeklyHeader.innerHTML = `<div class="wf-schedule__time-label">時間</div>${weekDates
+            .map(
+              date =>
+                `<div class="wf-schedule__date-header"><div class="wf-schedule__date-weekday">${getWeekdayLabel(date)}</div><div class="wf-schedule__date-day">${date.getMonth() + 1}/${date.getDate()}</div></div>`
+            )
+            .join("")}`;
+        }
+
+        // Grid
+        weeklyGrid.innerHTML = timeSlots
+          .map(time => {
+            let rowHtml = `<div class="wf-schedule__week-time-label">${time.slice(0, 5)}</div>`;
+            weekDates.forEach(date => {
+              const selected = isSlotSelected(date, time);
+              const dateStr = date.toISOString().split("T")[0];
+              const isRangeStart =
+                state.isRangeSelecting &&
+                state.rangeSelectionStart &&
+                state.rangeSelectionStart.time === time &&
+                getSlotKey(state.rangeSelectionStart.date, time) === getSlotKey(dateStr, time);
+              let className = `wf-schedule__week-time-slot ${selected ? "is-selected" : ""}`;
+              if (isRangeStart) className += " is-range-start";
+              const eventHandlers = state.isMobile
+                ? `onclick="handleTimeSlotClick('${dateStr}', '${time}')"`
+                : `onmousedown="handleTimeSlotMouseDown('${dateStr}', '${time}')" onmouseenter="handleTimeSlotMouseEnter('${dateStr}', '${time}')"`;
+              rowHtml += `<div class="${className}" data-date="${dateStr}" data-time="${time}" ${eventHandlers}>${selected ? "選択中" : ""}</div>`;
+            });
+            return rowHtml;
+          })
+          .join("");
+
+        if (!state.isMobile) {
+          weeklyGrid.addEventListener("mouseleave", () => {
+            state.isSelecting = false;
+            state.lastSelectedSlot = null;
+          });
+          weeklyGrid.addEventListener("selectstart", e => e.preventDefault());
+          weeklyGrid.addEventListener("contextmenu", e => {
+            if (state.isSelecting) e.preventDefault();
+          });
+        }
+      }
+
+      // Help text
+      if (helpText) {
+        const pattern = timeRangePatterns[state.timeRangePattern];
+        helpText.innerHTML = `クリックまたはドラッグして時間帯を選択してください（${pattern.label}: ${pattern.start}:00-${pattern.end}:00、${state.timeInterval}分刻み）${state.isMobile ? '<div style="font-size: 0.75rem; color: var(--wf-color-muted); margin-top: 0.25rem;">📱 スマホ：1回目のタップで開始、2回目のタップで終了時間を選択</div>' : ""}`;
+      }
+    }
+
+    // Expose handlers globally for inline handlers
+    window.handleTimeSlotMouseDown = handleTimeSlotMouseDown;
+    window.handleTimeSlotMouseEnter = handleTimeSlotMouseEnter;
+    window.handleTimeSlotClick = handleTimeSlotClick;
+
+    // Initialize
+    updateDisplay();
+
+    return {
+      getSelectedSlots: () => Array.from(state.selectedSlots),
+      clearSelection: () => {
+        state.selectedSlots.clear();
+        state.rangeSelectionStart = null;
+        state.isRangeSelecting = false;
+        updateDisplay();
+      },
+      setMode: mode => {
+        state.displayMode = mode;
+        updateDisplay();
+      },
+      setTimeInterval: interval => {
+        state.timeInterval = interval;
+        state.selectedSlots.clear();
+        updateDisplay();
+      },
+      setTimeRange: range => {
+        state.timeRangePattern = range;
+        state.selectedSlots.clear();
+        updateDisplay();
+      },
+      setSelectedDate: date => {
+        state.selectedDate = date;
+        updateDisplay();
+      },
+      navigateWeek: direction => {
+        const newWeekStart = new Date(state.currentWeekStart);
+        newWeekStart.setDate(state.currentWeekStart.getDate() + direction * 7);
+        state.currentWeekStart = newWeekStart;
+        updateDisplay();
+      },
+      getCurrentWeekStart: () => {
+        return new Date(state.currentWeekStart);
+      },
+      goToCurrentWeek: () => {
+        state.currentWeekStart = getInitialWeekStart();
+        updateDisplay();
+      },
+      generateText: () => {
+        const slotsByDate = {};
+        Array.from(state.selectedSlots).forEach(slot => {
+          const parts = slot.split("-");
+          const date = parts.slice(0, 3).join("-");
+          const time = parts.slice(3).join(":");
+          if (!slotsByDate[date]) slotsByDate[date] = [];
+          slotsByDate[date].push(time);
+        });
+        if (Object.keys(slotsByDate).length === 0) return "";
+        const results = [];
+        Object.keys(slotsByDate)
+          .sort()
+          .forEach(date => {
+            const times = slotsByDate[date].sort();
+            const ranges = [];
+            let rangeStart = times[0];
+            let rangeEnd = times[0];
+            for (let i = 1; i < times.length; i++) {
+              const [prevHour, prevMinute] = times[i - 1].split(":").map(Number);
+              const [currHour, currMinute] = times[i].split(":").map(Number);
+              const prevTotalMinutes = prevHour * 60 + prevMinute;
+              const currTotalMinutes = currHour * 60 + currMinute;
+              if (currTotalMinutes === prevTotalMinutes + state.timeInterval) {
+                rangeEnd = times[i];
+              } else {
+                const [endHour, endMinute] = rangeEnd.split(":").map(Number);
+                let finalEndMinute = endMinute + state.timeInterval;
+                let finalEndHour = endHour;
+                if (finalEndMinute >= 60) {
+                  finalEndMinute -= 60;
+                  finalEndHour += 1;
+                }
+                const endTime = `${finalEndHour.toString().padStart(2, "0")}:${finalEndMinute.toString().padStart(2, "0")}`;
+                ranges.push(`${rangeStart}-${endTime}`);
+                rangeStart = times[i];
+                rangeEnd = times[i];
+              }
+            }
+            if (rangeStart) {
+              const [endHour, endMinute] = rangeEnd.split(":").map(Number);
+              let finalEndMinute = endMinute + state.timeInterval;
+              let finalEndHour = endHour;
+              if (finalEndMinute >= 60) {
+                finalEndMinute -= 60;
+                finalEndHour += 1;
+              }
+              const endTime = `${finalEndHour.toString().padStart(2, "0")}:${finalEndMinute.toString().padStart(2, "0")}`;
+              ranges.push(`${rangeStart}-${endTime}`);
+            }
+            const dateFormatted = date.replace(/-/g, "/");
+            results.push(`${dateFormatted} ${ranges.join(",")}`);
+          });
+        return results.join("\n");
+      }
+    };
+  }
+
+  function calendar(root, opts) {
+    if (!root) return;
+    // 既に初期化されている場合は再初期化しない
+    if (root._wfCalendarInstance) {
+      return root._wfCalendarInstance;
+    }
+    const cfg = Object.assign(
+      {
+        selectedDate: null, // ISO date string (YYYY-MM-DD)
+        selectedDates: [], // Array of ISO date strings for multiple selection
+        minDate: null, // ISO date string
+        maxDate: null, // ISO date string
+        weekStart: 1, // 0 = Sunday, 1 = Monday
+        allowMultiple: false, // Allow multiple date selection
+        allowRange: false, // Allow date range selection
+        onSelect: null, // callback when date is selected
+        onNavigate: null // callback when month changes
+      },
+      opts || {}
+    );
+
+    const weekdays = cfg.weekStart === 0 ? ["日", "月", "火", "水", "木", "金", "土"] : ["月", "火", "水", "木", "金", "土", "日"];
+
+    // 初期表示日付を決定: 日付制限がある場合は制限範囲内に設定
+    let initialDate = new Date();
+    if (cfg.minDate) {
+      const [minYear, minMonth] = cfg.minDate.split("-").map(Number);
+      const minDateObj = new Date(minYear, minMonth - 1, 1);
+      if (initialDate < minDateObj) {
+        initialDate = minDateObj;
+      }
+    }
+    if (cfg.maxDate) {
+      const [maxYear, maxMonth] = cfg.maxDate.split("-").map(Number);
+      const maxDateObj = new Date(maxYear, maxMonth - 1, 1);
+      if (initialDate > maxDateObj) {
+        initialDate = maxDateObj;
+      }
+    }
+
+    const state = {
+      currentDate: initialDate,
+      selectedDate: cfg.selectedDate
+        ? (() => {
+            const [year, month, day] = cfg.selectedDate.split("-").map(Number);
+            return new Date(year, month - 1, day);
+          })()
+        : null,
+      selectedDates: new Set(cfg.selectedDates || []),
+      rangeStart: null,
+      rangeEnd: null,
+      allowMultiple: cfg.allowMultiple,
+      allowRange: cfg.allowRange
+    };
+
+    function getMonthStart(date) {
+      const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
+      return monthStart;
+    }
+
+    function getMonthEnd(date) {
+      const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
+      return monthEnd;
+    }
+
+    function getFirstDayOfWeek(date) {
+      const firstDay = getMonthStart(date);
+      let day = firstDay.getDay();
+      if (cfg.weekStart === 1) {
+        // Monday start: convert Sunday (0) to 6, others subtract 1
+        day = day === 0 ? 6 : day - 1;
+      }
+      // Sunday start: use day as-is (0-6)
+      return day;
+    }
+
+    function getDaysInMonth(date) {
+      return getMonthEnd(date).getDate();
+    }
+
+    // ローカルタイムゾーンで日付文字列（YYYY-MM-DD）を取得
+    function formatDateLocal(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function isToday(date) {
+      const today = new Date();
+      return (
+        date.getFullYear() === today.getFullYear() &&
+        date.getMonth() === today.getMonth() &&
+        date.getDate() === today.getDate()
+      );
+    }
+
+    function isSelected(date) {
+      const dateStr = formatDateLocal(date);
+      const selectedDateStr = state.selectedDate ? formatDateLocal(state.selectedDate) : null;
+      return state.selectedDates.has(dateStr) || (selectedDateStr && dateStr === selectedDateStr);
+    }
+
+    function isDisabled(date) {
+      const dateStr = formatDateLocal(date);
+      if (cfg.minDate) {
+        const minDateStr = cfg.minDate.includes("T") ? cfg.minDate.split("T")[0] : cfg.minDate;
+        if (dateStr < minDateStr) return true;
+      }
+      if (cfg.maxDate) {
+        const maxDateStr = cfg.maxDate.includes("T") ? cfg.maxDate.split("T")[0] : cfg.maxDate;
+        if (dateStr > maxDateStr) return true;
+      }
+      return false;
+    }
+
+    function isInRange(date) {
+      if (!state.rangeStart || !state.rangeEnd) return false;
+      const dateStr = formatDateLocal(date);
+      const startStr = formatDateLocal(state.rangeStart);
+      const endStr = formatDateLocal(state.rangeEnd);
+      return dateStr >= startStr && dateStr <= endStr;
+    }
+
+    function isRangeStart(date) {
+      if (!state.rangeStart) return false;
+      const dateStr = formatDateLocal(date);
+      const startStr = formatDateLocal(state.rangeStart);
+      return dateStr === startStr;
+    }
+
+    function isRangeEnd(date) {
+      if (!state.rangeEnd) return false;
+      const dateStr = formatDateLocal(date);
+      const endStr = formatDateLocal(state.rangeEnd);
+      return dateStr === endStr;
+    }
+
+    function handleDateClick(date) {
+      const dateStr = formatDateLocal(date);
+      if (isDisabled(date)) {
+        return;
+      }
+
+      if (state.allowRange) {
+        if (!state.rangeStart || (state.rangeStart && state.rangeEnd)) {
+          state.rangeStart = date;
+          state.rangeEnd = null;
+        } else {
+          if (date < state.rangeStart) {
+            state.rangeEnd = state.rangeStart;
+            state.rangeStart = date;
+          } else {
+            state.rangeEnd = date;
+          }
+        }
+      } else if (state.allowMultiple) {
+        if (state.selectedDates.has(dateStr)) {
+          state.selectedDates.delete(dateStr);
+        } else {
+          state.selectedDates.add(dateStr);
+        }
+      } else {
+        state.selectedDate = date;
+        state.selectedDates.clear();
+      }
+
+      updateDisplay();
+      if (cfg.onSelect) {
+        if (state.allowRange) {
+          if (state.rangeStart && state.rangeEnd) {
+            cfg.onSelect({
+              start: formatDateLocal(state.rangeStart),
+              end: formatDateLocal(state.rangeEnd)
+            });
+          } else if (state.rangeStart) {
+            // Range selection in progress
+            cfg.onSelect({
+              start: formatDateLocal(state.rangeStart),
+              end: null
+            });
+          }
+        } else if (state.allowMultiple) {
+          cfg.onSelect(Array.from(state.selectedDates));
+        } else {
+          cfg.onSelect(dateStr);
+        }
+      }
+      // Fire custom event
+      root.dispatchEvent(
+        new CustomEvent("wf-calendar-select", {
+          detail: state.allowRange
+            ? state.rangeStart && state.rangeEnd
+              ? {
+                  start: formatDateLocal(state.rangeStart),
+                  end: formatDateLocal(state.rangeEnd)
+                }
+              : state.rangeStart
+                ? {
+                    start: formatDateLocal(state.rangeStart),
+                    end: null
+                  }
+                : null
+            : state.allowMultiple
+              ? Array.from(state.selectedDates)
+              : dateStr
+        })
+      );
+    }
+
+    function updateDisplay() {
+      const header = root.querySelector(".wf-calendar__header");
+      const title = root.querySelector(".wf-calendar__title");
+      const grid = root.querySelector(".wf-calendar__grid");
+      const weekdaysEl = root.querySelector(".wf-calendar__weekdays");
+
+      // Update title
+      if (title) {
+        title.textContent = `${state.currentDate.getFullYear()}年${state.currentDate.getMonth() + 1}月`;
+      }
+
+      // Update weekdays
+      if (weekdaysEl) {
+        weekdaysEl.innerHTML = weekdays
+          .map((day, index) => {
+            const isWeekend = cfg.weekStart === 1 ? index >= 5 : index === 0 || index === 6;
+            return `<div class="wf-calendar__weekday${isWeekend ? " wf-calendar__weekday--weekend" : ""}">${day}</div>`;
+          })
+          .join("");
+      }
+
+      // Update grid
+      if (grid) {
+        const monthStart = getMonthStart(state.currentDate);
+        const monthEnd = getMonthEnd(state.currentDate);
+        const firstDay = getFirstDayOfWeek(state.currentDate);
+        const daysInMonth = getDaysInMonth(state.currentDate);
+        const days = [];
+
+        // Previous month days
+        if (firstDay > 0) {
+          const prevMonth = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth() - 1, 0);
+          const prevMonthDays = prevMonth.getDate();
+          for (let i = firstDay - 1; i >= 0; i--) {
+            const day = prevMonthDays - i;
+            const date = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth() - 1, day);
+            days.push({ date, isOtherMonth: true });
+          }
+        }
+
+        // Current month days
+        for (let i = 1; i <= daysInMonth; i++) {
+          const date = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth(), i);
+          days.push({ date, isOtherMonth: false });
+        }
+
+        // Next month days (fill remaining cells)
+        const remainingCells = 42 - days.length; // 6 rows × 7 days = 42
+        for (let i = 1; i <= remainingCells; i++) {
+          const date = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth() + 1, i);
+          days.push({ date, isOtherMonth: true });
+        }
+
+        grid.innerHTML = days
+          .map(({ date, isOtherMonth }) => {
+            const dateStr = formatDateLocal(date);
+            let className = "wf-calendar__day";
+            if (isToday(date)) className += " is-today";
+            if (isSelected(date)) className += " is-selected";
+            if (isDisabled(date)) className += " is-disabled";
+            if (isOtherMonth) className += " is-other-month";
+            if (state.allowRange) {
+              if (isRangeStart(date)) className += " is-range-start";
+              if (isRangeEnd(date)) className += " is-range-end";
+              if (isInRange(date) && !isRangeStart(date) && !isRangeEnd(date)) className += " is-in-range";
+            }
+
+            return `<button type="button" class="${className}" data-date="${dateStr}" tabindex="${isDisabled(date) || isOtherMonth ? "-1" : "0"}">${date.getDate()}</button>`;
+          })
+          .join("");
+
+        // Add event listeners
+        grid.querySelectorAll(".wf-calendar__day").forEach(btn => {
+          btn.addEventListener("click", () => {
+            const dateStr = btn.getAttribute("data-date");
+            // YYYY-MM-DD形式からローカルタイムゾーンでDateオブジェクトを作成
+            const [year, month, day] = dateStr.split("-").map(Number);
+            const date = new Date(year, month - 1, day);
+            handleDateClick(date);
+          });
+        });
+      }
+    }
+
+    function navigateMonth(direction) {
+      const newDate = new Date(state.currentDate);
+      newDate.setMonth(state.currentDate.getMonth() + direction);
+      state.currentDate = newDate;
+      updateDisplay();
+      if (cfg.onNavigate) {
+        cfg.onNavigate(state.currentDate.getFullYear(), state.currentDate.getMonth() + 1);
+      }
+    }
+
+    // Initialize event listeners
+    const prevBtn = root.querySelector('[data-action="prev"]');
+    const nextBtn = root.querySelector('[data-action="next"]');
+
+    if (prevBtn) {
+      prevBtn.addEventListener("click", () => navigateMonth(-1));
+    }
+    if (nextBtn) {
+      nextBtn.addEventListener("click", () => navigateMonth(1));
+    }
+
+    // Initialize display
+    updateDisplay();
+
+    const instance = {
+      getSelectedDate: () => {
+        return state.selectedDate ? formatDateLocal(state.selectedDate) : null;
+      },
+      getSelectedDates: () => {
+        return Array.from(state.selectedDates);
+      },
+      getRange: () => {
+        if (state.rangeStart && state.rangeEnd) {
+          return {
+            start: formatDateLocal(state.rangeStart),
+            end: formatDateLocal(state.rangeEnd)
+          };
+        }
+        return null;
+      },
+      setSelectedDate: date => {
+        if (date) {
+          // YYYY-MM-DD形式からローカルタイムゾーンでDateオブジェクトを作成
+          const [year, month, day] = date.split("-").map(Number);
+          state.selectedDate = new Date(year, month - 1, day);
+        } else {
+          state.selectedDate = null;
+        }
+        state.selectedDates.clear();
+        updateDisplay();
+      },
+      setSelectedDates: dates => {
+        state.selectedDates = new Set(dates || []);
+        state.selectedDate = null;
+        updateDisplay();
+      },
+      navigateMonth: direction => {
+        navigateMonth(direction);
+      },
+      goToMonth: (year, month) => {
+        state.currentDate = new Date(year, month - 1, 1);
+        updateDisplay();
+      },
+      goToToday: () => {
+        state.currentDate = new Date();
+        updateDisplay();
+      }
+    };
+
+    // Store instance reference and config
+    root._wfCalendarInstance = instance;
+    root._wfCalendarConfig = cfg;
+    return instance;
+  }
 
   // Auto-initialization
   document.addEventListener("DOMContentLoaded", () => {
@@ -616,6 +1376,34 @@
 
     // Code blocks with copy button: auto-detect [data-wf-codeblock]
     document.querySelectorAll("[data-wf-codeblock]").forEach(pre => codeblock(pre));
+
+    // Schedule: auto-detect [data-wf-schedule] or .wf-schedule
+    document.querySelectorAll("[data-wf-schedule], .wf-schedule").forEach(root => {
+      const mode = root.getAttribute("data-wf-schedule-mode") || "daily";
+      const timeInterval = parseInt(root.getAttribute("data-wf-schedule-interval")) || 60;
+      const timeRange = root.getAttribute("data-wf-schedule-range") || "all-day";
+      const selectedDate = root.getAttribute("data-wf-schedule-date");
+      schedule(root, { mode, timeInterval, timeRange, selectedDate });
+    });
+
+    // Calendar: auto-detect [data-wf-calendar] or .wf-calendar
+    document.querySelectorAll("[data-wf-calendar], .wf-calendar").forEach(root => {
+      const selectedDate = root.getAttribute("data-wf-calendar-date");
+      const allowMultiple = root.getAttribute("data-wf-calendar-multiple") === "true";
+      const allowRange = root.getAttribute("data-wf-calendar-range") === "true";
+      const weekStartAttr = root.getAttribute("data-wf-calendar-week-start");
+      const weekStart = weekStartAttr !== null ? parseInt(weekStartAttr) : 1;
+      const minDate = root.getAttribute("data-wf-calendar-min-date");
+      const maxDate = root.getAttribute("data-wf-calendar-max-date");
+      calendar(root, {
+        selectedDate,
+        allowMultiple,
+        allowRange,
+        weekStart,
+        minDate,
+        maxDate
+      });
+    });
   });
 
   function codeblock(pre) {
@@ -679,6 +1467,8 @@
     offcanvas,
     tabs,
     sortableTable,
-    codeblock
+    codeblock,
+    schedule,
+    calendar
   };
 })();
