@@ -395,6 +395,130 @@ npm run lint:css:fix  # 自動修正
 </div>
 ```
 
+#### Schedule（スケジュール選択）
+
+時間スロットを選択するコンポーネントです。日単位・週単位の表示モードに対応しています。
+
+```html
+<div class="wf-schedule" data-wf-schedule data-wf-schedule-mode="daily" data-wf-schedule-interval="60" data-wf-schedule-range="all-day">
+  <!-- モード選択 -->
+  <div class="wf-schedule__mode-grid">
+    <button class="wf-schedule__mode-button is-active">1日単位指定</button>
+    <button class="wf-schedule__mode-button">1週間単位指定</button>
+  </div>
+
+  <!-- 設定 -->
+  <div class="wf-schedule__settings-grid">
+    <input type="date" class="wf-input" id="selected-date" />
+    <select class="wf-select" id="time-range">
+      <option value="all-day">24時間表示</option>
+      <option value="work1">勤怠：ノーマル</option>
+      <option value="work2">勤怠：モダン</option>
+    </select>
+    <select class="wf-select" id="time-interval">
+      <option value="60">60分刻み</option>
+      <option value="30">30分刻み</option>
+      <option value="15">15分刻み</option>
+    </select>
+  </div>
+
+  <!-- 日単位モード：タイムテーブル -->
+  <div class="wf-schedule__daily-section">
+    <div class="wf-schedule__time-grid cols-8"></div>
+  </div>
+
+  <!-- 週単位モード：週カレンダー -->
+  <div class="wf-schedule__weekly-calendar is-hidden">
+    <div class="wf-schedule__calendar-header"></div>
+    <div class="wf-schedule__calendar-grid"></div>
+  </div>
+</div>
+```
+
+**属性:**
+- `data-wf-schedule`: 自動初期化を有効化
+- `data-wf-schedule-mode`: 表示モード（`daily` または `weekly`）
+- `data-wf-schedule-interval`: 時間刻み（`15`, `30`, `60`）
+- `data-wf-schedule-range`: 時間レンジ（`all-day`, `work1`, `work2`）
+- `data-wf-schedule-date`: 初期選択日（ISO形式: `YYYY-MM-DD`）
+
+**JavaScript API:**
+```javascript
+const instance = WFUI.schedule(element, {
+  mode: 'daily',           // 'daily' または 'weekly'
+  timeInterval: 60,        // 15, 30, または 60
+  timeRange: 'all-day',    // 'all-day', 'work1', 'work2'
+  selectedDate: null,       // ISO形式の日付文字列
+  onSelect: (slots) => {}  // 選択変更時のコールバック
+});
+
+// メソッド
+instance.getSelectedSlots();      // 選択されたスロットの配列を取得
+instance.clearSelection();         // 選択をクリア
+instance.setMode(mode);            // モード切り替え
+instance.setTimeInterval(interval); // 時間刻み設定
+instance.setTimeRange(range);      // 時間レンジ設定
+instance.setSelectedDate(date);    // 選択日付設定
+instance.navigateWeek(direction);  // 週ナビゲーション（-1: 前週, 1: 次週）
+instance.getCurrentWeekStart();    // 現在の週の開始日を取得
+instance.goToCurrentWeek();        // 今週に移動
+instance.generateText();           // 選択をテキスト形式で生成
+```
+
+詳細な使用例は `examples/schedule.html` を参照してください。
+
+#### Calendar（カレンダー）
+
+日付を選択するカレンダーコンポーネントです。単一選択、複数選択、範囲選択に対応しています。
+
+```html
+<div class="wf-calendar" data-wf-calendar>
+  <div class="wf-calendar__header">
+    <button class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">‹</button>
+    <div class="wf-calendar__title"></div>
+    <button class="wf-calendar__nav-btn" data-action="next" aria-label="次月">›</button>
+  </div>
+  <div class="wf-calendar__weekdays"></div>
+  <div class="wf-calendar__grid"></div>
+</div>
+```
+
+**属性:**
+- `data-wf-calendar`: 自動初期化を有効化
+- `data-wf-calendar-date`: 初期選択日（ISO形式: `YYYY-MM-DD`）
+- `data-wf-calendar-multiple`: 複数選択を有効化（`"true"`）
+- `data-wf-calendar-range`: 範囲選択を有効化（`"true"`）
+- `data-wf-calendar-week-start`: 週の開始日（`0`=日曜日、`1`=月曜日、デフォルト: `1`）
+- `data-wf-calendar-min-date`: 最小日付（ISO形式）
+- `data-wf-calendar-max-date`: 最大日付（ISO形式）
+
+**JavaScript API:**
+```javascript
+const instance = WFUI.calendar(element, {
+  selectedDate: null,        // 初期選択日（ISO形式）
+  selectedDates: [],         // 複数選択の場合の初期選択日配列
+  minDate: null,             // 最小日付（ISO形式）
+  maxDate: null,             // 最大日付（ISO形式）
+  weekStart: 1,              // 週の開始日（0=日曜、1=月曜）
+  allowMultiple: false,      // 複数選択を許可
+  allowRange: false,         // 範囲選択を許可
+  onSelect: (date) => {},    // 選択時のコールバック
+  onNavigate: (year, month) => {} // 月変更時のコールバック
+});
+
+// メソッド
+instance.getSelectedDate();      // 選択された日付を取得（単一選択）
+instance.getSelectedDates();     // 選択された日付の配列を取得（複数選択）
+instance.getRange();             // 選択範囲を取得（範囲選択: {start, end}）
+instance.setSelectedDate(date);  // 日付を設定（単一選択）
+instance.setSelectedDates(dates); // 日付を設定（複数選択）
+instance.navigateMonth(direction); // 月ナビゲーション（-1: 前月, 1: 次月）
+instance.goToMonth(year, month); // 指定月に移動
+instance.goToToday();            // 今月に移動
+```
+
+詳細な使用例は `examples/calendar.html` を参照してください。
+
 #### Tooltip
 
 ```html
