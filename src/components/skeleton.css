@@ -1,0 +1,22 @@
+@layer components {
+  /* Skeleton Loader */
+  @keyframes wf-shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .wf-skeleton {
+    background: linear-gradient(90deg,
+      var(--wf-surface-muted) 25%,
+      var(--wf-surface-subtle) 37%,
+      var(--wf-surface-muted) 63%);
+    background-size: 200% 100%;
+    animation: wf-shimmer var(--wf-duration-slow) linear infinite;
+    border-radius: var(--wf-radius-sm);
+  }
+  .wf-skeleton-line { height: 1em; }
+  .wf-skeleton-line.wf-sm { height: 0.75em; }
+  .wf-skeleton-line.wf-lg { height: 1.25em; }
+  .wf-skeleton-circle { width: 40px; height: 40px; border-radius: 50%; }
+  .wf-skeleton-rect { width: 100%; height: 120px; }
+}
+
