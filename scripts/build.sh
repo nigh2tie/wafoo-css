@@ -21,6 +21,7 @@ FILES=(
   "$ROOT_DIR/src/components/tabs.css"
   "$ROOT_DIR/src/components/schedule.css"
   "$ROOT_DIR/src/components/calendar.css"
+  "$ROOT_DIR/src/components/list-group.css"
   "$ROOT_DIR/src/components/modal.css"
   "$ROOT_DIR/src/components/grid.css"
   "$ROOT_DIR/src/components/navbar.css"
