@@ -620,4 +620,43 @@
       align-items: flex-end;
     }
   }
+
+  /* Text handling */
+  .wf-text-truncate {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .wf-text-break {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .wf-line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .wf-line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  /* Cursor */
+  .wf-cursor-pointer { cursor: pointer; }
+  .wf-cursor-not-allowed { cursor: not-allowed; }
+  .wf-cursor-wait { cursor: wait; }
+  .wf-cursor-grab { cursor: grab; }
+
+  /* Aspect ratio */
+  .wf-aspect-square { aspect-ratio: 1 / 1; }
+  .wf-aspect-video { aspect-ratio: 16 / 9; }
+  .wf-aspect-4-3 { aspect-ratio: 4 / 3; }
+
+  /* Scroll snap */
+  .wf-snap-x { scroll-snap-type: x mandatory; }
+  .wf-snap-y { scroll-snap-type: y mandatory; }
+  .wf-snap-start { scroll-snap-align: start; }
 }

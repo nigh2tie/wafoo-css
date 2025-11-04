@@ -102,6 +102,9 @@
     /* Breakpoints */
     --wf-breakpoint-sm: 600px;
     --wf-breakpoint-md: 900px;
+    /* Extended breakpoints for larger layouts */
+    --wf-breakpoint-lg: 1200px;
+    --wf-breakpoint-xl: 1440px;
 
     /* Button sizes */
     --wf-btn-py-sm: var(--wf-space-1);
