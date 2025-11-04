@@ -2087,6 +2087,38 @@
 }
 
 
+/* from: src/components/empty.css */
+@layer components {
+  /* Empty State */
+  .wf-empty {
+    text-align: center;
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-md);
+    background: var(--wf-surface-base);
+    padding: var(--wf-space-6);
+    color: var(--wf-color-muted);
+  }
+  .wf-empty__icon {
+    font-size: 2rem;
+    color: var(--wf-color-accent);
+    margin-bottom: var(--wf-space-2);
+    display: inline-block;
+  }
+  .wf-empty__title {
+    margin: 0 0 var(--wf-space-2);
+    font-weight: 700;
+    color: var(--wf-color-text);
+  }
+  .wf-empty__desc {
+    margin: 0 0 var(--wf-space-4);
+  }
+  .wf-empty__actions {
+    display: inline-flex;
+    gap: var(--wf-space-2);
+  }
+}
+
+
 /* from: src/components/modal.css */
 @layer components {
   /* Modal */
