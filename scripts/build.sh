@@ -24,6 +24,7 @@ FILES=(
   "$ROOT_DIR/src/components/list-group.css"
   "$ROOT_DIR/src/components/skeleton.css"
   "$ROOT_DIR/src/components/empty.css"
+  "$ROOT_DIR/src/components/avatar.css"
   "$ROOT_DIR/src/components/modal.css"
   "$ROOT_DIR/src/components/grid.css"
   "$ROOT_DIR/src/components/navbar.css"

@@ -1,0 +1,47 @@
+@layer components {
+  /* Avatar */
+  .wf-avatar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--wf-accent-100);
+    color: var(--wf-color-text);
+    font-weight: 700;
+    overflow: hidden;
+  }
+  .wf-avatar-sm {
+    width: 24px;
+    height: 24px;
+    font-size: var(--wf-font-sm);
+  }
+  .wf-avatar-lg {
+    width: 48px;
+    height: 48px;
+    font-size: var(--wf-font-lg);
+  }
+  .wf-avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .wf-avatar-square { border-radius: var(--wf-radius-md); }
+  .wf-avatar-status {
+    position: relative;
+  }
+  .wf-avatar-status::after {
+    content: "";
+    position: absolute;
+    right: -2px;
+    bottom: -2px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--wf-success);
+    border: 2px solid var(--wf-surface-base);
+  }
+}
+
