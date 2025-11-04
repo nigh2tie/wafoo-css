@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>wafoo-css | テストレポート</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="../dist/wafoo.css" />
+    <meta name="robots" content="noindex,nofollow" />
+    <style>
+      .k {
+        color: #666;
+        font-size: 12px;
+      }
+      .ok {
+        color: #2e7d32;
+        font-weight: 700;
+      }
+      .warn {
+        color: #b26a00;
+        font-weight: 700;
+      }
+      .bad {
+        color: #b00020;
+        font-weight: 700;
+      }
+      .grid {
+        display: grid;
+        gap: 12px;
+        grid-template-columns: 1fr;
+      }
+      .card {
+        background: #fff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 8px;
+        padding: 16px;
+      }
+      .mono {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        padding: 8px 6px;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+      }
+      th {
+        text-align: left;
+        color: #666;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+  <body class="theme-kiku">
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+    <header class="wf-header-noren" role="banner">
+      <div class="wf-container" style="padding: 0">
+        <h1>テストレポート</h1>
+        <p class="k">スナップショット: 2025-10-26T23:43:27+0900</p>
+      </div>
+    </header>
+    <main class="wf-container" role="main" id="main">
+      <section class="grid">
+        <div class="card">
+          <h2>ビルドサイズ</h2>
+          <table class="mono">
+            <tr>
+              <th>ファイル</th>
+              <th>サイズ (bytes)</th>
+            </tr>
+            <tr>
+              <td>dist/wafoo.css</td>
+              <td>11740</td>
+            </tr>
+            <tr>
+              <td>dist/wafoo.min.css</td>
+              <td>3674</td>
+            </tr>
+            <tr>
+              <td>gzip(dist/wafoo.min.css)</td>
+              <td>977</td>
+            </tr>
+          </table>
+          <p class="ok">閾値: gzip 20KB 以下 → PASS</p>
+        </div>
+
+        <div class="card">
+          <h2>コントラスト（代表値）</h2>
+          <table class="mono">
+            <tr>
+              <th>組み合わせ</th>
+              <th>比率</th>
+              <th>評価</th>
+            </tr>
+            <tr>
+              <td>本文色 vs 背景</td>
+              <td>15.89:1</td>
+              <td class="ok">AA/AAA</td>
+            </tr>
+            <tr>
+              <td>リンク色（accent-600）vs 背景</td>
+              <td>4.89:1</td>
+              <td class="ok">AA</td>
+            </tr>
+            <tr>
+              <td>プライマリ（白文字）vs accent-700</td>
+              <td>6.63:1</td>
+              <td class="ok">AA</td>
+            </tr>
+            <tr>
+              <td>境界 #8a8a8a vs 背景（非テキスト）</td>
+              <td>3.33:1</td>
+              <td class="ok">3:1</td>
+            </tr>
+          </table>
+        </div>
+
+        <div class="card">
+          <h2>コンポーネント実装状況</h2>
+          <ul>
+            <li class="ok">ボタン（サイズ/状態/アイコン/ロード中/無効）</li>
+            <li class="ok">フォーム（入力/テキストエリア/セレクト/ヘルプ/エラー/必須）</li>
+            <li class="ok">カード（通常/和紙）</li>
+            <li class="ok">暖簾ヘッダー（装飾あり）</li>
+            <li class="ok">ステップ（状態コネクタ）</li>
+            <li class="ok">アラート（success/warning/danger, has-icon, サイズ）</li>
+            <li class="ok">バッジ（success/warning/danger）</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>ドキュメント整備</h2>
+          <ul>
+            <li class="ok">
+              Getting Started、Design Tokens、Component
+              API、ガイド（命名/レイアウト/アクセシビリティ）
+            </li>
+            <li class="ok">デモ（buttons/forms/cards/alerts/badges/steps）</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h2>TODO 進捗</h2>
+          <ul>
+            <li class="ok">短期（MVP仕上げ）: 完了</li>
+            <li class="ok">トークン整理: 完了</li>
+            <li>ビルド/整備: 未着手（src分割、PostCSS/cssnano、stylelint/Prettier）</li>
+            <li>QA/アクセシビリティ: 未実施（Lighthouse/axe、reduced-motion等）</li>
+            <li>リリース: 未実施（CHANGELOG、タグ付け、CDN方針）</li>
+          </ul>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

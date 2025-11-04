@@ -28,6 +28,13 @@
     /* center the thumb over the track */
     margin-top: calc((var(--_thumb) - var(--_track-h)) / -2);
   }
+  /* Focus visible (WebKit) */
+  .wf-range:focus-visible::-webkit-slider-thumb {
+    box-shadow: 0 0 0 3px var(--wf-focus);
+  }
+  .wf-range:focus-visible::-webkit-slider-runnable-track {
+    background: var(--wf-color-border-strong);
+  }
   /* Firefox track */
   .wf-range::-moz-range-track {
     height: var(--_track-h);
@@ -41,5 +48,12 @@
     background: var(--wf-color-accent);
     cursor: pointer;
     border: 2px solid var(--wf-surface-base);
+  }
+  /* Focus visible (Firefox) */
+  .wf-range:focus-visible::-moz-range-thumb {
+    box-shadow: 0 0 0 3px var(--wf-focus);
+  }
+  .wf-range:focus-visible::-moz-range-track {
+    background: var(--wf-color-border-strong);
   }
 }

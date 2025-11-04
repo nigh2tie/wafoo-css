@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>ダッシュボード（データ表示） - wafoo-css</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="robots" content="noindex,nofollow" />
+    <link rel="stylesheet" href="../dist/wafoo.css" />
+    <script src="../docs/theme.js"></script>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+    <nav class="wf-navbar" role="navigation" aria-label="Primary">
+      <a class="wf-navbar-brand" href="#">wafoo</a>
+      <ul class="wf-navbar-nav">
+        <li class="wf-nav-item"><a class="wf-nav-link is-active" href="#">Dashboard</a></li>
+        <li class="wf-nav-item"><a class="wf-nav-link" href="../docs/index.html">Docs</a></li>
+      </ul>
+    </nav>
+
+    <main class="wf-container" role="main" id="main">
+      <div class="wf-row wf-g-3">
+        <aside class="wf-col-12 wf-col-md-3">
+          <div class="wf-card">
+            <h3 style="margin-top: 0">メニュー</h3>
+            <ul class="wf-mt-2">
+              <li><a class="wf-link" href="#">Overview</a></li>
+              <li><a class="wf-link" href="#">Customers</a></li>
+              <li><a class="wf-link" href="#">Settings</a></li>
+            </ul>
+          </div>
+        </aside>
+        <section class="wf-col-12 wf-col-md-9">
+          <div class="wf-row wf-g-2 wf-mb-3">
+            <div class="wf-col-6">
+              <div class="wf-card">
+                総売上
+                <strong>¥1,240,000</strong>
+              </div>
+            </div>
+            <div class="wf-col-6">
+              <div class="wf-card">
+                新規顧客
+                <strong>124</strong>
+              </div>
+            </div>
+            <div class="wf-col-6">
+              <div class="wf-card">
+                NPS
+                <span class="wf-badge wf-badge-success">+42</span>
+              </div>
+            </div>
+            <div class="wf-col-6">
+              <div class="wf-card">
+                稼働率
+                <div class="wf-progress" style="margin-top: 8px">
+                  <div class="wf-progress__bar" style="width: 68%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="wf-card">
+            <h2 style="margin-top: 0">最近の顧客</h2>
+            <div class="wf-flex wf-justify-between wf-items-center wf-mb-2">
+              <div class="wf-input-group" style="max-width: 320px">
+                <span class="wf-input-group__prepend wf-input-group__text">検索</span>
+                <input class="wf-input" placeholder="検索" />
+              </div>
+              <button class="wf-btn wf-btn-outline wf-btn-sm">エクスポート</button>
+            </div>
+            <div class="wf-table-wrap">
+              <table class="wf-table wf-table-striped">
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>氏名</th>
+                    <th>状態</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>C-1001</td>
+                    <td>山田 太郎</td>
+                    <td><span class="wf-badge wf-badge-success">アクティブ</span></td>
+                  </tr>
+                  <tr>
+                    <td>C-1002</td>
+                    <td>佐藤 花子</td>
+                    <td><span class="wf-badge wf-badge-warning">保留中</span></td>
+                  </tr>
+                  <tr>
+                    <td>C-1003</td>
+                    <td>鈴木 次郎</td>
+                    <td><span class="wf-badge wf-badge-danger">停止</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+      </div>
+      <p class="wf-text-sm wf-text-muted wf-mt-4">
+        <a class="wf-link" href="../docs/index.html">ドキュメントへ戻る</a>
+      </p>
+    </main>
+  </body>
+</html>
