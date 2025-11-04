@@ -2043,6 +2043,8 @@
     border-bottom: 1px solid var(--wf-color-border);
     color: var(--wf-color-text);
     text-decoration: none;
+    width: 100%;
+    background: transparent;
   }
   .wf-list-item:last-child {
     border-bottom: 0;
@@ -2060,8 +2062,39 @@
     color: var(--wf-color-muted);
     font-size: var(--wf-font-sm);
   }
-}
 
+  /* Ensure buttons look like list items */
+  button.wf-list-item {
+    appearance: none;
+    -webkit-appearance: none;
+    background: none;
+    border: 0;
+    font: inherit;
+    color: inherit;
+    text-align: left;
+    cursor: pointer;
+  }
+  a.wf-list-item {
+    display: flex;
+  }
+
+  /* Disabled state */
+  .wf-list-item.is-disabled,
+  .wf-list-item[aria-disabled="true"],
+  .wf-list-item:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Optional icon size inside items */
+  .wf-list-item .wf-icon {
+    width: var(--wf-icon-md);
+    height: var(--wf-icon-md);
+    line-height: 1;
+    flex: 0 0 auto;
+  }
+}
 
 /* from: src/components/skeleton.css */
 @layer components {
