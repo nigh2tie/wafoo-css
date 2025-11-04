@@ -154,7 +154,7 @@ function generateText() {
 
 function generateResponsive() {
   let css = "\n/* Responsive (min-width) */\n";
-  const breakpoints = ["sm", "md"];
+  const breakpoints = ["sm", "md", "lg"]; // extend to lg
 
   for (const bp of breakpoints) {
     css += `@media (min-width: var(--wf-breakpoint-${bp})) {\n`;
@@ -181,6 +181,11 @@ function generateResponsive() {
       css += `  .wf-${bp}-items-${value} { align-items: ${cssValue}; }\n`;
     }
 
+    // Text alignment
+    for (const align of ["left", "center", "right", "justify"]) {
+      css += `  .wf-${bp}-text-${align} { text-align: ${align}; }\n`;
+    }
+
     css += `}\n`;
   }
 
@@ -199,6 +204,9 @@ function generateStaticUtilities() {
 .wf-max-w-lg { max-width: 960px; }
 .wf-max-w-xl { max-width: 1200px; }
 .wf-container-fluid { max-width: none !important; }
+/* Full-height helpers */
+.wf-h-screen { height: 100vh; }
+.wf-min-h-screen { min-height: 100vh; }
 
 /* Overflow */
 .wf-overflow-hidden { overflow: hidden; }
@@ -229,6 +237,18 @@ function generateStaticUtilities() {
 /* Link helper */
 .wf-link { color: var(--wf-link-color); text-decoration: none; border-bottom: 1px solid transparent; cursor: pointer; }
 .wf-link:hover, .wf-link:focus-visible { color: var(--wf-link-color-hover); border-bottom-color: currentColor; }
+
+/* Animations */
+@keyframes wf-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes wf-slide-up { from { transform: translateY(8px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+@keyframes wf-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+.wf-fade-in { animation: wf-fade-in var(--wf-duration-fast) var(--wf-ease-out); }
+.wf-slide-up { animation: wf-slide-up var(--wf-duration-fast) var(--wf-ease-out); }
+.wf-pulse { animation: wf-pulse 2s infinite; }
+
+/* Transitions */
+.wf-transition { transition: all var(--wf-duration-fast) var(--wf-ease-out); }
+.wf-transition-colors { transition: color var(--wf-duration-fast) var(--wf-ease-out), background-color var(--wf-duration-fast) var(--wf-ease-out), border-color var(--wf-duration-fast) var(--wf-ease-out); }
 `;
 }
 
