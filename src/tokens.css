@@ -175,6 +175,7 @@
     --wf-duration-slower: 500ms;
     /* Component-specific durations */
     --wf-skeleton-duration: 8s; /* calmer shimmer (1/4 current speed) */
+    --wf-pulse-duration: 4s; /* calm pulse for gentle emphasis */
 
     /* Easing functions */
     --wf-ease-in: cubic-bezier(0.4, 0, 1, 1);

@@ -206,11 +206,16 @@
 @keyframes wf-pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 .wf-fade-in { animation: wf-fade-in var(--wf-duration-fast) var(--wf-ease-out); }
 .wf-slide-up { animation: wf-slide-up var(--wf-duration-fast) var(--wf-ease-out); }
-.wf-pulse { animation: wf-pulse 2s infinite; }
+.wf-pulse { animation: wf-pulse var(--wf-pulse-duration, 4s) infinite; }
 
 /* Transitions */
 .wf-transition { transition: all var(--wf-duration-fast) var(--wf-ease-out); }
 .wf-transition-colors { transition: color var(--wf-duration-fast) var(--wf-ease-out), background-color var(--wf-duration-fast) var(--wf-ease-out), border-color var(--wf-duration-fast) var(--wf-ease-out); }
+
+@media (prefers-reduced-motion: reduce) {
+  .wf-fade-in, .wf-slide-up, .wf-pulse { animation: none !important; }
+  .wf-transition, .wf-transition-colors { transition: none !important; }
+}
 
 /* Responsive (min-width) */
 @media (min-width: var(--wf-breakpoint-sm)) {

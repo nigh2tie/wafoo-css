@@ -243,7 +243,7 @@
     background: linear-gradient(135deg, var(--wf-warning), var(--wf-warning));
     color: var(--wf-surface-base);
     border-color: var(--wf-warning);
-    animation: pulse 1s infinite;
+    animation: pulse var(--wf-pulse-duration, 4s) infinite;
     box-shadow: var(--wf-shadow-md);
   }
 
@@ -375,8 +375,15 @@
     background: linear-gradient(135deg, var(--wf-warning), var(--wf-warning));
     color: var(--wf-surface-base);
     border-color: var(--wf-warning);
-    animation: pulse 1s infinite;
+    animation: pulse var(--wf-pulse-duration, 4s) infinite;
     box-shadow: var(--wf-shadow-md);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wf-schedule__time-slot.is-range-start,
+    .wf-schedule__week-time-slot.is-range-start {
+      animation: none;
+    }
   }
 
   /* Help Text */
@@ -457,4 +464,3 @@
     display: none;
   }
 }
-
