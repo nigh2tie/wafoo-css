@@ -174,7 +174,7 @@
     --wf-duration-slow: 350ms;
     --wf-duration-slower: 500ms;
     /* Component-specific durations */
-    --wf-skeleton-duration: 2s; /* calm shimmer for skeletons */
+    --wf-skeleton-duration: 8s; /* calmer shimmer (1/4 current speed) */
 
     /* Easing functions */
     --wf-ease-in: cubic-bezier(0.4, 0, 1, 1);
