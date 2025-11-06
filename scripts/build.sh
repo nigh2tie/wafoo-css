@@ -5,6 +5,10 @@ ROOT_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 OUT_DIR="$ROOT_DIR/dist"
 CSS_OUT="$OUT_DIR/wafoo.css"
 MIN_OUT="$OUT_DIR/wafoo.min.css"
+JS_SRC_DIR="$ROOT_DIR/src/js"
+JS_PATCH="$JS_SRC_DIR/wafoo.js"
+JS_OUT="$OUT_DIR/wafoo.js"
+JS_MIN_OUT="$OUT_DIR/wafoo.min.js"
 
 FILES=(
   "$ROOT_DIR/src/tokens.css"
@@ -72,4 +76,29 @@ else
   printf "%s" "$MIN_CONTENT" > "$MIN_OUT"
   echo "Built: $CSS_OUT"
   echo "Built: $MIN_OUT (fallback)"
+fi
+
+# JS build (patching dist/wafoo.js with src/js/wafoo.js if present)
+if [ -f "$JS_PATCH" ]; then
+  mkdir -p "$OUT_DIR"
+  if [ -f "$JS_OUT" ]; then
+    # Remove previously appended patch block if present (between markers)
+    awk 'BEGIN{skip=0} /\/\* WFUI PATCH BEGIN \*\//{skip=1} {if(skip==0) print $0} END{}' "$JS_OUT" > "$OUT_DIR/.wafoo.base.js"
+  else
+    # If no existing JS, start from empty base
+    : > "$OUT_DIR/.wafoo.base.js"
+  fi
+  cat "$OUT_DIR/.wafoo.base.js" "$JS_PATCH" > "$JS_OUT"
+
+  # Naive minify (no external deps)
+  MIN_CONTENT=$(cat "$JS_OUT" \
+    | sed -E 's:/\*[^*]*\*+([^/*][^*]*\*+)*/::g' \
+    | sed -E 's://[^\n]*::g' \
+    | tr '\n' ' ' \
+    | sed -E 's/[[:space:]]+/ /g' \
+    | sed -E 's/ ?([{}();,:\[\]]) ?/\1/g')
+  printf "%s" "$MIN_CONTENT" > "$JS_MIN_OUT"
+  rm -f "$OUT_DIR/.wafoo.base.js"
+  echo "Built: $JS_OUT (+ patch)"
+  echo "Built: $JS_MIN_OUT (fallback)"
 fi

@@ -783,6 +783,8 @@
     border: 1px solid var(--wf-color-border);
     border-radius: var(--wf-radius-md);
     padding: var(--wf-space-4);
+    /* Grid/Flex 内でのはみ出し防止（min-width: auto を打ち消し） */
+    min-width: 0;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   }
   .wf-card-washi {
@@ -1893,6 +1895,12 @@
     max-width: 400px;
   }
 
+  /* Fluid variant for container-fit layouts */
+  .wf-calendar-fluid {
+    width: 100%;
+    max-width: 100%;
+  }
+
   @media (min-width: var(--wf-breakpoint-md)) {
     .wf-calendar {
       padding: var(--wf-space-6);
@@ -2082,7 +2090,6 @@
     background: var(--wf-accent-100);
   }
 }
-
 
 /* from: src/components/list-group.css */
 @layer components {

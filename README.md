@@ -81,7 +81,8 @@ bash scripts/build.sh
 - **Noto Serif JP（明朝体）** - 日本語に最適化されたタイポグラフィ
 - **和紙テクスチャ** - 背景全体に和紙のような質感
 - **伝統色パレット** - 紅梅・藤・桜・白百合・墨・灰
-- **完全なテーマシステム** - 10種類のテーマ（桜、紅梅、萌黄、菊、氷、柳、紅葉、藤、鶯、雪）で全コンポーネントが正しく色継承
+- **完全なテーマシステム** -
+  10種類のテーマ（桜、紅梅、萌黄、菊、氷、柳、紅葉、藤、鶯、雪）で全コンポーネントが正しく色継承
 - **テーマ対応グラデーション** - 各テーマに最適化された配色
 - **和風コンポーネント** - 判子（ハンコ）、暖簾ヘッダー、和紙風カード
 - **漢数字サポート** - 壱・弐・参・肆などの表示
@@ -343,7 +344,8 @@ npm run lint:css:fix  # 自動修正
 
 これらのコンポーネントは `dist/wafoo.js` が必要です。
 
-**自動初期化**: `data-wf-*`属性を使用することで、JavaScriptコードを書かずにコンポーネントが自動的に初期化されます。
+**自動初期化**:
+`data-wf-*`属性を使用することで、JavaScriptコードを書かずにコンポーネントが自動的に初期化されます。
 
 #### Tabs
 
@@ -382,8 +384,6 @@ npm run lint:css:fix  # 自動修正
 - ステータス配色: `.wf-modal--danger` / `--warning` / `--success` / `--info`
 - フッター整列: `.wf-modal__footer.is-start` / `.is-center`
 
-動作デモ: `examples/modal.html`
-
 #### Dropdown
 
 ```html
@@ -410,7 +410,13 @@ npm run lint:css:fix  # 自動修正
 時間スロットを選択するコンポーネントです。日単位・週単位の表示モードに対応しています。
 
 ```html
-<div class="wf-schedule" data-wf-schedule data-wf-schedule-mode="daily" data-wf-schedule-interval="60" data-wf-schedule-range="all-day">
+<div
+  class="wf-schedule"
+  data-wf-schedule
+  data-wf-schedule-mode="daily"
+  data-wf-schedule-interval="60"
+  data-wf-schedule-range="all-day"
+>
   <!-- モード選択 -->
   <div class="wf-schedule__mode-grid">
     <button class="wf-schedule__mode-button is-active">1日単位指定</button>
@@ -420,11 +426,7 @@ npm run lint:css:fix  # 自動修正
   <!-- 設定 -->
   <div class="wf-schedule__settings-grid">
     <input type="date" class="wf-input" id="selected-date" />
-    <select class="wf-select" id="time-range">
-      <option value="all-day">24時間表示</option>
-      <option value="work1">勤怠：ノーマル</option>
-      <option value="work2">勤怠：モダン</option>
-    </select>
+    <!-- 時間レンジはAPIでのみ設定可能（デフォルトは all-day） -->
     <select class="wf-select" id="time-interval">
       <option value="60">60分刻み</option>
       <option value="30">30分刻み</option>
@@ -446,36 +448,47 @@ npm run lint:css:fix  # 自動修正
 ```
 
 **属性:**
+
 - `data-wf-schedule`: 自動初期化を有効化
 - `data-wf-schedule-mode`: 表示モード（`daily` または `weekly`）
 - `data-wf-schedule-interval`: 時間刻み（`15`, `30`, `60`）
-- `data-wf-schedule-range`: 時間レンジ（`all-day`, `work1`, `work2`）
+- `data-wf-schedule-range`: 時間レンジ（`all-day` のみ）。その他のレンジはAPIでのみ設定します。
 - `data-wf-schedule-date`: 初期選択日（ISO形式: `YYYY-MM-DD`）
 
 **JavaScript API:**
+
 ```javascript
 const instance = WFUI.schedule(element, {
-  mode: 'daily',           // 'daily' または 'weekly'
-  timeInterval: 60,        // 15, 30, または 60
-  timeRange: 'all-day',    // 'all-day', 'work1', 'work2'
-  selectedDate: null,       // ISO形式の日付文字列
-  onSelect: (slots) => {}  // 選択変更時のコールバック
+  mode: "daily", // 'daily' または 'weekly'
+  timeInterval: 60, // 15, 30, または 60
+  // timeRange はAPIのみで設定（デフォルト: 'all-day'）
+  // プリセット: 'daytime' (8:00–18:00), 'extended' (10:00–20:00)
+  // カスタム: { start: 6, end: 12, label: 'morning' } または (date)=>{...}
+  timeRange: 'all-day',
+  selectedDate: null, // ISO形式の日付文字列
+  onSelect: slots => {} // 選択変更時のコールバック
 });
 
 // メソッド
-instance.getSelectedSlots();      // 選択されたスロットの配列を取得
-instance.clearSelection();         // 選択をクリア
-instance.setMode(mode);            // モード切り替え
+instance.getSelectedSlots(); // 選択されたスロットの配列を取得
+instance.clearSelection(); // 選択をクリア
+instance.setMode(mode); // モード切り替え
 instance.setTimeInterval(interval); // 時間刻み設定
-instance.setTimeRange(range);      // 時間レンジ設定
-instance.setSelectedDate(date);    // 選択日付設定
-instance.navigateWeek(direction);  // 週ナビゲーション（-1: 前週, 1: 次週）
-instance.getCurrentWeekStart();    // 現在の週の開始日を取得
-instance.goToCurrentWeek();        // 今週に移動
-instance.generateText();           // 選択をテキスト形式で生成
+// 時間レンジ設定（APIのみ）
+instance.setTimeRange('daytime'); // プリセット（8:00–18:00）
+instance.setTimeRange('extended'); // プリセット（10:00–20:00）
+instance.setTimeRange({ start: 6, end: 12, label: 'morning' }); // カスタム
+instance.setTimeRange(date => ({ start: date.getDay() === 0 ? 10 : 8, end: 18, label: 'dynamic' })); // 関数
+instance.setSelectedDate(date); // 選択日付設定
+instance.navigateWeek(direction); // 週ナビゲーション（-1: 前週, 1: 次週）
+instance.getCurrentWeekStart(); // 現在の週の開始日を取得
+instance.goToCurrentWeek(); // 今週に移動
+instance.generateText(); // 選択をテキスト形式で生成
 ```
 
-詳細な使用例は `examples/schedule.html` を参照してください。
+注意
+- `work1` / `work2` は使用できません。代わりに `daytime` / `extended` またはカスタム `{ start, end, label }` を使用してください。
+- デフォルトは `all-day`（24時間表示）です。APIで `setTimeRange()` を呼び出した場合のみ時間レンジが適用されます。
 
 #### Calendar（カレンダー）
 
@@ -494,6 +507,7 @@ instance.generateText();           // 選択をテキスト形式で生成
 ```
 
 **属性:**
+
 - `data-wf-calendar`: 自動初期化を有効化
 - `data-wf-calendar-date`: 初期選択日（ISO形式: `YYYY-MM-DD`）
 - `data-wf-calendar-multiple`: 複数選択を有効化（`"true"`）
@@ -503,31 +517,30 @@ instance.generateText();           // 選択をテキスト形式で生成
 - `data-wf-calendar-max-date`: 最大日付（ISO形式）
 
 **JavaScript API:**
+
 ```javascript
 const instance = WFUI.calendar(element, {
-  selectedDate: null,        // 初期選択日（ISO形式）
-  selectedDates: [],         // 複数選択の場合の初期選択日配列
-  minDate: null,             // 最小日付（ISO形式）
-  maxDate: null,             // 最大日付（ISO形式）
-  weekStart: 1,              // 週の開始日（0=日曜、1=月曜）
-  allowMultiple: false,      // 複数選択を許可
-  allowRange: false,         // 範囲選択を許可
-  onSelect: (date) => {},    // 選択時のコールバック
+  selectedDate: null, // 初期選択日（ISO形式）
+  selectedDates: [], // 複数選択の場合の初期選択日配列
+  minDate: null, // 最小日付（ISO形式）
+  maxDate: null, // 最大日付（ISO形式）
+  weekStart: 1, // 週の開始日（0=日曜、1=月曜）
+  allowMultiple: false, // 複数選択を許可
+  allowRange: false, // 範囲選択を許可
+  onSelect: date => {}, // 選択時のコールバック
   onNavigate: (year, month) => {} // 月変更時のコールバック
 });
 
 // メソッド
-instance.getSelectedDate();      // 選択された日付を取得（単一選択）
-instance.getSelectedDates();     // 選択された日付の配列を取得（複数選択）
-instance.getRange();             // 選択範囲を取得（範囲選択: {start, end}）
-instance.setSelectedDate(date);  // 日付を設定（単一選択）
+instance.getSelectedDate(); // 選択された日付を取得（単一選択）
+instance.getSelectedDates(); // 選択された日付の配列を取得（複数選択）
+instance.getRange(); // 選択範囲を取得（範囲選択: {start, end}）
+instance.setSelectedDate(date); // 日付を設定（単一選択）
 instance.setSelectedDates(dates); // 日付を設定（複数選択）
 instance.navigateMonth(direction); // 月ナビゲーション（-1: 前月, 1: 次月）
 instance.goToMonth(year, month); // 指定月に移動
-instance.goToToday();            // 今月に移動
+instance.goToToday(); // 今月に移動
 ```
-
-詳細な使用例は `examples/calendar.html` を参照してください。
 
 #### Tooltip
 
@@ -591,7 +604,7 @@ instance.goToToday();            // 今月に移動
 
 ```html
 <!-- 水平線 -->
-<hr class="wf-divider">
+<hr class="wf-divider" />
 
 <!-- テキスト付き -->
 <div class="wf-divider wf-divider--text">または</div>
@@ -608,7 +621,9 @@ instance.goToToday();            // 今月に移動
 
 ```html
 <!-- キーボードキー -->
-<kbd class="wf-kbd">Ctrl</kbd> + <kbd class="wf-kbd">S</kbd>
+<kbd class="wf-kbd">Ctrl</kbd>
++
+<kbd class="wf-kbd">S</kbd>
 
 <!-- インラインコード -->
 <code class="wf-code">const name = "wafoo"</code>
@@ -621,7 +636,8 @@ function greet(name) {
 </code></pre>
 ```
 
-`data-wf-codeblock`属性を付けると、自動的に「コピー」ボタンが追加され、クリックでコードをクリップボードにコピーできます。Clipboard API対応ブラウザで動作します。
+`data-wf-codeblock`属性を付けると、自動的に「コピー」ボタンが追加され、クリックでコードをクリップボードにコピーできます。Clipboard
+API対応ブラウザで動作します。
 
 ### 和風コンポーネント
 
@@ -797,11 +813,11 @@ wafoo-cssには10種類の伝統的な日本の色テーマが含まれていま
 
 ```javascript
 // テーマを動的に変更
-document.body.className = 'theme-momiji';
+document.body.className = "theme-momiji";
 
 // 複数クラスがある場合
-document.body.classList.remove('theme-sakura');
-document.body.classList.add('theme-koori');
+document.body.classList.remove("theme-sakura");
+document.body.classList.add("theme-koori");
 ```
 
 ## 作者

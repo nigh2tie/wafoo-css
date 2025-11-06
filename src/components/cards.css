@@ -5,6 +5,8 @@
     border: 1px solid var(--wf-color-border);
     border-radius: var(--wf-radius-md);
     padding: var(--wf-space-4);
+    /* Grid/Flex 内でのはみ出し防止（min-width: auto を打ち消し） */
+    min-width: 0;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
   }
   .wf-card-washi {
