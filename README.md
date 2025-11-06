@@ -87,7 +87,7 @@ bash scripts/build.sh
 - **和風コンポーネント** - 判子（ハンコ）、暖簾ヘッダー、和紙風カード
 - **漢数字サポート** - 壱・弐・参・肆などの表示
 - **拡張されたデザイントークン** - 行間、シャドウ、アニメーション時間、イージング関数を体系化
-- **軽量** - gzip圧縮後約11KB（20KB予算内、将来的にcore/extras分割予定）
+- **軽量** - gzip圧縮後約12KB（20KB予算内、将来的にcore/extras分割予定）
 - **自動初期化** - `data-wf-*`属性による宣言的なコンポーネント制御
 
 ## 含まれるファイル
@@ -106,6 +106,8 @@ wafoo-css/
 │   ├── components/      # コンポーネントCSS（29ファイル）
 │   ├── utilities.css    # ユーティリティクラス
 │   └── themes.css       # 10種類のテーマ
+│   └── js/
+│       └── wafoo.js     # JS拡張（任意。dist/wafoo.js 末尾に連結されるパッチ）
 │
 ├── scripts/
 │   ├── build.sh         # ビルドスクリプト
@@ -125,15 +127,15 @@ npm install
 ### CSSをビルド
 
 ```bash
-# src/の全ファイルを結合して dist/wafoo.css を生成
+# src/のCSSを結合/圧縮し、必要に応じてJSパッチも反映して dist/ に出力
 bash scripts/build.sh
 ```
 
 このコマンドは以下を実行します。
 
-1. src/の33個のCSSファイルを1つに結合
-2. PostCSSでautoprefixerを適用
-3. cssnanoで圧縮して dist/wafoo.min.css を生成
+1. src/配下のCSSを結合（@layer順）
+2. PostCSS（autoprefixer/cssnano）で最適化
+3. `src/js/wafoo.js` が存在する場合、`dist/wafoo.js` の末尾に連結してJSを再出力（簡易minifyも実施）
 
 ### ユーティリティクラスを再生成
 
@@ -435,12 +437,12 @@ npm run lint:css:fix  # 自動修正
   </div>
 
   <!-- 日単位モード：タイムテーブル -->
-  <div class="wf-schedule__daily-section">
+  <div class="wf-schedule__daily">
     <div class="wf-schedule__time-grid cols-8"></div>
   </div>
 
   <!-- 週単位モード：週カレンダー -->
-  <div class="wf-schedule__weekly-calendar is-hidden">
+  <div class="wf-schedule__weekly is-hidden">
     <div class="wf-schedule__calendar-header"></div>
     <div class="wf-schedule__calendar-grid"></div>
   </div>
