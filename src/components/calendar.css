@@ -9,6 +9,12 @@
     max-width: 400px;
   }
 
+  /* Fluid variant for container-fit layouts */
+  .wf-calendar-fluid {
+    width: 100%;
+    max-width: 100%;
+  }
+
   @media (min-width: var(--wf-breakpoint-md)) {
     .wf-calendar {
       padding: var(--wf-space-6);
@@ -198,4 +204,3 @@
     background: var(--wf-accent-100);
   }
 }
-
