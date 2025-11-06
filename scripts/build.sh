@@ -102,3 +102,14 @@ if [ -f "$JS_PATCH" ]; then
   echo "Built: $JS_OUT (+ patch)"
   echo "Built: $JS_MIN_OUT (fallback)"
 fi
+
+# Copy assets into docs/ for GitHub Pages (docs folder is the site root)
+DOCS_DIR="$ROOT_DIR/docs"
+if [ -d "$DOCS_DIR" ]; then
+  cp -f "$CSS_OUT" "$DOCS_DIR/wafoo.css" 2>/dev/null || true
+  cp -f "$JS_OUT" "$DOCS_DIR/wafoo.js" 2>/dev/null || true
+  # Optionally copy minified as well (not referenced by default)
+  cp -f "$MIN_OUT" "$DOCS_DIR/wafoo.min.css" 2>/dev/null || true
+  cp -f "$JS_MIN_OUT" "$DOCS_DIR/wafoo.min.js" 2>/dev/null || true
+  echo "Synced dist assets to docs/"
+fi

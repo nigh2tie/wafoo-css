@@ -20,6 +20,10 @@
 
 wafoo-cssは2つの使い方があります。
 
+オンラインデモ（GitHub Pages）
+
+- サンプルとコンポーネント一覧: https://nigh2tie.github.io/wafoo-css/
+
 ### パターン1: すぐに使う
 
 ビルド済みのCSSとJavaScriptをダウンロードして使います。
