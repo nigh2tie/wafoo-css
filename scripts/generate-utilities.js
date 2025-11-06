@@ -205,6 +205,7 @@ function generateStaticUtilities() {
 .wf-max-w-xl { max-width: 1200px; }
 .wf-container-fluid { max-width: none !important; }
 /* Full-height helpers */
+.wf-h-100 { height: 100%; }
 .wf-h-screen { height: 100vh; }
 .wf-min-h-screen { min-height: 100vh; }
 
@@ -237,6 +238,28 @@ function generateStaticUtilities() {
 /* Link helper */
 .wf-link { color: var(--wf-link-color); text-decoration: none; border-bottom: 1px solid transparent; cursor: pointer; }
 .wf-link:hover, .wf-link:focus-visible { color: var(--wf-link-color-hover); border-bottom-color: currentColor; }
+
+/* Text handling */
+.wf-text-truncate { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wf-text-break { overflow-wrap: anywhere; word-break: break-word; }
+.wf-line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.wf-line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* Cursor */
+.wf-cursor-pointer { cursor: pointer; }
+.wf-cursor-not-allowed { cursor: not-allowed; }
+.wf-cursor-wait { cursor: wait; }
+.wf-cursor-grab { cursor: grab; }
+
+/* Aspect ratio */
+.wf-aspect-square { aspect-ratio: 1 / 1; }
+.wf-aspect-video { aspect-ratio: 16 / 9; }
+.wf-aspect-4-3 { aspect-ratio: 4 / 3; }
+
+/* Scroll snap */
+.wf-snap-x { scroll-snap-type: x mandatory; }
+.wf-snap-y { scroll-snap-type: y mandatory; }
+.wf-snap-start { scroll-snap-align: start; }
 
 /* Animations */
 @keyframes wf-fade-in { from { opacity: 0; } to { opacity: 1; } }

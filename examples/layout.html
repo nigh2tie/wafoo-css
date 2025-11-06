@@ -1,56 +1,72 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ja">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Layout Example - wafoo-css</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <meta name="robots" content="noindex,nofollow" />
-    <link rel="stylesheet" href="../dist/wafoo.css" />
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="../dist/wafoo.css">
     <script src="../docs/theme.js"></script>
     <style>
-      body {
-        margin: 0;
-      }
+      body { margin: 0; }
     </style>
   </head>
   <body>
     <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
-    <header class="wf-header-noren" role="banner">
+    <header class="wf-header-noren">
       <div class="wf-container" style="padding: 0">
         <h1>Layout Example</h1>
-        <p class="wf-text-sm wf-text-muted" style="margin: 4px 0 0">2カラム + グリッドの基本構成</p>
+        <p class="wf-text-sm wf-text-muted" style="margin: 4px 0 0">サイドバー + メイン + 内部グリッド</p>
       </div>
     </header>
-    <main class="wf-container" role="main" id="main">
+    <main class="wf-container" id="main">
+      <!-- 2カラム（sm以上で横並び） -->
       <div class="wf-row wf-g-3">
-        <aside class="wf-col-12 wf-col-md-3">
-          <div class="wf-card">
-            <h3 style="margin-top: 0">サイドバー</h3>
+        <!-- Sidebar -->
+        <aside class="wf-col-12 wf-col-sm-3" aria-label="サイドバー">
+          <nav class="wf-card" aria-label="補助ナビゲーション">
+            <h3 style="margin-top: 0">メニュー</h3>
             <ul>
-              <li><a class="wf-link" href="#">リンク1</a></li>
-              <li><a class="wf-link" href="#">リンク2</a></li>
-              <li><a class="wf-link" href="#">リンク3</a></li>
+              <li><a class="wf-link" href="#">ダッシュボード</a></li>
+              <li><a class="wf-link" href="#">プロジェクト</a></li>
+              <li><a class="wf-link" href="#">設定</a></li>
             </ul>
-          </div>
+          </nav>
         </aside>
-        <section class="wf-col-12 wf-col-md-9">
+
+        <!-- Main -->
+        <section class="wf-col-12 wf-col-sm-9">
+          <!-- Hero / Intro -->
           <div class="wf-card wf-mb-3">
             <h2 style="margin-top: 0">メインコンテンツ</h2>
-            <p class="wf-text-sm wf-text-muted">
-              段落テキストの例。レイアウトの余白と見出しを確認。
-            </p>
+            <p class="wf-text-sm wf-text-muted">モバイルでは縦積み、600px以上で横並びになります。</p>
           </div>
+
+          <!-- Stats（1列→2列→4列） -->
+          <div class="wf-row wf-g-2 wf-mb-3">
+            <div class="wf-col-12 wf-col-sm-6 wf-col-md-3"><div class="wf-card wf-text-center">統計A</div></div>
+            <div class="wf-col-12 wf-col-sm-6 wf-col-md-3"><div class="wf-card wf-text-center">統計B</div></div>
+            <div class="wf-col-12 wf-col-sm-6 wf-col-md-3"><div class="wf-card wf-text-center">統計C</div></div>
+            <div class="wf-col-12 wf-col-sm-6 wf-col-md-3"><div class="wf-card wf-text-center">統計D</div></div>
+          </div>
+
+          <!-- Content grid（1→2→3列） -->
+          <h3>カード一覧</h3>
           <div class="wf-row wf-g-2">
-            <div class="wf-col-6"><div class="wf-card wf-text-center">1</div></div>
-            <div class="wf-col-6"><div class="wf-card wf-text-center">2</div></div>
+            <div class="wf-col-12 wf-col-sm-6 wf-col-md-4"><div class="wf-card">カード1</div></div>
+            <div class="wf-col-12 wf-col-sm-6 wf-col-md-4"><div class="wf-card">カード2</div></div>
+            <div class="wf-col-12 wf-col-sm-6 wf-col-md-4"><div class="wf-card">カード3</div></div>
+            <div class="wf-col-12 wf-col-sm-6 wf-col-md-4"><div class="wf-card">カード4</div></div>
+            <div class="wf-col-12 wf-col-sm-6 wf-col-md-4"><div class="wf-card">カード5</div></div>
+            <div class="wf-col-12 wf-col-sm-6 wf-col-md-4"><div class="wf-card">カード6</div></div>
           </div>
+
+          <p class="wf-text-sm wf-text-muted wf-mt-4">
+            <a class="wf-link" href="../docs/index.html">ドキュメントへ戻る</a>
+          </p>
         </section>
       </div>
-      <p class="wf-text-sm wf-text-muted wf-mt-4">
-        <a class="wf-link" href="../docs/index.html">ドキュメントへ戻る</a>
-      </p>
     </main>
-    <footer class="wf-container wf-text-sm wf-text-muted" style="margin-top: 24px">フッター</footer>
   </body>
-</html>
+  </html>

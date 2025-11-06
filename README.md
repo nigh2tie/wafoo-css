@@ -168,8 +168,8 @@ npm run lint:css:fix  # 自動修正
 ```html
 <div class="wf-container">
   <div class="wf-row wf-g-3">
-    <div class="wf-col-12 wf-col-md-8">メイン</div>
-    <div class="wf-col-12 wf-col-md-4">サイド</div>
+    <div class="wf-col-12 wf-col-sm-8">メイン</div>
+    <div class="wf-col-12 wf-col-sm-4">サイド</div>
   </div>
 </div>
 ```
@@ -373,6 +373,16 @@ npm run lint:css:fix  # 自動修正
   </div>
 </div>
 ```
+
+モーダルのバリエーション（クラスで拡張できます）
+
+- 配置: `.wf-modal-overlay.is-top`（上寄せ）
+- サイズ: `.wf-modal-sm` / `.wf-modal-lg` / `.wf-modal-fullscreen`
+- 長文対応: `.wf-modal--scroll`（本文を `max-height: 80vh; overflow: auto;`）
+- ステータス配色: `.wf-modal--danger` / `--warning` / `--success` / `--info`
+- フッター整列: `.wf-modal__footer.is-start` / `.is-center`
+
+動作デモ: `examples/modal.html`
 
 #### Dropdown
 
@@ -660,6 +670,29 @@ function greet(name) {
 .wf-text-center
 .wf-text-right
 .wf-sr-only    /* スクリーンリーダー専用 */
+```
+
+主な追加ユーティリティ（抜粋）
+
+```css
+/* テキスト処理 */
+.wf-text-truncate    /* 省略記号（ellipsis） */
+.wf-text-break       /* 任意の位置で改行 */
+.wf-line-clamp-2     /* 2行で切り詰め */
+.wf-line-clamp-3     /* 3行で切り詰め */
+
+/* カーソル */
+.wf-cursor-pointer, .wf-cursor-not-allowed, .wf-cursor-wait, .wf-cursor-grab
+
+/* アスペクト比 */
+.wf-aspect-square, .wf-aspect-video, .wf-aspect-4-3
+
+/* スクロールスナップ */
+.wf-snap-x, .wf-snap-y, .wf-snap-start
+
+/* 高さ・フォント */
+.wf-h-100            /* 高さ100% */
+.wf-text-xl          /* 拡張フォントサイズ（--wf-font-xl） */
 ```
 
 ## カスタマイズ
