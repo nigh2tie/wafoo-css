@@ -426,11 +426,7 @@ npm run lint:css:fix  # 自動修正
   <!-- 設定 -->
   <div class="wf-schedule__settings-grid">
     <input type="date" class="wf-input" id="selected-date" />
-    <select class="wf-select" id="time-range">
-      <option value="all-day">24時間表示</option>
-      <option value="work1">勤怠：ノーマル</option>
-      <option value="work2">勤怠：モダン</option>
-    </select>
+    <!-- 時間レンジはAPIでのみ設定可能（デフォルトは all-day） -->
     <select class="wf-select" id="time-interval">
       <option value="60">60分刻み</option>
       <option value="30">30分刻み</option>
@@ -456,7 +452,7 @@ npm run lint:css:fix  # 自動修正
 - `data-wf-schedule`: 自動初期化を有効化
 - `data-wf-schedule-mode`: 表示モード（`daily` または `weekly`）
 - `data-wf-schedule-interval`: 時間刻み（`15`, `30`, `60`）
-- `data-wf-schedule-range`: 時間レンジ（`all-day`, `work1`, `work2`）
+- `data-wf-schedule-range`: 時間レンジ（`all-day` のみ）。その他のレンジはAPIでのみ設定します。
 - `data-wf-schedule-date`: 初期選択日（ISO形式: `YYYY-MM-DD`）
 
 **JavaScript API:**
@@ -465,7 +461,10 @@ npm run lint:css:fix  # 自動修正
 const instance = WFUI.schedule(element, {
   mode: "daily", // 'daily' または 'weekly'
   timeInterval: 60, // 15, 30, または 60
-  timeRange: "all-day", // 'all-day', 'work1', 'work2'
+  // timeRange はAPIのみで設定（デフォルト: 'all-day'）
+  // プリセット: 'daytime' (8:00–18:00), 'extended' (10:00–20:00)
+  // カスタム: { start: 6, end: 12, label: 'morning' } または (date)=>{...}
+  timeRange: 'all-day',
   selectedDate: null, // ISO形式の日付文字列
   onSelect: slots => {} // 選択変更時のコールバック
 });
@@ -475,13 +474,21 @@ instance.getSelectedSlots(); // 選択されたスロットの配列を取得
 instance.clearSelection(); // 選択をクリア
 instance.setMode(mode); // モード切り替え
 instance.setTimeInterval(interval); // 時間刻み設定
-instance.setTimeRange(range); // 時間レンジ設定
+// 時間レンジ設定（APIのみ）
+instance.setTimeRange('daytime'); // プリセット（8:00–18:00）
+instance.setTimeRange('extended'); // プリセット（10:00–20:00）
+instance.setTimeRange({ start: 6, end: 12, label: 'morning' }); // カスタム
+instance.setTimeRange(date => ({ start: date.getDay() === 0 ? 10 : 8, end: 18, label: 'dynamic' })); // 関数
 instance.setSelectedDate(date); // 選択日付設定
 instance.navigateWeek(direction); // 週ナビゲーション（-1: 前週, 1: 次週）
 instance.getCurrentWeekStart(); // 現在の週の開始日を取得
 instance.goToCurrentWeek(); // 今週に移動
 instance.generateText(); // 選択をテキスト形式で生成
 ```
+
+注意
+- `work1` / `work2` は使用できません。代わりに `daytime` / `extended` またはカスタム `{ start, end, label }` を使用してください。
+- デフォルトは `all-day`（24時間表示）です。APIで `setTimeRange()` を呼び出した場合のみ時間レンジが適用されます。
 
 #### Calendar（カレンダー）
 
