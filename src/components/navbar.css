@@ -41,4 +41,97 @@
     color: var(--wf-color-accent);
     background: var(--wf-surface-subtle);
   }
+
+  /* Hamburger Menu Icon */
+  .wf-hamburger {
+    display: none; /* デフォルトは非表示（モバイルで表示） */
+    position: relative;
+    width: 24px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 10;
+  }
+
+  .wf-hamburger__line {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--wf-color-text);
+    transition: all 0.3s ease;
+    transform-origin: center center;
+  }
+
+  .wf-hamburger__line:nth-child(1) {
+    top: 4px;
+  }
+
+  .wf-hamburger__line:nth-child(2) {
+    top: 11px;
+  }
+
+  .wf-hamburger__line:nth-child(3) {
+    top: 18px;
+  }
+
+  /* アクティブ状態（×印） */
+  .wf-hamburger.is-active .wf-hamburger__line:nth-child(1) {
+    top: 11px;
+    transform: rotate(45deg);
+  }
+
+  .wf-hamburger.is-active .wf-hamburger__line:nth-child(2) {
+    opacity: 0;
+  }
+
+  .wf-hamburger.is-active .wf-hamburger__line:nth-child(3) {
+    top: 11px;
+    transform: rotate(-45deg);
+  }
+
+  /* Reduced motion対応 */
+  @media (prefers-reduced-motion: reduce) {
+    .wf-hamburger__line {
+      transition: none;
+    }
+  }
+
+  /* モバイル時にハンバーガーを表示 */
+  @media (max-width: 768px) {
+    .wf-hamburger {
+      display: flex;
+    }
+
+    .wf-navbar-nav {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 280px;
+      height: 100vh;
+      background: var(--wf-surface-base);
+      flex-direction: column;
+      align-items: flex-start;
+      padding: var(--wf-space-6);
+      box-shadow: var(--wf-shadow-lg);
+      transition: left 0.3s ease;
+      z-index: 9998;
+    }
+
+    .wf-navbar-nav.is-open {
+      left: 0;
+    }
+
+    .wf-nav-item {
+      width: 100%;
+    }
+
+    .wf-nav-link {
+      display: block;
+      width: 100%;
+      padding: var(--wf-space-3) var(--wf-space-4);
+    }
+  }
 }

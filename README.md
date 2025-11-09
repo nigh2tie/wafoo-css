@@ -8,9 +8,11 @@
   - [パターン1: すぐに使う](#パターン1-すぐに使う)
   - [パターン2: カスタマイズして使う](#パターン2-カスタマイズして使う)
 - [特徴](#特徴)
+- [クイックリファレンス](#クイックリファレンス)
 - [含まれるファイル](#含まれるファイル)
 - [ビルド方法](#ビルド方法)
 - [コンポーネント](#コンポーネント)
+- [CSS変数リファレンス](#css変数リファレンス)
 - [カスタマイズ](#カスタマイズ)
 - [テーマ](#テーマ)
 - [作者](#作者)
@@ -93,6 +95,19 @@ bash scripts/build.sh
 - **拡張されたデザイントークン** - 行間、シャドウ、アニメーション時間、イージング関数を体系化
 - **軽量** - gzip圧縮後約12KB（20KB予算内、将来的にcore/extras分割予定）
 - **自動初期化** - `data-wf-*`属性による宣言的なコンポーネント制御
+
+## 📚 リファレンス
+
+wafoo-cssの詳細なリファレンスドキュメントを用意しています：
+
+- **[📖 完全リファレンス (REFERENCE.md)](./REFERENCE.md)** - GitHub上で閲覧できるMarkdown形式の完全なリファレンス
+- **[🌐 リファレンス (docs/reference.html)](https://nigh2tie.github.io/wafoo-css/reference.html)** - ブラウザで見やすいHTML形式のリファレンス
+
+リファレンスには以下が含まれています：
+- よく使うコンポーネント一覧
+- 全CSS変数（カラー、タイポグラフィ、スペーシング等）
+- ユーティリティクラス一覧
+- 利用可能な全34種類のコンポーネント
 
 ## 含まれるファイル
 
@@ -188,14 +203,41 @@ npm run lint:css:fix  # 自動修正
 #### Navbar
 
 ```html
+<!-- デスクトップ用ナビゲーション -->
 <nav class="wf-navbar" role="navigation" aria-label="Primary">
   <a class="wf-navbar-brand" href="#">ブランド</a>
+
+  <!-- ハンバーガーメニューアイコン（モバイルで表示） -->
+  <button class="wf-hamburger" aria-label="メニュー" aria-expanded="false">
+    <span class="wf-hamburger__line"></span>
+    <span class="wf-hamburger__line"></span>
+    <span class="wf-hamburger__line"></span>
+  </button>
+
+  <!-- ナビゲーションメニュー -->
   <ul class="wf-navbar-nav">
     <li class="wf-nav-item"><a class="wf-nav-link is-active" href="#">ホーム</a></li>
     <li class="wf-nav-item"><a class="wf-nav-link" href="#">ドキュメント</a></li>
+    <li class="wf-nav-item"><a class="wf-nav-link" href="#">お問い合わせ</a></li>
   </ul>
 </nav>
 ```
+
+**JavaScript（メニュー開閉）:**
+
+```javascript
+const hamburger = document.querySelector('.wf-hamburger');
+const navMenu = document.querySelector('.wf-navbar-nav');
+
+hamburger.addEventListener('click', () => {
+  hamburger.classList.toggle('is-active');
+  navMenu.classList.toggle('is-open');
+  const isOpen = navMenu.classList.contains('is-open');
+  hamburger.setAttribute('aria-expanded', isOpen);
+});
+```
+
+モバイル時（768px以下）は自動的にハンバーガーアイコンが表示され、メニューはサイドパネルとして表示されます。
 
 #### Breadcrumb
 
@@ -730,7 +772,7 @@ wafoo-cssはCSS変数（カスタムプロパティ）を使用しており、�
   --wf-color-accent: #6a5c7c; /* アクセントカラー */
   --wf-color-bg: #e7ddd4; /* 背景色 */
   --wf-primary-bg: #4f4560; /* ボタンのプライマリカラー */
-  /* ... その他多数 */
+  /* ... その他多数（詳細はREFERENCE.mdを参照） */
 }
 ```
 
