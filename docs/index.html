@@ -5,6 +5,24 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>wafoo-css | 和風CSSフレームワーク</title>
+
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント、和紙風デザイン。アクセシビリティ対応、モダンブラウザサポート。">
+  <meta name="keywords" content="CSS,フレームワーク,和風,日本,デザイン,UI,コンポーネント,レスポンシブ,アクセシビリティ,wafoo,和風CSS,Japanese design,CSS framework">
+  <meta name="author" content="Q_Q">
+  <meta name="theme-color" content="#bca7e8">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://q-q.github.io/wafoo-css/">
+  <meta property="og:title" content="wafoo-css | 和風CSSフレームワーク">
+  <meta property="og:description" content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント。">
+  <meta property="og:image" content="https://q-q.github.io/wafoo-css/og-image.png">
+  <meta property="og:locale" content="ja_JP">
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://q-q.github.io/wafoo-css/">
+
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="./wafoo.css">
   <script src="./wafoo.js"></script>
@@ -141,7 +159,7 @@
   </div>
 
   <!-- 暖簾ヘッダー -->
-  <header class="wf-header-noren" role="banner">
+  <header class="wf-header-noren">
     <div class="wf-container" style="padding: 0">
       <h1>wafoo-css</h1>
       <p style="margin: 8px 0 0; opacity: 0.9; letter-spacing: 0.15em;">
@@ -150,7 +168,7 @@
     </div>
   </header>
 
-  <main id="main" class="wf-container" role="main" style="padding-top: 48px;">
+  <main id="main" class="wf-container" style="padding-top: 48px;">
 
     <!-- 特徴 -->
     <section aria-label="特徴">
@@ -454,9 +472,9 @@
           <table class="wf-table wf-table-striped wf-table-hover">
             <thead>
               <tr>
-                <th>ID</th>
-                <th>氏名</th>
-                <th>ステータス</th>
+                <th scope="col">ID</th>
+                <th scope="col">氏名</th>
+                <th scope="col">ステータス</th>
               </tr>
             </thead>
             <tbody>
@@ -816,10 +834,10 @@
             <table class="wf-table wf-table-striped" id="pagination-table">
               <thead>
                 <tr>
-                  <th>ID</th>
-                  <th>商品名</th>
-                  <th>価格</th>
-                  <th>ステータス</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">商品名</th>
+                  <th scope="col">価格</th>
+                  <th scope="col">ステータス</th>
                 </tr>
               </thead>
               <tbody id="pagination-table-body">
