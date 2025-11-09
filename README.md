@@ -96,12 +96,12 @@ bash scripts/build.sh
 - **軽量** - gzip圧縮後約12KB（20KB予算内、将来的にcore/extras分割予定）
 - **自動初期化** - `data-wf-*`属性による宣言的なコンポーネント制御
 
-## 📚 リファレンス
+## リファレンス
 
 wafoo-cssの詳細なリファレンスドキュメントを用意しています：
 
-- **[📖 完全リファレンス (REFERENCE.md)](./REFERENCE.md)** - GitHub上で閲覧できるMarkdown形式の完全なリファレンス
-- **[🌐 リファレンス (docs/reference.html)](https://nigh2tie.github.io/wafoo-css/reference.html)** - ブラウザで見やすいHTML形式のリファレンス
+- **[完全リファレンス (REFERENCE.md)](./REFERENCE.md)** - GitHub上で閲覧できるMarkdown形式の完全なリファレンス
+- **[リファレンス (docs/reference.html)](https://nigh2tie.github.io/wafoo-css/reference.html)** - ブラウザで見やすいHTML形式のリファレンス
 
 リファレンスには以下が含まれています：
 - よく使うコンポーネント一覧
