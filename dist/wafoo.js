@@ -849,7 +849,7 @@
       // Help text
       if (helpText) {
         const pattern = timeRangePatterns[state.timeRangePattern];
-        helpText.innerHTML = `クリックまたはドラッグして時間帯を選択してください（${pattern.label}: ${pattern.start}:00-${pattern.end}:00、${state.timeInterval}分刻み）${state.isMobile ? '<div style="font-size: 0.75rem; color: var(--wf-color-muted); margin-top: 0.25rem;">📱 スマホ：1回目のタップで開始、2回目のタップで終了時間を選択</div>' : ""}`;
+        helpText.innerHTML = `クリックまたはドラッグして時間帯を選択してください（${pattern.label}: ${pattern.start}:00-${pattern.end}:00、${state.timeInterval}分刻み）${state.isMobile ? '<div style="font-size: 0.75rem; color: var(--wf-color-muted); margin-top: 0.25rem;">スマホ：1回目のタップで開始、2回目のタップで終了時間を選択</div>' : ""}`;
       }
     }
 
@@ -1751,13 +1751,12 @@
       if (inst.clearSelection) { var origClr = inst.clearSelection; inst.clearSelection = function () { var r = origClr.call(inst); setTimeout(function(){ applyCustomRange(root, customRange); },0); return r; }; }
       if (inst.setTimeRange) { var origTR = inst.setTimeRange; inst.setTimeRange = function (range) { customRange = normalizeRange(range); var r = origTR.call(inst, 'all-day'); setTimeout(function(){ applyCustomRange(root, customRange); },0); return r; }; }
 
-      // help emoji sanitize
+      // help text sanitize
       var mo = new MutationObserver(function(){
         var help = root.querySelector('.wf-schedule__help');
         if (help && help.innerHTML) {
           var html = help.innerHTML;
           var changed = false;
-          if (html.indexOf('\uD83D\uDCF1') >= 0) { html = html.replace(/\uD83D\uDCF1/g, 'スマホ'); changed = true; }
           if (html.indexOf('勤怠：ノーマル') >= 0) { html = html.replace(/勤怠：ノーマル/g, '標準'); changed = true; }
           if (html.indexOf('勤怠：モダン') >= 0) { html = html.replace(/勤怠：モダン/g, '拡張'); changed = true; }
           if (customRange) {
