@@ -26,11 +26,74 @@
     min-height: var(--wf-textarea-min-h);
     resize: vertical;
   }
+
+  /* Custom select with arrow icon */
+  .wf-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236a5c7c' d='M1.41 0L6 4.58L10.59 0L12 1.41l-6 6l-6-6z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right var(--wf-space-3) center;
+    background-size: 12px;
+    padding-right: calc(var(--wf-space-3) + 20px);
+  }
+
+  .wf-select:focus {
+    outline: 2px solid var(--wf-focus);
+    outline-offset: 2px;
+  }
+
+  /* Date, Time, DateTime inputs */
+  .wf-input[type="date"],
+  .wf-input[type="time"],
+  .wf-input[type="datetime-local"],
+  .wf-input[type="month"],
+  .wf-input[type="week"] {
+    /* Ensure consistent appearance across browsers */
+    position: relative;
+    cursor: pointer;
+  }
+
+  /* WebKit browsers (Chrome, Safari, Edge) - style the calendar icon */
+  .wf-input[type="date"]::-webkit-calendar-picker-indicator,
+  .wf-input[type="time"]::-webkit-calendar-picker-indicator,
+  .wf-input[type="datetime-local"]::-webkit-calendar-picker-indicator,
+  .wf-input[type="month"]::-webkit-calendar-picker-indicator,
+  .wf-input[type="week"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+
+  .wf-input[type="date"]::-webkit-calendar-picker-indicator:hover,
+  .wf-input[type="time"]::-webkit-calendar-picker-indicator:hover,
+  .wf-input[type="datetime-local"]::-webkit-calendar-picker-indicator:hover,
+  .wf-input[type="month"]::-webkit-calendar-picker-indicator:hover,
+  .wf-input[type="week"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+  }
+
+  /* Firefox - style the clear button */
+  .wf-input[type="date"]::-webkit-clear-button,
+  .wf-input[type="time"]::-webkit-clear-button,
+  .wf-input[type="datetime-local"]::-webkit-clear-button {
+    display: none;
+  }
+
   .wf-field {
     margin-bottom: var(--wf-space-4);
   }
 
-  /* Select options styling */
+  /* Select options styling
+   * Note: Browser support for <option> element styling is limited:
+   * - Safari: Most styles are not applied (browser default is used)
+   * - Chrome: Limited support for background, color, and font properties
+   * - Firefox: Better support, but still limited
+   * For full custom styling, consider using a custom dropdown component
+   * built with <div> elements, though this requires additional JavaScript
+   * and careful attention to accessibility (ARIA roles, keyboard navigation).
+   */
   .wf-select option {
     padding: var(--wf-space-2) var(--wf-space-3);
     background: var(--wf-surface-base);
