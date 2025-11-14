@@ -8,7 +8,7 @@
   - [パターン1: すぐに使う](#パターン1-すぐに使う)
   - [パターン2: カスタマイズして使う](#パターン2-カスタマイズして使う)
 - [特徴](#特徴)
-- [リファレンス](#リファレンス)
+- [クイックリファレンス](#クイックリファレンス)
 - [含まれるファイル](#含まれるファイル)
 - [ビルド方法](#ビルド方法)
 - [コンポーネント](#コンポーネント)
@@ -24,6 +24,8 @@ wafoo-cssは2つの使い方があります。
 オンラインデモ（GitHub Pages）
 
 - サンプルとコンポーネント一覧: https://nigh2tie.github.io/wafoo-css/
+- コンポーネントリファレンス: https://nigh2tie.github.io/wafoo-css/reference.html
+- CSS変数リファレンス: https://nigh2tie.github.io/wafoo-css/css-variables.html
 
 ### パターン1: すぐに使う
 
@@ -95,17 +97,17 @@ bash scripts/build.sh
 - **軽量** - gzip圧縮後約12KB（20KB予算内、将来的にcore/extras分割予定）
 - **自動初期化** - `data-wf-*`属性による宣言的なコンポーネント制御
 
-## リファレンス
+## クイックリファレンス
 
 wafoo-cssの詳細なリファレンスドキュメントを用意しています：
 
 - **[完全リファレンス (REFERENCE.md)](./REFERENCE.md)** - GitHub上で閲覧できるMarkdown形式の完全なリファレンス
 - **[コンポーネントリファレンス (docs/reference.html)](https://nigh2tie.github.io/wafoo-css/reference.html)** - ブラウザで見やすいHTML形式のコンポーネントリファレンス
-- **[CSS変数リファレンス (docs/css-variables.html)](https://nigh2tie.github.io/wafoo-css/css-variables.html)** - 全87個のCSS変数を視覚的なプレビュー付きで確認できるリファレンス
+- **[CSS変数リファレンス (docs/css-variables.html)](https://nigh2tie.github.io/wafoo-css/css-variables.html)** - 全87個のCSS変数を視覚的なプレビュー付きで確認
 
 リファレンスには以下が含まれています：
 - よく使うコンポーネント一覧
-- 全CSS変数（カラー、タイポグラフィ、スペーシング等）の詳細
+- 全CSS変数（カラー、タイポグラフィ、スペーシング等）
 - ユーティリティクラス一覧
 - 利用可能な全34種類のコンポーネント
 

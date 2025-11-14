@@ -4140,17 +4140,11 @@
 .wf-timeline-horizontal .wf-timeline__item {
   flex: 0 0 auto;
   min-width: 200px;
-  padding-left: 0;
-  padding-right: var(--wf-space-6);
-  padding-bottom: 0;
-  padding-top: var(--wf-space-8);
+  padding: var(--wf-space-8) var(--wf-space-6) 0 0;
 }
 
 .wf-timeline-horizontal .wf-timeline__item::before {
-  left: 0;
-  right: 0;
-  top: 12px;
-  bottom: auto;
+  inset: 12px 0 auto;
   width: auto;
   height: 2px;
 }
@@ -4606,10 +4600,7 @@
   /* Backdrop */
   .wf-sidebar-backdrop {
     position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    inset: 0;
     background-color: rgba(0, 0, 0, 0.5);
     opacity: 0;
     visibility: hidden;
