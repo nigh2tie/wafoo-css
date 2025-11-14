@@ -250,13 +250,6 @@
 
     function normalizeRange(range) {
       if (!range || range === "all-day") return null; // OFF
-      if (range === "work1" || range === "work2") {
-        throw new Error(
-          'WFUI.schedule: timeRange "' +
-            range +
-            '" is not supported. Use API presets ("daytime"/"extended") or a custom object { start, end, label }'
-        );
-      }
       if (range === "daytime") return { start: 8, end: 18, label: "標準" };
       if (range === "extended") return { start: 10, end: 20, label: "拡張" };
       if (typeof range === "function") {

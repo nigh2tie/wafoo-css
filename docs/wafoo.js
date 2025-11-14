@@ -575,7 +575,7 @@
       {
         mode: "daily", // 'daily' or 'weekly'
         timeInterval: 60, // minutes: 15, 30, or 60
-        timeRange: "all-day", // 'all-day', 'work1', 'work2'
+        timeRange: "all-day", // 'all-day' or custom object
         selectedDate: null, // ISO date string (YYYY-MM-DD)
         onSelect: null, // callback when selection changes
         onGenerate: null // callback to generate text
@@ -584,9 +584,7 @@
     );
 
     const timeRangePatterns = {
-      "all-day": { label: "24時間表示", start: 0, end: 23 },
-      work1: { label: "勤怠：ノーマル", start: 8, end: 18 },
-      work2: { label: "勤怠：モダン", start: 10, end: 20 }
+      "all-day": { label: "24時間表示", start: 0, end: 23 }
     };
 
     function getInitialWeekStart() {
@@ -1745,13 +1743,6 @@
 
     function normalizeRange(range) {
       if (!range || range === "all-day") return null; // OFF
-      if (range === "work1" || range === "work2") {
-        throw new Error(
-          'WFUI.schedule: timeRange "' +
-            range +
-            '" is not supported. Use API presets ("daytime"/"extended") or a custom object { start, end, label }'
-        );
-      }
       if (range === "daytime") return { start: 8, end: 18, label: "標準" };
       if (range === "extended") return { start: 10, end: 20, label: "拡張" };
       if (typeof range === "function") {
