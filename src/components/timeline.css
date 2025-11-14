@@ -23,7 +23,7 @@
 
 /* Timeline Line */
 .wf-timeline__item::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 12px;
   top: 28px;
@@ -92,7 +92,9 @@
 /* Timeline State Variants */
 .wf-timeline__item.is-current .wf-timeline__marker {
   background-color: var(--wf-accent-600);
-  box-shadow: 0 0 0 2px var(--wf-accent-600), 0 0 0 4px var(--wf-accent-200);
+  box-shadow:
+    0 0 0 2px var(--wf-accent-600),
+    0 0 0 4px var(--wf-accent-200);
   animation: wf-pulse 2s infinite;
 }
 

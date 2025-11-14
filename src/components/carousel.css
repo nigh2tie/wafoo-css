@@ -181,11 +181,11 @@
 
 /* Autoplay Indicator */
 .wf-carousel.is-playing .wf-carousel__button-play::before {
-  content: '⏸';
+  content: "⏸";
 }
 
 .wf-carousel:not(.is-playing) .wf-carousel__button-play::before {
-  content: '▶';
+  content: "▶";
 }
 
 /* Multiple Items Variant */

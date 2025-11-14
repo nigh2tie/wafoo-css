@@ -462,7 +462,8 @@
     color: var(--wf-color-text);
     font-size: var(--wf-font-sm);
     line-height: var(--wf-leading-normal);
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    font-family:
+      ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
   }
 
   /* Hidden State */

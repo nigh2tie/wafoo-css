@@ -28,7 +28,9 @@
     object-fit: cover;
     display: block;
   }
-  .wf-avatar-square { border-radius: var(--wf-radius-md); }
+  .wf-avatar-square {
+    border-radius: var(--wf-radius-md);
+  }
   .wf-avatar-status {
     position: relative;
   }
@@ -44,4 +46,3 @@
     border: 2px solid var(--wf-surface-base);
   }
 }
-

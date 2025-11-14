@@ -1,889 +1,1151 @@
 <!doctype html>
 <html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>wafoo-css | 和風CSSフレームワーク</title>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>wafoo-css | 和風CSSフレームワーク</title>
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント、和紙風デザイン。アクセシビリティ対応、モダンブラウザサポート。"
+    />
+    <meta
+      name="keywords"
+      content="CSS,フレームワーク,和風,日本,デザイン,UI,コンポーネント,レスポンシブ,アクセシビリティ,wafoo,和風CSS,Japanese design,CSS framework"
+    />
+    <meta name="author" content="Q_Q" />
+    <meta name="theme-color" content="#bca7e8" />
 
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント、和紙風デザイン。アクセシビリティ対応、モダンブラウザサポート。">
-  <meta name="keywords" content="CSS,フレームワーク,和風,日本,デザイン,UI,コンポーネント,レスポンシブ,アクセシビリティ,wafoo,和風CSS,Japanese design,CSS framework">
-  <meta name="author" content="Q_Q">
-  <meta name="theme-color" content="#bca7e8">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nigh2tie.github.io/wafoo-css/" />
+    <meta property="og:title" content="wafoo-css | 和風CSSフレームワーク" />
+    <meta
+      property="og:description"
+      content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント。"
+    />
+    <meta property="og:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="wafoo-css 和風CSSフレームワーク" />
+    <meta property="og:site_name" content="wafoo-css" />
+    <meta property="og:locale" content="ja_JP" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nigh2tie.github.io/wafoo-css/">
-  <meta property="og:title" content="wafoo-css | 和風CSSフレームワーク">
-  <meta property="og:description" content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント。">
-  <meta property="og:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="wafoo-css 和風CSSフレームワーク">
-  <meta property="og:site_name" content="wafoo-css">
-  <meta property="og:locale" content="ja_JP">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="wafoo-css | 和風CSSフレームワーク" />
+    <meta
+      name="twitter:description"
+      content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント。"
+    />
+    <meta name="twitter:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="wafoo-css | 和風CSSフレームワーク">
-  <meta name="twitter:description" content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント。">
-  <meta name="twitter:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://nigh2tie.github.io/wafoo-css/" />
 
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://nigh2tie.github.io/wafoo-css/">
-
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="./wafoo.css">
-  <script src="./wafoo.js"></script>
-  <style>
-    body {
-      margin: 0;
-    }
-
-    .theme-selector {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-      background: var(--wf-surface-base);
-      padding: 16px;
-      border-radius: var(--wf-radius-md);
-      box-shadow: var(--wf-shadow-md);
-      min-width: 200px;
-      border: 1px solid var(--wf-color-border);
-    }
-
-    .demo-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-      margin-bottom: 48px;
-    }
-
-    .demo-grid[style*="grid-template-columns: 1fr"] {
-      grid-template-columns: 1fr !important;
-    }
-
-    @media (max-width: 768px) {
-      .demo-grid {
-        grid-template-columns: 1fr;
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="./wafoo.css" />
+    <script src="./wafoo.js"></script>
+    <style>
+      body {
+        margin: 0;
       }
 
-      .calendar-grid {
+      .theme-selector {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1000;
+        background: var(--wf-surface-base);
+        padding: 16px;
+        border-radius: var(--wf-radius-md);
+        box-shadow: var(--wf-shadow-md);
+        min-width: 200px;
+        border: 1px solid var(--wf-color-border);
+      }
+
+      .demo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 24px;
+        margin-bottom: 48px;
+      }
+
+      .demo-grid[style*="grid-template-columns: 1fr"] {
         grid-template-columns: 1fr !important;
       }
-    }
 
-    section {
-      margin-bottom: 80px;
-    }
-
-    section h2 {
-      font-size: 2rem;
-      margin-bottom: 32px;
-      padding-bottom: 16px;
-      border-bottom: 3px solid var(--wf-color-accent);
-      text-align: center;
-      font-weight: 700;
-    }
-
-
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
-      margin-top: 32px;
-    }
-
-    .feature-card {
-      background: var(--wf-surface-base);
-      padding: 24px;
-      border-radius: var(--wf-radius-md);
-      border: 1px solid var(--wf-color-border);
-    }
-
-    .feature-card h3 {
-      margin-top: 0;
-      color: var(--wf-color-accent);
-      font-size: 1.25rem;
-    }
-  </style>
-  <script>
-    function applyTheme(theme) {
-      // themeが明示的に渡された場合はその値を使い、undefinedの場合はlocalStorageから取得
-      const t = theme !== undefined ? theme : (localStorage.getItem('wf-theme') || '');
-      console.log('[applyTheme] 適用するテーマ:', t);
-
-      // classList操作で安全にテーマクラスを管理
-      const removedThemes = [];
-      Array.from(document.body.classList).forEach(c => {
-        if (c.startsWith('theme-')) {
-          document.body.classList.remove(c);
-          removedThemes.push(c);
+      @media (max-width: 768px) {
+        .demo-grid {
+          grid-template-columns: 1fr;
         }
-      });
-      if (removedThemes.length > 0) {
-        console.log('[applyTheme] 削除したテーマ:', removedThemes);
+
+        .calendar-grid {
+          grid-template-columns: 1fr !important;
+        }
       }
 
-      if (t) {
-        document.body.classList.add(t);
-        console.log('[applyTheme] 追加したテーマ:', t);
+      section {
+        margin-bottom: 80px;
       }
 
-      localStorage.setItem('wf-theme', t);
-      const sel = document.getElementById('theme');
-      if (sel) sel.value = t;
+      section h2 {
+        font-size: 2rem;
+        margin-bottom: 32px;
+        padding-bottom: 16px;
+        border-bottom: 3px solid var(--wf-color-accent);
+        text-align: center;
+        font-weight: 700;
+      }
 
-      console.log('[applyTheme] body.classList:', Array.from(document.body.classList));
-      console.log('[applyTheme] 背景色:', getComputedStyle(document.body).backgroundColor);
-    }
-  </script>
-</head>
+      .feature-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 24px;
+        margin-top: 32px;
+      }
 
-<body>
-  <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+      .feature-card {
+        background: var(--wf-surface-base);
+        padding: 24px;
+        border-radius: var(--wf-radius-md);
+        border: 1px solid var(--wf-color-border);
+      }
 
-  <!-- テーマ切り替え -->
-  <div class="theme-selector">
-    <label for="theme" style="display: block; margin-bottom: 8px; font-weight: 700;">
-      テーマ選択
-    </label>
-    <select id="theme" class="wf-select" style="width: 100%;">
-      <option value="">標準（藤紫）</option>
-      <option value="theme-sakura">桜（sakura）</option>
-      <option value="theme-koubai">紅梅（koubai）</option>
-      <option value="theme-moe">萌黄（moe）</option>
-      <option value="theme-kiku">菊（kiku）</option>
-      <option value="theme-koori">氷（koori）</option>
-      <option value="theme-yanagi">柳（yanagi）</option>
-      <option value="theme-momiji">紅葉（momiji）</option>
-      <option value="theme-fuji">藤（fuji）</option>
-      <option value="theme-uguisu">鶯（uguisu）</option>
-      <option value="theme-yuki">雪（yuki）</option>
-    </select>
-    <p style="margin: 12px 0 0 0; font-size: 0.75rem; color: var(--wf-color-muted);">
-      テーマを切り替えてデザインを確認できます
-    </p>
-  </div>
+      .feature-card h3 {
+        margin-top: 0;
+        color: var(--wf-color-accent);
+        font-size: 1.25rem;
+      }
+    </style>
+    <script>
+      function applyTheme(theme) {
+        // themeが明示的に渡された場合はその値を使い、undefinedの場合はlocalStorageから取得
+        const t = theme !== undefined ? theme : localStorage.getItem("wf-theme") || "";
+        console.log("[applyTheme] 適用するテーマ:", t);
 
-  <!-- 暖簾ヘッダー -->
-  <header class="wf-header-noren">
-    <div class="wf-container" style="padding: 0">
-      <h1>wafoo-css</h1>
-      <p style="margin: 8px 0 0; opacity: 0.9; letter-spacing: 0.15em;">
-        伝統的な日本の美学を取り入れたCSSフレームワーク
+        // classList操作で安全にテーマクラスを管理
+        const removedThemes = [];
+        Array.from(document.body.classList).forEach(c => {
+          if (c.startsWith("theme-")) {
+            document.body.classList.remove(c);
+            removedThemes.push(c);
+          }
+        });
+        if (removedThemes.length > 0) {
+          console.log("[applyTheme] 削除したテーマ:", removedThemes);
+        }
+
+        if (t) {
+          document.body.classList.add(t);
+          console.log("[applyTheme] 追加したテーマ:", t);
+        }
+
+        localStorage.setItem("wf-theme", t);
+        const sel = document.getElementById("theme");
+        if (sel) sel.value = t;
+
+        console.log("[applyTheme] body.classList:", Array.from(document.body.classList));
+        console.log("[applyTheme] 背景色:", getComputedStyle(document.body).backgroundColor);
+      }
+    </script>
+  </head>
+
+  <body>
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+
+    <!-- テーマ切り替え -->
+    <div class="theme-selector">
+      <label for="theme" style="display: block; margin-bottom: 8px; font-weight: 700">
+        テーマ選択
+      </label>
+      <select id="theme" class="wf-select" style="width: 100%">
+        <option value="">標準（藤紫）</option>
+        <option value="theme-sakura">桜（sakura）</option>
+        <option value="theme-koubai">紅梅（koubai）</option>
+        <option value="theme-moe">萌黄（moe）</option>
+        <option value="theme-kiku">菊（kiku）</option>
+        <option value="theme-koori">氷（koori）</option>
+        <option value="theme-yanagi">柳（yanagi）</option>
+        <option value="theme-momiji">紅葉（momiji）</option>
+        <option value="theme-fuji">藤（fuji）</option>
+        <option value="theme-uguisu">鶯（uguisu）</option>
+        <option value="theme-yuki">雪（yuki）</option>
+      </select>
+      <p style="margin: 12px 0 0 0; font-size: 0.75rem; color: var(--wf-color-muted)">
+        テーマを切り替えてデザインを確認できます
       </p>
     </div>
-  </header>
 
-  <main id="main" class="wf-container" style="padding-top: 48px;">
-
-    <!-- 特徴 -->
-    <section aria-label="特徴">
-      <h2>主な特徴</h2>
-      <div class="feature-grid">
-        <div class="feature-card">
-          <h3>和風デザイン</h3>
-          <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-            <li>Noto Serif JP（明朝体）</li>
-            <li>和紙のテクスチャー</li>
-            <li>伝統色パレット</li>
-            <li>四隅の飾り枠</li>
-          </ul>
-        </div>
-        <div class="feature-card">
-          <h3>10種類のテーマ</h3>
-          <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-            <li>桜・紅梅・萌黄</li>
-            <li>菊・氷・柳</li>
-            <li>紅葉・藤・鶯・雪</li>
-            <li>全てのコンポーネントに対応</li>
-          </ul>
-        </div>
-        <div class="feature-card">
-          <h3>豊富なコンポーネント</h3>
-          <ul style="margin: 0; padding-left: 20px; line-height: 1.8;">
-            <li>ボタン・フォーム・カード</li>
-            <li>タブ・モーダル・カレンダー</li>
-            <li>テーブル・アラート・ナビゲーション</li>
-            <li>その他30種類以上</li>
-          </ul>
-        </div>
+    <!-- 暖簾ヘッダー -->
+    <header class="wf-header-noren">
+      <div class="wf-container" style="padding: 0">
+        <h1>wafoo-css</h1>
+        <p style="margin: 8px 0 0; opacity: 0.9; letter-spacing: 0.15em">
+          伝統的な日本の美学を取り入れたCSSフレームワーク
+        </p>
       </div>
-    </section>
+    </header>
 
-    <!-- 伝統色パレット（10テーマ） -->
-    <section aria-label="伝統色パレット">
-      <h2>伝統色パレット（10テーマ）</h2>
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px;">
-        <div
-          style="background: #f4b3c2; padding: 32px; text-align: center; color: #2a2a2a; font-weight: 700; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          桜<br><small style="opacity: 0.8; font-size: 0.75rem;">#f4b3c2</small>
-        </div>
-        <div
-          style="background: #e35c8d; padding: 32px; text-align: center; color: white; font-weight: 700; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          紅梅<br><small style="opacity: 0.9; font-size: 0.75rem;">#e35c8d</small>
-        </div>
-        <div
-          style="background: #a9d18e; padding: 32px; text-align: center; color: #1f1f1f; font-weight: 700; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          萌黄<br><small style="opacity: 0.8; font-size: 0.75rem;">#a9d18e</small>
-        </div>
-        <div
-          style="background: #967bb6; padding: 32px; text-align: center; color: white; font-weight: 700; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          菊<br><small style="opacity: 0.9; font-size: 0.75rem;">#967bb6</small>
-        </div>
-        <div
-          style="background: #7eb8d4; padding: 32px; text-align: center; color: #1f1f1f; font-weight: 700; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          氷<br><small style="opacity: 0.8; font-size: 0.75rem;">#7eb8d4</small>
-        </div>
-        <div
-          style="background: #93c572; padding: 32px; text-align: center; color: #1f1f1f; font-weight: 700; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          柳<br><small style="opacity: 0.8; font-size: 0.75rem;">#93c572</small>
-        </div>
-        <div
-          style="background: #c94c28; padding: 32px; text-align: center; color: white; font-weight: 700; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          紅葉<br><small style="opacity: 0.9; font-size: 0.75rem;">#c94c28</small>
-        </div>
-        <div
-          style="background: #bca7e8; padding: 32px; text-align: center; color: #2a2a2a; font-weight: 700; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          藤<br><small style="opacity: 0.8; font-size: 0.75rem;">#bca7e8</small>
-        </div>
-        <div
-          style="background: #7c8c4b; padding: 32px; text-align: center; color: white; font-weight: 700; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          鶯<br><small style="opacity: 0.9; font-size: 0.75rem;">#7c8c4b</small>
-        </div>
-        <div
-          style="background: #5a7a8f; padding: 32px; text-align: center; color: white; font-weight: 700; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-          雪<br><small style="opacity: 0.9; font-size: 0.75rem;">#5a7a8f</small>
-        </div>
-      </div>
-    </section>
-
-    <!-- ボタン -->
-    <section aria-label="ボタン">
-      <h2>ボタン</h2>
-      <div class="demo-grid">
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">基本ボタン</h3>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button class="wf-btn">標準</button>
-            <button class="wf-btn wf-btn-primary">プライマリ</button>
-            <button class="wf-btn wf-btn-outline">アウトライン</button>
-            <button class="wf-btn wf-btn-subtle">サブトル</button>
+    <main id="main" class="wf-container" style="padding-top: 48px">
+      <!-- 特徴 -->
+      <section aria-label="特徴">
+        <h2>主な特徴</h2>
+        <div class="feature-grid">
+          <div class="feature-card">
+            <h3>和風デザイン</h3>
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.8">
+              <li>Noto Serif JP（明朝体）</li>
+              <li>和紙のテクスチャー</li>
+              <li>伝統色パレット</li>
+              <li>四隅の飾り枠</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>10種類のテーマ</h3>
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.8">
+              <li>桜・紅梅・萌黄</li>
+              <li>菊・氷・柳</li>
+              <li>紅葉・藤・鶯・雪</li>
+              <li>全てのコンポーネントに対応</li>
+            </ul>
+          </div>
+          <div class="feature-card">
+            <h3>豊富なコンポーネント</h3>
+            <ul style="margin: 0; padding-left: 20px; line-height: 1.8">
+              <li>ボタン・フォーム・カード</li>
+              <li>タブ・モーダル・カレンダー</li>
+              <li>テーブル・アラート・ナビゲーション</li>
+              <li>その他30種類以上</li>
+            </ul>
           </div>
         </div>
+      </section>
 
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">和風グラデーション</h3>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button class="wf-btn wf-btn-gradient">グラデーション</button>
-            <button class="wf-btn wf-btn-gradient wf-btn-lg">大サイズ</button>
+      <!-- 伝統色パレット（10テーマ） -->
+      <section aria-label="伝統色パレット">
+        <h2>伝統色パレット（10テーマ）</h2>
+        <div
+          style="
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 16px;
+          "
+        >
+          <div
+            style="
+              background: #f4b3c2;
+              padding: 32px;
+              text-align: center;
+              color: #2a2a2a;
+              font-weight: 700;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            桜
+            <br />
+            <small style="opacity: 0.8; font-size: 0.75rem">#f4b3c2</small>
           </div>
-          <p style="color: var(--wf-color-muted); font-size: 0.9rem; margin: 16px 0 0 0;">
-            ホバーすると光が流れるエフェクトがあります
+          <div
+            style="
+              background: #e35c8d;
+              padding: 32px;
+              text-align: center;
+              color: white;
+              font-weight: 700;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            紅梅
+            <br />
+            <small style="opacity: 0.9; font-size: 0.75rem">#e35c8d</small>
+          </div>
+          <div
+            style="
+              background: #a9d18e;
+              padding: 32px;
+              text-align: center;
+              color: #1f1f1f;
+              font-weight: 700;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            萌黄
+            <br />
+            <small style="opacity: 0.8; font-size: 0.75rem">#a9d18e</small>
+          </div>
+          <div
+            style="
+              background: #967bb6;
+              padding: 32px;
+              text-align: center;
+              color: white;
+              font-weight: 700;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            菊
+            <br />
+            <small style="opacity: 0.9; font-size: 0.75rem">#967bb6</small>
+          </div>
+          <div
+            style="
+              background: #7eb8d4;
+              padding: 32px;
+              text-align: center;
+              color: #1f1f1f;
+              font-weight: 700;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            氷
+            <br />
+            <small style="opacity: 0.8; font-size: 0.75rem">#7eb8d4</small>
+          </div>
+          <div
+            style="
+              background: #93c572;
+              padding: 32px;
+              text-align: center;
+              color: #1f1f1f;
+              font-weight: 700;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            柳
+            <br />
+            <small style="opacity: 0.8; font-size: 0.75rem">#93c572</small>
+          </div>
+          <div
+            style="
+              background: #c94c28;
+              padding: 32px;
+              text-align: center;
+              color: white;
+              font-weight: 700;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            紅葉
+            <br />
+            <small style="opacity: 0.9; font-size: 0.75rem">#c94c28</small>
+          </div>
+          <div
+            style="
+              background: #bca7e8;
+              padding: 32px;
+              text-align: center;
+              color: #2a2a2a;
+              font-weight: 700;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            藤
+            <br />
+            <small style="opacity: 0.8; font-size: 0.75rem">#bca7e8</small>
+          </div>
+          <div
+            style="
+              background: #7c8c4b;
+              padding: 32px;
+              text-align: center;
+              color: white;
+              font-weight: 700;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            鶯
+            <br />
+            <small style="opacity: 0.9; font-size: 0.75rem">#7c8c4b</small>
+          </div>
+          <div
+            style="
+              background: #5a7a8f;
+              padding: 32px;
+              text-align: center;
+              color: white;
+              font-weight: 700;
+              border-radius: 8px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            "
+          >
+            雪
+            <br />
+            <small style="opacity: 0.9; font-size: 0.75rem">#5a7a8f</small>
+          </div>
+        </div>
+      </section>
+
+      <!-- ボタン -->
+      <section aria-label="ボタン">
+        <h2>ボタン</h2>
+        <div class="demo-grid">
+          <div class="wf-card">
+            <h3 style="margin-top: 0">基本ボタン</h3>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap">
+              <button class="wf-btn">標準</button>
+              <button class="wf-btn wf-btn-primary">プライマリ</button>
+              <button class="wf-btn wf-btn-outline">アウトライン</button>
+              <button class="wf-btn wf-btn-subtle">サブトル</button>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">和風グラデーション</h3>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap">
+              <button class="wf-btn wf-btn-gradient">グラデーション</button>
+              <button class="wf-btn wf-btn-gradient wf-btn-lg">大サイズ</button>
+            </div>
+            <p style="color: var(--wf-color-muted); font-size: 0.9rem; margin: 16px 0 0 0">
+              ホバーすると光が流れるエフェクトがあります
+            </p>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">ステータスボタン</h3>
+            <div style="display: flex; gap: 12px; flex-wrap: wrap">
+              <button class="wf-btn wf-btn-success">成功</button>
+              <button class="wf-btn wf-btn-warning">警告</button>
+              <button class="wf-btn wf-btn-danger">エラー</button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- アラート・トースト通知 -->
+      <section aria-label="アラート・トースト通知">
+        <h2>アラート・トースト通知</h2>
+
+        <div class="wf-card" style="margin-bottom: 24px">
+          <h3 style="margin-top: 0">アラート</h3>
+          <p style="margin-bottom: 16px; color: var(--wf-color-muted)">
+            重要な情報や状態を表示するメッセージコンポーネントです。
           </p>
+          <div style="display: flex; flex-direction: column; gap: 12px">
+            <div class="wf-alert">
+              <strong>お知らせ</strong>
+              <br />
+              これは標準のアラートメッセージです。
+            </div>
+            <div class="wf-alert wf-alert-success">
+              <strong>成功</strong>
+              <br />
+              操作が正常に完了しました。
+            </div>
+            <div class="wf-alert wf-alert-warning">
+              <strong>警告</strong>
+              <br />
+              注意が必要な操作です。
+            </div>
+            <div class="wf-alert wf-alert-danger">
+              <strong>エラー</strong>
+              <br />
+              エラーが発生しました。もう一度お試しください。
+            </div>
+          </div>
         </div>
 
         <div class="wf-card">
-          <h3 style="margin-top: 0;">ステータスボタン</h3>
-          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-            <button class="wf-btn wf-btn-success">成功</button>
-            <button class="wf-btn wf-btn-warning">警告</button>
-            <button class="wf-btn wf-btn-danger">エラー</button>
+          <h3 style="margin-top: 0">トースト通知</h3>
+          <p style="margin-bottom: 16px; color: var(--wf-color-muted)">
+            一時的な通知を表示するコンポーネントです。画面隅に表示され、自動的に消滅させることができます。
+          </p>
+          <div style="display: flex; flex-direction: column; gap: 12px; max-width: 480px">
+            <div class="wf-toast">
+              <div class="wf-toast__content">
+                <div class="wf-toast__title">お知らせ</div>
+                新しいメッセージが届きました
+              </div>
+              <button class="wf-toast__close" aria-label="閉じる">×</button>
+            </div>
+            <div class="wf-toast wf-toast--success">
+              <div class="wf-toast__content">
+                <div class="wf-toast__title">保存完了</div>
+                データが正常に保存されました
+              </div>
+              <button class="wf-toast__close" aria-label="閉じる">×</button>
+            </div>
+            <div class="wf-toast wf-toast--warning">
+              <div class="wf-toast__content">
+                <div class="wf-toast__title">注意</div>
+                一部の項目が未入力です
+              </div>
+              <button class="wf-toast__close" aria-label="閉じる">×</button>
+            </div>
+            <div class="wf-toast wf-toast--danger">
+              <div class="wf-toast__content">
+                <div class="wf-toast__title">エラー</div>
+                接続に失敗しました
+              </div>
+              <button class="wf-toast__close" aria-label="閉じる">×</button>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- アラート・トースト通知 -->
-    <section aria-label="アラート・トースト通知">
-      <h2>アラート・トースト通知</h2>
-
-      <div class="wf-card" style="margin-bottom: 24px;">
-        <h3 style="margin-top: 0;">アラート</h3>
-        <p style="margin-bottom: 16px; color: var(--wf-color-muted);">
-          重要な情報や状態を表示するメッセージコンポーネントです。
-        </p>
-        <div style="display: flex; flex-direction: column; gap: 12px;">
-          <div class="wf-alert">
-            <strong>お知らせ</strong><br>
-            これは標準のアラートメッセージです。
+      <!-- カード -->
+      <section aria-label="カード">
+        <h2>カード</h2>
+        <div class="demo-grid">
+          <div class="wf-card">
+            <h3 style="margin-top: 0">通常カード</h3>
+            <p>シンプルなカードデザインです。コンテンツを整理して表示できます。</p>
           </div>
-          <div class="wf-alert wf-alert-success">
-            <strong>成功</strong><br>
-            操作が正常に完了しました。
-          </div>
-          <div class="wf-alert wf-alert-warning">
-            <strong>警告</strong><br>
-            注意が必要な操作です。
-          </div>
-          <div class="wf-alert wf-alert-danger">
-            <strong>エラー</strong><br>
-            エラーが発生しました。もう一度お試しください。
+          <div class="wf-card-washi">
+            <h3 style="margin-top: 0">和紙風カード</h3>
+            <p>四隅にテーマ色の飾り枠があります。和紙のような質感を表現しています。</p>
           </div>
         </div>
-      </div>
+      </section>
 
-      <div class="wf-card">
-        <h3 style="margin-top: 0;">トースト通知</h3>
-        <p style="margin-bottom: 16px; color: var(--wf-color-muted);">
-          一時的な通知を表示するコンポーネントです。画面隅に表示され、自動的に消滅させることができます。
-        </p>
-        <div style="display: flex; flex-direction: column; gap: 12px; max-width: 480px;">
-          <div class="wf-toast">
-            <div class="wf-toast__content">
-              <div class="wf-toast__title">お知らせ</div>
-              新しいメッセージが届きました
-            </div>
-            <button class="wf-toast__close" aria-label="閉じる">×</button>
-          </div>
-          <div class="wf-toast wf-toast--success">
-            <div class="wf-toast__content">
-              <div class="wf-toast__title">保存完了</div>
-              データが正常に保存されました
-            </div>
-            <button class="wf-toast__close" aria-label="閉じる">×</button>
-          </div>
-          <div class="wf-toast wf-toast--warning">
-            <div class="wf-toast__content">
-              <div class="wf-toast__title">注意</div>
-              一部の項目が未入力です
-            </div>
-            <button class="wf-toast__close" aria-label="閉じる">×</button>
-          </div>
-          <div class="wf-toast wf-toast--danger">
-            <div class="wf-toast__content">
-              <div class="wf-toast__title">エラー</div>
-              接続に失敗しました
-            </div>
-            <button class="wf-toast__close" aria-label="閉じる">×</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- カード -->
-    <section aria-label="カード">
-      <h2>カード</h2>
-      <div class="demo-grid">
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">通常カード</h3>
-          <p>シンプルなカードデザインです。コンテンツを整理して表示できます。</p>
-        </div>
+      <!-- フォーム -->
+      <section aria-label="フォーム">
+        <h2>フォーム</h2>
         <div class="wf-card-washi">
-          <h3 style="margin-top: 0;">和紙風カード</h3>
-          <p>四隅にテーマ色の飾り枠があります。和紙のような質感を表現しています。</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- フォーム -->
-    <section aria-label="フォーム">
-      <h2>フォーム</h2>
-      <div class="wf-card-washi">
-        <h3 style="margin-top: 0;">基本フォーム（◆装飾付きラベル）</h3>
-        <form onsubmit="event.preventDefault(); return false;">
-          <div style="margin-bottom: 24px;">
-            <label class="wf-label" for="name">お名前</label>
-            <input type="text" id="name" class="wf-input" placeholder="山田 太郎">
-          </div>
-
-          <div style="margin-bottom: 24px;">
-            <label class="wf-label" for="email">メールアドレス</label>
-            <input type="email" id="email" class="wf-input" placeholder="you@example.com">
-          </div>
-
-          <div style="margin-bottom: 24px;">
-            <label class="wf-label" for="message">メッセージ</label>
-            <textarea id="message" class="wf-textarea" rows="4" placeholder="ご用件をお書きください"></textarea>
-          </div>
-
-          <fieldset style="margin-bottom: 24px; border: none; padding: 0;">
-            <legend class="wf-label">オプション</legend>
-            <div style="background: var(--wf-surface-muted); padding: 16px; border-radius: 4px;">
-              <label class="wf-checkbox__label" style="display: flex; align-items: center; margin-bottom: 12px;">
-                <input type="checkbox" class="wf-checkbox" checked>
-                <span style="margin-left: 12px;">ニュースレターを受け取る</span>
-              </label>
-              <label class="wf-checkbox__label" style="display: flex; align-items: center;">
-                <input type="checkbox" class="wf-checkbox">
-                <span style="margin-left: 12px;">利用規約に同意する</span>
-              </label>
-            </div>
-          </fieldset>
-
-          <button type="submit" class="wf-btn wf-btn-gradient" style="width: 100%; padding: 16px;">
-            送信する
-          </button>
-        </form>
-      </div>
-
-      <div class="demo-grid" style="margin-top: 24px;">
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">スイッチ</h3>
-          <label class="wf-switch__label">
-            <input type="checkbox" class="wf-switch" role="switch">
-            <span style="margin-left: 12px;">通知を有効にする</span>
-          </label>
-        </div>
-
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">レンジ</h3>
-          <label class="wf-label" for="volume">音量</label>
-          <input id="volume" type="range" class="wf-range" min="0" max="100" value="50">
-        </div>
-
-      </div>
-    </section>
-
-    <!-- 判子・ステップ -->
-    <section aria-label="判子とステップ">
-      <h2>判子・ステップ</h2>
-      <div class="demo-grid">
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">判子（ハンコ）</h3>
-          <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
-            <span class="wf-stamp">承認</span>
-            <span class="wf-stamp">検証済</span>
-            <span class="wf-stamp">完了</span>
-            <span class="wf-stamp">確認</span>
-            <span class="wf-stamp">特選</span>
-          </div>
-        </div>
-
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">ステップ表示</h3>
-          <ol class="wf-steps">
-            <li class="wf-step is-done">
-              <span class="wf-step__bullet">1</span>
-              完了
-            </li>
-            <li class="wf-step is-current">
-              <span class="wf-step__bullet">2</span>
-              進行中
-            </li>
-            <li class="wf-step">
-              <span class="wf-step__bullet">3</span>
-              未着手
-            </li>
-          </ol>
-        </div>
-      </div>
-    </section>
-
-    <!-- テーブル -->
-    <section aria-label="テーブル">
-      <h2>テーブル</h2>
-      <div class="wf-card">
-        <h3 style="margin-top: 0;">テーブル</h3>
-        <div class="wf-table-wrap">
-          <table class="wf-table wf-table-striped wf-table-hover">
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">氏名</th>
-                <th scope="col">ステータス</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>001</td>
-                <td>山田 太郎</td>
-                <td><span class="wf-stamp">承認</span></td>
-              </tr>
-              <tr>
-                <td>002</td>
-                <td>佐藤 花子</td>
-                <td><span class="wf-stamp">検証済</span></td>
-              </tr>
-              <tr>
-                <td>003</td>
-                <td>鈴木 次郎</td>
-                <td><span class="wf-stamp">完了</span></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
-
-    <!-- インタラクティブコンポーネント -->
-    <section aria-label="インタラクティブコンポーネント">
-      <h2>インタラクティブコンポーネント</h2>
-      <div class="demo-grid" style="grid-template-columns: 1fr;">
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">タブ</h3>
-          <div class="wf-tabs" data-wf-tabs>
-            <div class="wf-tablist" role="tablist">
-              <button class="wf-tab" role="tab" aria-selected="true">タブ1</button>
-              <button class="wf-tab" role="tab">タブ2</button>
-              <button class="wf-tab" role="tab">タブ3</button>
-            </div>
-            <div class="wf-tabpanel" role="tabpanel">
-              <div class="wf-card-washi" style="margin-top: 16px;">
-                <h4 style="margin-top: 0;">タブ1の内容</h4>
-                <p>キーボードの矢印キーで切り替えできます。</p>
-              </div>
-            </div>
-            <div class="wf-tabpanel" role="tabpanel" hidden>
-              <div class="wf-card-washi" style="margin-top: 16px;">
-                <h4 style="margin-top: 0;">タブ2の内容</h4>
-                <p>アクセシビリティに配慮した設計です。</p>
-              </div>
-            </div>
-            <div class="wf-tabpanel" role="tabpanel" hidden>
-              <div class="wf-card-washi" style="margin-top: 16px;">
-                <h4 style="margin-top: 0;">タブ3の内容</h4>
-                <p>ARIA属性を適切に設定しています。</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">モーダル</h3>
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <button class="wf-btn wf-btn-primary" data-wf-modal="demo-modal">標準モーダル</button>
-            <button class="wf-btn wf-btn-outline" data-wf-modal="demo-modal-sm">小さいモーダル</button>
-            <button class="wf-btn wf-btn-warning" data-wf-modal="demo-modal-warning">警告モーダル</button>
-            <button class="wf-btn wf-btn-success" data-wf-modal="demo-modal-success">成功モーダル</button>
-            <button class="wf-btn wf-btn-danger" data-wf-modal="demo-modal-danger">エラーモーダル</button>
-          </div>
-
-          <!-- 標準モーダル -->
-          <div id="demo-modal" class="wf-modal-overlay" hidden>
-            <div class="wf-modal" role="dialog" aria-modal="true">
-              <div class="wf-modal__header">
-                <h4 class="wf-modal__title" style="margin: 0;">モーダルダイアログ</h4>
-                <button class="wf-modal__close" aria-label="閉じる">×</button>
-              </div>
-              <div class="wf-modal__body">
-                <p>これはモーダルダイアログのデモです。</p>
-                <p>Escキーまたは背景をクリックして閉じることができます。</p>
-              </div>
-              <div class="wf-modal__footer">
-                <button class="wf-btn wf-btn-gradient" data-close>閉じる</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 小さいモーダル -->
-          <div id="demo-modal-sm" class="wf-modal-overlay" hidden>
-            <div class="wf-modal wf-modal-sm" role="dialog" aria-modal="true">
-              <div class="wf-modal__header">
-                <h4 class="wf-modal__title" style="margin: 0;">確認</h4>
-                <button class="wf-modal__close" aria-label="閉じる">×</button>
-              </div>
-              <div class="wf-modal__body">
-                <p>この操作を実行してもよろしいですか？</p>
-              </div>
-              <div class="wf-modal__footer">
-                <button class="wf-btn wf-btn-subtle" data-close>キャンセル</button>
-                <button class="wf-btn wf-btn-primary" data-close>実行</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 警告モーダル -->
-          <div id="demo-modal-warning" class="wf-modal-overlay" hidden>
-            <div class="wf-modal wf-modal--warning" role="dialog" aria-modal="true">
-              <div class="wf-modal__header">
-                <h4 class="wf-modal__title" style="margin: 0;">警告</h4>
-                <button class="wf-modal__close" aria-label="閉じる">×</button>
-              </div>
-              <div class="wf-modal__body">
-                <p>この操作は取り消せません。続行しますか？</p>
-              </div>
-              <div class="wf-modal__footer">
-                <button class="wf-btn wf-btn-subtle" data-close>キャンセル</button>
-                <button class="wf-btn wf-btn-warning" data-close>続行</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- 成功モーダル -->
-          <div id="demo-modal-success" class="wf-modal-overlay" hidden>
-            <div class="wf-modal wf-modal--success" role="dialog" aria-modal="true">
-              <div class="wf-modal__header">
-                <h4 class="wf-modal__title" style="margin: 0;">成功</h4>
-                <button class="wf-modal__close" aria-label="閉じる">×</button>
-              </div>
-              <div class="wf-modal__body">
-                <p>操作が正常に完了しました。</p>
-              </div>
-              <div class="wf-modal__footer">
-                <button class="wf-btn wf-btn-success" data-close>OK</button>
-              </div>
-            </div>
-          </div>
-
-          <!-- エラーモーダル -->
-          <div id="demo-modal-danger" class="wf-modal-overlay" hidden>
-            <div class="wf-modal wf-modal--danger" role="dialog" aria-modal="true">
-              <div class="wf-modal__header">
-                <h4 class="wf-modal__title" style="margin: 0;">エラー</h4>
-                <button class="wf-modal__close" aria-label="閉じる">×</button>
-              </div>
-              <div class="wf-modal__body">
-                <p>エラーが発生しました。もう一度お試しください。</p>
-              </div>
-              <div class="wf-modal__footer">
-                <button class="wf-btn wf-btn-danger" data-close>閉じる</button>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">カレンダー</h3>
-          <div class="calendar-grid"
-            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px;">
-            <div>
-              <h4 style="margin-top: 0; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">単一選択</h4>
-              <div class="wf-calendar wf-calendar-fluid" data-wf-calendar>
-                <div class="wf-calendar__header">
-                  <button class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">‹</button>
-                  <div class="wf-calendar__title"></div>
-                  <button class="wf-calendar__nav-btn" data-action="next" aria-label="次月">›</button>
-                </div>
-                <div class="wf-calendar__weekdays"></div>
-                <div class="wf-calendar__grid"></div>
-              </div>
-            </div>
-            <div>
-              <h4 style="margin-top: 0; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600;">範囲選択</h4>
-              <div class="wf-calendar wf-calendar-fluid" data-wf-calendar data-wf-calendar-range="true">
-                <div class="wf-calendar__header">
-                  <button class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">‹</button>
-                  <div class="wf-calendar__title"></div>
-                  <button class="wf-calendar__nav-btn" data-action="next" aria-label="次月">›</button>
-                </div>
-                <div class="wf-calendar__weekdays"></div>
-                <div class="wf-calendar__grid"></div>
-              </div>
-            </div>
-          </div>
-          <p style="color: var(--wf-color-muted); font-size: 0.9rem; margin: 16px 0 0 0;">
-            テーマを切り替えると、カレンダーの色も自動的に変更されます
-          </p>
-        </div>
-
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">スケジュール</h3>
-          <div class="wf-schedule" data-wf-schedule data-wf-schedule-mode="daily" data-wf-schedule-interval="60"
-            data-wf-schedule-range="all-day">
-            <!-- モード選択 -->
-            <div style="margin-bottom: 24px;">
-              <label class="wf-label" style="margin-bottom: 12px; display: block;">表示モード</label>
-              <div class="wf-schedule__mode-grid">
-                <button class="wf-schedule__mode-button is-active" id="schedule-daily-mode">
-                  <div class="wf-schedule__mode-title">1日単位指定</div>
-                  <div class="wf-schedule__mode-desc">日付を選択してタイムテーブルで指定</div>
-                </button>
-                <button class="wf-schedule__mode-button" id="schedule-weekly-mode">
-                  <div class="wf-schedule__mode-title">1週間単位指定</div>
-                  <div class="wf-schedule__mode-desc">週表示で複数日を一度に指定</div>
-                </button>
-              </div>
+          <h3 style="margin-top: 0">基本フォーム（◆装飾付きラベル）</h3>
+          <form onsubmit="event.preventDefault(); return false;">
+            <div style="margin-bottom: 24px">
+              <label class="wf-label" for="name">お名前</label>
+              <input type="text" id="name" class="wf-input" placeholder="山田 太郎" />
             </div>
 
-            <!-- 設定 -->
-            <div class="wf-schedule__settings-grid"
-              style="display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 24px;">
-              <div id="schedule-date-selector">
-                <label class="wf-label" for="schedule-selected-date">日付を選択</label>
-                <input type="date" class="wf-input" id="schedule-selected-date" />
+            <div style="margin-bottom: 24px">
+              <label class="wf-label" for="email">メールアドレス</label>
+              <input type="email" id="email" class="wf-input" placeholder="you@example.com" />
+            </div>
+
+            <div style="margin-bottom: 24px">
+              <label class="wf-label" for="message">メッセージ</label>
+              <textarea
+                id="message"
+                class="wf-textarea"
+                rows="4"
+                placeholder="ご用件をお書きください"
+              ></textarea>
+            </div>
+
+            <fieldset style="margin-bottom: 24px; border: none; padding: 0">
+              <legend class="wf-label">オプション</legend>
+              <div style="background: var(--wf-surface-muted); padding: 16px; border-radius: 4px">
+                <label
+                  class="wf-checkbox__label"
+                  style="display: flex; align-items: center; margin-bottom: 12px"
+                >
+                  <input type="checkbox" class="wf-checkbox" checked />
+                  <span style="margin-left: 12px">ニュースレターを受け取る</span>
+                </label>
+                <label class="wf-checkbox__label" style="display: flex; align-items: center">
+                  <input type="checkbox" class="wf-checkbox" />
+                  <span style="margin-left: 12px">利用規約に同意する</span>
+                </label>
               </div>
-              <div id="schedule-time-interval-wrapper" style="display: none;">
-                <label class="wf-label" for="schedule-time-interval">時間刻み</label>
-                <select class="wf-select" id="schedule-time-interval">
-                  <option value="60">60分刻み</option>
-                  <option value="30">30分刻み</option>
-                  <option value="15">15分刻み</option>
-                </select>
-              </div>
-            </div>
+            </fieldset>
 
-            <!-- 日単位モード：タイムテーブル -->
-            <div class="wf-schedule__daily" id="schedule-daily-section" style="display: none;">
-              <div class="wf-schedule__time-grid cols-8"></div>
-            </div>
-
-            <!-- 週単位モード：週カレンダー -->
-            <div class="wf-schedule__weekly is-hidden">
-              <div class="wf-schedule__calendar-header"></div>
-              <div class="wf-schedule__calendar-grid"></div>
-            </div>
-          </div>
-        </div>
-
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">アコーディオン</h3>
-          <div class="wf-accordion" id="demo-accordion">
-            <div class="wf-accordion__item">
-              <button class="wf-accordion__header" id="acc-header-1" aria-controls="acc-panel-1" aria-expanded="false">
-                項目1
-              </button>
-              <div class="wf-accordion__panel" id="acc-panel-1" role="region" aria-labelledby="acc-header-1" hidden>
-                アコーディオンのパネル1の内容です。
-              </div>
-            </div>
-            <div class="wf-accordion__item">
-              <button class="wf-accordion__header" id="acc-header-2" aria-controls="acc-panel-2" aria-expanded="false">
-                項目2
-              </button>
-              <div class="wf-accordion__panel" id="acc-panel-2" role="region" aria-labelledby="acc-header-2" hidden>
-                アコーディオンのパネル2の内容です。
-              </div>
-            </div>
-            <div class="wf-accordion__item">
-              <button class="wf-accordion__header" id="acc-header-3" aria-controls="acc-panel-3" aria-expanded="false">
-                項目3
-              </button>
-              <div class="wf-accordion__panel" id="acc-panel-3" role="region" aria-labelledby="acc-header-3" hidden>
-                アコーディオンのパネル3の内容です。
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">ツールチップ・ポップオーバー</h3>
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <div style="position: relative;">
-              <button id="demo-tooltip-btn" class="wf-btn wf-btn-primary" aria-describedby="demo-tooltip">
-                ツールチップ
-              </button>
-              <div id="demo-tooltip" class="wf-tooltip is-right" role="tooltip" hidden>
-                保存します
-              </div>
-            </div>
-
-            <div style="position: relative;">
-              <button id="demo-popover-btn" class="wf-btn wf-btn-outline" aria-controls="demo-popover"
-                aria-expanded="false" aria-haspopup="dialog" type="button">
-                ポップオーバー
-              </button>
-              <div id="demo-popover" class="wf-popover" role="dialog" aria-labelledby="popover-title" hidden>
-                <div class="wf-popover__header" id="popover-title">タイトル</div>
-                <div class="wf-popover__body">説明テキストがここに表示されます。</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">ナビゲーション</h3>
-          <nav aria-label="Breadcrumb" style="margin-bottom: 32px;">
-            <ol class="wf-breadcrumb">
-              <li class="wf-breadcrumb-item"><a href="javascript:void(0)">ホーム</a></li>
-              <li class="wf-breadcrumb-item"><a href="javascript:void(0)">ライブラリ</a></li>
-              <li class="wf-breadcrumb-item" aria-current="page">データ</li>
-            </ol>
-          </nav>
-
-          <h4 style="margin-top: 0; margin-bottom: 16px;">ナビゲーションバー</h4>
-          <nav class="wf-navbar" role="navigation" aria-label="Primary" style="margin-bottom: 32px;">
-            <a class="wf-navbar-brand" href="javascript:void(0)">ブランド</a>
-            <ul class="wf-navbar-nav">
-              <li class="wf-nav-item"><a class="wf-nav-link is-active" href="javascript:void(0)">ホーム</a></li>
-              <li class="wf-nav-item"><a class="wf-nav-link" href="javascript:void(0)">ドキュメント</a></li>
-              <li class="wf-nav-item"><a class="wf-nav-link" href="javascript:void(0)">設定</a></li>
-            </ul>
-          </nav>
-
-          <h4 style="margin-top: 0; margin-bottom: 16px;">ハンバーガーメニュー</h4>
-          <style>
-            /* デモ用：PCサイズでもハンバーガーメニューを動作させる */
-            #demo-nav-menu {
-              position: fixed;
-              top: 0;
-              left: -100%;
-              width: 280px;
-              height: 100vh;
-              background: var(--wf-surface-base);
-              flex-direction: column;
-              align-items: flex-start;
-              padding: var(--wf-space-6);
-              box-shadow: var(--wf-shadow-lg);
-              transition: left 0.3s ease;
-              z-index: 9998;
-            }
-            #demo-nav-menu.is-open {
-              left: 0;
-            }
-            #demo-nav-menu .wf-nav-item {
-              width: 100%;
-            }
-            #demo-nav-menu .wf-nav-link {
-              display: block;
-              width: 100%;
-              padding: var(--wf-space-3) var(--wf-space-4);
-            }
-          </style>
-          <nav class="wf-navbar" role="navigation" style="position: relative; margin-bottom: 32px;">
-            <a class="wf-navbar-brand" href="#" onclick="return false;">wafoo-css</a>
-
-            <button class="wf-hamburger" aria-label="メニュー" aria-expanded="false" id="demo-hamburger" style="display: flex;">
-              <span class="wf-hamburger__line"></span>
-              <span class="wf-hamburger__line"></span>
-              <span class="wf-hamburger__line"></span>
+            <button type="submit" class="wf-btn wf-btn-gradient" style="width: 100%; padding: 16px">
+              送信する
             </button>
+          </form>
+        </div>
 
-            <ul class="wf-navbar-nav" id="demo-nav-menu">
-              <li class="wf-nav-item"><a class="wf-nav-link is-active" href="#" onclick="return false;">ホーム</a></li>
-              <li class="wf-nav-item"><a class="wf-nav-link" href="#" onclick="return false;">ドキュメント</a></li>
-              <li class="wf-nav-item"><a class="wf-nav-link" href="#" onclick="return false;">お問い合わせ</a></li>
-            </ul>
-          </nav>
+        <div class="demo-grid" style="margin-top: 24px">
+          <div class="wf-card">
+            <h3 style="margin-top: 0">スイッチ</h3>
+            <label class="wf-switch__label">
+              <input type="checkbox" class="wf-switch" role="switch" />
+              <span style="margin-left: 12px">通知を有効にする</span>
+            </label>
+          </div>
 
-          <h4 style="margin-top: 0; margin-bottom: 16px;">ページネーション付きテーブル</h4>
+          <div class="wf-card">
+            <h3 style="margin-top: 0">レンジ</h3>
+            <label class="wf-label" for="volume">音量</label>
+            <input id="volume" type="range" class="wf-range" min="0" max="100" value="50" />
+          </div>
+        </div>
+      </section>
+
+      <!-- 判子・ステップ -->
+      <section aria-label="判子とステップ">
+        <h2>判子・ステップ</h2>
+        <div class="demo-grid">
+          <div class="wf-card">
+            <h3 style="margin-top: 0">判子（ハンコ）</h3>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap">
+              <span class="wf-stamp">承認</span>
+              <span class="wf-stamp">検証済</span>
+              <span class="wf-stamp">完了</span>
+              <span class="wf-stamp">確認</span>
+              <span class="wf-stamp">特選</span>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">ステップ表示</h3>
+            <ol class="wf-steps">
+              <li class="wf-step is-done">
+                <span class="wf-step__bullet">1</span>
+                完了
+              </li>
+              <li class="wf-step is-current">
+                <span class="wf-step__bullet">2</span>
+                進行中
+              </li>
+              <li class="wf-step">
+                <span class="wf-step__bullet">3</span>
+                未着手
+              </li>
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      <!-- テーブル -->
+      <section aria-label="テーブル">
+        <h2>テーブル</h2>
+        <div class="wf-card">
+          <h3 style="margin-top: 0">テーブル</h3>
           <div class="wf-table-wrap">
-            <table class="wf-table wf-table-striped" id="pagination-table">
+            <table class="wf-table wf-table-striped wf-table-hover">
               <thead>
                 <tr>
                   <th scope="col">ID</th>
-                  <th scope="col">商品名</th>
-                  <th scope="col">価格</th>
+                  <th scope="col">氏名</th>
                   <th scope="col">ステータス</th>
                 </tr>
               </thead>
-              <tbody id="pagination-table-body">
-                <!-- データはJavaScriptで動的に生成 -->
+              <tbody>
+                <tr>
+                  <td>001</td>
+                  <td>山田 太郎</td>
+                  <td><span class="wf-stamp">承認</span></td>
+                </tr>
+                <tr>
+                  <td>002</td>
+                  <td>佐藤 花子</td>
+                  <td><span class="wf-stamp">検証済</span></td>
+                </tr>
+                <tr>
+                  <td>003</td>
+                  <td>鈴木 次郎</td>
+                  <td><span class="wf-stamp">完了</span></td>
+                </tr>
               </tbody>
             </table>
           </div>
-          <nav class="wf-pagination" aria-label="テーブルページネーション" id="pagination-nav" style="margin-top: 16px;">
-            <!-- ページネーションはJavaScriptで動的に生成 -->
-          </nav>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- その他のコンポーネント -->
-    <section aria-label="その他のコンポーネント">
-      <h2>その他のコンポーネント</h2>
-      <div class="demo-grid" style="grid-template-columns: 1fr;">
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">プログレスバー</h3>
-          <div class="wf-progress" aria-label="進捗">
-            <div class="wf-progress__bar wf-progress-success" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-              aria-valuenow="70" style="width:70%"></div>
+      <!-- インタラクティブコンポーネント -->
+      <section aria-label="インタラクティブコンポーネント">
+        <h2>インタラクティブコンポーネント</h2>
+        <div class="demo-grid" style="grid-template-columns: 1fr">
+          <div class="wf-card">
+            <h3 style="margin-top: 0">タブ</h3>
+            <div class="wf-tabs" data-wf-tabs>
+              <div class="wf-tablist" role="tablist">
+                <button class="wf-tab" role="tab" aria-selected="true">タブ1</button>
+                <button class="wf-tab" role="tab">タブ2</button>
+                <button class="wf-tab" role="tab">タブ3</button>
+              </div>
+              <div class="wf-tabpanel" role="tabpanel">
+                <div class="wf-card-washi" style="margin-top: 16px">
+                  <h4 style="margin-top: 0">タブ1の内容</h4>
+                  <p>キーボードの矢印キーで切り替えできます。</p>
+                </div>
+              </div>
+              <div class="wf-tabpanel" role="tabpanel" hidden>
+                <div class="wf-card-washi" style="margin-top: 16px">
+                  <h4 style="margin-top: 0">タブ2の内容</h4>
+                  <p>アクセシビリティに配慮した設計です。</p>
+                </div>
+              </div>
+              <div class="wf-tabpanel" role="tabpanel" hidden>
+                <div class="wf-card-washi" style="margin-top: 16px">
+                  <h4 style="margin-top: 0">タブ3の内容</h4>
+                  <p>ARIA属性を適切に設定しています。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">モーダル</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <button class="wf-btn wf-btn-primary" data-wf-modal="demo-modal">標準モーダル</button>
+              <button class="wf-btn wf-btn-outline" data-wf-modal="demo-modal-sm">
+                小さいモーダル
+              </button>
+              <button class="wf-btn wf-btn-warning" data-wf-modal="demo-modal-warning">
+                警告モーダル
+              </button>
+              <button class="wf-btn wf-btn-success" data-wf-modal="demo-modal-success">
+                成功モーダル
+              </button>
+              <button class="wf-btn wf-btn-danger" data-wf-modal="demo-modal-danger">
+                エラーモーダル
+              </button>
+            </div>
+
+            <!-- 標準モーダル -->
+            <div id="demo-modal" class="wf-modal-overlay" hidden>
+              <div class="wf-modal" role="dialog" aria-modal="true">
+                <div class="wf-modal__header">
+                  <h4 class="wf-modal__title" style="margin: 0">モーダルダイアログ</h4>
+                  <button class="wf-modal__close" aria-label="閉じる">×</button>
+                </div>
+                <div class="wf-modal__body">
+                  <p>これはモーダルダイアログのデモです。</p>
+                  <p>Escキーまたは背景をクリックして閉じることができます。</p>
+                </div>
+                <div class="wf-modal__footer">
+                  <button class="wf-btn wf-btn-gradient" data-close>閉じる</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 小さいモーダル -->
+            <div id="demo-modal-sm" class="wf-modal-overlay" hidden>
+              <div class="wf-modal wf-modal-sm" role="dialog" aria-modal="true">
+                <div class="wf-modal__header">
+                  <h4 class="wf-modal__title" style="margin: 0">確認</h4>
+                  <button class="wf-modal__close" aria-label="閉じる">×</button>
+                </div>
+                <div class="wf-modal__body">
+                  <p>この操作を実行してもよろしいですか？</p>
+                </div>
+                <div class="wf-modal__footer">
+                  <button class="wf-btn wf-btn-subtle" data-close>キャンセル</button>
+                  <button class="wf-btn wf-btn-primary" data-close>実行</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 警告モーダル -->
+            <div id="demo-modal-warning" class="wf-modal-overlay" hidden>
+              <div class="wf-modal wf-modal--warning" role="dialog" aria-modal="true">
+                <div class="wf-modal__header">
+                  <h4 class="wf-modal__title" style="margin: 0">警告</h4>
+                  <button class="wf-modal__close" aria-label="閉じる">×</button>
+                </div>
+                <div class="wf-modal__body">
+                  <p>この操作は取り消せません。続行しますか？</p>
+                </div>
+                <div class="wf-modal__footer">
+                  <button class="wf-btn wf-btn-subtle" data-close>キャンセル</button>
+                  <button class="wf-btn wf-btn-warning" data-close>続行</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- 成功モーダル -->
+            <div id="demo-modal-success" class="wf-modal-overlay" hidden>
+              <div class="wf-modal wf-modal--success" role="dialog" aria-modal="true">
+                <div class="wf-modal__header">
+                  <h4 class="wf-modal__title" style="margin: 0">成功</h4>
+                  <button class="wf-modal__close" aria-label="閉じる">×</button>
+                </div>
+                <div class="wf-modal__body">
+                  <p>操作が正常に完了しました。</p>
+                </div>
+                <div class="wf-modal__footer">
+                  <button class="wf-btn wf-btn-success" data-close>OK</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- エラーモーダル -->
+            <div id="demo-modal-danger" class="wf-modal-overlay" hidden>
+              <div class="wf-modal wf-modal--danger" role="dialog" aria-modal="true">
+                <div class="wf-modal__header">
+                  <h4 class="wf-modal__title" style="margin: 0">エラー</h4>
+                  <button class="wf-modal__close" aria-label="閉じる">×</button>
+                </div>
+                <div class="wf-modal__body">
+                  <p>エラーが発生しました。もう一度お試しください。</p>
+                </div>
+                <div class="wf-modal__footer">
+                  <button class="wf-btn wf-btn-danger" data-close>閉じる</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">カレンダー</h3>
+            <div
+              class="calendar-grid"
+              style="
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+                gap: 24px;
+              "
+            >
+              <div>
+                <h4 style="margin-top: 0; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600">
+                  単一選択
+                </h4>
+                <div class="wf-calendar wf-calendar-fluid" data-wf-calendar>
+                  <div class="wf-calendar__header">
+                    <button class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">
+                      ‹
+                    </button>
+                    <div class="wf-calendar__title"></div>
+                    <button class="wf-calendar__nav-btn" data-action="next" aria-label="次月">
+                      ›
+                    </button>
+                  </div>
+                  <div class="wf-calendar__weekdays"></div>
+                  <div class="wf-calendar__grid"></div>
+                </div>
+              </div>
+              <div>
+                <h4 style="margin-top: 0; margin-bottom: 12px; font-size: 0.9rem; font-weight: 600">
+                  範囲選択
+                </h4>
+                <div
+                  class="wf-calendar wf-calendar-fluid"
+                  data-wf-calendar
+                  data-wf-calendar-range="true"
+                >
+                  <div class="wf-calendar__header">
+                    <button class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">
+                      ‹
+                    </button>
+                    <div class="wf-calendar__title"></div>
+                    <button class="wf-calendar__nav-btn" data-action="next" aria-label="次月">
+                      ›
+                    </button>
+                  </div>
+                  <div class="wf-calendar__weekdays"></div>
+                  <div class="wf-calendar__grid"></div>
+                </div>
+              </div>
+            </div>
+            <p style="color: var(--wf-color-muted); font-size: 0.9rem; margin: 16px 0 0 0">
+              テーマを切り替えると、カレンダーの色も自動的に変更されます
+            </p>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">スケジュール</h3>
+            <div
+              class="wf-schedule"
+              data-wf-schedule
+              data-wf-schedule-mode="daily"
+              data-wf-schedule-interval="60"
+              data-wf-schedule-range="all-day"
+            >
+              <!-- モード選択 -->
+              <div style="margin-bottom: 24px">
+                <label class="wf-label" style="margin-bottom: 12px; display: block">
+                  表示モード
+                </label>
+                <div class="wf-schedule__mode-grid">
+                  <button class="wf-schedule__mode-button is-active" id="schedule-daily-mode">
+                    <div class="wf-schedule__mode-title">1日単位指定</div>
+                    <div class="wf-schedule__mode-desc">日付を選択してタイムテーブルで指定</div>
+                  </button>
+                  <button class="wf-schedule__mode-button" id="schedule-weekly-mode">
+                    <div class="wf-schedule__mode-title">1週間単位指定</div>
+                    <div class="wf-schedule__mode-desc">週表示で複数日を一度に指定</div>
+                  </button>
+                </div>
+              </div>
+
+              <!-- 設定 -->
+              <div
+                class="wf-schedule__settings-grid"
+                style="display: grid; grid-template-columns: 1fr; gap: 16px; margin-bottom: 24px"
+              >
+                <div id="schedule-date-selector">
+                  <label class="wf-label" for="schedule-selected-date">日付を選択</label>
+                  <input type="date" class="wf-input" id="schedule-selected-date" />
+                </div>
+                <div id="schedule-time-interval-wrapper" style="display: none">
+                  <label class="wf-label" for="schedule-time-interval">時間刻み</label>
+                  <select class="wf-select" id="schedule-time-interval">
+                    <option value="60">60分刻み</option>
+                    <option value="30">30分刻み</option>
+                    <option value="15">15分刻み</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- 日単位モード：タイムテーブル -->
+              <div class="wf-schedule__daily" id="schedule-daily-section" style="display: none">
+                <div class="wf-schedule__time-grid cols-8"></div>
+              </div>
+
+              <!-- 週単位モード：週カレンダー -->
+              <div class="wf-schedule__weekly is-hidden">
+                <div class="wf-schedule__calendar-header"></div>
+                <div class="wf-schedule__calendar-grid"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">アコーディオン</h3>
+            <div class="wf-accordion" id="demo-accordion">
+              <div class="wf-accordion__item">
+                <button
+                  class="wf-accordion__header"
+                  id="acc-header-1"
+                  aria-controls="acc-panel-1"
+                  aria-expanded="false"
+                >
+                  項目1
+                </button>
+                <div
+                  class="wf-accordion__panel"
+                  id="acc-panel-1"
+                  role="region"
+                  aria-labelledby="acc-header-1"
+                  hidden
+                >
+                  アコーディオンのパネル1の内容です。
+                </div>
+              </div>
+              <div class="wf-accordion__item">
+                <button
+                  class="wf-accordion__header"
+                  id="acc-header-2"
+                  aria-controls="acc-panel-2"
+                  aria-expanded="false"
+                >
+                  項目2
+                </button>
+                <div
+                  class="wf-accordion__panel"
+                  id="acc-panel-2"
+                  role="region"
+                  aria-labelledby="acc-header-2"
+                  hidden
+                >
+                  アコーディオンのパネル2の内容です。
+                </div>
+              </div>
+              <div class="wf-accordion__item">
+                <button
+                  class="wf-accordion__header"
+                  id="acc-header-3"
+                  aria-controls="acc-panel-3"
+                  aria-expanded="false"
+                >
+                  項目3
+                </button>
+                <div
+                  class="wf-accordion__panel"
+                  id="acc-panel-3"
+                  role="region"
+                  aria-labelledby="acc-header-3"
+                  hidden
+                >
+                  アコーディオンのパネル3の内容です。
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">ツールチップ・ポップオーバー</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div style="position: relative">
+                <button
+                  id="demo-tooltip-btn"
+                  class="wf-btn wf-btn-primary"
+                  aria-describedby="demo-tooltip"
+                >
+                  ツールチップ
+                </button>
+                <div id="demo-tooltip" class="wf-tooltip is-right" role="tooltip" hidden>
+                  保存します
+                </div>
+              </div>
+
+              <div style="position: relative">
+                <button
+                  id="demo-popover-btn"
+                  class="wf-btn wf-btn-outline"
+                  aria-controls="demo-popover"
+                  aria-expanded="false"
+                  aria-haspopup="dialog"
+                  type="button"
+                >
+                  ポップオーバー
+                </button>
+                <div
+                  id="demo-popover"
+                  class="wf-popover"
+                  role="dialog"
+                  aria-labelledby="popover-title"
+                  hidden
+                >
+                  <div class="wf-popover__header" id="popover-title">タイトル</div>
+                  <div class="wf-popover__body">説明テキストがここに表示されます。</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">ナビゲーション</h3>
+            <nav aria-label="Breadcrumb" style="margin-bottom: 32px">
+              <ol class="wf-breadcrumb">
+                <li class="wf-breadcrumb-item"><a href="javascript:void(0)">ホーム</a></li>
+                <li class="wf-breadcrumb-item"><a href="javascript:void(0)">ライブラリ</a></li>
+                <li class="wf-breadcrumb-item" aria-current="page">データ</li>
+              </ol>
+            </nav>
+
+            <h4 style="margin-top: 0; margin-bottom: 16px">ナビゲーションバー</h4>
+            <nav
+              class="wf-navbar"
+              role="navigation"
+              aria-label="Primary"
+              style="margin-bottom: 32px"
+            >
+              <a class="wf-navbar-brand" href="javascript:void(0)">ブランド</a>
+              <ul class="wf-navbar-nav">
+                <li class="wf-nav-item">
+                  <a class="wf-nav-link is-active" href="javascript:void(0)">ホーム</a>
+                </li>
+                <li class="wf-nav-item">
+                  <a class="wf-nav-link" href="javascript:void(0)">ドキュメント</a>
+                </li>
+                <li class="wf-nav-item">
+                  <a class="wf-nav-link" href="javascript:void(0)">設定</a>
+                </li>
+              </ul>
+            </nav>
+
+            <h4 style="margin-top: 0; margin-bottom: 16px">ハンバーガーメニュー</h4>
+            <style>
+              /* デモ用：PCサイズでもハンバーガーメニューを動作させる */
+              #demo-nav-menu {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 280px;
+                height: 100vh;
+                background: var(--wf-surface-base);
+                flex-direction: column;
+                align-items: flex-start;
+                padding: var(--wf-space-6);
+                box-shadow: var(--wf-shadow-lg);
+                transition: left 0.3s ease;
+                z-index: 9998;
+              }
+              #demo-nav-menu.is-open {
+                left: 0;
+              }
+              #demo-nav-menu .wf-nav-item {
+                width: 100%;
+              }
+              #demo-nav-menu .wf-nav-link {
+                display: block;
+                width: 100%;
+                padding: var(--wf-space-3) var(--wf-space-4);
+              }
+            </style>
+            <nav
+              class="wf-navbar"
+              role="navigation"
+              style="position: relative; margin-bottom: 32px"
+            >
+              <a class="wf-navbar-brand" href="#" onclick="return false;">wafoo-css</a>
+
+              <button
+                class="wf-hamburger"
+                aria-label="メニュー"
+                aria-expanded="false"
+                id="demo-hamburger"
+                style="display: flex"
+              >
+                <span class="wf-hamburger__line"></span>
+                <span class="wf-hamburger__line"></span>
+                <span class="wf-hamburger__line"></span>
+              </button>
+
+              <ul class="wf-navbar-nav" id="demo-nav-menu">
+                <li class="wf-nav-item">
+                  <a class="wf-nav-link is-active" href="#" onclick="return false;">ホーム</a>
+                </li>
+                <li class="wf-nav-item">
+                  <a class="wf-nav-link" href="#" onclick="return false;">ドキュメント</a>
+                </li>
+                <li class="wf-nav-item">
+                  <a class="wf-nav-link" href="#" onclick="return false;">お問い合わせ</a>
+                </li>
+              </ul>
+            </nav>
+
+            <h4 style="margin-top: 0; margin-bottom: 16px">ページネーション付きテーブル</h4>
+            <div class="wf-table-wrap">
+              <table class="wf-table wf-table-striped" id="pagination-table">
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">商品名</th>
+                    <th scope="col">価格</th>
+                    <th scope="col">ステータス</th>
+                  </tr>
+                </thead>
+                <tbody id="pagination-table-body">
+                  <!-- データはJavaScriptで動的に生成 -->
+                </tbody>
+              </table>
+            </div>
+            <nav
+              class="wf-pagination"
+              aria-label="テーブルページネーション"
+              id="pagination-nav"
+              style="margin-top: 16px"
+            >
+              <!-- ページネーションはJavaScriptで動的に生成 -->
+            </nav>
           </div>
         </div>
+      </section>
 
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">スピナー</h3>
-          <div class="wf-spinner" role="status">
-            <span class="wf-sr-only">読み込み中…</span>
+      <!-- その他のコンポーネント -->
+      <section aria-label="その他のコンポーネント">
+        <h2>その他のコンポーネント</h2>
+        <div class="demo-grid" style="grid-template-columns: 1fr">
+          <div class="wf-card">
+            <h3 style="margin-top: 0">プログレスバー</h3>
+            <div class="wf-progress" aria-label="進捗">
+              <div
+                class="wf-progress__bar wf-progress-success"
+                role="progressbar"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="70"
+                style="width: 70%"
+              ></div>
+            </div>
           </div>
-        </div>
 
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">コードブロック</h3>
-          <pre class="wf-code-block" data-wf-codeblock><code>function greet(name) {
+          <div class="wf-card">
+            <h3 style="margin-top: 0">スピナー</h3>
+            <div class="wf-spinner" role="status">
+              <span class="wf-sr-only">読み込み中…</span>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">コードブロック</h3>
+            <pre class="wf-code-block" data-wf-codeblock><code>function greet(name) {
   return `こんにちは、${name}さん`;
 }
 
@@ -897,375 +1159,402 @@ const total = products.reduce((sum, item) => sum + item.price, 0);
 console.log(`合計: ${total}円`);
 
 console.log(greet('世界'));</code></pre>
-        </div>
-
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">アバター</h3>
-          <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
-            <span class="wf-avatar wf-avatar-sm">A</span>
-            <span class="wf-avatar">B</span>
-            <span class="wf-avatar wf-avatar-lg">C</span>
-            <span class="wf-avatar wf-avatar-square">D</span>
-            <span class="wf-avatar wf-avatar-status">E</span>
           </div>
-        </div>
 
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">空状態</h3>
-          <div class="wf-empty">
-            <div class="wf-empty__icon">□</div>
-            <h4 class="wf-empty__title">データがありません</h4>
-            <p class="wf-empty__desc">表示するデータが存在しません。</p>
-            <div class="wf-empty__actions">
-              <button class="wf-btn wf-btn-primary">新規作成</button>
+          <div class="wf-card">
+            <h3 style="margin-top: 0">アバター</h3>
+            <div style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap">
+              <span class="wf-avatar wf-avatar-sm">A</span>
+              <span class="wf-avatar">B</span>
+              <span class="wf-avatar wf-avatar-lg">C</span>
+              <span class="wf-avatar wf-avatar-square">D</span>
+              <span class="wf-avatar wf-avatar-status">E</span>
             </div>
           </div>
-        </div>
 
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">リストグループ</h3>
-          <ul class="wf-list-group">
-            <a href="javascript:void(0)" class="wf-list-item is-active">
-              <span>アクティブな項目</span>
-              <span class="wf-meta">3</span>
-            </a>
-            <a href="javascript:void(0)" class="wf-list-item">
-              <span>通常の項目</span>
-              <span class="wf-meta">12</span>
-            </a>
-            <a href="javascript:void(0)" class="wf-list-item">
-              <span>別の項目</span>
-              <span class="wf-meta">5</span>
-            </a>
-            <button class="wf-list-item" disabled>無効な項目</button>
-          </ul>
-        </div>
-
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">スケルトン</h3>
-          <div style="display: flex; flex-direction: column; gap: 12px;">
-            <div class="wf-skeleton wf-skeleton-line"></div>
-            <div class="wf-skeleton wf-skeleton-line wf-sm"></div>
-            <div class="wf-skeleton wf-skeleton-line wf-lg"></div>
-            <div style="display: flex; gap: 12px; align-items: center;">
-              <div class="wf-skeleton wf-skeleton-circle"></div>
-              <div style="flex: 1;">
-                <div class="wf-skeleton wf-skeleton-line"></div>
-                <div class="wf-skeleton wf-skeleton-line wf-sm" style="margin-top: 8px;"></div>
+          <div class="wf-card">
+            <h3 style="margin-top: 0">空状態</h3>
+            <div class="wf-empty">
+              <div class="wf-empty__icon">□</div>
+              <h4 class="wf-empty__title">データがありません</h4>
+              <p class="wf-empty__desc">表示するデータが存在しません。</p>
+              <div class="wf-empty__actions">
+                <button class="wf-btn wf-btn-primary">新規作成</button>
               </div>
             </div>
-            <div class="wf-skeleton wf-skeleton-rect"></div>
           </div>
-        </div>
 
-        <div class="wf-card">
-          <h3 style="margin-top: 0;">区切り線</h3>
-          <div>
-            <p>上</p>
-            <hr class="wf-divider">
-            <p>中</p>
-            <div class="wf-divider wf-divider--text">または</div>
-            <p>下</p>
-            <div style="display: flex; align-items: center;">
-              <span>項目A</span>
-              <div class="wf-divider wf-divider--vertical"></div>
-              <span>項目B</span>
+          <div class="wf-card">
+            <h3 style="margin-top: 0">リストグループ</h3>
+            <ul class="wf-list-group">
+              <a href="javascript:void(0)" class="wf-list-item is-active">
+                <span>アクティブな項目</span>
+                <span class="wf-meta">3</span>
+              </a>
+              <a href="javascript:void(0)" class="wf-list-item">
+                <span>通常の項目</span>
+                <span class="wf-meta">12</span>
+              </a>
+              <a href="javascript:void(0)" class="wf-list-item">
+                <span>別の項目</span>
+                <span class="wf-meta">5</span>
+              </a>
+              <button class="wf-list-item" disabled>無効な項目</button>
+            </ul>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">スケルトン</h3>
+            <div style="display: flex; flex-direction: column; gap: 12px">
+              <div class="wf-skeleton wf-skeleton-line"></div>
+              <div class="wf-skeleton wf-skeleton-line wf-sm"></div>
+              <div class="wf-skeleton wf-skeleton-line wf-lg"></div>
+              <div style="display: flex; gap: 12px; align-items: center">
+                <div class="wf-skeleton wf-skeleton-circle"></div>
+                <div style="flex: 1">
+                  <div class="wf-skeleton wf-skeleton-line"></div>
+                  <div class="wf-skeleton wf-skeleton-line wf-sm" style="margin-top: 8px"></div>
+                </div>
+              </div>
+              <div class="wf-skeleton wf-skeleton-rect"></div>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">区切り線</h3>
+            <div>
+              <p>上</p>
+              <hr class="wf-divider" />
+              <p>中</p>
+              <div class="wf-divider wf-divider--text">または</div>
+              <p>下</p>
+              <div style="display: flex; align-items: center">
+                <span>項目A</span>
+                <div class="wf-divider wf-divider--vertical"></div>
+                <span>項目B</span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- リファレンス -->
-    <section aria-label="リファレンス">
-      <h2>リファレンス</h2>
-      <div class="demo-grid">
-        <div class="wf-card">
-          <h3 style="margin-top: 0; color: var(--wf-color-accent);">
-            <a href="./css-variables.html" style="color: var(--wf-color-accent); text-decoration: none;">CSS変数リファレンス</a>
-          </h3>
-          <p style="color: var(--wf-color-muted); margin-bottom: 12px;">
-            全87個のデザイントークンを視覚的に確認できます
-          </p>
-          <ul style="margin: 8px 0 0 0; padding-left: 20px; line-height: 1.8;">
-            <li>カラーパレット（伝統色、アクセント、ステータス）</li>
-            <li>スペーシング（4pxベースの8pxグリッド）</li>
-            <li>タイポグラフィ、シャドウ、ブレークポイント</li>
-            <li>コンポーネント固有の変数</li>
-          </ul>
+      <!-- リファレンス -->
+      <section aria-label="リファレンス">
+        <h2>リファレンス</h2>
+        <div class="demo-grid">
+          <div class="wf-card">
+            <h3 style="margin-top: 0; color: var(--wf-color-accent)">
+              <a
+                href="./css-variables.html"
+                style="color: var(--wf-color-accent); text-decoration: none"
+              >
+                CSS変数リファレンス
+              </a>
+            </h3>
+            <p style="color: var(--wf-color-muted); margin-bottom: 12px">
+              全87個のデザイントークンを視覚的に確認できます
+            </p>
+            <ul style="margin: 8px 0 0 0; padding-left: 20px; line-height: 1.8">
+              <li>カラーパレット（伝統色、アクセント、ステータス）</li>
+              <li>スペーシング（4pxベースの8pxグリッド）</li>
+              <li>タイポグラフィ、シャドウ、ブレークポイント</li>
+              <li>コンポーネント固有の変数</li>
+            </ul>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0; color: var(--wf-color-accent)">
+              <a
+                href="./reference.html"
+                style="color: var(--wf-color-accent); text-decoration: none"
+              >
+                コンポーネントリファレンス
+              </a>
+            </h3>
+            <p style="color: var(--wf-color-muted); margin-bottom: 12px">
+              全コンポーネントとユーティリティクラスの詳細
+            </p>
+            <ul style="margin: 8px 0 0 0; padding-left: 20px; line-height: 1.8">
+              <li>よく使うコンポーネント一覧</li>
+              <li>ユーティリティクラス一覧</li>
+              <li>利用可能な全34種類のコンポーネント詳細</li>
+            </ul>
+          </div>
         </div>
+      </section>
 
-        <div class="wf-card">
-          <h3 style="margin-top: 0; color: var(--wf-color-accent);">
-            <a href="./reference.html" style="color: var(--wf-color-accent); text-decoration: none;">コンポーネントリファレンス</a>
-          </h3>
-          <p style="color: var(--wf-color-muted); margin-bottom: 12px;">
-            全コンポーネントとユーティリティクラスの詳細
-          </p>
-          <ul style="margin: 8px 0 0 0; padding-left: 20px; line-height: 1.8;">
-            <li>よく使うコンポーネント一覧</li>
-            <li>ユーティリティクラス一覧</li>
-            <li>利用可能な全34種類のコンポーネント詳細</li>
-          </ul>
-        </div>
-      </div>
-    </section>
+      <!-- フッター -->
+      <footer
+        style="
+          margin-top: 80px;
+          padding: 48px 0;
+          text-align: center;
+          border-top: 2px solid var(--wf-color-border);
+        "
+      >
+        <p style="color: var(--wf-color-muted); margin: 0; font-size: 0.875rem">
+          &copy;
+          <span id="copyright-year"></span>
+          Q_Q. All rights reserved.
+        </p>
+      </footer>
+    </main>
 
-    <!-- フッター -->
-    <footer
-      style="margin-top: 80px; padding: 48px 0; text-align: center; border-top: 2px solid var(--wf-color-border);">
-      <p style="color: var(--wf-color-muted); margin: 0; font-size: 0.875rem;">
-        &copy; <span id="copyright-year"></span> Q_Q. All rights reserved.
-      </p>
-    </footer>
-  </main>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // テーマ切り替えの初期化
+        applyTheme();
+        const theme = document.getElementById("theme");
+        if (theme) theme.addEventListener("change", () => applyTheme(theme.value));
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // テーマ切り替えの初期化
-      applyTheme();
-      const theme = document.getElementById('theme');
-      if (theme) theme.addEventListener('change', () => applyTheme(theme.value));
+        // 著作権の年を動的に設定
+        const yearEl = document.getElementById("copyright-year");
+        if (yearEl) {
+          yearEl.textContent = new Date().getFullYear();
+        }
 
-      // 著作権の年を動的に設定
-      const yearEl = document.getElementById('copyright-year');
-      if (yearEl) {
-        yearEl.textContent = new Date().getFullYear();
-      }
+        // ページネーション付きテーブル
+        (function () {
+          const tableBody = document.getElementById("pagination-table-body");
+          const paginationNav = document.getElementById("pagination-nav");
+          if (!tableBody || !paginationNav) return;
 
+          // サンプルデータ（12件）
+          const allData = [
+            { id: "001", name: "和紙ノート", price: "1,200円", status: "在庫あり" },
+            { id: "002", name: "墨汁セット", price: "850円", status: "在庫あり" },
+            { id: "003", name: "筆ペン", price: "450円", status: "在庫あり" },
+            { id: "004", name: "硯", price: "3,500円", status: "在庫あり" },
+            { id: "005", name: "半紙100枚", price: "600円", status: "在庫あり" },
+            { id: "006", name: "書道セット", price: "2,800円", status: "在庫あり" },
+            { id: "007", name: "印鑑ケース", price: "1,500円", status: "在庫あり" },
+            { id: "008", name: "便箋セット", price: "980円", status: "在庫あり" },
+            { id: "009", name: "封筒10枚", price: "320円", status: "在庫あり" },
+            { id: "010", name: "のし袋", price: "250円", status: "在庫あり" },
+            { id: "011", name: "筆立て", price: "1,800円", status: "在庫あり" },
+            { id: "012", name: "文鎮", price: "2,200円", status: "在庫あり" }
+          ];
 
-      // ページネーション付きテーブル
-      (function () {
-        const tableBody = document.getElementById('pagination-table-body');
-        const paginationNav = document.getElementById('pagination-nav');
-        if (!tableBody || !paginationNav) return;
+          const itemsPerPage = 5;
+          let currentPage = 1;
+          const totalPages = Math.ceil(allData.length / itemsPerPage);
 
-        // サンプルデータ（12件）
-        const allData = [
-          { id: '001', name: '和紙ノート', price: '1,200円', status: '在庫あり' },
-          { id: '002', name: '墨汁セット', price: '850円', status: '在庫あり' },
-          { id: '003', name: '筆ペン', price: '450円', status: '在庫あり' },
-          { id: '004', name: '硯', price: '3,500円', status: '在庫あり' },
-          { id: '005', name: '半紙100枚', price: '600円', status: '在庫あり' },
-          { id: '006', name: '書道セット', price: '2,800円', status: '在庫あり' },
-          { id: '007', name: '印鑑ケース', price: '1,500円', status: '在庫あり' },
-          { id: '008', name: '便箋セット', price: '980円', status: '在庫あり' },
-          { id: '009', name: '封筒10枚', price: '320円', status: '在庫あり' },
-          { id: '010', name: 'のし袋', price: '250円', status: '在庫あり' },
-          { id: '011', name: '筆立て', price: '1,800円', status: '在庫あり' },
-          { id: '012', name: '文鎮', price: '2,200円', status: '在庫あり' }
-        ];
+          function renderTable(page) {
+            const start = (page - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const pageData = allData.slice(start, end);
 
-        const itemsPerPage = 5;
-        let currentPage = 1;
-        const totalPages = Math.ceil(allData.length / itemsPerPage);
-
-        function renderTable(page) {
-          const start = (page - 1) * itemsPerPage;
-          const end = start + itemsPerPage;
-          const pageData = allData.slice(start, end);
-
-          tableBody.innerHTML = pageData.map(item => `
+            tableBody.innerHTML = pageData
+              .map(
+                item => `
             <tr>
               <td>${item.id}</td>
               <td>${item.name}</td>
               <td>${item.price}</td>
               <td><span class="wf-stamp">${item.status}</span></td>
             </tr>
-          `).join('');
-        }
+          `
+              )
+              .join("");
+          }
 
-        function renderPagination(page) {
-          const pages = [];
+          function renderPagination(page) {
+            const pages = [];
 
-          // 前へボタン
-          pages.push(`<a class="wf-page-link ${page === 1 ? 'is-disabled' : ''}" 
+            // 前へボタン
+            pages.push(`<a class="wf-page-link ${page === 1 ? "is-disabled" : ""}" 
             href="javascript:void(0)" 
             data-page="${page - 1}" 
-            ${page === 1 ? 'aria-disabled="true"' : ''}>前へ</a>`);
+            ${page === 1 ? 'aria-disabled="true"' : ""}>前へ</a>`);
 
-          // ページ番号
-          for (let i = 1; i <= totalPages; i++) {
-            if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
-              pages.push(`<a class="wf-page-link ${i === page ? 'is-active' : ''}" 
+            // ページ番号
+            for (let i = 1; i <= totalPages; i++) {
+              if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
+                pages.push(`<a class="wf-page-link ${i === page ? "is-active" : ""}" 
                 href="javascript:void(0)" 
                 data-page="${i}" 
-                ${i === page ? 'aria-current="page"' : ''}>${i}</a>`);
-            } else if (i === page - 2 || i === page + 2) {
-              pages.push('<span class="wf-page-link" style="pointer-events: none;">…</span>');
+                ${i === page ? 'aria-current="page"' : ""}>${i}</a>`);
+              } else if (i === page - 2 || i === page + 2) {
+                pages.push('<span class="wf-page-link" style="pointer-events: none;">…</span>');
+              }
+            }
+
+            // 次へボタン
+            pages.push(`<a class="wf-page-link ${page === totalPages ? "is-disabled" : ""}" 
+            href="javascript:void(0)" 
+            data-page="${page + 1}" 
+            ${page === totalPages ? 'aria-disabled="true"' : ""}>次へ</a>`);
+
+            paginationNav.innerHTML = pages.join("");
+          }
+
+          function goToPage(page) {
+            if (page < 1 || page > totalPages) return;
+            currentPage = page;
+            renderTable(currentPage);
+            renderPagination(currentPage);
+          }
+
+          // 初期表示
+          renderTable(currentPage);
+          renderPagination(currentPage);
+
+          // ページネーションクリックイベント
+          paginationNav.addEventListener("click", function (e) {
+            const link = e.target.closest(".wf-page-link[data-page]");
+            if (link && !link.classList.contains("is-disabled")) {
+              e.preventDefault();
+              const page = parseInt(link.getAttribute("data-page"));
+              goToPage(page);
+            }
+          });
+        })();
+
+        // スケジュールコンポーネントのモード切り替えと設定変更
+        (function () {
+          const scheduleEl = document.querySelector(".wf-schedule");
+          if (!scheduleEl) return;
+
+          let scheduleInstance = null;
+          let currentMode = "daily";
+
+          // 日付変更と表示制御
+          const dateInput = document.getElementById("schedule-selected-date");
+          const timeIntervalWrapper = document.getElementById("schedule-time-interval-wrapper");
+          const dailySection = document.getElementById("schedule-daily-section");
+
+          function updateScheduleVisibility() {
+            const hasDate = dateInput && dateInput.value;
+            const weeklySectionLocal = scheduleEl.querySelector(".wf-schedule__weekly");
+            if (timeIntervalWrapper) timeIntervalWrapper.style.display = hasDate ? "block" : "none";
+            if (dailySection) {
+              dailySection.style.display = currentMode === "daily" && hasDate ? "block" : "none";
+            }
+            if (weeklySectionLocal) {
+              weeklySectionLocal.style.display =
+                currentMode === "weekly" && hasDate ? "block" : "none";
             }
           }
 
-          // 次へボタン
-          pages.push(`<a class="wf-page-link ${page === totalPages ? 'is-disabled' : ''}" 
-            href="javascript:void(0)" 
-            data-page="${page + 1}" 
-            ${page === totalPages ? 'aria-disabled="true"' : ''}>次へ</a>`);
+          // スケジュールインスタンスを取得（自動初期化後に）
+          setTimeout(() => {
+            scheduleInstance = WFUI.schedule(scheduleEl, {
+              mode: "daily",
+              timeInterval: 60,
+              timeRange: "all-day"
+            });
 
-          paginationNav.innerHTML = pages.join('');
-        }
+            // 初期表示の可視性を更新
+            updateScheduleVisibility();
 
-        function goToPage(page) {
-          if (page < 1 || page > totalPages) return;
-          currentPage = page;
-          renderTable(currentPage);
-          renderPagination(currentPage);
-        }
+            // 時間刻み変更
+            const timeIntervalSelect = document.getElementById("schedule-time-interval");
+            if (timeIntervalSelect) {
+              timeIntervalSelect.addEventListener("change", e => {
+                if (scheduleInstance) {
+                  scheduleInstance.setTimeInterval(parseInt(e.target.value));
+                  scheduleInstance.clearSelection();
+                }
+              });
+            }
+          }, 100);
 
-        // 初期表示
-        renderTable(currentPage);
-        renderPagination(currentPage);
+          // モード切り替え
+          const dailyModeBtn = document.getElementById("schedule-daily-mode");
+          const weeklyModeBtn = document.getElementById("schedule-weekly-mode");
+          const dateSelector = document.getElementById("schedule-date-selector");
+          const weeklySection = scheduleEl.querySelector(".wf-schedule__weekly");
 
-        // ページネーションクリックイベント
-        paginationNav.addEventListener('click', function (e) {
-          const link = e.target.closest('.wf-page-link[data-page]');
-          if (link && !link.classList.contains('is-disabled')) {
-            e.preventDefault();
-            const page = parseInt(link.getAttribute('data-page'));
-            goToPage(page);
+          if (dailyModeBtn && weeklyModeBtn) {
+            dailyModeBtn.addEventListener("click", () => {
+              if (currentMode === "daily") return;
+              currentMode = "daily";
+              dailyModeBtn.classList.add("is-active");
+              weeklyModeBtn.classList.remove("is-active");
+              if (dateSelector) dateSelector.style.display = "block";
+              updateScheduleVisibility();
+              if (weeklySection) {
+                weeklySection.classList.add("is-hidden");
+                weeklySection.style.display = "none";
+              }
+              if (scheduleInstance) scheduleInstance.setMode("daily");
+            });
+
+            weeklyModeBtn.addEventListener("click", () => {
+              if (currentMode === "weekly") return;
+              currentMode = "weekly";
+              weeklyModeBtn.classList.add("is-active");
+              dailyModeBtn.classList.remove("is-active");
+              if (dateSelector) dateSelector.style.display = "none";
+              if (dailySection) {
+                dailySection.classList.add("is-hidden");
+                dailySection.style.display = "none";
+              }
+              if (weeklySection) {
+                weeklySection.classList.remove("is-hidden");
+                weeklySection.style.display = "block";
+              }
+              if (scheduleInstance) scheduleInstance.setMode("weekly");
+            });
           }
-        });
-      })();
 
-      // スケジュールコンポーネントのモード切り替えと設定変更
-      (function () {
-        const scheduleEl = document.querySelector('.wf-schedule');
-        if (!scheduleEl) return;
-
-        let scheduleInstance = null;
-        let currentMode = 'daily';
-
-        // 日付変更と表示制御
-        const dateInput = document.getElementById('schedule-selected-date');
-        const timeIntervalWrapper = document.getElementById('schedule-time-interval-wrapper');
-        const dailySection = document.getElementById('schedule-daily-section');
-
-        function updateScheduleVisibility() {
-          const hasDate = dateInput && dateInput.value;
-          const weeklySectionLocal = scheduleEl.querySelector('.wf-schedule__weekly');
-          if (timeIntervalWrapper) timeIntervalWrapper.style.display = hasDate ? 'block' : 'none';
-          if (dailySection) {
-            dailySection.style.display = (currentMode === 'daily' && hasDate) ? 'block' : 'none';
-          }
-          if (weeklySectionLocal) {
-            weeklySectionLocal.style.display = (currentMode === 'weekly' && hasDate) ? 'block' : 'none';
-          }
-        }
-
-        // スケジュールインスタンスを取得（自動初期化後に）
-        setTimeout(() => {
-          scheduleInstance = WFUI.schedule(scheduleEl, {
-            mode: 'daily',
-            timeInterval: 60,
-            timeRange: 'all-day'
-          });
-
-          // 初期表示の可視性を更新
-          updateScheduleVisibility();
-
-          // 時間刻み変更
-          const timeIntervalSelect = document.getElementById('schedule-time-interval');
-          if (timeIntervalSelect) {
-            timeIntervalSelect.addEventListener('change', (e) => {
-              if (scheduleInstance) {
-                scheduleInstance.setTimeInterval(parseInt(e.target.value));
-                scheduleInstance.clearSelection();
+          // 日付変更
+          if (dateInput) {
+            dateInput.addEventListener("change", e => {
+              updateScheduleVisibility();
+              if (scheduleInstance && e.target.value) {
+                scheduleInstance.setSelectedDate(e.target.value);
               }
             });
           }
-        }, 100);
+        })();
 
-        // モード切り替え
-        const dailyModeBtn = document.getElementById('schedule-daily-mode');
-        const weeklyModeBtn = document.getElementById('schedule-weekly-mode');
-        const dateSelector = document.getElementById('schedule-date-selector');
-        const weeklySection = scheduleEl.querySelector('.wf-schedule__weekly');
+        // アコーディオン
+        (function () {
+          const accordion = document.getElementById("demo-accordion");
+          if (accordion) {
+            accordion.addEventListener("click", e => {
+              const btn = e.target.closest(".wf-accordion__header");
+              if (!btn) return;
+              const panel = document.getElementById(btn.getAttribute("aria-controls"));
+              const isOpen = btn.getAttribute("aria-expanded") === "true";
+              btn.setAttribute("aria-expanded", String(!isOpen));
+              panel.hidden = isOpen;
+            });
+          }
+        })();
 
-        if (dailyModeBtn && weeklyModeBtn) {
-          dailyModeBtn.addEventListener('click', () => {
-            if (currentMode === 'daily') return;
-            currentMode = 'daily';
-            dailyModeBtn.classList.add('is-active');
-            weeklyModeBtn.classList.remove('is-active');
-            if (dateSelector) dateSelector.style.display = 'block';
-            updateScheduleVisibility();
-            if (weeklySection) { weeklySection.classList.add('is-hidden'); weeklySection.style.display = 'none'; }
-            if (scheduleInstance) scheduleInstance.setMode('daily');
-          });
-
-          weeklyModeBtn.addEventListener('click', () => {
-            if (currentMode === 'weekly') return;
-            currentMode = 'weekly';
-            weeklyModeBtn.classList.add('is-active');
-            dailyModeBtn.classList.remove('is-active');
-            if (dateSelector) dateSelector.style.display = 'none';
-            if (dailySection) {
-              dailySection.classList.add('is-hidden');
-              dailySection.style.display = 'none';
-            }
-            if (weeklySection) { weeklySection.classList.remove('is-hidden'); weeklySection.style.display = 'block'; }
-            if (scheduleInstance) scheduleInstance.setMode('weekly');
-          });
+        // ツールチップ
+        if (window.WFUI) {
+          const tooltipBtn = document.getElementById("demo-tooltip-btn");
+          const tooltip = document.getElementById("demo-tooltip");
+          if (tooltipBtn && tooltip) {
+            WFUI.tooltip(tooltipBtn, tooltip, { placement: "right" });
+          }
         }
 
-        // 日付変更
-        if (dateInput) {
-          dateInput.addEventListener('change', (e) => {
-            updateScheduleVisibility();
-            if (scheduleInstance && e.target.value) {
-              scheduleInstance.setSelectedDate(e.target.value);
-            }
-          });
+        // ポップオーバー
+        if (window.WFUI) {
+          const popoverBtn = document.getElementById("demo-popover-btn");
+          const popover = document.getElementById("demo-popover");
+          if (popoverBtn && popover) {
+            WFUI.popover(popoverBtn, popover, { placement: "right" });
+          }
         }
-      })();
+      });
 
-      // アコーディオン
-      (function () {
-        const accordion = document.getElementById('demo-accordion');
-        if (accordion) {
-          accordion.addEventListener('click', (e) => {
-            const btn = e.target.closest('.wf-accordion__header');
-            if (!btn) return;
-            const panel = document.getElementById(btn.getAttribute('aria-controls'));
-            const isOpen = btn.getAttribute('aria-expanded') === 'true';
-            btn.setAttribute('aria-expanded', String(!isOpen));
-            panel.hidden = isOpen;
-          });
-        }
-      })();
-
-      // ツールチップ
-      if (window.WFUI) {
-        const tooltipBtn = document.getElementById('demo-tooltip-btn');
-        const tooltip = document.getElementById('demo-tooltip');
-        if (tooltipBtn && tooltip) {
-          WFUI.tooltip(tooltipBtn, tooltip, { placement: 'right' });
-        }
+      // ハンバーガーメニューのデモ
+      function toggleDemoMenu() {
+        const hamburger = document.getElementById("demo-hamburger");
+        const navMenu = document.getElementById("demo-nav-menu");
+        hamburger.classList.toggle("is-active");
+        navMenu.classList.toggle("is-open");
+        const isOpen = navMenu.classList.contains("is-open");
+        hamburger.setAttribute("aria-expanded", isOpen);
       }
 
-      // ポップオーバー
-      if (window.WFUI) {
-        const popoverBtn = document.getElementById('demo-popover-btn');
-        const popover = document.getElementById('demo-popover');
-        if (popoverBtn && popover) {
-          WFUI.popover(popoverBtn, popover, { placement: 'right' });
-        }
-      }
-    });
-
-    // ハンバーガーメニューのデモ
-    function toggleDemoMenu() {
-      const hamburger = document.getElementById('demo-hamburger');
-      const navMenu = document.getElementById('demo-nav-menu');
-      hamburger.classList.toggle('is-active');
-      navMenu.classList.toggle('is-open');
-      const isOpen = navMenu.classList.contains('is-open');
-      hamburger.setAttribute('aria-expanded', isOpen);
-    }
-
-    // 実際のハンバーガーメニューのイベントリスナー
-    document.getElementById('demo-hamburger').addEventListener('click', toggleDemoMenu);
-  </script>
-</body>
-
+      // 実際のハンバーガーメニューのイベントリスナー
+      document.getElementById("demo-hamburger").addEventListener("click", toggleDemoMenu);
+    </script>
+  </body>
 </html>
