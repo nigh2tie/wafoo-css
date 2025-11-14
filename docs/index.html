@@ -1238,6 +1238,262 @@ console.log(greet('世界'));</code></pre>
         </div>
       </section>
 
+      <!-- Rating -->
+      <section aria-label="評価（Rating）">
+        <h2>評価（Rating）</h2>
+        <div class="demo-grid">
+          <div class="wf-card">
+            <h3 style="margin-top: 0">基本的な評価表示</h3>
+            <div style="margin-bottom: 16px">
+              <div class="wf-rating">
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star" aria-hidden="true">★</span>
+                <span class="wf-rating__value" aria-label="評価: 5つ星中4">4.0</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 16px">
+              <div class="wf-rating">
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-half" aria-hidden="true">★</span>
+                <span class="wf-rating__star" aria-hidden="true">★</span>
+                <span class="wf-rating__value" aria-label="評価: 5つ星中3.5">3.5</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">サイズバリエーション</h3>
+            <div style="margin-bottom: 12px">
+              <div class="wf-rating wf-rating-sm">
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star" aria-hidden="true">★</span>
+                <span class="wf-rating__value">4.0 (小)</span>
+              </div>
+            </div>
+            <div style="margin-bottom: 12px">
+              <div class="wf-rating">
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star" aria-hidden="true">★</span>
+                <span class="wf-rating__value">4.0 (標準)</span>
+              </div>
+            </div>
+            <div>
+              <div class="wf-rating wf-rating-lg">
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star is-filled" aria-hidden="true">★</span>
+                <span class="wf-rating__star" aria-hidden="true">★</span>
+                <span class="wf-rating__value">4.0 (大)</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">インタラクティブ評価（整数）</h3>
+            <p style="color: var(--wf-color-muted); font-size: 14px; margin-bottom: 12px">
+              星をクリックして評価してください
+            </p>
+            <div
+              class="wf-rating is-interactive"
+              id="demo-rating-int"
+              role="radiogroup"
+              aria-label="評価を選択"
+            >
+              <input type="radio" name="demo-rating" value="1" class="wf-rating__input" />
+              <span
+                class="wf-rating__star"
+                role="radio"
+                aria-checked="false"
+                aria-label="1つ星"
+                tabindex="0"
+                data-value="1"
+              >
+                ★
+              </span>
+
+              <input type="radio" name="demo-rating" value="2" class="wf-rating__input" />
+              <span
+                class="wf-rating__star"
+                role="radio"
+                aria-checked="false"
+                aria-label="2つ星"
+                tabindex="-1"
+                data-value="2"
+              >
+                ★
+              </span>
+
+              <input type="radio" name="demo-rating" value="3" class="wf-rating__input" />
+              <span
+                class="wf-rating__star"
+                role="radio"
+                aria-checked="false"
+                aria-label="3つ星"
+                tabindex="-1"
+                data-value="3"
+              >
+                ★
+              </span>
+
+              <input type="radio" name="demo-rating" value="4" class="wf-rating__input" />
+              <span
+                class="wf-rating__star"
+                role="radio"
+                aria-checked="false"
+                aria-label="4つ星"
+                tabindex="-1"
+                data-value="4"
+              >
+                ★
+              </span>
+
+              <input type="radio" name="demo-rating" value="5" class="wf-rating__input" />
+              <span
+                class="wf-rating__star"
+                role="radio"
+                aria-checked="false"
+                aria-label="5つ星"
+                tabindex="-1"
+                data-value="5"
+              >
+                ★
+              </span>
+
+              <span class="wf-rating__value" id="demo-rating-value">未評価</span>
+            </div>
+          </div>
+
+          <div class="wf-card">
+            <h3 style="margin-top: 0">インタラクティブ評価（0.5単位）</h3>
+            <p style="color: var(--wf-color-muted); font-size: 14px; margin-bottom: 12px">
+              星の左半分=0.5、右半分=1.0
+            </p>
+            <div
+              class="wf-rating is-interactive"
+              id="demo-rating-half"
+              role="radiogroup"
+              aria-label="半星評価を選択"
+            >
+              <input type="radio" name="demo-rating-half" value="0.5" class="wf-rating__input" />
+              <input type="radio" name="demo-rating-half" value="1" class="wf-rating__input" />
+              <span
+                class="wf-rating__star"
+                role="radio"
+                aria-checked="false"
+                aria-label="1つ星"
+                tabindex="0"
+                data-index="1"
+              >
+                ★
+              </span>
+
+              <input type="radio" name="demo-rating-half" value="1.5" class="wf-rating__input" />
+              <input type="radio" name="demo-rating-half" value="2" class="wf-rating__input" />
+              <span
+                class="wf-rating__star"
+                role="radio"
+                aria-checked="false"
+                aria-label="2つ星"
+                tabindex="-1"
+                data-index="2"
+              >
+                ★
+              </span>
+
+              <input type="radio" name="demo-rating-half" value="2.5" class="wf-rating__input" />
+              <input type="radio" name="demo-rating-half" value="3" class="wf-rating__input" />
+              <span
+                class="wf-rating__star"
+                role="radio"
+                aria-checked="false"
+                aria-label="3つ星"
+                tabindex="-1"
+                data-index="3"
+              >
+                ★
+              </span>
+
+              <input type="radio" name="demo-rating-half" value="3.5" class="wf-rating__input" />
+              <input type="radio" name="demo-rating-half" value="4" class="wf-rating__input" />
+              <span
+                class="wf-rating__star"
+                role="radio"
+                aria-checked="false"
+                aria-label="4つ星"
+                tabindex="-1"
+                data-index="4"
+              >
+                ★
+              </span>
+
+              <input type="radio" name="demo-rating-half" value="4.5" class="wf-rating__input" />
+              <input type="radio" name="demo-rating-half" value="5" class="wf-rating__input" />
+              <span
+                class="wf-rating__star"
+                role="radio"
+                aria-checked="false"
+                aria-label="5つ星"
+                tabindex="-1"
+                data-index="5"
+              >
+                ★
+              </span>
+
+              <span class="wf-rating__value" id="demo-rating-half-value">未評価</span>
+            </div>
+          </div>
+        </div>
+
+        <details style="margin-top: 24px">
+          <summary style="cursor: pointer; font-weight: 600; color: var(--wf-color-accent)">
+            使用例
+          </summary>
+          <pre
+            style="
+              background: var(--wf-color-bg-subtle);
+              padding: 16px;
+              border-radius: 8px;
+              overflow-x: auto;
+            "
+          ><code>&lt;!-- 基本的な評価表示 --&gt;
+&lt;div class="wf-rating"&gt;
+  &lt;span class="wf-rating__star is-filled"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__value"&gt;4.0&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- 半星表示 --&gt;
+&lt;div class="wf-rating"&gt;
+  &lt;span class="wf-rating__star is-filled"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-half"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__value"&gt;3.5&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- サイズバリエーション --&gt;
+&lt;div class="wf-rating wf-rating-sm"&gt;...&lt;/div&gt;  &lt;!-- 小 --&gt;
+&lt;div class="wf-rating"&gt;...&lt;/div&gt;           &lt;!-- 標準 --&gt;
+&lt;div class="wf-rating wf-rating-lg"&gt;...&lt;/div&gt;  &lt;!-- 大 --&gt;</code></pre>
+        </details>
+      </section>
+
       <!-- リファレンス -->
       <section aria-label="リファレンス">
         <h2>リファレンス</h2>
@@ -1555,6 +1811,77 @@ console.log(greet('世界'));</code></pre>
 
       // 実際のハンバーガーメニューのイベントリスナー
       document.getElementById("demo-hamburger").addEventListener("click", toggleDemoMenu);
+
+      // Rating demos
+      document.addEventListener("DOMContentLoaded", function () {
+        // Integer rating (1-5)
+        const demoRatingInt = document.getElementById("demo-rating-int");
+        if (demoRatingInt) {
+          const stars = demoRatingInt.querySelectorAll(".wf-rating__star");
+          const valueDisplay = demoRatingInt.querySelector(".wf-rating__value");
+          const inputs = demoRatingInt.querySelectorAll(".wf-rating__input");
+
+          stars.forEach(star => {
+            star.addEventListener("click", function () {
+              const value = parseInt(this.dataset.value);
+              updateIntRating(value);
+            });
+          });
+
+          function updateIntRating(value) {
+            stars.forEach((s, i) => {
+              if (i < value) {
+                s.classList.add("is-filled");
+                s.setAttribute("aria-checked", "true");
+              } else {
+                s.classList.remove("is-filled");
+                s.setAttribute("aria-checked", "false");
+              }
+            });
+            valueDisplay.textContent = value + ".0";
+            inputs[value - 1].checked = true;
+          }
+        }
+
+        // Half-star rating (0.5-5)
+        const demoRatingHalf = document.getElementById("demo-rating-half");
+        if (demoRatingHalf) {
+          const stars = demoRatingHalf.querySelectorAll(".wf-rating__star");
+          const valueDisplay = demoRatingHalf.querySelector(".wf-rating__value");
+          const inputs = demoRatingHalf.querySelectorAll(".wf-rating__input");
+
+          stars.forEach(star => {
+            star.addEventListener("click", function (e) {
+              const rect = this.getBoundingClientRect();
+              const clickX = e.clientX - rect.left;
+              const starWidth = rect.width;
+              const starIndex = parseInt(this.dataset.index);
+              const isLeftHalf = clickX < starWidth / 2;
+              const value = isLeftHalf ? starIndex - 0.5 : starIndex;
+              updateHalfRating(value);
+            });
+          });
+
+          function updateHalfRating(value) {
+            stars.forEach(s => {
+              const starIndex = parseInt(s.dataset.index);
+              s.classList.remove("is-filled", "is-half");
+              s.setAttribute("aria-checked", "false");
+
+              if (starIndex < value) {
+                s.classList.add("is-filled");
+                s.setAttribute("aria-checked", "true");
+              } else if (starIndex === Math.ceil(value) && value % 1 !== 0) {
+                s.classList.add("is-half");
+                s.setAttribute("aria-checked", "true");
+              }
+            });
+            valueDisplay.textContent = value.toFixed(1);
+            const targetInput = Array.from(inputs).find(input => parseFloat(input.value) === value);
+            if (targetInput) targetInput.checked = true;
+          }
+        }
+      });
     </script>
   </body>
 </html>
