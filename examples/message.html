@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Message Component - wafoo-css</title>
+  <link rel="stylesheet" href="../dist/wafoo.css">
+  <style>
+    body {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      background: var(--wf-ink-50);
+    }
+    .demo-section {
+      margin-bottom: 3rem;
+      padding: 2rem;
+      background: white;
+      border: 1px solid var(--wf-ink-200);
+      border-radius: 8px;
+    }
+    .demo-section h2 {
+      margin-top: 0;
+      color: var(--wf-accent-700);
+    }
+    .chat-container {
+      background: var(--wf-ink-50);
+      border-radius: 8px;
+      padding: 1rem;
+      max-height: 500px;
+      overflow-y: auto;
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+
+  <header role="banner">
+    <h1>Chat/Message Component Examples</h1>
+    <p>チャット風メッセージ表示コンポーネントのデモ</p>
+  </header>
+
+  <main role="main" id="main">
+    <!-- Basic Chat Messages -->
+    <section class="demo-section">
+      <h2>基本的なチャットメッセージ</h2>
+
+      <div class="chat-container">
+        <!-- Received Message -->
+        <div class="wf-message">
+          <div class="wf-message__avatar">
+            田
+          </div>
+          <div class="wf-message__content">
+            <div class="wf-message__header">
+              <span class="wf-message__name">田中太郎</span>
+              <time class="wf-message__time" datetime="2025-11-14T10:30">10:30</time>
+            </div>
+            <div class="wf-message__bubble">
+              <div class="wf-message__body">
+                おはようございます!今日の会議の資料、共有いただけますか?
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sent Message -->
+        <div class="wf-message wf-message-sent">
+          <div class="wf-message__avatar">
+            佐
+          </div>
+          <div class="wf-message__content">
+            <div class="wf-message__header">
+              <span class="wf-message__name">あなた</span>
+              <time class="wf-message__time" datetime="2025-11-14T10:32">10:32</time>
+            </div>
+            <div class="wf-message__bubble">
+              <div class="wf-message__body">
+                おはようございます。了解です、すぐに送ります!
+              </div>
+            </div>
+            <div class="wf-message__status is-read">
+              <span class="wf-icon" aria-hidden="true">✓✓</span> 既読
+            </div>
+          </div>
+        </div>
+
+        <!-- Received Message with Image Avatar -->
+        <div class="wf-message">
+          <div class="wf-message__avatar">
+            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='40'%3E%3Crect fill='%23e0e0e0' width='40' height='40'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='%23666' font-size='16' font-family='sans-serif'%3E👤%3C/text%3E%3C/svg%3E" alt="田中太郎">
+          </div>
+          <div class="wf-message__content">
+            <div class="wf-message__header">
+              <span class="wf-message__name">田中太郎</span>
+              <time class="wf-message__time" datetime="2025-11-14T10:33">10:33</time>
+            </div>
+            <div class="wf-message__bubble">
+              <div class="wf-message__body">
+                ありがとうございます!助かります。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- System Message -->
+        <div class="wf-message wf-message-system">
+          <div class="wf-message__content">
+            <div class="wf-message__bubble">
+              山田花子さんが会話に参加しました
+            </div>
+          </div>
+        </div>
+
+        <!-- New Participant Message -->
+        <div class="wf-message">
+          <div class="wf-message__avatar">
+            山
+          </div>
+          <div class="wf-message__content">
+            <div class="wf-message__header">
+              <span class="wf-message__name">山田花子</span>
+              <time class="wf-message__time" datetime="2025-11-14T10:35">10:35</time>
+            </div>
+            <div class="wf-message__bubble">
+              <div class="wf-message__body">
+                こんにちは!会議の件、私も確認させてください。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sent Message (Sending State) -->
+        <div class="wf-message wf-message-sent is-sending">
+          <div class="wf-message__avatar">
+            佐
+          </div>
+          <div class="wf-message__content">
+            <div class="wf-message__header">
+              <span class="wf-message__name">あなた</span>
+              <time class="wf-message__time" datetime="2025-11-14T10:36">10:36</time>
+            </div>
+            <div class="wf-message__bubble">
+              <div class="wf-message__body">
+                もちろんです!今共有しますね。
+              </div>
+            </div>
+            <div class="wf-message__status">
+              <span class="wf-icon" aria-hidden="true">●</span> 送信中...
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Compact Messages -->
+    <section class="demo-section">
+      <h2>コンパクト表示（アバターなし）</h2>
+
+      <div class="chat-container">
+        <div class="wf-message wf-message-compact">
+          <div class="wf-message__content">
+            <div class="wf-message__header">
+              <span class="wf-message__name">田中太郎</span>
+              <time class="wf-message__time" datetime="2025-11-14T11:00">11:00</time>
+            </div>
+            <div class="wf-message__bubble">
+              <div class="wf-message__body">
+                了解しました
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-message wf-message-compact wf-message-sent">
+          <div class="wf-message__content">
+            <div class="wf-message__header">
+              <span class="wf-message__name">あなた</span>
+              <time class="wf-message__time" datetime="2025-11-14T11:01">11:01</time>
+            </div>
+            <div class="wf-message__bubble">
+              <div class="wf-message__body">
+                ありがとうございます
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-message wf-message-compact">
+          <div class="wf-message__content">
+            <div class="wf-message__header">
+              <span class="wf-message__name">田中太郎</span>
+              <time class="wf-message__time" datetime="2025-11-14T11:02">11:02</time>
+            </div>
+            <div class="wf-message__bubble">
+              <div class="wf-message__body">
+                👍
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Long Message Example -->
+    <section class="demo-section">
+      <h2>長文メッセージ</h2>
+
+      <div class="chat-container">
+        <div class="wf-message">
+          <div class="wf-message__avatar">
+            鈴
+          </div>
+          <div class="wf-message__content">
+            <div class="wf-message__header">
+              <span class="wf-message__name">鈴木一郎</span>
+              <time class="wf-message__time" datetime="2025-11-14T14:00">14:00</time>
+            </div>
+            <div class="wf-message__bubble">
+              <div class="wf-message__body">
+                プロジェクトの進捗報告です。<br><br>
+
+                【完了した作業】<br>
+                ・要件定義書の作成<br>
+                ・UI/UXデザインの初稿<br>
+                ・バックエンドのAPI設計<br><br>
+
+                【次週の予定】<br>
+                ・フロントエンドの実装開始<br>
+                ・データベース設計の最終確認<br><br>
+
+                何かご質問があればお気軽にお知らせください。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-message wf-message-sent">
+          <div class="wf-message__avatar">
+            佐
+          </div>
+          <div class="wf-message__content">
+            <div class="wf-message__header">
+              <span class="wf-message__name">あなた</span>
+              <time class="wf-message__time" datetime="2025-11-14T14:05">14:05</time>
+            </div>
+            <div class="wf-message__bubble">
+              <div class="wf-message__body">
+                ご報告ありがとうございます!順調に進んでいますね。UI/UXデザインの初稿、確認させていただきました。いくつかフィードバックがあるので、後ほど詳細をお送りします。
+              </div>
+            </div>
+            <div class="wf-message__status is-read">
+              <span class="wf-icon" aria-hidden="true">✓✓</span> 既読
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

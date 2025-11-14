@@ -1,0 +1,108 @@
+/**
+ * Rating/Star Component
+ * 評価表示・入力コンポーネント
+ */
+
+/* Rating Container */
+.wf-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wf-space-1);
+}
+
+/* Star Item */
+.wf-rating__star {
+  display: inline-block;
+  width: var(--wf-icon-md);
+  height: var(--wf-icon-md);
+  color: var(--wf-ink-200);
+  transition: color var(--wf-duration-fast) ease;
+  cursor: default;
+}
+
+/* Filled Star */
+.wf-rating__star.is-filled {
+  color: var(--wf-accent-500);
+}
+
+/* Half Star */
+.wf-rating__star.is-half {
+  position: relative;
+  color: var(--wf-ink-200);
+}
+
+.wf-rating__star.is-half::before {
+  content: '★';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  overflow: hidden;
+  color: var(--wf-accent-500);
+}
+
+/* Interactive Rating (Editable) */
+.wf-rating.is-interactive .wf-rating__star {
+  cursor: pointer;
+}
+
+.wf-rating.is-interactive .wf-rating__star:hover,
+.wf-rating.is-interactive .wf-rating__star:focus-visible {
+  color: var(--wf-accent-400);
+  transform: scale(1.1);
+}
+
+.wf-rating.is-interactive .wf-rating__star:focus-visible {
+  outline: 2px solid var(--wf-accent-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Size Variants */
+.wf-rating-sm .wf-rating__star {
+  width: var(--wf-icon-sm);
+  height: var(--wf-icon-sm);
+}
+
+.wf-rating-lg .wf-rating__star {
+  width: var(--wf-icon-lg);
+  height: var(--wf-icon-lg);
+}
+
+/* Rating Value Display */
+.wf-rating__value {
+  margin-left: var(--wf-space-2);
+  font-size: var(--wf-font-sm);
+  color: var(--wf-ink-600);
+}
+
+/* Disabled State */
+.wf-rating.is-disabled .wf-rating__star {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Hidden Input for Form Submission */
+.wf-rating__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Accessible Focus */
+@media (prefers-reduced-motion: reduce) {
+  .wf-rating__star {
+    transition: none;
+  }
+
+  .wf-rating.is-interactive .wf-rating__star:hover,
+  .wf-rating.is-interactive .wf-rating__star:focus-visible {
+    transform: none;
+  }
+}
