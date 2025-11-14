@@ -1702,6 +1702,45 @@ WFUI.calendar(containerElement, { selectedDate: '2025-11-10' });
 // スケジュール
 WFUI.schedule(containerElement, { mode: 'daily', timeInterval: 60 });</code></pre>
 
+        <h3>使用上の注意</h3>
+
+        <h4>スケジュールコンポーネント</h4>
+        <p>
+          日付選択後に表示される要素（時間レンジ選択、時間刻み選択など）は、初期状態で
+          <code>display: none</code>
+          または
+          <code>hidden</code>
+          属性を設定してください。日付が選択されるまでこれらの要素を非表示にすることで、より良いユーザー体験を提供できます。
+        </p>
+        <pre><code>&lt;!-- 日付選択後に表示される要素 --&gt;
+&lt;div id="schedule-time-interval-wrapper" style="display: none;"&gt;
+  &lt;!-- 時間レンジや時間刻みの選択UI --&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+// 日付選択時に表示制御
+function updateScheduleVisibility() {
+  const hasDate = dateInput && dateInput.value;
+  const wrapper = document.getElementById('schedule-time-interval-wrapper');
+  if (wrapper) {
+    wrapper.style.display = hasDate ? 'block' : 'none';
+  }
+}
+&lt;/script&gt;</code></pre>
+
+        <h4>デモページでのフォーム使用</h4>
+        <p>
+          デモページやサンプルでフォームコンポーネントを使用する際は、ページ遷移を防ぐため
+          <code>onsubmit</code>
+          イベントで
+          <code>preventDefault()</code>
+          を呼び出してください。実際のアプリケーションでは、適切なフォーム送信処理を実装してください。
+        </p>
+        <pre><code>&lt;form onsubmit="event.preventDefault(); return false;"&gt;
+  &lt;!-- フォーム要素 --&gt;
+  &lt;button type="submit" class="wf-btn wf-btn-primary"&gt;送信&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
         <h3>キーボード対応</h3>
         <ul>
           <li>
