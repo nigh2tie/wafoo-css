@@ -3963,6 +3963,8 @@
   display: inline-block;
   width: var(--wf-icon-md);
   height: var(--wf-icon-md);
+  font-size: var(--wf-icon-md);
+  line-height: 1;
   color: var(--wf-ink-200);
   transition: color var(--wf-duration-fast) ease;
   cursor: default;
@@ -4010,11 +4012,13 @@
 .wf-rating-sm .wf-rating__star {
   width: var(--wf-icon-sm);
   height: var(--wf-icon-sm);
+  font-size: var(--wf-icon-sm);
 }
 
 .wf-rating-lg .wf-rating__star {
   width: var(--wf-icon-lg);
   height: var(--wf-icon-lg);
+  font-size: var(--wf-icon-lg);
 }
 
 /* Rating Value Display */
