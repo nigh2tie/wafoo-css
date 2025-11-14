@@ -131,7 +131,6 @@
   color: var(--wf-ink-600);
 }
 
-
 /* Message Status Indicators */
 .wf-message__status {
   font-size: var(--wf-font-sm);

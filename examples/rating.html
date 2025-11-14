@@ -129,7 +129,7 @@
       <h2>インタラクティブ評価（編集可能）</h2>
 
       <div class="demo-row">
-        <label for="rating-input">あなたの評価を選択してください</label>
+        <label for="rating-input">あなたの評価を選択してください（整数のみ）</label>
         <div class="wf-rating is-interactive" role="radiogroup" aria-label="評価を選択">
           <input type="radio" name="rating" value="1" id="star-1" class="wf-rating__input">
           <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="1つ星" tabindex="0" data-value="1">★</span>
@@ -147,6 +147,43 @@
           <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="5つ星" tabindex="-1" data-value="5">★</span>
 
           <span class="wf-rating__value" id="rating-value">未評価</span>
+        </div>
+      </div>
+
+      <div class="demo-row">
+        <label for="rating-half-input">半星対応（0.5単位で評価）</label>
+        <div class="wf-rating is-interactive" id="rating-half" role="radiogroup" aria-label="半星評価を選択">
+          <input type="radio" name="rating-half" value="0.5" id="star-half-0-5" class="wf-rating__input">
+          <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="0.5つ星" tabindex="0" data-value="0.5" data-half="true">★</span>
+
+          <input type="radio" name="rating-half" value="1" id="star-half-1" class="wf-rating__input">
+          <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="1つ星" tabindex="-1" data-value="1">★</span>
+
+          <input type="radio" name="rating-half" value="1.5" id="star-half-1-5" class="wf-rating__input">
+          <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="1.5つ星" tabindex="-1" data-value="1.5" data-half="true">★</span>
+
+          <input type="radio" name="rating-half" value="2" id="star-half-2" class="wf-rating__input">
+          <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="2つ星" tabindex="-1" data-value="2">★</span>
+
+          <input type="radio" name="rating-half" value="2.5" id="star-half-2-5" class="wf-rating__input">
+          <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="2.5つ星" tabindex="-1" data-value="2.5" data-half="true">★</span>
+
+          <input type="radio" name="rating-half" value="3" id="star-half-3" class="wf-rating__input">
+          <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="3つ星" tabindex="-1" data-value="3">★</span>
+
+          <input type="radio" name="rating-half" value="3.5" id="star-half-3-5" class="wf-rating__input">
+          <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="3.5つ星" tabindex="-1" data-value="3.5" data-half="true">★</span>
+
+          <input type="radio" name="rating-half" value="4" id="star-half-4" class="wf-rating__input">
+          <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="4つ星" tabindex="-1" data-value="4">★</span>
+
+          <input type="radio" name="rating-half" value="4.5" id="star-half-4-5" class="wf-rating__input">
+          <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="4.5つ星" tabindex="-1" data-value="4.5" data-half="true">★</span>
+
+          <input type="radio" name="rating-half" value="5" id="star-half-5" class="wf-rating__input">
+          <span class="wf-rating__star" role="radio" aria-checked="false" aria-label="5つ星" tabindex="-1" data-value="5">★</span>
+
+          <span class="wf-rating__value" id="rating-half-value">未評価</span>
         </div>
       </div>
     </section>
@@ -172,7 +209,8 @@
   <script>
     // Simple interactive rating demo
     document.addEventListener('DOMContentLoaded', function() {
-      const interactiveRating = document.querySelector('.wf-rating.is-interactive');
+      // Integer rating (1-5)
+      const interactiveRating = document.querySelector('.wf-rating.is-interactive:not(#rating-half)');
       if (interactiveRating) {
         const stars = interactiveRating.querySelectorAll('.wf-rating__star');
         const valueDisplay = interactiveRating.querySelector('.wf-rating__value');
@@ -205,6 +243,51 @@
           });
           valueDisplay.textContent = value + '.0';
           inputs[value - 1].checked = true;
+        }
+      }
+
+      // Half-star rating (0.5-5)
+      const halfRating = document.getElementById('rating-half');
+      if (halfRating) {
+        const stars = halfRating.querySelectorAll('.wf-rating__star');
+        const valueDisplay = halfRating.querySelector('.wf-rating__value');
+        const inputs = halfRating.querySelectorAll('.wf-rating__input');
+
+        stars.forEach((star, index) => {
+          star.addEventListener('click', function() {
+            const value = parseFloat(this.dataset.value);
+            updateHalfRating(value);
+          });
+
+          star.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              const value = parseFloat(this.dataset.value);
+              updateHalfRating(value);
+            }
+          });
+        });
+
+        function updateHalfRating(value) {
+          stars.forEach((s, i) => {
+            const starValue = parseFloat(s.dataset.value);
+            s.classList.remove('is-filled', 'is-half');
+            s.setAttribute('aria-checked', 'false');
+
+            if (starValue <= value) {
+              if (s.dataset.half === 'true' && starValue === value) {
+                // Half star
+                s.classList.add('is-half');
+              } else if (starValue < value || (starValue === value && !s.dataset.half)) {
+                // Full star
+                s.classList.add('is-filled');
+              }
+              s.setAttribute('aria-checked', 'true');
+            }
+          });
+          valueDisplay.textContent = value.toFixed(1);
+          const targetInput = Array.from(inputs).find(input => parseFloat(input.value) === value);
+          if (targetInput) targetInput.checked = true;
         }
       }
     });

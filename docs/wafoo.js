@@ -248,16 +248,20 @@
       }
       if (e.key === "Enter" || e.key === " ") {
         const current = document.activeElement;
-        if (current && current.classList.contains('wf-dropdown__item')) {
+        if (current && current.classList.contains("wf-dropdown__item")) {
           e.preventDefault();
           open(false);
           btn.focus();
         }
       }
     });
-    on(menu, 'click', (e)=>{
-      const item = e.target.closest('.wf-dropdown__item');
-      if (item) { e.preventDefault(); open(false); btn.focus(); }
+    on(menu, "click", e => {
+      const item = e.target.closest(".wf-dropdown__item");
+      if (item) {
+        e.preventDefault();
+        open(false);
+        btn.focus();
+      }
     });
   }
 
@@ -774,7 +778,8 @@
               state.isRangeSelecting &&
               state.rangeSelectionStart &&
               state.rangeSelectionStart.time === time &&
-              getSlotKey(state.rangeSelectionStart.date, time) === getSlotKey(state.selectedDate, time);
+              getSlotKey(state.rangeSelectionStart.date, time) ===
+                getSlotKey(state.selectedDate, time);
             let className = `wf-schedule__time-slot ${selected ? "is-selected" : ""}`;
             if (isRangeStart) className += " is-range-start";
             const eventHandlers = state.isMobile
@@ -979,7 +984,10 @@
       opts || {}
     );
 
-    const weekdays = cfg.weekStart === 0 ? ["日", "月", "火", "水", "木", "金", "土"] : ["月", "火", "水", "木", "金", "土", "日"];
+    const weekdays =
+      cfg.weekStart === 0
+        ? ["日", "月", "火", "水", "木", "金", "土"]
+        : ["月", "火", "水", "木", "金", "土", "日"];
 
     // 初期表示日付を決定: 日付制限がある場合は制限範囲内に設定
     let initialDate = new Date();
@@ -1199,11 +1207,19 @@
 
         // Previous month days
         if (firstDay > 0) {
-          const prevMonth = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth() - 1, 0);
+          const prevMonth = new Date(
+            state.currentDate.getFullYear(),
+            state.currentDate.getMonth() - 1,
+            0
+          );
           const prevMonthDays = prevMonth.getDate();
           for (let i = firstDay - 1; i >= 0; i--) {
             const day = prevMonthDays - i;
-            const date = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth() - 1, day);
+            const date = new Date(
+              state.currentDate.getFullYear(),
+              state.currentDate.getMonth() - 1,
+              day
+            );
             days.push({ date, isOtherMonth: true });
           }
         }
@@ -1217,7 +1233,11 @@
         // Next month days (fill remaining cells)
         const remainingCells = 42 - days.length; // 6 rows × 7 days = 42
         for (let i = 1; i <= remainingCells; i++) {
-          const date = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth() + 1, i);
+          const date = new Date(
+            state.currentDate.getFullYear(),
+            state.currentDate.getMonth() + 1,
+            i
+          );
           days.push({ date, isOtherMonth: true });
         }
 
@@ -1232,7 +1252,8 @@
             if (state.allowRange) {
               if (isRangeStart(date)) className += " is-range-start";
               if (isRangeEnd(date)) className += " is-range-end";
-              if (isInRange(date) && !isRangeStart(date) && !isRangeEnd(date)) className += " is-in-range";
+              if (isInRange(date) && !isRangeStart(date) && !isRangeEnd(date))
+                className += " is-in-range";
             }
 
             return `<button type="button" class="${className}" data-date="${dateStr}" tabindex="${isDisabled(date) || isOtherMonth ? "-1" : "0"}">${date.getDate()}</button>`;
