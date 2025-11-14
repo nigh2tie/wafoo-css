@@ -1373,6 +1373,135 @@ hamburger.addEventListener('click', () =&gt; {
             </tbody>
           </table>
         </div>
+
+        <h3>Rating（評価）</h3>
+        <p>星評価コンポーネント。整数評価と0.5刻みの半星評価に対応。</p>
+
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">説明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-rating</code></td>
+                <td>評価コンテナ（ベース）</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating__star</code></td>
+                <td>個別の星</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating__star.is-filled</code></td>
+                <td>塗りつぶし星</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating__star.is-half</code></td>
+                <td>半星表示</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating__value</code></td>
+                <td>評価値テキスト</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating-sm</code></td>
+                <td>小サイズ（14px）</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating-lg</code></td>
+                <td>大サイズ（20px）</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating.is-interactive</code></td>
+                <td>インタラクティブ版（クリック可能）</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating.is-disabled</code></td>
+                <td>無効状態</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>基本的な使用例</h4>
+        <pre><code>&lt;!-- 4つ星評価 --&gt;
+&lt;div class="wf-rating"&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__value" aria-label="評価: 5つ星中4"&gt;4.0&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- 半星評価 --&gt;
+&lt;div class="wf-rating"&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-half" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__value"&gt;3.5&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- サイズバリエーション --&gt;
+&lt;div class="wf-rating wf-rating-sm"&gt;...&lt;/div&gt;  &lt;!-- 小 --&gt;
+&lt;div class="wf-rating"&gt;...&lt;/div&gt;           &lt;!-- 標準 --&gt;
+&lt;div class="wf-rating wf-rating-lg"&gt;...&lt;/div&gt;  &lt;!-- 大 --&gt;</code></pre>
+
+        <h4>インタラクティブ評価（JavaScript必要）</h4>
+        <p>整数評価（1-5）の実装例:</p>
+        <pre><code>&lt;div class="wf-rating is-interactive" role="radiogroup" aria-label="評価を選択"&gt;
+  &lt;input type="radio" name="rating" value="1" class="wf-rating__input"&gt;
+  &lt;span class="wf-rating__star" role="radio" aria-checked="false"
+        aria-label="1つ星" tabindex="0" data-value="1"&gt;★&lt;/span&gt;
+
+  &lt;input type="radio" name="rating" value="2" class="wf-rating__input"&gt;
+  &lt;span class="wf-rating__star" role="radio" aria-checked="false"
+        aria-label="2つ星" tabindex="-1" data-value="2"&gt;★&lt;/span&gt;
+  &lt;!-- ...5つ星まで繰り返し... --&gt;
+
+  &lt;span class="wf-rating__value"&gt;未評価&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+        <p>半星評価（0.5-5.0）の実装例:</p>
+        <pre><code>&lt;div class="wf-rating is-interactive" id="half-rating" role="radiogroup"&gt;
+  &lt;input type="radio" name="rating-half" value="0.5" class="wf-rating__input"&gt;
+  &lt;input type="radio" name="rating-half" value="1" class="wf-rating__input"&gt;
+  &lt;span class="wf-rating__star" role="radio" aria-label="1つ星"
+        tabindex="0" data-index="1"&gt;★&lt;/span&gt;
+
+  &lt;input type="radio" name="rating-half" value="1.5" class="wf-rating__input"&gt;
+  &lt;input type="radio" name="rating-half" value="2" class="wf-rating__input"&gt;
+  &lt;span class="wf-rating__star" role="radio" aria-label="2つ星"
+        tabindex="-1" data-index="2"&gt;★&lt;/span&gt;
+  &lt;!-- ...5つ星まで繰り返し... --&gt;
+
+  &lt;span class="wf-rating__value"&gt;未評価&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+// 星の左半分クリック = 0.5、右半分クリック = 1.0
+document.querySelectorAll('#half-rating .wf-rating__star').forEach(star =&gt; {
+  star.addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const starIndex = parseInt(this.dataset.index);
+    const isLeftHalf = clickX &lt; rect.width / 2;
+    const value = isLeftHalf ? starIndex - 0.5 : starIndex;
+    // 評価値を更新する処理...
+  });
+});
+&lt;/script&gt;</code></pre>
+
+        <p>
+          詳細な実装例は
+          <code>examples/rating.html</code>
+          を参照してください。
+        </p>
       </section>
 
       <!-- テーマ -->
