@@ -1,387 +1,439 @@
 <!doctype html>
 <html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>wafoo-css 完全リファレンス</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>wafoo-css 完全リファレンス</title>
 
-  <!-- SEO Meta Tags -->
-  <meta name="description" content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント、和紙風デザイン。アクセシビリティ対応、モダンブラウザサポート。">
-  <meta name="keywords" content="CSS,フレームワーク,和風,日本,デザイン,UI,コンポーネント,レスポンシブ,アクセシビリティ,wafoo,和風CSS,Japanese design,CSS framework">
-  <meta name="author" content="Q_Q">
-  <meta name="theme-color" content="#bca7e8">
+    <!-- SEO Meta Tags -->
+    <meta
+      name="description"
+      content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント、和紙風デザイン。アクセシビリティ対応、モダンブラウザサポート。"
+    />
+    <meta
+      name="keywords"
+      content="CSS,フレームワーク,和風,日本,デザイン,UI,コンポーネント,レスポンシブ,アクセシビリティ,wafoo,和風CSS,Japanese design,CSS framework"
+    />
+    <meta name="author" content="Q_Q" />
+    <meta name="theme-color" content="#bca7e8" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nigh2tie.github.io/wafoo-css/">
-  <meta property="og:title" content="wafoo-css | 和風CSSフレームワーク">
-  <meta property="og:description" content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント。">
-  <meta property="og:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="wafoo-css 和風CSSフレームワーク">
-  <meta property="og:site_name" content="wafoo-css">
-  <meta property="og:locale" content="ja_JP">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nigh2tie.github.io/wafoo-css/" />
+    <meta property="og:title" content="wafoo-css | 和風CSSフレームワーク" />
+    <meta
+      property="og:description"
+      content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント。"
+    />
+    <meta property="og:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="wafoo-css 和風CSSフレームワーク" />
+    <meta property="og:site_name" content="wafoo-css" />
+    <meta property="og:locale" content="ja_JP" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="wafoo-css | 和風CSSフレームワーク">
-  <meta name="twitter:description" content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント。">
-  <meta name="twitter:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="wafoo-css | 和風CSSフレームワーク" />
+    <meta
+      name="twitter:description"
+      content="伝統的な日本の美学を取り入れた軽量CSSフレームワーク。10種類の伝統色テーマ、30種類以上のコンポーネント。"
+    />
+    <meta name="twitter:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png" />
 
-  <!-- Canonical URL -->
-  <link rel="canonical" href="https://nigh2tie.github.io/wafoo-css/">
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://nigh2tie.github.io/wafoo-css/" />
 
-  <link rel="stylesheet" href="./wafoo.min.css">
-  <style>
-    :root {
-      scroll-behavior: smooth;
-    }
-    pre {
-      background: var(--wf-surface-muted);
-      padding: var(--wf-space-3);
-      border-radius: var(--wf-radius-md);
-      overflow-x: auto;
-      font-size: 0.875rem;
-      line-height: 1.5;
-      border: 1px solid var(--wf-color-border);
-    }
-    code {
-      font-family: 'Menlo', 'Monaco', 'Courier New', monospace;
-      background: var(--wf-surface-muted);
-      padding: 0.125rem 0.375rem;
-      border-radius: var(--wf-radius-sm);
-      font-size: 0.875em;
-    }
-    pre code {
-      background: transparent;
-      padding: 0;
-    }
-    .ref-toc {
-      background: var(--wf-surface-subtle);
-      padding: var(--wf-space-4);
-      border-radius: var(--wf-radius-md);
-      border: 1px solid var(--wf-color-border);
-    }
-    .ref-toc ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-    .ref-toc li {
-      margin: var(--wf-space-2) 0;
-    }
-    .ref-toc a {
-      color: var(--wf-link-color);
-      text-decoration: none;
-    }
-    .ref-toc a:hover {
-      text-decoration: underline;
-    }
-    .ref-section {
-      margin: var(--wf-space-8) 0;
-      scroll-margin-top: var(--wf-space-8);
-    }
-    .ref-section h2 {
-      border-bottom: 2px solid var(--wf-color-accent);
-      padding-bottom: var(--wf-space-2);
-      margin-bottom: var(--wf-space-4);
-    }
-    .ref-section h3 {
-      margin-top: var(--wf-space-6);
-      margin-bottom: var(--wf-space-3);
-      color: var(--wf-color-accent);
-    }
-    .table-wrapper {
-      overflow-x: auto;
-      margin: var(--wf-space-4) 0;
-    }
-    body {
-      margin: 0;
-    }
-  </style>
-  <script>
-    // index.htmlからテーマを継承
-    document.addEventListener('DOMContentLoaded', function() {
-      const savedTheme = localStorage.getItem('wf-theme');
-      if (savedTheme) {
-        document.body.classList.add(savedTheme);
+    <link rel="stylesheet" href="./wafoo.min.css" />
+    <style>
+      :root {
+        scroll-behavior: smooth;
       }
-    });
-  </script>
-</head>
-<body>
-  <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+      pre {
+        background: var(--wf-surface-muted);
+        padding: var(--wf-space-3);
+        border-radius: var(--wf-radius-md);
+        overflow-x: auto;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        border: 1px solid var(--wf-color-border);
+      }
+      code {
+        font-family: "Menlo", "Monaco", "Courier New", monospace;
+        background: var(--wf-surface-muted);
+        padding: 0.125rem 0.375rem;
+        border-radius: var(--wf-radius-sm);
+        font-size: 0.875em;
+      }
+      pre code {
+        background: transparent;
+        padding: 0;
+      }
+      .ref-toc {
+        background: var(--wf-surface-subtle);
+        padding: var(--wf-space-4);
+        border-radius: var(--wf-radius-md);
+        border: 1px solid var(--wf-color-border);
+      }
+      .ref-toc ul {
+        list-style: none;
+        padding-left: 0;
+        margin: 0;
+      }
+      .ref-toc li {
+        margin: var(--wf-space-2) 0;
+      }
+      .ref-toc a {
+        color: var(--wf-link-color);
+        text-decoration: none;
+      }
+      .ref-toc a:hover {
+        text-decoration: underline;
+      }
+      .ref-section {
+        margin: var(--wf-space-8) 0;
+        scroll-margin-top: var(--wf-space-8);
+      }
+      .ref-section h2 {
+        border-bottom: 2px solid var(--wf-color-accent);
+        padding-bottom: var(--wf-space-2);
+        margin-bottom: var(--wf-space-4);
+      }
+      .ref-section h3 {
+        margin-top: var(--wf-space-6);
+        margin-bottom: var(--wf-space-3);
+        color: var(--wf-color-accent);
+      }
+      .table-wrapper {
+        overflow-x: auto;
+        margin: var(--wf-space-4) 0;
+      }
+      body {
+        margin: 0;
+      }
+    </style>
+    <script>
+      // index.htmlからテーマを継承
+      document.addEventListener("DOMContentLoaded", function () {
+        const savedTheme = localStorage.getItem("wf-theme");
+        if (savedTheme) {
+          document.body.classList.add(savedTheme);
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
 
-  <!-- 暖簾ヘッダー -->
-  <header class="wf-header-noren">
-    <div class="wf-container" style="padding: 0">
-      <h1>wafoo-css リファレンス</h1>
-      <p style="margin: 8px 0 0; opacity: 0.9; letter-spacing: 0.15em;">
-        <a href="./index.html" style="color: inherit; text-decoration: none;">ホーム</a> |
-        <a href="https://github.com/nigh2tie/wafoo-css/blob/main/README.md" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">README</a> |
-        <a href="https://github.com/nigh2tie/wafoo-css" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;">GitHub</a>
-      </p>
-    </div>
-  </header>
-
-  <main id="main" class="wf-container" style="padding-top: 48px;">
-
-    <!-- 目次 -->
-    <section class="ref-toc">
-      <h2>目次</h2>
-      <ul>
-        <li><a href="#quick-reference">よく使うコンポーネント</a></li>
-        <li><a href="./css-variables.html">CSS変数リファレンス</a>（別ページ）</li>
-        <li><a href="#utilities">ユーティリティクラス</a></li>
-        <li><a href="#all-components">全コンポーネント一覧</a></li>
-        <li><a href="#themes">テーマ</a></li>
-        <li><a href="#aria-and-js">アクセシビリティ＆JavaScript初期化</a></li>
-      </ul>
-    </section>
-
-    <!-- よく使うコンポーネント -->
-    <section id="quick-reference" class="ref-section">
-      <h2>よく使うコンポーネント</h2>
-
-      <h3>ボタン</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-              <th scope="col">使用例</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-btn</code></td>
-              <td>ベースボタン</td>
-              <td><code>&lt;button class="wf-btn"&gt;ボタン&lt;/button&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-btn-primary</code></td>
-              <td>プライマリーボタン</td>
-              <td><code>&lt;button class="wf-btn wf-btn-primary"&gt;実行&lt;/button&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-btn-outline</code></td>
-              <td>アウトラインボタン</td>
-              <td><code>&lt;button class="wf-btn wf-btn-outline"&gt;詳細&lt;/button&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-btn-danger</code></td>
-              <td>危険な操作</td>
-              <td><code>&lt;button class="wf-btn wf-btn-danger"&gt;削除&lt;/button&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-btn-sm</code></td>
-              <td>小サイズ</td>
-              <td><code>&lt;button class="wf-btn wf-btn-sm"&gt;小&lt;/button&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-btn-lg</code></td>
-              <td>大サイズ</td>
-              <td><code>&lt;button class="wf-btn wf-btn-lg"&gt;大&lt;/button&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>is-loading</code></td>
-              <td>読み込み中状態</td>
-              <td><code>&lt;button class="wf-btn is-loading"&gt;処理中...&lt;/button&gt;</code></td>
-            </tr>
-          </tbody>
-        </table>
+    <!-- 暖簾ヘッダー -->
+    <header class="wf-header-noren">
+      <div class="wf-container" style="padding: 0">
+        <h1>wafoo-css リファレンス</h1>
+        <p style="margin: 8px 0 0; opacity: 0.9; letter-spacing: 0.15em">
+          <a href="./index.html" style="color: inherit; text-decoration: none">ホーム</a>
+          |
+          <a
+            href="https://github.com/nigh2tie/wafoo-css/blob/main/README.md"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="color: inherit; text-decoration: none"
+          >
+            README
+          </a>
+          |
+          <a
+            href="https://github.com/nigh2tie/wafoo-css"
+            target="_blank"
+            rel="noopener noreferrer"
+            style="color: inherit; text-decoration: none"
+          >
+            GitHub
+          </a>
+        </p>
       </div>
+    </header>
 
-      <h3>カード</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-              <th scope="col">使用例</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-card</code></td>
-              <td>ベースカード</td>
-              <td><code>&lt;div class="wf-card"&gt;コンテンツ&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-card-washi</code></td>
-              <td>和紙風カード</td>
-              <td><code>&lt;div class="wf-card wf-card-washi"&gt;和風&lt;/div&gt;</code></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+    <main id="main" class="wf-container" style="padding-top: 48px">
+      <!-- 目次 -->
+      <section class="ref-toc">
+        <h2>目次</h2>
+        <ul>
+          <li><a href="#quick-reference">よく使うコンポーネント</a></li>
+          <li>
+            <a href="./css-variables.html">CSS変数リファレンス</a>
+            （別ページ）
+          </li>
+          <li><a href="#utilities">ユーティリティクラス</a></li>
+          <li><a href="#all-components">全コンポーネント一覧</a></li>
+          <li><a href="#themes">テーマ</a></li>
+          <li><a href="#aria-and-js">アクセシビリティ＆JavaScript初期化</a></li>
+        </ul>
+      </section>
 
-      <h3>フォーム</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-              <th scope="col">使用例</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-input</code></td>
-              <td>テキスト入力</td>
-              <td><code>&lt;input type="text" class="wf-input"&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-textarea</code></td>
-              <td>テキストエリア</td>
-              <td><code>&lt;textarea class="wf-textarea"&gt;&lt;/textarea&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-select</code></td>
-              <td>セレクトボックス</td>
-              <td><code>&lt;select class="wf-select"&gt;&lt;option&gt;選択&lt;/option&gt;&lt;/select&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-checkbox</code></td>
-              <td>チェックボックス</td>
-              <td><code>&lt;input type="checkbox" class="wf-checkbox"&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-radio</code></td>
-              <td>ラジオボタン</td>
-              <td><code>&lt;input type="radio" class="wf-radio"&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-label</code></td>
-              <td>ラベル</td>
-              <td><code>&lt;label class="wf-label"&gt;名前&lt;/label&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>is-invalid</code></td>
-              <td>エラー状態</td>
-              <td><code>&lt;input class="wf-input is-invalid"&gt;</code></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <!-- よく使うコンポーネント -->
+      <section id="quick-reference" class="ref-section">
+        <h2>よく使うコンポーネント</h2>
 
-      <h3>アラート・トースト</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-              <th scope="col">使用例</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-alert</code></td>
-              <td>アラートボックス</td>
-              <td><code>&lt;div class="wf-alert"&gt;お知らせ&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-alert-success</code></td>
-              <td>成功メッセージ</td>
-              <td><code>&lt;div class="wf-alert wf-alert-success"&gt;成功&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-alert-warning</code></td>
-              <td>警告メッセージ</td>
-              <td><code>&lt;div class="wf-alert wf-alert-warning"&gt;警告&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-alert-danger</code></td>
-              <td>エラーメッセージ</td>
-              <td><code>&lt;div class="wf-alert wf-alert-danger"&gt;エラー&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-toast</code></td>
-              <td>トースト通知</td>
-              <td><code>&lt;div class="wf-toast"&gt;通知&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-toast--success</code></td>
-              <td>成功トースト</td>
-              <td><code>&lt;div class="wf-toast wf-toast--success"&gt;保存しました&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-toast--warning</code></td>
-              <td>警告トースト</td>
-              <td><code>&lt;div class="wf-toast wf-toast--warning"&gt;注意&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-toast--danger</code></td>
-              <td>エラートースト</td>
-              <td><code>&lt;div class="wf-toast wf-toast--danger"&gt;失敗&lt;/div&gt;</code></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h4>アラート詳細サンプル</h4>
-      <p>重要な情報や状態を表示するメッセージコンポーネントです。</p>
-      <div style="display: flex; flex-direction: column; gap: 12px; margin: 16px 0;">
-        <div class="wf-alert">
-          <strong>お知らせ</strong><br>
-          これは標準のアラートメッセージです。
+        <h3>ボタン</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+                <th scope="col">使用例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-btn</code></td>
+                <td>ベースボタン</td>
+                <td><code>&lt;button class="wf-btn"&gt;ボタン&lt;/button&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-btn-primary</code></td>
+                <td>プライマリーボタン</td>
+                <td>
+                  <code>&lt;button class="wf-btn wf-btn-primary"&gt;実行&lt;/button&gt;</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>wf-btn-outline</code></td>
+                <td>アウトラインボタン</td>
+                <td>
+                  <code>&lt;button class="wf-btn wf-btn-outline"&gt;詳細&lt;/button&gt;</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>wf-btn-danger</code></td>
+                <td>危険な操作</td>
+                <td><code>&lt;button class="wf-btn wf-btn-danger"&gt;削除&lt;/button&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-btn-sm</code></td>
+                <td>小サイズ</td>
+                <td><code>&lt;button class="wf-btn wf-btn-sm"&gt;小&lt;/button&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-btn-lg</code></td>
+                <td>大サイズ</td>
+                <td><code>&lt;button class="wf-btn wf-btn-lg"&gt;大&lt;/button&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>is-loading</code></td>
+                <td>読み込み中状態</td>
+                <td>
+                  <code>&lt;button class="wf-btn is-loading"&gt;処理中...&lt;/button&gt;</code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="wf-alert wf-alert-success">
-          <strong>成功</strong><br>
-          操作が正常に完了しました。
+
+        <h3>カード</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+                <th scope="col">使用例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-card</code></td>
+                <td>ベースカード</td>
+                <td><code>&lt;div class="wf-card"&gt;コンテンツ&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-card-washi</code></td>
+                <td>和紙風カード</td>
+                <td><code>&lt;div class="wf-card wf-card-washi"&gt;和風&lt;/div&gt;</code></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="wf-alert wf-alert-warning">
-          <strong>警告</strong><br>
-          注意が必要な操作です。
+
+        <h3>フォーム</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+                <th scope="col">使用例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-input</code></td>
+                <td>テキスト入力</td>
+                <td><code>&lt;input type="text" class="wf-input"&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-textarea</code></td>
+                <td>テキストエリア</td>
+                <td><code>&lt;textarea class="wf-textarea"&gt;&lt;/textarea&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-select</code></td>
+                <td>セレクトボックス</td>
+                <td>
+                  <code>
+                    &lt;select class="wf-select"&gt;&lt;option&gt;選択&lt;/option&gt;&lt;/select&gt;
+                  </code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>wf-checkbox</code></td>
+                <td>チェックボックス</td>
+                <td><code>&lt;input type="checkbox" class="wf-checkbox"&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-radio</code></td>
+                <td>ラジオボタン</td>
+                <td><code>&lt;input type="radio" class="wf-radio"&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-label</code></td>
+                <td>ラベル</td>
+                <td><code>&lt;label class="wf-label"&gt;名前&lt;/label&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>is-invalid</code></td>
+                <td>エラー状態</td>
+                <td><code>&lt;input class="wf-input is-invalid"&gt;</code></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-        <div class="wf-alert wf-alert-danger">
-          <strong>エラー</strong><br>
-          エラーが発生しました。もう一度お試しください。
+
+        <h3>アラート・トースト</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+                <th scope="col">使用例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-alert</code></td>
+                <td>アラートボックス</td>
+                <td><code>&lt;div class="wf-alert"&gt;お知らせ&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-alert-success</code></td>
+                <td>成功メッセージ</td>
+                <td><code>&lt;div class="wf-alert wf-alert-success"&gt;成功&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-alert-warning</code></td>
+                <td>警告メッセージ</td>
+                <td><code>&lt;div class="wf-alert wf-alert-warning"&gt;警告&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-alert-danger</code></td>
+                <td>エラーメッセージ</td>
+                <td><code>&lt;div class="wf-alert wf-alert-danger"&gt;エラー&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-toast</code></td>
+                <td>トースト通知</td>
+                <td><code>&lt;div class="wf-toast"&gt;通知&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-toast--success</code></td>
+                <td>成功トースト</td>
+                <td>
+                  <code>
+                    &lt;div class="wf-toast wf-toast--success"&gt;保存しました&lt;/div&gt;
+                  </code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>wf-toast--warning</code></td>
+                <td>警告トースト</td>
+                <td><code>&lt;div class="wf-toast wf-toast--warning"&gt;注意&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-toast--danger</code></td>
+                <td>エラートースト</td>
+                <td><code>&lt;div class="wf-toast wf-toast--danger"&gt;失敗&lt;/div&gt;</code></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
-      </div>
-      <pre><code>&lt;div class="wf-alert wf-alert-success"&gt;
+
+        <h4>アラート詳細サンプル</h4>
+        <p>重要な情報や状態を表示するメッセージコンポーネントです。</p>
+        <div style="display: flex; flex-direction: column; gap: 12px; margin: 16px 0">
+          <div class="wf-alert">
+            <strong>お知らせ</strong>
+            <br />
+            これは標準のアラートメッセージです。
+          </div>
+          <div class="wf-alert wf-alert-success">
+            <strong>成功</strong>
+            <br />
+            操作が正常に完了しました。
+          </div>
+          <div class="wf-alert wf-alert-warning">
+            <strong>警告</strong>
+            <br />
+            注意が必要な操作です。
+          </div>
+          <div class="wf-alert wf-alert-danger">
+            <strong>エラー</strong>
+            <br />
+            エラーが発生しました。もう一度お試しください。
+          </div>
+        </div>
+        <pre><code>&lt;div class="wf-alert wf-alert-success"&gt;
   &lt;strong&gt;成功&lt;/strong&gt;&lt;br&gt;
   操作が正常に完了しました。
 &lt;/div&gt;</code></pre>
 
-      <h4>トースト詳細サンプル</h4>
-      <p>一時的な通知を表示するコンポーネントです。画面隅に表示され、自動的に消滅させることができます。</p>
-      <div style="display: flex; flex-direction: column; gap: 12px; max-width: 480px; margin: 16px 0;">
-        <div class="wf-toast">
-          <div class="wf-toast__content">
-            <div class="wf-toast__title">お知らせ</div>
-            新しいメッセージが届きました
+        <h4>トースト詳細サンプル</h4>
+        <p>
+          一時的な通知を表示するコンポーネントです。画面隅に表示され、自動的に消滅させることができます。
+        </p>
+        <div
+          style="display: flex; flex-direction: column; gap: 12px; max-width: 480px; margin: 16px 0"
+        >
+          <div class="wf-toast">
+            <div class="wf-toast__content">
+              <div class="wf-toast__title">お知らせ</div>
+              新しいメッセージが届きました
+            </div>
+            <button class="wf-toast__close" aria-label="閉じる">×</button>
           </div>
-          <button class="wf-toast__close" aria-label="閉じる">×</button>
-        </div>
-        <div class="wf-toast wf-toast--success">
-          <div class="wf-toast__content">
-            <div class="wf-toast__title">保存完了</div>
-            データが正常に保存されました
+          <div class="wf-toast wf-toast--success">
+            <div class="wf-toast__content">
+              <div class="wf-toast__title">保存完了</div>
+              データが正常に保存されました
+            </div>
+            <button class="wf-toast__close" aria-label="閉じる">×</button>
           </div>
-          <button class="wf-toast__close" aria-label="閉じる">×</button>
-        </div>
-        <div class="wf-toast wf-toast--warning">
-          <div class="wf-toast__content">
-            <div class="wf-toast__title">注意</div>
-            一部の項目が未入力です
+          <div class="wf-toast wf-toast--warning">
+            <div class="wf-toast__content">
+              <div class="wf-toast__title">注意</div>
+              一部の項目が未入力です
+            </div>
+            <button class="wf-toast__close" aria-label="閉じる">×</button>
           </div>
-          <button class="wf-toast__close" aria-label="閉じる">×</button>
-        </div>
-        <div class="wf-toast wf-toast--danger">
-          <div class="wf-toast__content">
-            <div class="wf-toast__title">エラー</div>
-            接続に失敗しました
+          <div class="wf-toast wf-toast--danger">
+            <div class="wf-toast__content">
+              <div class="wf-toast__title">エラー</div>
+              接続に失敗しました
+            </div>
+            <button class="wf-toast__close" aria-label="閉じる">×</button>
           </div>
-          <button class="wf-toast__close" aria-label="閉じる">×</button>
         </div>
-      </div>
-      <pre><code>&lt;div class="wf-toast wf-toast--success"&gt;
+        <pre><code>&lt;div class="wf-toast wf-toast--success"&gt;
   &lt;div class="wf-toast__content"&gt;
     &lt;div class="wf-toast__title"&gt;保存完了&lt;/div&gt;
     データが正常に保存されました
@@ -389,64 +441,66 @@
   &lt;button class="wf-toast__close"&gt;×&lt;/button&gt;
 &lt;/div&gt;</code></pre>
 
-      <h3>ナビゲーション</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-              <th scope="col">使用例</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-navbar</code></td>
-              <td>ナビゲーションバー</td>
-              <td><code>&lt;nav class="wf-navbar"&gt;...&lt;/nav&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-navbar-brand</code></td>
-              <td>ブランドロゴ/タイトル</td>
-              <td><code>&lt;a class="wf-navbar-brand"&gt;wafoo&lt;/a&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-navbar-nav</code></td>
-              <td>ナビゲーションリスト</td>
-              <td><code>&lt;ul class="wf-navbar-nav"&gt;...&lt;/ul&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-nav-item</code></td>
-              <td>ナビゲーション項目</td>
-              <td><code>&lt;li class="wf-nav-item"&gt;...&lt;/li&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-nav-link</code></td>
-              <td>ナビゲーションリンク</td>
-              <td><code>&lt;a class="wf-nav-link"&gt;リンク&lt;/a&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-hamburger</code></td>
-              <td>ハンバーガーメニュー</td>
-              <td><code>&lt;button class="wf-hamburger"&gt;...&lt;/button&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-hamburger__line</code></td>
-              <td>ハンバーガーの線</td>
-              <td><code>&lt;span class="wf-hamburger__line"&gt;&lt;/span&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>is-active</code></td>
-              <td>アクティブ状態</td>
-              <td><code>&lt;a class="wf-nav-link is-active"&gt;現在地&lt;/a&gt;</code></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <h3>ナビゲーション</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+                <th scope="col">使用例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-navbar</code></td>
+                <td>ナビゲーションバー</td>
+                <td><code>&lt;nav class="wf-navbar"&gt;...&lt;/nav&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-navbar-brand</code></td>
+                <td>ブランドロゴ/タイトル</td>
+                <td><code>&lt;a class="wf-navbar-brand"&gt;wafoo&lt;/a&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-navbar-nav</code></td>
+                <td>ナビゲーションリスト</td>
+                <td><code>&lt;ul class="wf-navbar-nav"&gt;...&lt;/ul&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-nav-item</code></td>
+                <td>ナビゲーション項目</td>
+                <td><code>&lt;li class="wf-nav-item"&gt;...&lt;/li&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-nav-link</code></td>
+                <td>ナビゲーションリンク</td>
+                <td><code>&lt;a class="wf-nav-link"&gt;リンク&lt;/a&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-hamburger</code></td>
+                <td>ハンバーガーメニュー</td>
+                <td><code>&lt;button class="wf-hamburger"&gt;...&lt;/button&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-hamburger__line</code></td>
+                <td>ハンバーガーの線</td>
+                <td><code>&lt;span class="wf-hamburger__line"&gt;&lt;/span&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>is-active</code></td>
+                <td>アクティブ状態</td>
+                <td><code>&lt;a class="wf-nav-link is-active"&gt;現在地&lt;/a&gt;</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h4>ハンバーガーメニュー詳細サンプル</h4>
-      <p>モバイル対応のナビゲーションメニューです。ハンバーガーアイコンはモバイル（768px以下）で自動表示されます。</p>
-      <pre><code>&lt;nav class="wf-navbar"&gt;
+        <h4>ハンバーガーメニュー詳細サンプル</h4>
+        <p>
+          モバイル対応のナビゲーションメニューです。ハンバーガーアイコンはモバイル（768px以下）で自動表示されます。
+        </p>
+        <pre><code>&lt;nav class="wf-navbar"&gt;
   &lt;a class="wf-navbar-brand" href="#"&gt;ブランド&lt;/a&gt;
 
   &lt;button class="wf-hamburger" aria-label="メニュー" aria-expanded="false" aria-controls="main-nav"&gt;
@@ -475,815 +529,1146 @@ hamburger.addEventListener('click', () =&gt; {
 });
 &lt;/script&gt;</code></pre>
 
-      <h3>モーダル</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-              <th scope="col">使用例</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-modal-overlay</code></td>
-              <td>モーダルオーバーレイ</td>
-              <td><code>&lt;div class="wf-modal-overlay"&gt;...&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-modal</code></td>
-              <td>モーダル本体</td>
-              <td><code>&lt;div class="wf-modal"&gt;...&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-modal-sm</code></td>
-              <td>小サイズモーダル</td>
-              <td><code>&lt;div class="wf-modal wf-modal-sm"&gt;...&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-modal-lg</code></td>
-              <td>大サイズモーダル</td>
-              <td><code>&lt;div class="wf-modal wf-modal-lg"&gt;...&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-modal__header</code></td>
-              <td>モーダルヘッダー</td>
-              <td><code>&lt;div class="wf-modal__header"&gt;...&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-modal__title</code></td>
-              <td>モーダルタイトル</td>
-              <td><code>&lt;h2 class="wf-modal__title"&gt;タイトル&lt;/h2&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-modal__body</code></td>
-              <td>モーダル本文</td>
-              <td><code>&lt;div class="wf-modal__body"&gt;...&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-modal__footer</code></td>
-              <td>モーダルフッター</td>
-              <td><code>&lt;div class="wf-modal__footer"&gt;...&lt;/div&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-modal__close</code></td>
-              <td>閉じるボタン</td>
-              <td><code>&lt;button class="wf-modal__close"&gt;×&lt;/button&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>is-open</code></td>
-              <td>開いた状態</td>
-              <td><code>&lt;div class="wf-modal-overlay is-open"&gt;...&lt;/div&gt;</code></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <h3>モーダル</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+                <th scope="col">使用例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-modal-overlay</code></td>
+                <td>モーダルオーバーレイ</td>
+                <td><code>&lt;div class="wf-modal-overlay"&gt;...&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-modal</code></td>
+                <td>モーダル本体</td>
+                <td><code>&lt;div class="wf-modal"&gt;...&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-modal-sm</code></td>
+                <td>小サイズモーダル</td>
+                <td><code>&lt;div class="wf-modal wf-modal-sm"&gt;...&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-modal-lg</code></td>
+                <td>大サイズモーダル</td>
+                <td><code>&lt;div class="wf-modal wf-modal-lg"&gt;...&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-modal__header</code></td>
+                <td>モーダルヘッダー</td>
+                <td><code>&lt;div class="wf-modal__header"&gt;...&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-modal__title</code></td>
+                <td>モーダルタイトル</td>
+                <td><code>&lt;h2 class="wf-modal__title"&gt;タイトル&lt;/h2&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-modal__body</code></td>
+                <td>モーダル本文</td>
+                <td><code>&lt;div class="wf-modal__body"&gt;...&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-modal__footer</code></td>
+                <td>モーダルフッター</td>
+                <td><code>&lt;div class="wf-modal__footer"&gt;...&lt;/div&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-modal__close</code></td>
+                <td>閉じるボタン</td>
+                <td><code>&lt;button class="wf-modal__close"&gt;×&lt;/button&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>is-open</code></td>
+                <td>開いた状態</td>
+                <td><code>&lt;div class="wf-modal-overlay is-open"&gt;...&lt;/div&gt;</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>テーブル</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-              <th scope="col">使用例</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-table</code></td>
-              <td>ベーステーブル</td>
-              <td><code>&lt;table class="wf-table"&gt;...&lt;/table&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-table-striped</code></td>
-              <td>ストライプテーブル</td>
-              <td><code>&lt;table class="wf-table wf-table-striped"&gt;...&lt;/table&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-table-bordered</code></td>
-              <td>ボーダー付き</td>
-              <td><code>&lt;table class="wf-table wf-table-bordered"&gt;...&lt;/table&gt;</code></td>
-            </tr>
-            <tr>
-              <td><code>wf-table-hover</code></td>
-              <td>ホバー効果</td>
-              <td><code>&lt;table class="wf-table wf-table-hover"&gt;...&lt;/table&gt;</code></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
+        <h3>テーブル</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+                <th scope="col">使用例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-table</code></td>
+                <td>ベーステーブル</td>
+                <td><code>&lt;table class="wf-table"&gt;...&lt;/table&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-table-striped</code></td>
+                <td>ストライプテーブル</td>
+                <td>
+                  <code>&lt;table class="wf-table wf-table-striped"&gt;...&lt;/table&gt;</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>wf-table-bordered</code></td>
+                <td>ボーダー付き</td>
+                <td>
+                  <code>&lt;table class="wf-table wf-table-bordered"&gt;...&lt;/table&gt;</code>
+                </td>
+              </tr>
+              <tr>
+                <td><code>wf-table-hover</code></td>
+                <td>ホバー効果</td>
+                <td><code>&lt;table class="wf-table wf-table-hover"&gt;...&lt;/table&gt;</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-    <!-- CSS変数リファレンス -->
-    <section id="css-variables" class="ref-section">
-      <h2>CSS変数リファレンス</h2>
-      <div class="wf-card">
-        <p style="margin: 0 0 16px 0;">
-          全87個のCSS変数の詳細なリファレンスは、専用ページをご覧ください。
+      <!-- CSS変数リファレンス -->
+      <section id="css-variables" class="ref-section">
+        <h2>CSS変数リファレンス</h2>
+        <div class="wf-card">
+          <p style="margin: 0 0 16px 0">
+            全87個のCSS変数の詳細なリファレンスは、専用ページをご覧ください。
+          </p>
+          <a href="./css-variables.html" class="wf-btn wf-btn-primary">CSS変数リファレンスを見る</a>
+          <p style="margin: 16px 0 0 0; color: var(--wf-color-muted); font-size: 0.875rem">
+            視覚的なプレビュー付きで、カラー、スペーシング、タイポグラフィ、アニメーション、ブレークポイントなどを確認できます。
+          </p>
+        </div>
+      </section>
+
+      <!-- ユーティリティクラス -->
+      <section id="utilities" class="ref-section">
+        <h2>ユーティリティクラス</h2>
+
+        <h3>スペーシング</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+                <th scope="col">値</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-m-{0,2,4,6,8,10,12}</code></td>
+                <td>全方向マージン</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-mt-{0,2,4,6,8,10,12}</code></td>
+                <td>マージントップ</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-mr-{0,2,4,6,8,10,12}</code></td>
+                <td>マージンライト</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-mb-{0,2,4,6,8,10,12}</code></td>
+                <td>マージンボトム</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-ml-{0,2,4,6,8,10,12}</code></td>
+                <td>マージンレフト</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-mx-{0,2,4,6,8,10,12}</code></td>
+                <td>左右マージン</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-my-{0,2,4,6,8,10,12}</code></td>
+                <td>上下マージン</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-p-{0,2,4,6,8,10,12}</code></td>
+                <td>全方向パディング</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-pt-{0,2,4,6,8,10,12}</code></td>
+                <td>パディングトップ</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-pr-{0,2,4,6,8,10,12}</code></td>
+                <td>パディングライト</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-pb-{0,2,4,6,8,10,12}</code></td>
+                <td>パディングボトム</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-pl-{0,2,4,6,8,10,12}</code></td>
+                <td>パディングレフト</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-px-{0,2,4,6,8,10,12}</code></td>
+                <td>左右パディング</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-py-{0,2,4,6,8,10,12}</code></td>
+                <td>上下パディング</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+              <tr>
+                <td><code>wf-gap-{0,2,4,6,8,10,12}</code></td>
+                <td>Flexbox/Grid gap</td>
+                <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>テキスト</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-text-xs</code></td>
+                <td>極小テキスト</td>
+              </tr>
+              <tr>
+                <td><code>wf-text-sm</code></td>
+                <td>小さいテキスト</td>
+              </tr>
+              <tr>
+                <td><code>wf-text-md</code></td>
+                <td>中サイズテキスト</td>
+              </tr>
+              <tr>
+                <td><code>wf-text-lg</code></td>
+                <td>大きいテキスト</td>
+              </tr>
+              <tr>
+                <td><code>wf-text-xl</code></td>
+                <td>特大テキスト</td>
+              </tr>
+              <tr>
+                <td><code>wf-text-muted</code></td>
+                <td>薄いテキスト色</td>
+              </tr>
+              <tr>
+                <td><code>wf-text-left</code></td>
+                <td>左揃え</td>
+              </tr>
+              <tr>
+                <td><code>wf-text-center</code></td>
+                <td>中央揃え</td>
+              </tr>
+              <tr>
+                <td><code>wf-text-right</code></td>
+                <td>右揃え</td>
+              </tr>
+              <tr>
+                <td><code>wf-text-justify</code></td>
+                <td>両端揃え</td>
+              </tr>
+              <tr>
+                <td><code>wf-font-bold</code></td>
+                <td>太字（font-weight: 700）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>表示</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-hidden</code></td>
+                <td>非表示</td>
+              </tr>
+              <tr>
+                <td><code>wf-block</code></td>
+                <td>ブロック表示</td>
+              </tr>
+              <tr>
+                <td><code>wf-inline-block</code></td>
+                <td>インラインブロック</td>
+              </tr>
+              <tr>
+                <td><code>wf-flex</code></td>
+                <td>フレックス表示</td>
+              </tr>
+              <tr>
+                <td><code>wf-grid</code></td>
+                <td>グリッド表示</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>アクセシビリティ</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-sr-only</code></td>
+                <td>スクリーンリーダー専用（視覚的に非表示）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Gridレイアウト</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-grid-cols-1</code></td>
+                <td>1列グリッド</td>
+              </tr>
+              <tr>
+                <td><code>wf-grid-cols-2</code></td>
+                <td>2列グリッド</td>
+              </tr>
+              <tr>
+                <td><code>wf-grid-cols-3</code></td>
+                <td>3列グリッド</td>
+              </tr>
+              <tr>
+                <td><code>wf-grid-cols-4</code></td>
+                <td>4列グリッド</td>
+              </tr>
+              <tr>
+                <td><code>wf-grid-cols-6</code></td>
+                <td>6列グリッド</td>
+              </tr>
+              <tr>
+                <td><code>wf-grid-cols-12</code></td>
+                <td>12列グリッド</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 全コンポーネント一覧 -->
+      <section id="all-components" class="ref-section">
+        <h2>全コンポーネント一覧</h2>
+
+        <h3>レイアウト</h3>
+        <ol>
+          <li>
+            <strong>コンテナ</strong>
+            (
+            <code>.wf-container</code>
+            ) - コンテンツ幅制限
+          </li>
+          <li>
+            <strong>グリッド</strong>
+            (
+            <code>.wf-grid</code>
+            ) - CSS Grid レイアウト
+          </li>
+        </ol>
+
+        <h3>ナビゲーション</h3>
+        <ol start="3">
+          <li>
+            <strong>ナビバー</strong>
+            (
+            <code>.wf-navbar</code>
+            ) - ナビゲーションバー
+          </li>
+          <li>
+            <strong>ハンバーガーメニュー</strong>
+            (
+            <code>.wf-hamburger</code>
+            ) - モバイルメニュー
+          </li>
+          <li>
+            <strong>暖簾ヘッダー</strong>
+            (
+            <code>.wf-header-noren</code>
+            ) - 和風ヘッダー
+          </li>
+          <li>
+            <strong>ブレッドクラム</strong>
+            (
+            <code>.wf-breadcrumb</code>
+            ) - パンくずリスト
+          </li>
+          <li>
+            <strong>ステップ</strong>
+            (
+            <code>.wf-steps</code>
+            ) - 進捗ステップ
+          </li>
+          <li>
+            <strong>タブ</strong>
+            (
+            <code>.wf-tablist</code>
+            ,
+            <code>.wf-tab</code>
+            ) - タブナビゲーション
+          </li>
+        </ol>
+
+        <h3>コンテンツ</h3>
+        <ol start="9">
+          <li>
+            <strong>カード</strong>
+            (
+            <code>.wf-card</code>
+            ) - コンテンツカード
+          </li>
+          <li>
+            <strong>和紙カード</strong>
+            (
+            <code>.wf-card-washi</code>
+            ) - 和紙風カード
+          </li>
+          <li>
+            <strong>アコーディオン</strong>
+            (
+            <code>.wf-accordion</code>
+            ) - 折りたたみコンテンツ
+          </li>
+          <li>
+            <strong>判子（スタンプ）</strong>
+            (
+            <code>.wf-stamp</code>
+            ) - 和風スタンプ
+          </li>
+        </ol>
+
+        <h3>フォーム</h3>
+        <ol start="13">
+          <li>
+            <strong>入力フィールド</strong>
+            (
+            <code>.wf-input</code>
+            ) - テキスト入力
+          </li>
+          <li>
+            <strong>テキストエリア</strong>
+            (
+            <code>.wf-textarea</code>
+            ) - 複数行入力
+          </li>
+          <li>
+            <strong>セレクト</strong>
+            (
+            <code>.wf-select</code>
+            ) - ドロップダウン選択
+          </li>
+          <li>
+            <strong>チェックボックス</strong>
+            (
+            <code>.wf-checkbox</code>
+            ) - チェックボックス
+          </li>
+          <li>
+            <strong>ラジオボタン</strong>
+            (
+            <code>.wf-radio</code>
+            ) - ラジオボタン
+          </li>
+          <li>
+            <strong>スイッチ</strong>
+            (
+            <code>.wf-switch</code>
+            ) - トグルスイッチ
+          </li>
+          <li>
+            <strong>ラベル</strong>
+            (
+            <code>.wf-label</code>
+            ) - フォームラベル
+          </li>
+        </ol>
+
+        <h3>ボタン・インタラクション</h3>
+        <ol start="20">
+          <li>
+            <strong>ボタン</strong>
+            (
+            <code>.wf-btn</code>
+            ) - ボタン各種
+          </li>
+          <li>
+            <strong>バッジ</strong>
+            (
+            <code>.wf-badge</code>
+            ) - バッジ・ラベル
+          </li>
+        </ol>
+
+        <h3>フィードバック</h3>
+        <ol start="22">
+          <li>
+            <strong>アラート</strong>
+            (
+            <code>.wf-alert</code>
+            ) - アラートメッセージ
+          </li>
+          <li>
+            <strong>トースト</strong>
+            (
+            <code>.wf-toast</code>
+            ) - トースト通知
+          </li>
+          <li>
+            <strong>モーダル</strong>
+            (
+            <code>.wf-modal</code>
+            ) - モーダルダイアログ
+          </li>
+          <li>
+            <strong>オフキャンバス</strong>
+            (
+            <code>.wf-offcanvas</code>
+            ) - サイドパネル
+          </li>
+          <li>
+            <strong>ツールチップ</strong>
+            (
+            <code>.wf-tooltip</code>
+            ) - ツールチップ
+          </li>
+          <li>
+            <strong>ポップオーバー</strong>
+            (
+            <code>.wf-popover</code>
+            ) - ポップオーバー
+          </li>
+        </ol>
+
+        <h3>データ表示</h3>
+        <ol start="28">
+          <li>
+            <strong>テーブル</strong>
+            (
+            <code>.wf-table</code>
+            ) - データテーブル
+          </li>
+          <li>
+            <strong>リストグループ</strong>
+            (
+            <code>.wf-list-group</code>
+            ,
+            <code>.wf-list-item</code>
+            ) - リスト表示
+          </li>
+          <li>
+            <strong>スケジュール</strong>
+            (
+            <code>.wf-schedule</code>
+            ) - スケジュール表示
+          </li>
+          <li>
+            <strong>カレンダー</strong>
+            (
+            <code>.wf-calendar</code>
+            ) - カレンダー表示
+          </li>
+        </ol>
+
+        <h3>その他</h3>
+        <ol start="32">
+          <li>
+            <strong>ドロップダウン</strong>
+            (
+            <code>.wf-dropdown</code>
+            ) - ドロップダウンメニュー
+          </li>
+          <li>
+            <strong>ディバイダー</strong>
+            (
+            <code>.wf-divider</code>
+            ) - 区切り線
+          </li>
+          <li>
+            <strong>スピナー</strong>
+            (
+            <code>.wf-spinner</code>
+            ) - ローディングスピナー
+          </li>
+        </ol>
+      </section>
+
+      <!-- 追加コンポーネント詳細 -->
+      <section id="additional-components" class="ref-section">
+        <h2>追加コンポーネント詳細</h2>
+
+        <h3>コードブロック</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-code</code></td>
+                <td>インラインコード</td>
+              </tr>
+              <tr>
+                <td><code>wf-code-block</code></td>
+                <td>コードブロック（複数行）</td>
+              </tr>
+              <tr>
+                <td><code>wf-kbd</code></td>
+                <td>キーボードキー表示</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>アバター</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-avatar</code></td>
+                <td>アバター（32px）</td>
+              </tr>
+              <tr>
+                <td><code>wf-avatar-sm</code></td>
+                <td>小サイズ（24px）</td>
+              </tr>
+              <tr>
+                <td><code>wf-avatar-lg</code></td>
+                <td>大サイズ（48px）</td>
+              </tr>
+              <tr>
+                <td><code>wf-avatar-square</code></td>
+                <td>四角形</td>
+              </tr>
+              <tr>
+                <td><code>wf-avatar-status</code></td>
+                <td>ステータスドット付き</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>プログレスバー</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-progress</code></td>
+                <td>プログレスバー（12px）</td>
+              </tr>
+              <tr>
+                <td><code>wf-progress-sm</code></td>
+                <td>小サイズ（8px）</td>
+              </tr>
+              <tr>
+                <td><code>wf-progress-lg</code></td>
+                <td>大サイズ（16px）</td>
+              </tr>
+              <tr>
+                <td><code>wf-progress-success</code></td>
+                <td>成功色（緑）</td>
+              </tr>
+              <tr>
+                <td><code>wf-progress-warning</code></td>
+                <td>警告色（黄）</td>
+              </tr>
+              <tr>
+                <td><code>wf-progress-danger</code></td>
+                <td>エラー色（赤）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>ページネーション</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-pagination</code></td>
+                <td>ページネーションコンテナ</td>
+              </tr>
+              <tr>
+                <td><code>wf-page-link</code></td>
+                <td>ページリンク</td>
+              </tr>
+              <tr>
+                <td><code>.is-active</code></td>
+                <td>アクティブページ</td>
+              </tr>
+              <tr>
+                <td><code>.is-disabled</code></td>
+                <td>無効状態</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>ドロップダウン</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-dropdown</code></td>
+                <td>ドロップダウンコンテナ</td>
+              </tr>
+              <tr>
+                <td><code>wf-dropdown__toggle</code></td>
+                <td>トグルボタン</td>
+              </tr>
+              <tr>
+                <td><code>wf-dropdown__menu</code></td>
+                <td>ドロップダウンメニュー</td>
+              </tr>
+              <tr>
+                <td><code>wf-dropdown__item</code></td>
+                <td>メニューアイテム</td>
+              </tr>
+              <tr>
+                <td><code>.is-open</code></td>
+                <td>開いた状態</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>オフキャンバス</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-offcanvas-overlay</code></td>
+                <td>背景オーバーレイ</td>
+              </tr>
+              <tr>
+                <td><code>wf-offcanvas</code></td>
+                <td>オフキャンバスパネル</td>
+              </tr>
+              <tr>
+                <td><code>wf-offcanvas-start</code></td>
+                <td>左から表示</td>
+              </tr>
+              <tr>
+                <td><code>wf-offcanvas-end</code></td>
+                <td>右から表示</td>
+              </tr>
+              <tr>
+                <td><code>wf-offcanvas-top</code></td>
+                <td>上から表示</td>
+              </tr>
+              <tr>
+                <td><code>wf-offcanvas-bottom</code></td>
+                <td>下から表示</td>
+              </tr>
+              <tr>
+                <td><code>.is-open</code></td>
+                <td>開いた状態</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>バッジ</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-badge</code></td>
+                <td>バッジ（標準）</td>
+              </tr>
+              <tr>
+                <td><code>wf-badge-success</code></td>
+                <td>成功バッジ（緑）</td>
+              </tr>
+              <tr>
+                <td><code>wf-badge-warning</code></td>
+                <td>警告バッジ（黄）</td>
+              </tr>
+              <tr>
+                <td><code>wf-badge-danger</code></td>
+                <td>エラーバッジ（赤）</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>評価</h3>
+        <p>星評価コンポーネント。整数評価と0.5刻みの半星評価に対応。</p>
+
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">説明</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-rating</code></td>
+                <td>評価コンテナ（ベース）</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating__star</code></td>
+                <td>個別の星</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating__star.is-filled</code></td>
+                <td>塗りつぶし星</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating__star.is-half</code></td>
+                <td>半星表示</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating__value</code></td>
+                <td>評価値テキスト</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating-sm</code></td>
+                <td>小サイズ（14px）</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating-lg</code></td>
+                <td>大サイズ（20px）</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating.is-interactive</code></td>
+                <td>インタラクティブ版（クリック可能）</td>
+              </tr>
+              <tr>
+                <td><code>wf-rating.is-disabled</code></td>
+                <td>無効状態</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>基本的な使用例</h4>
+        <pre><code>&lt;!-- 4つ星評価 --&gt;
+&lt;div class="wf-rating"&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__value" aria-label="評価: 5つ星中4"&gt;4.0&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- 半星評価 --&gt;
+&lt;div class="wf-rating"&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-filled" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star is-half" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__star" aria-hidden="true"&gt;★&lt;/span&gt;
+  &lt;span class="wf-rating__value"&gt;3.5&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;!-- サイズバリエーション --&gt;
+&lt;div class="wf-rating wf-rating-sm"&gt;...&lt;/div&gt;  &lt;!-- 小 --&gt;
+&lt;div class="wf-rating"&gt;...&lt;/div&gt;           &lt;!-- 標準 --&gt;
+&lt;div class="wf-rating wf-rating-lg"&gt;...&lt;/div&gt;  &lt;!-- 大 --&gt;</code></pre>
+
+        <h4>インタラクティブ評価（JavaScript必要）</h4>
+        <p>整数評価（1-5）の実装例:</p>
+        <pre><code>&lt;div class="wf-rating is-interactive" role="radiogroup" aria-label="評価を選択"&gt;
+  &lt;input type="radio" name="rating" value="1" class="wf-rating__input"&gt;
+  &lt;span class="wf-rating__star" role="radio" aria-checked="false"
+        aria-label="1つ星" tabindex="0" data-value="1"&gt;★&lt;/span&gt;
+
+  &lt;input type="radio" name="rating" value="2" class="wf-rating__input"&gt;
+  &lt;span class="wf-rating__star" role="radio" aria-checked="false"
+        aria-label="2つ星" tabindex="-1" data-value="2"&gt;★&lt;/span&gt;
+  &lt;!-- ...5つ星まで繰り返し... --&gt;
+
+  &lt;span class="wf-rating__value"&gt;未評価&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+
+        <p>半星評価（0.5-5.0）の実装例:</p>
+        <pre><code>&lt;div class="wf-rating is-interactive" id="half-rating" role="radiogroup"&gt;
+  &lt;input type="radio" name="rating-half" value="0.5" class="wf-rating__input"&gt;
+  &lt;input type="radio" name="rating-half" value="1" class="wf-rating__input"&gt;
+  &lt;span class="wf-rating__star" role="radio" aria-label="1つ星"
+        tabindex="0" data-index="1"&gt;★&lt;/span&gt;
+
+  &lt;input type="radio" name="rating-half" value="1.5" class="wf-rating__input"&gt;
+  &lt;input type="radio" name="rating-half" value="2" class="wf-rating__input"&gt;
+  &lt;span class="wf-rating__star" role="radio" aria-label="2つ星"
+        tabindex="-1" data-index="2"&gt;★&lt;/span&gt;
+  &lt;!-- ...5つ星まで繰り返し... --&gt;
+
+  &lt;span class="wf-rating__value"&gt;未評価&lt;/span&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+// 星の左半分クリック = 0.5、右半分クリック = 1.0
+document.querySelectorAll('#half-rating .wf-rating__star').forEach(star =&gt; {
+  star.addEventListener('click', function(e) {
+    const rect = this.getBoundingClientRect();
+    const clickX = e.clientX - rect.left;
+    const starIndex = parseInt(this.dataset.index);
+    const isLeftHalf = clickX &lt; rect.width / 2;
+    const value = isLeftHalf ? starIndex - 0.5 : starIndex;
+    // 評価値を更新する処理...
+  });
+});
+&lt;/script&gt;</code></pre>
+
+        <p>
+          詳細な実装例は
+          <code>examples/rating.html</code>
+          を参照してください。
         </p>
-        <a href="./css-variables.html" class="wf-btn wf-btn-primary">
-          CSS変数リファレンスを見る
-        </a>
-        <p style="margin: 16px 0 0 0; color: var(--wf-color-muted); font-size: 0.875rem;">
-          視覚的なプレビュー付きで、カラー、スペーシング、タイポグラフィ、アニメーション、ブレークポイントなどを確認できます。
-        </p>
-      </div>
-    </section>
+      </section>
 
-    <!-- ユーティリティクラス -->
-    <section id="utilities" class="ref-section">
-      <h2>ユーティリティクラス</h2>
+      <!-- テーマ -->
+      <section id="themes" class="ref-section">
+        <h2>テーマ</h2>
+        <p>wafoo-cssには10種類の和風カラーテーマが用意されています。</p>
 
-      <h3>スペーシング</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-              <th scope="col">値</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-m-{0,2,4,6,8,10,12}</code></td>
-              <td>全方向マージン</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-mt-{0,2,4,6,8,10,12}</code></td>
-              <td>マージントップ</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-mr-{0,2,4,6,8,10,12}</code></td>
-              <td>マージンライト</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-mb-{0,2,4,6,8,10,12}</code></td>
-              <td>マージンボトム</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-ml-{0,2,4,6,8,10,12}</code></td>
-              <td>マージンレフト</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-mx-{0,2,4,6,8,10,12}</code></td>
-              <td>左右マージン</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-my-{0,2,4,6,8,10,12}</code></td>
-              <td>上下マージン</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-p-{0,2,4,6,8,10,12}</code></td>
-              <td>全方向パディング</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-pt-{0,2,4,6,8,10,12}</code></td>
-              <td>パディングトップ</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-pr-{0,2,4,6,8,10,12}</code></td>
-              <td>パディングライト</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-pb-{0,2,4,6,8,10,12}</code></td>
-              <td>パディングボトム</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-pl-{0,2,4,6,8,10,12}</code></td>
-              <td>パディングレフト</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-px-{0,2,4,6,8,10,12}</code></td>
-              <td>左右パディング</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-py-{0,2,4,6,8,10,12}</code></td>
-              <td>上下パディング</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-            <tr>
-              <td><code>wf-gap-{0,2,4,6,8,10,12}</code></td>
-              <td>Flexbox/Grid gap</td>
-              <td>0, 8px, 16px, 24px, 32px, 40px, 48px</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">テーマ名</th>
+                <th scope="col">由来</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>theme-sakura</code></td>
+                <td>桜</td>
+                <td>春の桜色</td>
+              </tr>
+              <tr>
+                <td><code>theme-koubai</code></td>
+                <td>紅梅</td>
+                <td>紅梅の花色</td>
+              </tr>
+              <tr>
+                <td><code>theme-moe</code></td>
+                <td>萌黄</td>
+                <td>春の新芽色</td>
+              </tr>
+              <tr>
+                <td><code>theme-kiku</code></td>
+                <td>菊</td>
+                <td>菊の花色</td>
+              </tr>
+              <tr>
+                <td><code>theme-koori</code></td>
+                <td>氷</td>
+                <td>氷の透明感</td>
+              </tr>
+              <tr>
+                <td><code>theme-yanagi</code></td>
+                <td>柳</td>
+                <td>柳の葉色</td>
+              </tr>
+              <tr>
+                <td><code>theme-momiji</code></td>
+                <td>紅葉</td>
+                <td>秋の紅葉色</td>
+              </tr>
+              <tr>
+                <td><code>theme-fuji</code></td>
+                <td>藤</td>
+                <td>藤の花色</td>
+              </tr>
+              <tr>
+                <td><code>theme-uguisu</code></td>
+                <td>鶯</td>
+                <td>鶯の羽色</td>
+              </tr>
+              <tr>
+                <td><code>theme-yuki</code></td>
+                <td>雪</td>
+                <td>雪の白さ</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>テキスト</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-text-xs</code></td>
-              <td>極小テキスト</td>
-            </tr>
-            <tr>
-              <td><code>wf-text-sm</code></td>
-              <td>小さいテキスト</td>
-            </tr>
-            <tr>
-              <td><code>wf-text-md</code></td>
-              <td>中サイズテキスト</td>
-            </tr>
-            <tr>
-              <td><code>wf-text-lg</code></td>
-              <td>大きいテキスト</td>
-            </tr>
-            <tr>
-              <td><code>wf-text-xl</code></td>
-              <td>特大テキスト</td>
-            </tr>
-            <tr>
-              <td><code>wf-text-muted</code></td>
-              <td>薄いテキスト色</td>
-            </tr>
-            <tr>
-              <td><code>wf-text-left</code></td>
-              <td>左揃え</td>
-            </tr>
-            <tr>
-              <td><code>wf-text-center</code></td>
-              <td>中央揃え</td>
-            </tr>
-            <tr>
-              <td><code>wf-text-right</code></td>
-              <td>右揃え</td>
-            </tr>
-            <tr>
-              <td><code>wf-text-justify</code></td>
-              <td>両端揃え</td>
-            </tr>
-            <tr>
-              <td><code>wf-font-bold</code></td>
-              <td>太字（font-weight: 700）</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>表示</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-hidden</code></td>
-              <td>非表示</td>
-            </tr>
-            <tr>
-              <td><code>wf-block</code></td>
-              <td>ブロック表示</td>
-            </tr>
-            <tr>
-              <td><code>wf-inline-block</code></td>
-              <td>インラインブロック</td>
-            </tr>
-            <tr>
-              <td><code>wf-flex</code></td>
-              <td>フレックス表示</td>
-            </tr>
-            <tr>
-              <td><code>wf-grid</code></td>
-              <td>グリッド表示</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>アクセシビリティ</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-sr-only</code></td>
-              <td>スクリーンリーダー専用（視覚的に非表示）</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>Gridレイアウト</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-grid-cols-1</code></td>
-              <td>1列グリッド</td>
-            </tr>
-            <tr>
-              <td><code>wf-grid-cols-2</code></td>
-              <td>2列グリッド</td>
-            </tr>
-            <tr>
-              <td><code>wf-grid-cols-3</code></td>
-              <td>3列グリッド</td>
-            </tr>
-            <tr>
-              <td><code>wf-grid-cols-4</code></td>
-              <td>4列グリッド</td>
-            </tr>
-            <tr>
-              <td><code>wf-grid-cols-6</code></td>
-              <td>6列グリッド</td>
-            </tr>
-            <tr>
-              <td><code>wf-grid-cols-12</code></td>
-              <td>12列グリッド</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- 全コンポーネント一覧 -->
-    <section id="all-components" class="ref-section">
-      <h2>全コンポーネント一覧</h2>
-
-      <h3>レイアウト</h3>
-      <ol>
-        <li><strong>コンテナ</strong> (<code>.wf-container</code>) - コンテンツ幅制限</li>
-        <li><strong>グリッド</strong> (<code>.wf-grid</code>) - CSS Grid レイアウト</li>
-      </ol>
-
-      <h3>ナビゲーション</h3>
-      <ol start="3">
-        <li><strong>ナビバー</strong> (<code>.wf-navbar</code>) - ナビゲーションバー</li>
-        <li><strong>ハンバーガーメニュー</strong> (<code>.wf-hamburger</code>) - モバイルメニュー</li>
-        <li><strong>暖簾ヘッダー</strong> (<code>.wf-header-noren</code>) - 和風ヘッダー</li>
-        <li><strong>ブレッドクラム</strong> (<code>.wf-breadcrumb</code>) - パンくずリスト</li>
-        <li><strong>ステップ</strong> (<code>.wf-steps</code>) - 進捗ステップ</li>
-        <li><strong>タブ</strong> (<code>.wf-tablist</code>, <code>.wf-tab</code>) - タブナビゲーション</li>
-      </ol>
-
-      <h3>コンテンツ</h3>
-      <ol start="9">
-        <li><strong>カード</strong> (<code>.wf-card</code>) - コンテンツカード</li>
-        <li><strong>和紙カード</strong> (<code>.wf-card-washi</code>) - 和紙風カード</li>
-        <li><strong>アコーディオン</strong> (<code>.wf-accordion</code>) - 折りたたみコンテンツ</li>
-        <li><strong>判子（スタンプ）</strong> (<code>.wf-stamp</code>) - 和風スタンプ</li>
-      </ol>
-
-      <h3>フォーム</h3>
-      <ol start="13">
-        <li><strong>入力フィールド</strong> (<code>.wf-input</code>) - テキスト入力</li>
-        <li><strong>テキストエリア</strong> (<code>.wf-textarea</code>) - 複数行入力</li>
-        <li><strong>セレクト</strong> (<code>.wf-select</code>) - ドロップダウン選択</li>
-        <li><strong>チェックボックス</strong> (<code>.wf-checkbox</code>) - チェックボックス</li>
-        <li><strong>ラジオボタン</strong> (<code>.wf-radio</code>) - ラジオボタン</li>
-        <li><strong>スイッチ</strong> (<code>.wf-switch</code>) - トグルスイッチ</li>
-        <li><strong>ラベル</strong> (<code>.wf-label</code>) - フォームラベル</li>
-      </ol>
-
-      <h3>ボタン・インタラクション</h3>
-      <ol start="20">
-        <li><strong>ボタン</strong> (<code>.wf-btn</code>) - ボタン各種</li>
-        <li><strong>バッジ</strong> (<code>.wf-badge</code>) - バッジ・ラベル</li>
-      </ol>
-
-      <h3>フィードバック</h3>
-      <ol start="22">
-        <li><strong>アラート</strong> (<code>.wf-alert</code>) - アラートメッセージ</li>
-        <li><strong>トースト</strong> (<code>.wf-toast</code>) - トースト通知</li>
-        <li><strong>モーダル</strong> (<code>.wf-modal</code>) - モーダルダイアログ</li>
-        <li><strong>オフキャンバス</strong> (<code>.wf-offcanvas</code>) - サイドパネル</li>
-        <li><strong>ツールチップ</strong> (<code>.wf-tooltip</code>) - ツールチップ</li>
-        <li><strong>ポップオーバー</strong> (<code>.wf-popover</code>) - ポップオーバー</li>
-      </ol>
-
-      <h3>データ表示</h3>
-      <ol start="28">
-        <li><strong>テーブル</strong> (<code>.wf-table</code>) - データテーブル</li>
-        <li><strong>リストグループ</strong> (<code>.wf-list-group</code>, <code>.wf-list-item</code>) - リスト表示</li>
-        <li><strong>スケジュール</strong> (<code>.wf-schedule</code>) - スケジュール表示</li>
-        <li><strong>カレンダー</strong> (<code>.wf-calendar</code>) - カレンダー表示</li>
-      </ol>
-
-      <h3>その他</h3>
-      <ol start="32">
-        <li><strong>ドロップダウン</strong> (<code>.wf-dropdown</code>) - ドロップダウンメニュー</li>
-        <li><strong>ディバイダー</strong> (<code>.wf-divider</code>) - 区切り線</li>
-        <li><strong>スピナー</strong> (<code>.wf-spinner</code>) - ローディングスピナー</li>
-      </ol>
-    </section>
-
-    <!-- 追加コンポーネント詳細 -->
-    <section id="additional-components" class="ref-section">
-      <h2>追加コンポーネント詳細</h2>
-
-      <h3>コードブロック</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-code</code></td>
-              <td>インラインコード</td>
-            </tr>
-            <tr>
-              <td><code>wf-code-block</code></td>
-              <td>コードブロック（複数行）</td>
-            </tr>
-            <tr>
-              <td><code>wf-kbd</code></td>
-              <td>キーボードキー表示</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>アバター</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-avatar</code></td>
-              <td>アバター（32px）</td>
-            </tr>
-            <tr>
-              <td><code>wf-avatar-sm</code></td>
-              <td>小サイズ（24px）</td>
-            </tr>
-            <tr>
-              <td><code>wf-avatar-lg</code></td>
-              <td>大サイズ（48px）</td>
-            </tr>
-            <tr>
-              <td><code>wf-avatar-square</code></td>
-              <td>四角形</td>
-            </tr>
-            <tr>
-              <td><code>wf-avatar-status</code></td>
-              <td>ステータスドット付き</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>プログレスバー</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-progress</code></td>
-              <td>プログレスバー（12px）</td>
-            </tr>
-            <tr>
-              <td><code>wf-progress-sm</code></td>
-              <td>小サイズ（8px）</td>
-            </tr>
-            <tr>
-              <td><code>wf-progress-lg</code></td>
-              <td>大サイズ（16px）</td>
-            </tr>
-            <tr>
-              <td><code>wf-progress-success</code></td>
-              <td>成功色（緑）</td>
-            </tr>
-            <tr>
-              <td><code>wf-progress-warning</code></td>
-              <td>警告色（黄）</td>
-            </tr>
-            <tr>
-              <td><code>wf-progress-danger</code></td>
-              <td>エラー色（赤）</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>ページネーション</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-pagination</code></td>
-              <td>ページネーションコンテナ</td>
-            </tr>
-            <tr>
-              <td><code>wf-page-link</code></td>
-              <td>ページリンク</td>
-            </tr>
-            <tr>
-              <td><code>.is-active</code></td>
-              <td>アクティブページ</td>
-            </tr>
-            <tr>
-              <td><code>.is-disabled</code></td>
-              <td>無効状態</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>ドロップダウン</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-dropdown</code></td>
-              <td>ドロップダウンコンテナ</td>
-            </tr>
-            <tr>
-              <td><code>wf-dropdown__toggle</code></td>
-              <td>トグルボタン</td>
-            </tr>
-            <tr>
-              <td><code>wf-dropdown__menu</code></td>
-              <td>ドロップダウンメニュー</td>
-            </tr>
-            <tr>
-              <td><code>wf-dropdown__item</code></td>
-              <td>メニューアイテム</td>
-            </tr>
-            <tr>
-              <td><code>.is-open</code></td>
-              <td>開いた状態</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>オフキャンバス</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-offcanvas-overlay</code></td>
-              <td>背景オーバーレイ</td>
-            </tr>
-            <tr>
-              <td><code>wf-offcanvas</code></td>
-              <td>オフキャンバスパネル</td>
-            </tr>
-            <tr>
-              <td><code>wf-offcanvas-start</code></td>
-              <td>左から表示</td>
-            </tr>
-            <tr>
-              <td><code>wf-offcanvas-end</code></td>
-              <td>右から表示</td>
-            </tr>
-            <tr>
-              <td><code>wf-offcanvas-top</code></td>
-              <td>上から表示</td>
-            </tr>
-            <tr>
-              <td><code>wf-offcanvas-bottom</code></td>
-              <td>下から表示</td>
-            </tr>
-            <tr>
-              <td><code>.is-open</code></td>
-              <td>開いた状態</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <h3>バッジ</h3>
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">用途</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>wf-badge</code></td>
-              <td>バッジ（標準）</td>
-            </tr>
-            <tr>
-              <td><code>wf-badge-success</code></td>
-              <td>成功バッジ（緑）</td>
-            </tr>
-            <tr>
-              <td><code>wf-badge-warning</code></td>
-              <td>警告バッジ（黄）</td>
-            </tr>
-            <tr>
-              <td><code>wf-badge-danger</code></td>
-              <td>エラーバッジ（赤）</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- テーマ -->
-    <section id="themes" class="ref-section">
-      <h2>テーマ</h2>
-      <p>wafoo-cssには10種類の和風カラーテーマが用意されています。</p>
-
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">クラス名</th>
-              <th scope="col">テーマ名</th>
-              <th scope="col">由来</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><code>theme-sakura</code></td>
-              <td>桜</td>
-              <td>春の桜色</td>
-            </tr>
-            <tr>
-              <td><code>theme-koubai</code></td>
-              <td>紅梅</td>
-              <td>紅梅の花色</td>
-            </tr>
-            <tr>
-              <td><code>theme-moe</code></td>
-              <td>萌黄</td>
-              <td>春の新芽色</td>
-            </tr>
-            <tr>
-              <td><code>theme-kiku</code></td>
-              <td>菊</td>
-              <td>菊の花色</td>
-            </tr>
-            <tr>
-              <td><code>theme-koori</code></td>
-              <td>氷</td>
-              <td>氷の透明感</td>
-            </tr>
-            <tr>
-              <td><code>theme-yanagi</code></td>
-              <td>柳</td>
-              <td>柳の葉色</td>
-            </tr>
-            <tr>
-              <td><code>theme-momiji</code></td>
-              <td>紅葉</td>
-              <td>秋の紅葉色</td>
-            </tr>
-            <tr>
-              <td><code>theme-fuji</code></td>
-              <td>藤</td>
-              <td>藤の花色</td>
-            </tr>
-            <tr>
-              <td><code>theme-uguisu</code></td>
-              <td>鶯</td>
-              <td>鶯の羽色</td>
-            </tr>
-            <tr>
-              <td><code>theme-yuki</code></td>
-              <td>雪</td>
-              <td>雪の白さ</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <p>使用方法：</p>
-      <pre><code>&lt;body class="theme-sakura"&gt;
+        <p>使用方法：</p>
+        <pre><code>&lt;body class="theme-sakura"&gt;
   &lt;!-- コンテンツ --&gt;
 &lt;/body&gt;</code></pre>
-    </section>
+      </section>
 
-    <!-- ARIA & JavaScript初期化 -->
-    <section id="aria-and-js" class="ref-section">
-      <h2>アクセシビリティ＆JavaScript初期化</h2>
+      <!-- ARIA & JavaScript初期化 -->
+      <section id="aria-and-js" class="ref-section">
+        <h2>アクセシビリティ＆JavaScript初期化</h2>
 
-      <h3>自動初期化（推奨）</h3>
-      <p>wafoo.jsを読み込むと、<code>data-wf-*</code>属性を持つ要素が自動的に初期化されます：</p>
+        <h3>自動初期化（推奨）</h3>
+        <p>
+          wafoo.jsを読み込むと、
+          <code>data-wf-*</code>
+          属性を持つ要素が自動的に初期化されます：
+        </p>
 
-      <div class="table-wrapper">
-        <table class="wf-table wf-table-striped">
-          <thead>
-            <tr>
-              <th scope="col">コンポーネント</th>
-              <th scope="col">データ属性</th>
-              <th scope="col">必要なARIA属性</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ツールチップ</td>
-              <td><code>data-wf-tooltip="tip-id"</code></td>
-              <td>自動設定</td>
-            </tr>
-            <tr>
-              <td>ポップオーバー</td>
-              <td><code>data-wf-popover="popover-id"</code></td>
-              <td><code>role="dialog"</code>、<code>aria-labelledby</code></td>
-            </tr>
-            <tr>
-              <td>モーダル</td>
-              <td><code>data-wf-modal="modal-id"</code></td>
-              <td><code>role="dialog"</code>、<code>aria-modal="true"</code></td>
-            </tr>
-            <tr>
-              <td>オフキャンバス</td>
-              <td><code>data-wf-offcanvas="oc-id"</code></td>
-              <td><code>role="dialog"</code></td>
-            </tr>
-            <tr>
-              <td>タブ</td>
-              <td><code>data-wf-tabs</code></td>
-              <td><code>role="tablist"</code>、<code>role="tab"</code>、<code>role="tabpanel"</code></td>
-            </tr>
-            <tr>
-              <td>カレンダー</td>
-              <td><code>data-wf-calendar</code></td>
-              <td><code>role="grid"</code>、<code>aria-label</code></td>
-            </tr>
-            <tr>
-              <td>スケジュール</td>
-              <td><code>data-wf-schedule</code></td>
-              <td><code>role="application"</code>、<code>aria-label</code></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">コンポーネント</th>
+                <th scope="col">データ属性</th>
+                <th scope="col">必要なARIA属性</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>ツールチップ</td>
+                <td><code>data-wf-tooltip="tip-id"</code></td>
+                <td>自動設定</td>
+              </tr>
+              <tr>
+                <td>ポップオーバー</td>
+                <td><code>data-wf-popover="popover-id"</code></td>
+                <td>
+                  <code>role="dialog"</code>
+                  、
+                  <code>aria-labelledby</code>
+                </td>
+              </tr>
+              <tr>
+                <td>モーダル</td>
+                <td><code>data-wf-modal="modal-id"</code></td>
+                <td>
+                  <code>role="dialog"</code>
+                  、
+                  <code>aria-modal="true"</code>
+                </td>
+              </tr>
+              <tr>
+                <td>オフキャンバス</td>
+                <td><code>data-wf-offcanvas="oc-id"</code></td>
+                <td><code>role="dialog"</code></td>
+              </tr>
+              <tr>
+                <td>タブ</td>
+                <td><code>data-wf-tabs</code></td>
+                <td>
+                  <code>role="tablist"</code>
+                  、
+                  <code>role="tab"</code>
+                  、
+                  <code>role="tabpanel"</code>
+                </td>
+              </tr>
+              <tr>
+                <td>カレンダー</td>
+                <td><code>data-wf-calendar</code></td>
+                <td>
+                  <code>role="grid"</code>
+                  、
+                  <code>aria-label</code>
+                </td>
+              </tr>
+              <tr>
+                <td>スケジュール</td>
+                <td><code>data-wf-schedule</code></td>
+                <td>
+                  <code>role="application"</code>
+                  、
+                  <code>aria-label</code>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-      <h3>使用例</h3>
+        <h3>使用例</h3>
 
-      <h4>ツールチップ</h4>
-      <pre><code>&lt;button data-wf-tooltip="tip-1"&gt;ホバーしてください&lt;/button&gt;
+        <h4>ツールチップ</h4>
+        <pre><code>&lt;button data-wf-tooltip="tip-1"&gt;ホバーしてください&lt;/button&gt;
 &lt;div id="tip-1" class="wf-tooltip" hidden&gt;ツールチップの内容&lt;/div&gt;</code></pre>
 
-      <h4>モーダル</h4>
-      <pre><code>&lt;button data-wf-modal="modal-1"&gt;開く&lt;/button&gt;
+        <h4>モーダル</h4>
+        <pre><code>&lt;button data-wf-modal="modal-1"&gt;開く&lt;/button&gt;
 &lt;div id="modal-1" class="wf-modal-overlay" hidden&gt;
   &lt;div class="wf-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title"&gt;
     &lt;h2 id="modal-title"&gt;タイトル&lt;/h2&gt;
@@ -1292,17 +1677,17 @@ hamburger.addEventListener('click', () =&gt; {
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
 
-      <h4>タブ（ARIAパターン）</h4>
-      <pre><code>&lt;div class="wf-tablist" role="tablist" data-wf-tabs&gt;
+        <h4>タブ（ARIAパターン）</h4>
+        <pre><code>&lt;div class="wf-tablist" role="tablist" data-wf-tabs&gt;
   &lt;button class="wf-tab" role="tab" aria-selected="true" aria-controls="panel-1"&gt;タブ1&lt;/button&gt;
   &lt;button class="wf-tab" role="tab" aria-selected="false" aria-controls="panel-2"&gt;タブ2&lt;/button&gt;
 &lt;/div&gt;
 &lt;div id="panel-1" class="wf-tabpanel" role="tabpanel"&gt;内容1&lt;/div&gt;
 &lt;div id="panel-2" class="wf-tabpanel" role="tabpanel" hidden&gt;内容2&lt;/div&gt;</code></pre>
 
-      <h3>手動初期化（高度な使用）</h3>
-      <p>動的に生成された要素には、WFUIオブジェクトを直接使用できます：</p>
-      <pre><code>// ツールチップ
+        <h3>手動初期化（高度な使用）</h3>
+        <p>動的に生成された要素には、WFUIオブジェクトを直接使用できます：</p>
+        <pre><code>// ツールチップ
 WFUI.tooltip(triggerElement, tooltipElement);
 
 // モーダル
@@ -1317,39 +1702,113 @@ WFUI.calendar(containerElement, { selectedDate: '2025-11-10' });
 // スケジュール
 WFUI.schedule(containerElement, { mode: 'daily', timeInterval: 60 });</code></pre>
 
-      <h3>キーボード対応</h3>
-      <ul>
-        <li><strong>Esc</strong>: モーダル/ポップオーバー/ツールチップを閉じる</li>
-        <li><strong>Tab</strong>: フォーカストラップ（モーダル/オフキャンバス内）</li>
-        <li><strong>矢印キー</strong>: タブ、ドロップダウン、カレンダーのナビゲーション</li>
-        <li><strong>Enter/Space</strong>: ボタンの実行、選択の確定</li>
-        <li><strong>Home/End</strong>: タブの最初/最後へ移動</li>
-      </ul>
+        <h3>使用上の注意</h3>
 
-      <h3>スクリーンリーダー対応</h3>
-      <ul>
-        <li>ソート可能テーブル：<code>aria-live</code>リージョンで並び替えを通知</li>
-        <li>タブ：<code>aria-selected</code>で現在のタブを示す</li>
-        <li>モーダル：背景に<code>aria-hidden="true"</code>を自動設定</li>
-        <li>フォーカス管理：開閉時に前のフォーカス位置を保存・復元</li>
-      </ul>
-    </section>
+        <h4>スケジュールコンポーネント</h4>
+        <p>
+          日付選択後に表示される要素（時間レンジ選択、時間刻み選択など）は、初期状態で
+          <code>display: none</code>
+          または
+          <code>hidden</code>
+          属性を設定してください。日付が選択されるまでこれらの要素を非表示にすることで、より良いユーザー体験を提供できます。
+        </p>
+        <pre><code>&lt;!-- 日付選択後に表示される要素 --&gt;
+&lt;div id="schedule-time-interval-wrapper" style="display: none;"&gt;
+  &lt;!-- 時間レンジや時間刻みの選択UI --&gt;
+&lt;/div&gt;
 
-    <!-- フッター -->
-    <footer
-      style="margin-top: 80px; padding: 48px 0; text-align: center; border-top: 2px solid var(--wf-color-border);">
-      <p style="color: var(--wf-color-muted); margin: 0; font-size: 0.875rem;">
-        &copy; <span id="copyright-year"></span> Q_Q. All rights reserved.
-      </p>
-    </footer>
-  </main>
+&lt;script&gt;
+// 日付選択時に表示制御
+function updateScheduleVisibility() {
+  const hasDate = dateInput && dateInput.value;
+  const wrapper = document.getElementById('schedule-time-interval-wrapper');
+  if (wrapper) {
+    wrapper.style.display = hasDate ? 'block' : 'none';
+  }
+}
+&lt;/script&gt;</code></pre>
 
-  <script>
-    // 著作権年の設定
-    const yearSpan = document.getElementById('copyright-year');
-    if (yearSpan) {
-      yearSpan.textContent = new Date().getFullYear();
-    }
-  </script>
-</body>
+        <h4>デモページでのフォーム使用</h4>
+        <p>
+          デモページやサンプルでフォームコンポーネントを使用する際は、ページ遷移を防ぐため
+          <code>onsubmit</code>
+          イベントで
+          <code>preventDefault()</code>
+          を呼び出してください。実際のアプリケーションでは、適切なフォーム送信処理を実装してください。
+        </p>
+        <pre><code>&lt;form onsubmit="event.preventDefault(); return false;"&gt;
+  &lt;!-- フォーム要素 --&gt;
+  &lt;button type="submit" class="wf-btn wf-btn-primary"&gt;送信&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+
+        <h3>キーボード対応</h3>
+        <ul>
+          <li>
+            <strong>Esc</strong>
+            : モーダル/ポップオーバー/ツールチップを閉じる
+          </li>
+          <li>
+            <strong>Tab</strong>
+            : フォーカストラップ（モーダル/オフキャンバス内）
+          </li>
+          <li>
+            <strong>矢印キー</strong>
+            : タブ、ドロップダウン、カレンダーのナビゲーション
+          </li>
+          <li>
+            <strong>Enter/Space</strong>
+            : ボタンの実行、選択の確定
+          </li>
+          <li>
+            <strong>Home/End</strong>
+            : タブの最初/最後へ移動
+          </li>
+        </ul>
+
+        <h3>スクリーンリーダー対応</h3>
+        <ul>
+          <li>
+            ソート可能テーブル：
+            <code>aria-live</code>
+            リージョンで並び替えを通知
+          </li>
+          <li>
+            タブ：
+            <code>aria-selected</code>
+            で現在のタブを示す
+          </li>
+          <li>
+            モーダル：背景に
+            <code>aria-hidden="true"</code>
+            を自動設定
+          </li>
+          <li>フォーカス管理：開閉時に前のフォーカス位置を保存・復元</li>
+        </ul>
+      </section>
+
+      <!-- フッター -->
+      <footer
+        style="
+          margin-top: 80px;
+          padding: 48px 0;
+          text-align: center;
+          border-top: 2px solid var(--wf-color-border);
+        "
+      >
+        <p style="color: var(--wf-color-muted); margin: 0; font-size: 0.875rem">
+          &copy;
+          <span id="copyright-year"></span>
+          Q_Q. All rights reserved.
+        </p>
+      </footer>
+    </main>
+
+    <script>
+      // 著作権年の設定
+      const yearSpan = document.getElementById("copyright-year");
+      if (yearSpan) {
+        yearSpan.textContent = new Date().getFullYear();
+      }
+    </script>
+  </body>
 </html>

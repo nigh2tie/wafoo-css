@@ -49,6 +49,11 @@ FILES=(
   "$ROOT_DIR/src/components/toast.css"
   "$ROOT_DIR/src/components/divider.css"
   "$ROOT_DIR/src/components/code.css"
+  "$ROOT_DIR/src/components/rating.css"
+  "$ROOT_DIR/src/components/timeline.css"
+  "$ROOT_DIR/src/components/message.css"
+  "$ROOT_DIR/src/components/sidebar.css"
+  "$ROOT_DIR/src/components/carousel.css"
   "$ROOT_DIR/src/utilities.css"
 )
 

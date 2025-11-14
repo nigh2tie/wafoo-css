@@ -1,0 +1,183 @@
+/**
+ * Chat/Message Component
+ * チャット風メッセージ表示コンポーネント
+ */
+
+/* Message Container */
+.wf-message {
+  display: flex;
+  gap: var(--wf-space-3);
+  margin-bottom: var(--wf-space-4);
+  max-width: 100%;
+}
+
+/* Message Avatar */
+.wf-message__avatar {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--wf-ink-200);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--wf-ink-600);
+  font-weight: 600;
+  font-size: var(--wf-font-sm);
+}
+
+.wf-message__avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Message Content */
+.wf-message__content {
+  flex: 1;
+  min-width: 0;
+  max-width: 70%;
+}
+
+/* Message Header */
+.wf-message__header {
+  display: flex;
+  align-items: center;
+  gap: var(--wf-space-2);
+  margin-bottom: var(--wf-space-1);
+}
+
+.wf-message__name {
+  font-weight: 600;
+  color: var(--wf-ink-900);
+  font-size: var(--wf-font-sm);
+}
+
+.wf-message__time {
+  font-size: var(--wf-font-sm);
+  color: var(--wf-ink-500);
+}
+
+/* Message Bubble */
+.wf-message__bubble {
+  background-color: var(--wf-color-bg);
+  border: 1px solid var(--wf-ink-200);
+  border-radius: 12px;
+  padding: var(--wf-space-3);
+  word-wrap: break-word;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* Message Body */
+.wf-message__body {
+  color: var(--wf-ink-800);
+  line-height: 1.5;
+  font-size: var(--wf-font-md);
+}
+
+/* Message Footer (for reactions, etc.) */
+.wf-message__footer {
+  margin-top: var(--wf-space-2);
+  font-size: var(--wf-font-sm);
+  color: var(--wf-ink-600);
+}
+
+/* Sent Message (Right Aligned) */
+.wf-message-sent {
+  flex-direction: row-reverse;
+}
+
+.wf-message-sent .wf-message__content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.wf-message-sent .wf-message__header {
+  flex-direction: row-reverse;
+}
+
+.wf-message-sent .wf-message__bubble {
+  background-color: var(--wf-accent-500);
+  border-color: var(--wf-accent-600);
+  color: white;
+}
+
+.wf-message-sent .wf-message__body {
+  color: white;
+}
+
+/* System Message (Centered) */
+.wf-message-system {
+  justify-content: center;
+  margin: var(--wf-space-3) 0;
+}
+
+.wf-message-system .wf-message__avatar {
+  display: none;
+}
+
+.wf-message-system .wf-message__content {
+  max-width: none;
+  text-align: center;
+}
+
+.wf-message-system .wf-message__bubble {
+  background-color: var(--wf-ink-100);
+  border-color: var(--wf-ink-200);
+  display: inline-block;
+  font-size: var(--wf-font-sm);
+  color: var(--wf-ink-600);
+}
+
+/* Message Status Indicators */
+.wf-message__status {
+  font-size: var(--wf-font-sm);
+  color: var(--wf-ink-500);
+  margin-top: var(--wf-space-1);
+}
+
+.wf-message__status .wf-icon {
+  font-size: 12px;
+}
+
+.wf-message.is-read .wf-message__status {
+  color: var(--wf-accent-500);
+}
+
+.wf-message.is-sending .wf-message__bubble {
+  opacity: 0.6;
+}
+
+/* Compact Variant (No Avatar) */
+.wf-message-compact .wf-message__avatar {
+  display: none;
+}
+
+.wf-message-compact {
+  margin-bottom: var(--wf-space-2);
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .wf-message__content {
+    max-width: 85%;
+  }
+
+  .wf-message__avatar {
+    width: 32px;
+    height: 32px;
+  }
+
+  .wf-message__bubble {
+    padding: var(--wf-space-2);
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .wf-message {
+    transition: none;
+  }
+}

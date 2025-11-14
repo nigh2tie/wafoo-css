@@ -1,927 +1,1051 @@
 <!doctype html>
 <html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>CSS変数リファレンス | wafoo-css</title>
+    <meta
+      name="description"
+      content="wafoo-cssで利用可能な全87個のCSS変数のリファレンス。カラー、スペーシング、タイポグラフィ、コンポーネント設定など、視覚的なプレビュー付きで確認できます。伝統的な日本の美学を取り入れた和風CSSフレームワーク。"
+    />
+    <meta
+      name="keywords"
+      content="CSS変数,カスタムプロパティ,CSS,フレームワーク,和風,日本,デザイントークン,カラーパレット,リファレンス,wafoo,和風CSS"
+    />
+    <meta name="author" content="Q_Q" />
+    <meta name="theme-color" content="#bca7e8" />
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>CSS変数リファレンス | wafoo-css</title>
-  <meta name="description" content="wafoo-cssで利用可能な全87個のCSS変数のリファレンス。カラー、スペーシング、タイポグラフィ、コンポーネント設定など、視覚的なプレビュー付きで確認できます。伝統的な日本の美学を取り入れた和風CSSフレームワーク。">
-  <meta name="keywords" content="CSS変数,カスタムプロパティ,CSS,フレームワーク,和風,日本,デザイントークン,カラーパレット,リファレンス,wafoo,和風CSS">
-  <meta name="author" content="Q_Q">
-  <meta name="theme-color" content="#bca7e8">
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://nigh2tie.github.io/wafoo-css/css-variables.html" />
+    <meta property="og:title" content="CSS変数リファレンス | wafoo-css" />
+    <meta
+      property="og:description"
+      content="wafoo-cssで利用可能な全87個のCSS変数のリファレンス。視覚的なプレビュー付きで確認できます。"
+    />
+    <meta property="og:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="wafoo-css CSS変数リファレンス" />
+    <meta property="og:site_name" content="wafoo-css" />
+    <meta property="og:locale" content="ja_JP" />
 
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://nigh2tie.github.io/wafoo-css/css-variables.html">
-  <meta property="og:title" content="CSS変数リファレンス | wafoo-css">
-  <meta property="og:description" content="wafoo-cssで利用可能な全87個のCSS変数のリファレンス。視覚的なプレビュー付きで確認できます。">
-  <meta property="og:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="wafoo-css CSS変数リファレンス">
-  <meta property="og:site_name" content="wafoo-css">
-  <meta property="og:locale" content="ja_JP">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="CSS変数リファレンス | wafoo-css" />
+    <meta
+      name="twitter:description"
+      content="wafoo-cssで利用可能な全87個のCSS変数のリファレンス。視覚的なプレビュー付きで確認できます。"
+    />
+    <meta name="twitter:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png" />
 
-  <!-- Twitter Card -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="CSS変数リファレンス | wafoo-css">
-  <meta name="twitter:description" content="wafoo-cssで利用可能な全87個のCSS変数のリファレンス。視覚的なプレビュー付きで確認できます。">
-  <meta name="twitter:image" content="https://nigh2tie.github.io/wafoo-css/og-image.png">
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <link rel="stylesheet" href="./wafoo.css" />
+    <style>
+      body {
+        margin: 0;
+      }
 
-  <link rel="icon" type="image/svg+xml" href="favicon.svg">
-  <link rel="stylesheet" href="./wafoo.css">
-  <style>
-    body {
-      margin: 0;
-    }
+      .var-table {
+        width: 100%;
+        margin-bottom: 32px;
+      }
 
-    .var-table {
-      width: 100%;
-      margin-bottom: 32px;
-    }
+      .var-table th {
+        text-align: left;
+        background: var(--wf-surface-subtle);
+        padding: 12px;
+        font-weight: 700;
+      }
 
-    .var-table th {
-      text-align: left;
-      background: var(--wf-surface-subtle);
-      padding: 12px;
-      font-weight: 700;
-    }
+      .var-table td {
+        padding: 12px;
+        border-bottom: 1px solid var(--wf-color-border);
+        vertical-align: top;
+      }
 
-    .var-table td {
-      padding: 12px;
-      border-bottom: 1px solid var(--wf-color-border);
-      vertical-align: top;
-    }
+      .var-name {
+        font-family: "Courier New", monospace;
+        font-size: 0.9rem;
+        color: var(--wf-accent-700);
+        font-weight: 600;
+      }
 
-    .var-name {
-      font-family: "Courier New", monospace;
-      font-size: 0.9rem;
-      color: var(--wf-accent-700);
-      font-weight: 600;
-    }
+      .var-value {
+        font-family: "Courier New", monospace;
+        font-size: 0.85rem;
+        color: var(--wf-color-muted);
+      }
 
-    .var-value {
-      font-family: "Courier New", monospace;
-      font-size: 0.85rem;
-      color: var(--wf-color-muted);
-    }
+      .color-swatch {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--wf-radius-sm);
+        border: 1px solid var(--wf-color-border-strong);
+        vertical-align: middle;
+        margin-right: 8px;
+      }
 
-    .color-swatch {
-      display: inline-block;
-      width: 40px;
-      height: 40px;
-      border-radius: var(--wf-radius-sm);
-      border: 1px solid var(--wf-color-border-strong);
-      vertical-align: middle;
-      margin-right: 8px;
-    }
+      .spacing-bar {
+        height: 20px;
+        background: var(--wf-accent-300);
+        border-radius: var(--wf-radius-sm);
+      }
 
-    .spacing-bar {
-      height: 20px;
-      background: var(--wf-accent-300);
-      border-radius: var(--wf-radius-sm);
-    }
+      .category-section {
+        margin-bottom: 64px;
+      }
 
-    .category-section {
-      margin-bottom: 64px;
-    }
+      .category-section h2 {
+        font-size: 1.75rem;
+        margin-bottom: 24px;
+        padding-bottom: 12px;
+        border-bottom: 2px solid var(--wf-color-accent);
+        color: var(--wf-color-accent);
+      }
 
-    .category-section h2 {
-      font-size: 1.75rem;
-      margin-bottom: 24px;
-      padding-bottom: 12px;
-      border-bottom: 2px solid var(--wf-color-accent);
-      color: var(--wf-color-accent);
-    }
+      .toc {
+        background: var(--wf-surface-subtle);
+        padding: 24px;
+        border-radius: var(--wf-radius-md);
+        margin-bottom: 48px;
+      }
 
-    .toc {
-      background: var(--wf-surface-subtle);
-      padding: 24px;
-      border-radius: var(--wf-radius-md);
-      margin-bottom: 48px;
-    }
+      .toc h2 {
+        margin-top: 0;
+        font-size: 1.25rem;
+      }
 
-    .toc h2 {
-      margin-top: 0;
-      font-size: 1.25rem;
-    }
+      .toc ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
 
-    .toc ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
+      .toc li {
+        margin-bottom: 8px;
+      }
 
-    .toc li {
-      margin-bottom: 8px;
-    }
+      .toc a {
+        color: var(--wf-link-color);
+        text-decoration: none;
+        font-weight: 500;
+      }
 
-    .toc a {
-      color: var(--wf-link-color);
-      text-decoration: none;
-      font-weight: 500;
-    }
+      .toc a:hover {
+        color: var(--wf-link-color-hover);
+        text-decoration: underline;
+      }
 
-    .toc a:hover {
-      color: var(--wf-link-color-hover);
-      text-decoration: underline;
-    }
+      .back-link {
+        display: inline-block;
+        margin-bottom: 24px;
+        color: var(--wf-link-color);
+        text-decoration: none;
+      }
 
-    .back-link {
-      display: inline-block;
-      margin-bottom: 24px;
-      color: var(--wf-link-color);
-      text-decoration: none;
-    }
+      .back-link:hover {
+        color: var(--wf-link-color-hover);
+        text-decoration: underline;
+      }
+    </style>
+  </head>
 
-    .back-link:hover {
-      color: var(--wf-link-color-hover);
-      text-decoration: underline;
-    }
-  </style>
-</head>
+  <body>
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
 
-<body>
-  <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+    <header class="wf-header-noren">
+      <div class="wf-container" style="padding: 0">
+        <h1>CSS変数リファレンス</h1>
+        <p style="margin: 8px 0 0; opacity: 0.9; letter-spacing: 0.15em">
+          wafoo-cssで利用可能な全87個のデザイントークン
+        </p>
+      </div>
+    </header>
 
-  <header class="wf-header-noren">
-    <div class="wf-container" style="padding: 0">
-      <h1>CSS変数リファレンス</h1>
-      <p style="margin: 8px 0 0; opacity: 0.9; letter-spacing: 0.15em;">
-        wafoo-cssで利用可能な全87個のデザイントークン
+    <main id="main" class="wf-container" style="padding-top: 48px">
+      <div style="margin-bottom: 24px">
+        <a href="./index.html" class="back-link">← ドキュメントトップに戻る</a>
+        <span style="margin: 0 12px; color: var(--wf-color-muted)">|</span>
+        <a href="./reference.html" class="back-link">コンポーネントリファレンス</a>
+      </div>
+
+      <div class="toc">
+        <h2>目次</h2>
+        <ul>
+          <li><a href="#typography">タイポグラフィ</a></li>
+          <li><a href="#colors">カラー</a></li>
+          <li><a href="#spacing">スペーシング</a></li>
+          <li><a href="#radius">ボーダーラジウス</a></li>
+          <li><a href="#shadows">シャドウ</a></li>
+          <li><a href="#breakpoints">ブレークポイント</a></li>
+          <li><a href="#buttons">ボタン</a></li>
+          <li><a href="#forms">フォーム</a></li>
+          <li><a href="#components">その他コンポーネント</a></li>
+          <li><a href="#animation">アニメーション</a></li>
+        </ul>
+      </div>
+
+      <!-- Typography -->
+      <section id="typography" class="category-section">
+        <h2>タイポグラフィ</h2>
+
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>説明</th>
+              <th>プレビュー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-font-family</span></td>
+              <td><span class="var-value">"Noto Serif JP", serif</span></td>
+              <td>メインフォント（和風の明朝体）</td>
+              <td style="font-family: var(--wf-font-family)">あいうえお ABC</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-font-family-sans</span></td>
+              <td><span class="var-value">system-ui, sans-serif</span></td>
+              <td>サンセリフフォント</td>
+              <td style="font-family: var(--wf-font-family-sans)">あいうえお ABC</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-font-sm</span></td>
+              <td><span class="var-value">0.875rem (14px)</span></td>
+              <td>小さいフォントサイズ</td>
+              <td style="font-size: var(--wf-font-sm)">サンプルテキスト</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-font-md</span></td>
+              <td><span class="var-value">1rem (16px)</span></td>
+              <td>標準フォントサイズ</td>
+              <td style="font-size: var(--wf-font-md)">サンプルテキスト</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-font-lg</span></td>
+              <td><span class="var-value">1.125rem (18px)</span></td>
+              <td>大きいフォントサイズ</td>
+              <td style="font-size: var(--wf-font-lg)">サンプルテキスト</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-font-xl</span></td>
+              <td><span class="var-value">1.25rem (20px)</span></td>
+              <td>特大フォントサイズ</td>
+              <td style="font-size: var(--wf-font-xl)">サンプルテキスト</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-leading-none</span></td>
+              <td><span class="var-value">1</span></td>
+              <td>行間なし</td>
+              <td style="line-height: var(--wf-leading-none)">
+                行間なし
+                <br />
+                2行目
+              </td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-leading-tight</span></td>
+              <td><span class="var-value">1.25</span></td>
+              <td>狭い行間</td>
+              <td style="line-height: var(--wf-leading-tight)">
+                狭い行間
+                <br />
+                2行目
+              </td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-leading-normal</span></td>
+              <td><span class="var-value">1.5</span></td>
+              <td>標準行間</td>
+              <td style="line-height: var(--wf-leading-normal)">
+                標準行間
+                <br />
+                2行目
+              </td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-leading-relaxed</span></td>
+              <td><span class="var-value">1.75</span></td>
+              <td>広い行間</td>
+              <td style="line-height: var(--wf-leading-relaxed)">
+                広い行間
+                <br />
+                2行目
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Colors -->
+      <section id="colors" class="category-section">
+        <h2>カラー</h2>
+
+        <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem">伝統色（基本）</h3>
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>説明</th>
+              <th>プレビュー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-koubai</span></td>
+              <td><span class="var-value">#f4a7b9</span></td>
+              <td>紅梅（こうばい）</td>
+              <td><span class="color-swatch" style="background: var(--wf-koubai)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-fuji</span></td>
+              <td><span class="var-value">#b28fce</span></td>
+              <td>藤（ふじ）</td>
+              <td><span class="color-swatch" style="background: var(--wf-fuji)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-sakura</span></td>
+              <td><span class="var-value">#fddede</span></td>
+              <td>桜（さくら）</td>
+              <td><span class="color-swatch" style="background: var(--wf-sakura)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-shirayuri</span></td>
+              <td><span class="var-value">#f8f4e6</span></td>
+              <td>白百合（しらゆり）</td>
+              <td><span class="color-swatch" style="background: var(--wf-shirayuri)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-sumi</span></td>
+              <td><span class="var-value">#2c2c2c</span></td>
+              <td>墨（すみ）</td>
+              <td><span class="color-swatch" style="background: var(--wf-sumi)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-hai</span></td>
+              <td><span class="var-value">#828282</span></td>
+              <td>灰（はい）</td>
+              <td><span class="color-swatch" style="background: var(--wf-hai)"></span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem">
+          インク（グレースケール）
+        </h3>
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>用途</th>
+              <th>プレビュー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-ink-900</span></td>
+              <td><span class="var-value">#1f1f1f</span></td>
+              <td>メインテキスト</td>
+              <td><span class="color-swatch" style="background: var(--wf-ink-900)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-ink-700</span></td>
+              <td><span class="var-value">#444444</span></td>
+              <td>セカンダリテキスト</td>
+              <td><span class="color-swatch" style="background: var(--wf-ink-700)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-ink-500</span></td>
+              <td><span class="var-value">#666666</span></td>
+              <td>控えめなテキスト</td>
+              <td><span class="color-swatch" style="background: var(--wf-ink-500)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-ink-300</span></td>
+              <td><span class="var-value">#999999</span></td>
+              <td>プレースホルダー</td>
+              <td><span class="color-swatch" style="background: var(--wf-ink-300)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-ink-100</span></td>
+              <td><span class="var-value">#e5e5e5</span></td>
+              <td>ボーダー、区切り線</td>
+              <td><span class="color-swatch" style="background: var(--wf-ink-100)"></span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem">
+          アクセントカラー（藤紫スケール）
+        </h3>
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>用途</th>
+              <th>プレビュー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-accent-50</span></td>
+              <td><span class="var-value">#f0ecf3</span></td>
+              <td>最も薄い</td>
+              <td><span class="color-swatch" style="background: var(--wf-accent-50)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-accent-100</span></td>
+              <td><span class="var-value">#e2dcef</span></td>
+              <td>-</td>
+              <td><span class="color-swatch" style="background: var(--wf-accent-100)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-accent-200</span></td>
+              <td><span class="var-value">#cfc7e3</span></td>
+              <td>-</td>
+              <td><span class="color-swatch" style="background: var(--wf-accent-200)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-accent-300</span></td>
+              <td><span class="var-value">#b9afd2</span></td>
+              <td>-</td>
+              <td><span class="color-swatch" style="background: var(--wf-accent-300)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-accent-400</span></td>
+              <td><span class="var-value">#9f93bd</span></td>
+              <td>-</td>
+              <td><span class="color-swatch" style="background: var(--wf-accent-400)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-accent-500</span></td>
+              <td><span class="var-value">#6a5c7c</span></td>
+              <td>ベースカラー</td>
+              <td><span class="color-swatch" style="background: var(--wf-accent-500)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-accent-600</span></td>
+              <td><span class="var-value">#5e516f</span></td>
+              <td>リンク</td>
+              <td><span class="color-swatch" style="background: var(--wf-accent-600)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-accent-700</span></td>
+              <td><span class="var-value">#4f4560</span></td>
+              <td>ボタン、フォーカス</td>
+              <td><span class="color-swatch" style="background: var(--wf-accent-700)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-accent-800</span></td>
+              <td><span class="var-value">#413a50</span></td>
+              <td>ホバー</td>
+              <td><span class="color-swatch" style="background: var(--wf-accent-800)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-accent-900</span></td>
+              <td><span class="var-value">#332f41</span></td>
+              <td>アクティブ</td>
+              <td><span class="color-swatch" style="background: var(--wf-accent-900)"></span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem">
+          セマンティックカラー
+        </h3>
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>用途</th>
+              <th>プレビュー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-color-text</span></td>
+              <td><span class="var-value">var(--wf-ink-900)</span></td>
+              <td>メインテキスト色</td>
+              <td><span style="color: var(--wf-color-text)">サンプル</span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-color-muted</span></td>
+              <td><span class="var-value">var(--wf-ink-500)</span></td>
+              <td>控えめなテキスト</td>
+              <td><span style="color: var(--wf-color-muted)">サンプル</span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-color-accent</span></td>
+              <td><span class="var-value">var(--wf-accent-500)</span></td>
+              <td>アクセントカラー</td>
+              <td><span class="color-swatch" style="background: var(--wf-color-accent)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-link-color</span></td>
+              <td><span class="var-value">var(--wf-accent-600)</span></td>
+              <td>リンク色</td>
+              <td><a href="#" style="color: var(--wf-link-color)">リンク</a></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-color-bg</span></td>
+              <td><span class="var-value">#e7ddd4</span></td>
+              <td>背景色（灰桜）</td>
+              <td><span class="color-swatch" style="background: var(--wf-color-bg)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-surface-base</span></td>
+              <td><span class="var-value">#ffffff</span></td>
+              <td>カード背景</td>
+              <td><span class="color-swatch" style="background: var(--wf-surface-base)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-surface-subtle</span></td>
+              <td><span class="var-value">#faf7f5</span></td>
+              <td>控えめな背景</td>
+              <td>
+                <span class="color-swatch" style="background: var(--wf-surface-subtle)"></span>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-surface-muted</span></td>
+              <td><span class="var-value">#f5f2ef</span></td>
+              <td>強調された背景</td>
+              <td>
+                <span class="color-swatch" style="background: var(--wf-surface-muted)"></span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem">ステータスカラー</h3>
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>用途</th>
+              <th>プレビュー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-success</span></td>
+              <td><span class="var-value">#2e7d32</span></td>
+              <td>成功メッセージ</td>
+              <td><span class="color-swatch" style="background: var(--wf-success)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-warning</span></td>
+              <td><span class="var-value">#b26a00</span></td>
+              <td>警告メッセージ</td>
+              <td><span class="color-swatch" style="background: var(--wf-warning)"></span></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-danger</span></td>
+              <td><span class="var-value">#b00020</span></td>
+              <td>エラーメッセージ</td>
+              <td><span class="color-swatch" style="background: var(--wf-danger)"></span></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Spacing -->
+      <section id="spacing" class="category-section">
+        <h2>スペーシング</h2>
+        <p style="color: var(--wf-color-muted); margin-bottom: 24px">
+          4pxベースの8pxグリッドシステム
+        </p>
+
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>説明</th>
+              <th>プレビュー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-space-half</span></td>
+              <td><span class="var-value">2px</span></td>
+              <td>0.5倍（半分）</td>
+              <td><div class="spacing-bar" style="width: var(--wf-space-half)"></div></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-space-1</span></td>
+              <td><span class="var-value">4px</span></td>
+              <td>1倍（ベース）</td>
+              <td><div class="spacing-bar" style="width: var(--wf-space-1)"></div></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-space-2</span></td>
+              <td><span class="var-value">8px</span></td>
+              <td>2倍（8pxグリッド）</td>
+              <td><div class="spacing-bar" style="width: var(--wf-space-2)"></div></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-space-3</span></td>
+              <td><span class="var-value">12px</span></td>
+              <td>3倍</td>
+              <td><div class="spacing-bar" style="width: var(--wf-space-3)"></div></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-space-4</span></td>
+              <td><span class="var-value">16px</span></td>
+              <td>4倍</td>
+              <td><div class="spacing-bar" style="width: var(--wf-space-4)"></div></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-space-6</span></td>
+              <td><span class="var-value">24px</span></td>
+              <td>6倍</td>
+              <td><div class="spacing-bar" style="width: var(--wf-space-6)"></div></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-space-8</span></td>
+              <td><span class="var-value">32px</span></td>
+              <td>8倍</td>
+              <td><div class="spacing-bar" style="width: var(--wf-space-8)"></div></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-space-10</span></td>
+              <td><span class="var-value">40px</span></td>
+              <td>10倍</td>
+              <td><div class="spacing-bar" style="width: var(--wf-space-10)"></div></td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-space-12</span></td>
+              <td><span class="var-value">48px</span></td>
+              <td>12倍</td>
+              <td><div class="spacing-bar" style="width: var(--wf-space-12)"></div></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Radius -->
+      <section id="radius" class="category-section">
+        <h2>ボーダーラジウス</h2>
+
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>用途</th>
+              <th>プレビュー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-radius-sm</span></td>
+              <td><span class="var-value">4px</span></td>
+              <td>小さい角丸</td>
+              <td>
+                <div
+                  style="
+                    width: 60px;
+                    height: 40px;
+                    background: var(--wf-accent-300);
+                    border-radius: var(--wf-radius-sm);
+                  "
+                ></div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-radius-md</span></td>
+              <td><span class="var-value">8px</span></td>
+              <td>標準角丸</td>
+              <td>
+                <div
+                  style="
+                    width: 60px;
+                    height: 40px;
+                    background: var(--wf-accent-300);
+                    border-radius: var(--wf-radius-md);
+                  "
+                ></div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-radius-lg</span></td>
+              <td><span class="var-value">12px</span></td>
+              <td>大きい角丸</td>
+              <td>
+                <div
+                  style="
+                    width: 60px;
+                    height: 40px;
+                    background: var(--wf-accent-300);
+                    border-radius: var(--wf-radius-lg);
+                  "
+                ></div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-radius-full</span></td>
+              <td><span class="var-value">9999px</span></td>
+              <td>完全な円形</td>
+              <td>
+                <div
+                  style="
+                    width: 40px;
+                    height: 40px;
+                    background: var(--wf-accent-300);
+                    border-radius: var(--wf-radius-full);
+                  "
+                ></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Shadows -->
+      <section id="shadows" class="category-section">
+        <h2>シャドウ</h2>
+
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>説明</th>
+              <th>プレビュー</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-shadow-sm</span></td>
+              <td>小さいシャドウ（微妙な浮き上がり）</td>
+              <td>
+                <div
+                  style="
+                    width: 100px;
+                    height: 60px;
+                    background: white;
+                    box-shadow: var(--wf-shadow-sm);
+                  "
+                ></div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-shadow-md</span></td>
+              <td>標準シャドウ（カード、ボタン）</td>
+              <td>
+                <div
+                  style="
+                    width: 100px;
+                    height: 60px;
+                    background: white;
+                    box-shadow: var(--wf-shadow-md);
+                  "
+                ></div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-shadow-lg</span></td>
+              <td>大きいシャドウ（ドロップダウン）</td>
+              <td>
+                <div
+                  style="
+                    width: 100px;
+                    height: 60px;
+                    background: white;
+                    box-shadow: var(--wf-shadow-lg);
+                  "
+                ></div>
+              </td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-shadow-xl</span></td>
+              <td>特大シャドウ（モーダル）</td>
+              <td>
+                <div
+                  style="
+                    width: 100px;
+                    height: 60px;
+                    background: white;
+                    box-shadow: var(--wf-shadow-xl);
+                  "
+                ></div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Breakpoints -->
+      <section id="breakpoints" class="category-section">
+        <h2>ブレークポイント</h2>
+
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>デバイス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-breakpoint-sm</span></td>
+              <td><span class="var-value">600px</span></td>
+              <td>タブレット（小）</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-breakpoint-md</span></td>
+              <td><span class="var-value">900px</span></td>
+              <td>タブレット（大）</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-breakpoint-lg</span></td>
+              <td><span class="var-value">1200px</span></td>
+              <td>デスクトップ</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-breakpoint-xl</span></td>
+              <td><span class="var-value">1440px</span></td>
+              <td>大画面デスクトップ</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Buttons -->
+      <section id="buttons" class="category-section">
+        <h2>ボタン</h2>
+
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-btn-py-sm</span></td>
+              <td><span class="var-value">4px</span></td>
+              <td>小ボタンの縦パディング</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-btn-px-sm</span></td>
+              <td><span class="var-value">12px</span></td>
+              <td>小ボタンの横パディング</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-btn-py-md</span></td>
+              <td><span class="var-value">8px</span></td>
+              <td>標準ボタンの縦パディング</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-btn-px-md</span></td>
+              <td><span class="var-value">16px</span></td>
+              <td>標準ボタンの横パディング</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-btn-py-lg</span></td>
+              <td><span class="var-value">12px</span></td>
+              <td>大ボタンの縦パディング</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-btn-px-lg</span></td>
+              <td><span class="var-value">24px</span></td>
+              <td>大ボタンの横パディング</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Forms -->
+      <section id="forms" class="category-section">
+        <h2>フォーム</h2>
+
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-checkbox-size</span></td>
+              <td><span class="var-value">18px</span></td>
+              <td>チェックボックスのサイズ</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-radio-size</span></td>
+              <td><span class="var-value">18px</span></td>
+              <td>ラジオボタンのサイズ</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-textarea-min-h</span></td>
+              <td><span class="var-value">96px</span></td>
+              <td>テキストエリアの最小高さ</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Components -->
+      <section id="components" class="category-section">
+        <h2>その他コンポーネント</h2>
+
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>説明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-stamp-color</span></td>
+              <td><span class="var-value">var(--wf-primary-bg)</span></td>
+              <td>判子の色</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-stamp-weight</span></td>
+              <td><span class="var-value">3px</span></td>
+              <td>判子のボーダー幅</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-step-bullet-size</span></td>
+              <td><span class="var-value">24px</span></td>
+              <td>ステップ番号のサイズ</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-icon-sm</span></td>
+              <td><span class="var-value">14px</span></td>
+              <td>小さいアイコン</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-icon-md</span></td>
+              <td><span class="var-value">16px</span></td>
+              <td>標準アイコン</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-icon-lg</span></td>
+              <td><span class="var-value">20px</span></td>
+              <td>大きいアイコン</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Animation -->
+      <section id="animation" class="category-section">
+        <h2>アニメーション</h2>
+
+        <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem">デュレーション</h3>
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>用途</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-duration-fast</span></td>
+              <td><span class="var-value">150ms</span></td>
+              <td>高速アニメーション（ホバー、フォーカス）</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-duration-base</span></td>
+              <td><span class="var-value">250ms</span></td>
+              <td>標準アニメーション</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-duration-slow</span></td>
+              <td><span class="var-value">350ms</span></td>
+              <td>低速アニメーション（モーダル）</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-duration-slower</span></td>
+              <td><span class="var-value">500ms</span></td>
+              <td>最も遅いアニメーション</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem">イージング関数</h3>
+        <table class="var-table">
+          <thead>
+            <tr>
+              <th>変数名</th>
+              <th>値</th>
+              <th>特徴</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><span class="var-name">--wf-ease-in</span></td>
+              <td><span class="var-value">cubic-bezier(0.4, 0, 1, 1)</span></td>
+              <td>ゆっくり始まり速く終わる</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-ease-out</span></td>
+              <td><span class="var-value">cubic-bezier(0, 0, 0.2, 1)</span></td>
+              <td>速く始まりゆっくり終わる</td>
+            </tr>
+            <tr>
+              <td><span class="var-name">--wf-ease-in-out</span></td>
+              <td><span class="var-value">cubic-bezier(0.4, 0, 0.2, 1)</span></td>
+              <td>ゆっくり始まりゆっくり終わる</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <div
+        class="wf-alert wf-alert-sm"
+        style="margin-top: 48px; background: var(--wf-surface-subtle)"
+      >
+        <strong>使い方のヒント</strong>
+        <p style="margin: 8px 0 0 0">
+          これらのCSS変数は、独自のスタイルをカスタマイズする際に使用できます。例えば、
+          <code>color: var(--wf-color-accent);</code>
+          のように記述することで、テーマ変更に自動的に対応します。
+        </p>
+      </div>
+    </main>
+
+    <footer
+      style="
+        margin-top: 80px;
+        padding: 48px 0;
+        text-align: center;
+        border-top: 2px solid var(--wf-color-border);
+      "
+    >
+      <p style="color: var(--wf-color-muted); margin: 0; font-size: 0.875rem">
+        &copy;
+        <span id="copyright-year"></span>
+        Q_Q. All rights reserved.
       </p>
-    </div>
-  </header>
+    </footer>
 
-  <main id="main" class="wf-container" style="padding-top: 48px;">
-    <div style="margin-bottom: 24px;">
-      <a href="./index.html" class="back-link">← ドキュメントトップに戻る</a>
-      <span style="margin: 0 12px; color: var(--wf-color-muted);">|</span>
-      <a href="./reference.html" class="back-link">コンポーネントリファレンス</a>
-    </div>
-
-    <div class="toc">
-      <h2>目次</h2>
-      <ul>
-        <li><a href="#typography">タイポグラフィ</a></li>
-        <li><a href="#colors">カラー</a></li>
-        <li><a href="#spacing">スペーシング</a></li>
-        <li><a href="#radius">ボーダーラジウス</a></li>
-        <li><a href="#shadows">シャドウ</a></li>
-        <li><a href="#breakpoints">ブレークポイント</a></li>
-        <li><a href="#buttons">ボタン</a></li>
-        <li><a href="#forms">フォーム</a></li>
-        <li><a href="#components">その他コンポーネント</a></li>
-        <li><a href="#animation">アニメーション</a></li>
-      </ul>
-    </div>
-
-    <!-- Typography -->
-    <section id="typography" class="category-section">
-      <h2>タイポグラフィ</h2>
-
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>説明</th>
-            <th>プレビュー</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-font-family</span></td>
-            <td><span class="var-value">"Noto Serif JP", serif</span></td>
-            <td>メインフォント（和風の明朝体）</td>
-            <td style="font-family: var(--wf-font-family);">あいうえお ABC</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-font-family-sans</span></td>
-            <td><span class="var-value">system-ui, sans-serif</span></td>
-            <td>サンセリフフォント</td>
-            <td style="font-family: var(--wf-font-family-sans);">あいうえお ABC</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-font-sm</span></td>
-            <td><span class="var-value">0.875rem (14px)</span></td>
-            <td>小さいフォントサイズ</td>
-            <td style="font-size: var(--wf-font-sm);">サンプルテキスト</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-font-md</span></td>
-            <td><span class="var-value">1rem (16px)</span></td>
-            <td>標準フォントサイズ</td>
-            <td style="font-size: var(--wf-font-md);">サンプルテキスト</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-font-lg</span></td>
-            <td><span class="var-value">1.125rem (18px)</span></td>
-            <td>大きいフォントサイズ</td>
-            <td style="font-size: var(--wf-font-lg);">サンプルテキスト</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-font-xl</span></td>
-            <td><span class="var-value">1.25rem (20px)</span></td>
-            <td>特大フォントサイズ</td>
-            <td style="font-size: var(--wf-font-xl);">サンプルテキスト</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-leading-none</span></td>
-            <td><span class="var-value">1</span></td>
-            <td>行間なし</td>
-            <td style="line-height: var(--wf-leading-none);">行間なし<br>2行目</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-leading-tight</span></td>
-            <td><span class="var-value">1.25</span></td>
-            <td>狭い行間</td>
-            <td style="line-height: var(--wf-leading-tight);">狭い行間<br>2行目</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-leading-normal</span></td>
-            <td><span class="var-value">1.5</span></td>
-            <td>標準行間</td>
-            <td style="line-height: var(--wf-leading-normal);">標準行間<br>2行目</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-leading-relaxed</span></td>
-            <td><span class="var-value">1.75</span></td>
-            <td>広い行間</td>
-            <td style="line-height: var(--wf-leading-relaxed);">広い行間<br>2行目</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Colors -->
-    <section id="colors" class="category-section">
-      <h2>カラー</h2>
-
-      <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem;">伝統色（基本）</h3>
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>説明</th>
-            <th>プレビュー</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-koubai</span></td>
-            <td><span class="var-value">#f4a7b9</span></td>
-            <td>紅梅（こうばい）</td>
-            <td><span class="color-swatch" style="background: var(--wf-koubai);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-fuji</span></td>
-            <td><span class="var-value">#b28fce</span></td>
-            <td>藤（ふじ）</td>
-            <td><span class="color-swatch" style="background: var(--wf-fuji);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-sakura</span></td>
-            <td><span class="var-value">#fddede</span></td>
-            <td>桜（さくら）</td>
-            <td><span class="color-swatch" style="background: var(--wf-sakura);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-shirayuri</span></td>
-            <td><span class="var-value">#f8f4e6</span></td>
-            <td>白百合（しらゆり）</td>
-            <td><span class="color-swatch" style="background: var(--wf-shirayuri);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-sumi</span></td>
-            <td><span class="var-value">#2c2c2c</span></td>
-            <td>墨（すみ）</td>
-            <td><span class="color-swatch" style="background: var(--wf-sumi);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-hai</span></td>
-            <td><span class="var-value">#828282</span></td>
-            <td>灰（はい）</td>
-            <td><span class="color-swatch" style="background: var(--wf-hai);"></span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem;">インク（グレースケール）</h3>
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>用途</th>
-            <th>プレビュー</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-ink-900</span></td>
-            <td><span class="var-value">#1f1f1f</span></td>
-            <td>メインテキスト</td>
-            <td><span class="color-swatch" style="background: var(--wf-ink-900);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-ink-700</span></td>
-            <td><span class="var-value">#444444</span></td>
-            <td>セカンダリテキスト</td>
-            <td><span class="color-swatch" style="background: var(--wf-ink-700);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-ink-500</span></td>
-            <td><span class="var-value">#666666</span></td>
-            <td>控えめなテキスト</td>
-            <td><span class="color-swatch" style="background: var(--wf-ink-500);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-ink-300</span></td>
-            <td><span class="var-value">#999999</span></td>
-            <td>プレースホルダー</td>
-            <td><span class="color-swatch" style="background: var(--wf-ink-300);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-ink-100</span></td>
-            <td><span class="var-value">#e5e5e5</span></td>
-            <td>ボーダー、区切り線</td>
-            <td><span class="color-swatch" style="background: var(--wf-ink-100);"></span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem;">アクセントカラー（藤紫スケール）</h3>
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>用途</th>
-            <th>プレビュー</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-accent-50</span></td>
-            <td><span class="var-value">#f0ecf3</span></td>
-            <td>最も薄い</td>
-            <td><span class="color-swatch" style="background: var(--wf-accent-50);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-accent-100</span></td>
-            <td><span class="var-value">#e2dcef</span></td>
-            <td>-</td>
-            <td><span class="color-swatch" style="background: var(--wf-accent-100);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-accent-200</span></td>
-            <td><span class="var-value">#cfc7e3</span></td>
-            <td>-</td>
-            <td><span class="color-swatch" style="background: var(--wf-accent-200);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-accent-300</span></td>
-            <td><span class="var-value">#b9afd2</span></td>
-            <td>-</td>
-            <td><span class="color-swatch" style="background: var(--wf-accent-300);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-accent-400</span></td>
-            <td><span class="var-value">#9f93bd</span></td>
-            <td>-</td>
-            <td><span class="color-swatch" style="background: var(--wf-accent-400);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-accent-500</span></td>
-            <td><span class="var-value">#6a5c7c</span></td>
-            <td>ベースカラー</td>
-            <td><span class="color-swatch" style="background: var(--wf-accent-500);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-accent-600</span></td>
-            <td><span class="var-value">#5e516f</span></td>
-            <td>リンク</td>
-            <td><span class="color-swatch" style="background: var(--wf-accent-600);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-accent-700</span></td>
-            <td><span class="var-value">#4f4560</span></td>
-            <td>ボタン、フォーカス</td>
-            <td><span class="color-swatch" style="background: var(--wf-accent-700);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-accent-800</span></td>
-            <td><span class="var-value">#413a50</span></td>
-            <td>ホバー</td>
-            <td><span class="color-swatch" style="background: var(--wf-accent-800);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-accent-900</span></td>
-            <td><span class="var-value">#332f41</span></td>
-            <td>アクティブ</td>
-            <td><span class="color-swatch" style="background: var(--wf-accent-900);"></span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem;">セマンティックカラー</h3>
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>用途</th>
-            <th>プレビュー</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-color-text</span></td>
-            <td><span class="var-value">var(--wf-ink-900)</span></td>
-            <td>メインテキスト色</td>
-            <td><span style="color: var(--wf-color-text);">サンプル</span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-color-muted</span></td>
-            <td><span class="var-value">var(--wf-ink-500)</span></td>
-            <td>控えめなテキスト</td>
-            <td><span style="color: var(--wf-color-muted);">サンプル</span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-color-accent</span></td>
-            <td><span class="var-value">var(--wf-accent-500)</span></td>
-            <td>アクセントカラー</td>
-            <td><span class="color-swatch" style="background: var(--wf-color-accent);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-link-color</span></td>
-            <td><span class="var-value">var(--wf-accent-600)</span></td>
-            <td>リンク色</td>
-            <td><a href="#" style="color: var(--wf-link-color);">リンク</a></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-color-bg</span></td>
-            <td><span class="var-value">#e7ddd4</span></td>
-            <td>背景色（灰桜）</td>
-            <td><span class="color-swatch" style="background: var(--wf-color-bg);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-surface-base</span></td>
-            <td><span class="var-value">#ffffff</span></td>
-            <td>カード背景</td>
-            <td><span class="color-swatch" style="background: var(--wf-surface-base);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-surface-subtle</span></td>
-            <td><span class="var-value">#faf7f5</span></td>
-            <td>控えめな背景</td>
-            <td><span class="color-swatch" style="background: var(--wf-surface-subtle);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-surface-muted</span></td>
-            <td><span class="var-value">#f5f2ef</span></td>
-            <td>強調された背景</td>
-            <td><span class="color-swatch" style="background: var(--wf-surface-muted);"></span></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem;">ステータスカラー</h3>
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>用途</th>
-            <th>プレビュー</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-success</span></td>
-            <td><span class="var-value">#2e7d32</span></td>
-            <td>成功メッセージ</td>
-            <td><span class="color-swatch" style="background: var(--wf-success);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-warning</span></td>
-            <td><span class="var-value">#b26a00</span></td>
-            <td>警告メッセージ</td>
-            <td><span class="color-swatch" style="background: var(--wf-warning);"></span></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-danger</span></td>
-            <td><span class="var-value">#b00020</span></td>
-            <td>エラーメッセージ</td>
-            <td><span class="color-swatch" style="background: var(--wf-danger);"></span></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Spacing -->
-    <section id="spacing" class="category-section">
-      <h2>スペーシング</h2>
-      <p style="color: var(--wf-color-muted); margin-bottom: 24px;">4pxベースの8pxグリッドシステム</p>
-
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>説明</th>
-            <th>プレビュー</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-space-half</span></td>
-            <td><span class="var-value">2px</span></td>
-            <td>0.5倍（半分）</td>
-            <td><div class="spacing-bar" style="width: var(--wf-space-half);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-space-1</span></td>
-            <td><span class="var-value">4px</span></td>
-            <td>1倍（ベース）</td>
-            <td><div class="spacing-bar" style="width: var(--wf-space-1);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-space-2</span></td>
-            <td><span class="var-value">8px</span></td>
-            <td>2倍（8pxグリッド）</td>
-            <td><div class="spacing-bar" style="width: var(--wf-space-2);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-space-3</span></td>
-            <td><span class="var-value">12px</span></td>
-            <td>3倍</td>
-            <td><div class="spacing-bar" style="width: var(--wf-space-3);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-space-4</span></td>
-            <td><span class="var-value">16px</span></td>
-            <td>4倍</td>
-            <td><div class="spacing-bar" style="width: var(--wf-space-4);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-space-6</span></td>
-            <td><span class="var-value">24px</span></td>
-            <td>6倍</td>
-            <td><div class="spacing-bar" style="width: var(--wf-space-6);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-space-8</span></td>
-            <td><span class="var-value">32px</span></td>
-            <td>8倍</td>
-            <td><div class="spacing-bar" style="width: var(--wf-space-8);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-space-10</span></td>
-            <td><span class="var-value">40px</span></td>
-            <td>10倍</td>
-            <td><div class="spacing-bar" style="width: var(--wf-space-10);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-space-12</span></td>
-            <td><span class="var-value">48px</span></td>
-            <td>12倍</td>
-            <td><div class="spacing-bar" style="width: var(--wf-space-12);"></div></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Radius -->
-    <section id="radius" class="category-section">
-      <h2>ボーダーラジウス</h2>
-
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>用途</th>
-            <th>プレビュー</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-radius-sm</span></td>
-            <td><span class="var-value">4px</span></td>
-            <td>小さい角丸</td>
-            <td><div style="width: 60px; height: 40px; background: var(--wf-accent-300); border-radius: var(--wf-radius-sm);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-radius-md</span></td>
-            <td><span class="var-value">8px</span></td>
-            <td>標準角丸</td>
-            <td><div style="width: 60px; height: 40px; background: var(--wf-accent-300); border-radius: var(--wf-radius-md);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-radius-lg</span></td>
-            <td><span class="var-value">12px</span></td>
-            <td>大きい角丸</td>
-            <td><div style="width: 60px; height: 40px; background: var(--wf-accent-300); border-radius: var(--wf-radius-lg);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-radius-full</span></td>
-            <td><span class="var-value">9999px</span></td>
-            <td>完全な円形</td>
-            <td><div style="width: 40px; height: 40px; background: var(--wf-accent-300); border-radius: var(--wf-radius-full);"></div></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Shadows -->
-    <section id="shadows" class="category-section">
-      <h2>シャドウ</h2>
-
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>説明</th>
-            <th>プレビュー</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-shadow-sm</span></td>
-            <td>小さいシャドウ（微妙な浮き上がり）</td>
-            <td><div style="width: 100px; height: 60px; background: white; box-shadow: var(--wf-shadow-sm);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-shadow-md</span></td>
-            <td>標準シャドウ（カード、ボタン）</td>
-            <td><div style="width: 100px; height: 60px; background: white; box-shadow: var(--wf-shadow-md);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-shadow-lg</span></td>
-            <td>大きいシャドウ（ドロップダウン）</td>
-            <td><div style="width: 100px; height: 60px; background: white; box-shadow: var(--wf-shadow-lg);"></div></td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-shadow-xl</span></td>
-            <td>特大シャドウ（モーダル）</td>
-            <td><div style="width: 100px; height: 60px; background: white; box-shadow: var(--wf-shadow-xl);"></div></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Breakpoints -->
-    <section id="breakpoints" class="category-section">
-      <h2>ブレークポイント</h2>
-
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>デバイス</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-breakpoint-sm</span></td>
-            <td><span class="var-value">600px</span></td>
-            <td>タブレット（小）</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-breakpoint-md</span></td>
-            <td><span class="var-value">900px</span></td>
-            <td>タブレット（大）</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-breakpoint-lg</span></td>
-            <td><span class="var-value">1200px</span></td>
-            <td>デスクトップ</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-breakpoint-xl</span></td>
-            <td><span class="var-value">1440px</span></td>
-            <td>大画面デスクトップ</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Buttons -->
-    <section id="buttons" class="category-section">
-      <h2>ボタン</h2>
-
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>説明</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-btn-py-sm</span></td>
-            <td><span class="var-value">4px</span></td>
-            <td>小ボタンの縦パディング</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-btn-px-sm</span></td>
-            <td><span class="var-value">12px</span></td>
-            <td>小ボタンの横パディング</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-btn-py-md</span></td>
-            <td><span class="var-value">8px</span></td>
-            <td>標準ボタンの縦パディング</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-btn-px-md</span></td>
-            <td><span class="var-value">16px</span></td>
-            <td>標準ボタンの横パディング</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-btn-py-lg</span></td>
-            <td><span class="var-value">12px</span></td>
-            <td>大ボタンの縦パディング</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-btn-px-lg</span></td>
-            <td><span class="var-value">24px</span></td>
-            <td>大ボタンの横パディング</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Forms -->
-    <section id="forms" class="category-section">
-      <h2>フォーム</h2>
-
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>説明</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-checkbox-size</span></td>
-            <td><span class="var-value">18px</span></td>
-            <td>チェックボックスのサイズ</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-radio-size</span></td>
-            <td><span class="var-value">18px</span></td>
-            <td>ラジオボタンのサイズ</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-textarea-min-h</span></td>
-            <td><span class="var-value">96px</span></td>
-            <td>テキストエリアの最小高さ</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Components -->
-    <section id="components" class="category-section">
-      <h2>その他コンポーネント</h2>
-
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>説明</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-stamp-color</span></td>
-            <td><span class="var-value">var(--wf-primary-bg)</span></td>
-            <td>判子の色</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-stamp-weight</span></td>
-            <td><span class="var-value">3px</span></td>
-            <td>判子のボーダー幅</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-step-bullet-size</span></td>
-            <td><span class="var-value">24px</span></td>
-            <td>ステップ番号のサイズ</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-icon-sm</span></td>
-            <td><span class="var-value">14px</span></td>
-            <td>小さいアイコン</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-icon-md</span></td>
-            <td><span class="var-value">16px</span></td>
-            <td>標準アイコン</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-icon-lg</span></td>
-            <td><span class="var-value">20px</span></td>
-            <td>大きいアイコン</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- Animation -->
-    <section id="animation" class="category-section">
-      <h2>アニメーション</h2>
-
-      <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem;">デュレーション</h3>
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>用途</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-duration-fast</span></td>
-            <td><span class="var-value">150ms</span></td>
-            <td>高速アニメーション（ホバー、フォーカス）</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-duration-base</span></td>
-            <td><span class="var-value">250ms</span></td>
-            <td>標準アニメーション</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-duration-slow</span></td>
-            <td><span class="var-value">350ms</span></td>
-            <td>低速アニメーション（モーダル）</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-duration-slower</span></td>
-            <td><span class="var-value">500ms</span></td>
-            <td>最も遅いアニメーション</td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3 style="margin-top: 32px; margin-bottom: 16px; font-size: 1.25rem;">イージング関数</h3>
-      <table class="var-table">
-        <thead>
-          <tr>
-            <th>変数名</th>
-            <th>値</th>
-            <th>特徴</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><span class="var-name">--wf-ease-in</span></td>
-            <td><span class="var-value">cubic-bezier(0.4, 0, 1, 1)</span></td>
-            <td>ゆっくり始まり速く終わる</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-ease-out</span></td>
-            <td><span class="var-value">cubic-bezier(0, 0, 0.2, 1)</span></td>
-            <td>速く始まりゆっくり終わる</td>
-          </tr>
-          <tr>
-            <td><span class="var-name">--wf-ease-in-out</span></td>
-            <td><span class="var-value">cubic-bezier(0.4, 0, 0.2, 1)</span></td>
-            <td>ゆっくり始まりゆっくり終わる</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <div class="wf-alert wf-alert-sm" style="margin-top: 48px; background: var(--wf-surface-subtle);">
-      <strong>使い方のヒント</strong>
-      <p style="margin: 8px 0 0 0;">
-        これらのCSS変数は、独自のスタイルをカスタマイズする際に使用できます。例えば、<code>color: var(--wf-color-accent);</code> のように記述することで、テーマ変更に自動的に対応します。
-      </p>
-    </div>
-  </main>
-
-  <footer style="margin-top: 80px; padding: 48px 0; text-align: center; border-top: 2px solid var(--wf-color-border);">
-    <p style="color: var(--wf-color-muted); margin: 0; font-size: 0.875rem;">
-      &copy; <span id="copyright-year"></span> Q_Q. All rights reserved.
-    </p>
-  </footer>
-
-  <script>
-    const yearEl = document.getElementById('copyright-year');
-    if (yearEl) {
-      yearEl.textContent = new Date().getFullYear();
-    }
-  </script>
-</body>
-
+    <script>
+      const yearEl = document.getElementById("copyright-year");
+      if (yearEl) {
+        yearEl.textContent = new Date().getFullYear();
+      }
+    </script>
+  </body>
 </html>
