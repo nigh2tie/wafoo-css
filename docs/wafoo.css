@@ -3,8 +3,11 @@
 /* Design Tokens */
 @layer tokens, base, components, utilities;
 
-/* Import Japanese serif font */
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&display=swap");
+/* Note: Font should be loaded in HTML <head> for better performance:
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+*/
 
 @layer tokens {
   :root {
@@ -1145,7 +1148,48 @@
 
 /* from: src/components/header.css */
 @layer components {
-  /* Header - Noren (暖簾風) */
+  /* Header - Base with striped decoration (デフォルトで二色ストライプ装飾) */
+  .wf-header {
+    background: linear-gradient(180deg, var(--wf-sumi) 0%, rgba(44, 44, 44, 0.95) 100%);
+    color: var(--wf-surface-base);
+    padding: 2rem 0;
+    position: relative;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+
+  .wf-header h1,
+  .wf-header h2 {
+    margin: 0;
+    font-weight: 900;
+    letter-spacing: 0.2em;
+  }
+
+  /* Theme color stripe (テーマカラーストライプ) - デフォルトで全ヘッダーに適用 */
+  .wf-header::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: repeating-linear-gradient(
+      90deg,
+      var(--wf-color-accent),
+      var(--wf-color-accent) 10px,
+      var(--wf-surface-subtle) 10px,
+      var(--wf-surface-subtle) 20px,
+      var(--wf-color-accent) 20px,
+      var(--wf-color-accent) 30px
+    );
+  }
+
+  /* Modifier: ストライプなしヘッダー */
+  .wf-header--no-stripe::after {
+    display: none;
+  }
+
+  /* Header - Noren (暖簾風) - 既存クラス(後方互換性のため維持) */
   .wf-header-noren {
     background: linear-gradient(180deg, var(--wf-sumi) 0%, rgba(44, 44, 44, 0.95) 100%);
     color: var(--wf-surface-base);
@@ -5805,3 +5849,4 @@
     }
   }
 }
+

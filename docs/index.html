@@ -44,25 +44,100 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://nigh2tie.github.io/wafoo-css/" />
 
+    <!-- Fonts - Preconnect for better performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
-    <link rel="stylesheet" href="./wafoo.css" />
-    <script src="./wafoo.js"></script>
+    <link rel="stylesheet" href="./wafoo.min.css" />
+    <script src="./wafoo.min.js"></script>
     <style>
       body {
         margin: 0;
       }
 
+      /* テーマセレクター - 折りたたみ対応 */
       .theme-selector {
         position: fixed;
         top: 20px;
         right: 20px;
         z-index: 1000;
         background: var(--wf-surface-base);
-        padding: 16px;
         border-radius: var(--wf-radius-md);
         box-shadow: var(--wf-shadow-md);
-        min-width: 200px;
         border: 1px solid var(--wf-color-border);
+        max-width: 280px;
+      }
+
+      .theme-selector__toggle {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 12px 16px;
+        background: var(--wf-surface-base);
+        border: none;
+        border-radius: var(--wf-radius-md);
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--wf-color-text);
+        width: 100%;
+        transition: background-color 0.2s ease;
+      }
+
+      .theme-selector__toggle:hover {
+        background: var(--wf-surface-subtle);
+      }
+
+      .theme-selector__toggle span:first-child {
+        font-size: 1.25rem;
+        line-height: 1;
+      }
+
+      .theme-selector__label {
+        font-size: 0.875rem;
+      }
+
+      .theme-selector__content {
+        padding: 16px;
+        border-top: 1px solid var(--wf-color-border);
+      }
+
+      .theme-selector__content[hidden] {
+        display: none;
+      }
+
+      .theme-selector__content .wf-label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 700;
+      }
+
+      .theme-selector__content .wf-select {
+        width: 100%;
+        margin-bottom: 12px;
+      }
+
+      .theme-selector__hint {
+        margin: 0;
+        font-size: 0.75rem;
+        color: var(--wf-color-muted);
+        line-height: 1.4;
+      }
+
+      @media (max-width: 768px) {
+        .theme-selector {
+          top: 10px;
+          right: 10px;
+        }
+
+        .theme-selector__toggle {
+          padding: 10px 12px;
+        }
       }
 
       .demo-grid {
@@ -155,27 +230,37 @@
   <body>
     <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
 
-    <!-- テーマ切り替え -->
+    <!-- テーマ切り替え - 折りたたみ対応 -->
     <div class="theme-selector">
-      <label for="theme" style="display: block; margin-bottom: 8px; font-weight: 700">
-        テーマ選択
-      </label>
-      <select id="theme" class="wf-select" style="width: 100%">
-        <option value="">標準（藤紫）</option>
-        <option value="theme-sakura">桜（sakura）</option>
-        <option value="theme-koubai">紅梅（koubai）</option>
-        <option value="theme-moe">萌黄（moe）</option>
-        <option value="theme-kiku">菊（kiku）</option>
-        <option value="theme-koori">氷（koori）</option>
-        <option value="theme-yanagi">柳（yanagi）</option>
-        <option value="theme-momiji">紅葉（momiji）</option>
-        <option value="theme-fuji">藤（fuji）</option>
-        <option value="theme-uguisu">鶯（uguisu）</option>
-        <option value="theme-yuki">雪（yuki）</option>
-      </select>
-      <p style="margin: 12px 0 0 0; font-size: 0.75rem; color: var(--wf-color-muted)">
-        テーマを切り替えてデザインを確認できます
-      </p>
+      <button
+        class="theme-selector__toggle"
+        aria-expanded="false"
+        aria-controls="theme-selector-content"
+        aria-label="テーマ選択パネルを開く"
+      >
+        <span>🎨</span>
+        <span class="theme-selector__label">テーマ</span>
+      </button>
+
+      <div id="theme-selector-content" class="theme-selector__content" hidden>
+        <label for="theme" class="wf-label">テーマ選択</label>
+        <select id="theme" class="wf-select">
+          <option value="">標準（藤紫）</option>
+          <option value="theme-sakura">桜（sakura）</option>
+          <option value="theme-koubai">紅梅（koubai）</option>
+          <option value="theme-moe">萌黄（moe）</option>
+          <option value="theme-kiku">菊（kiku）</option>
+          <option value="theme-koori">氷（koori）</option>
+          <option value="theme-yanagi">柳（yanagi）</option>
+          <option value="theme-momiji">紅葉（momiji）</option>
+          <option value="theme-fuji">藤（fuji）</option>
+          <option value="theme-uguisu">鶯（uguisu）</option>
+          <option value="theme-yuki">雪（yuki）</option>
+        </select>
+        <p class="theme-selector__hint">
+          テーマを切り替えてデザインを確認できます
+        </p>
+      </div>
     </div>
 
     <!-- 暖簾ヘッダー -->
@@ -1843,6 +1928,37 @@ console.log(greet('世界'));</code></pre>
             const targetInput = Array.from(inputs).find(input => parseFloat(input.value) === value);
             if (targetInput) targetInput.checked = true;
           }
+        }
+      });
+
+      // スクロール位置の制御
+      if (window.history.scrollRestoration) {
+        window.history.scrollRestoration = 'manual';
+      }
+      window.scrollTo(0, 0);
+
+      // テーマセレクターの折りたたみ機能
+      document.addEventListener('DOMContentLoaded', function() {
+        // ハッシュがない場合のみ最上部へスクロール
+        if (!window.location.hash) {
+          setTimeout(function() {
+            window.scrollTo(0, 0);
+          }, 0);
+        }
+
+        // 折りたたみトグル
+        const toggle = document.querySelector('.theme-selector__toggle');
+        const content = document.getElementById('theme-selector-content');
+
+        if (toggle && content) {
+          toggle.addEventListener('click', function() {
+            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', !isExpanded);
+            content.hidden = isExpanded;
+            toggle.setAttribute('aria-label',
+              isExpanded ? 'テーマ選択パネルを開く' : 'テーマ選択パネルを閉じる'
+            );
+          });
         }
       });
     </script>

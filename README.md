@@ -45,7 +45,17 @@ HTMLに読み込みます：
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>My App - wafoo-css</title>
-    <link rel="stylesheet" href="path/to/wafoo-css/dist/wafoo.css" />
+
+    <!-- フォント読み込み（パフォーマンス向上のためpreconnect使用） -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- wafoo-css（minified版推奨） -->
+    <link rel="stylesheet" href="path/to/wafoo-css/dist/wafoo.min.css" />
   </head>
   <body>
     <div class="wf-container">
@@ -53,8 +63,8 @@ HTMLに読み込みます：
       <button class="wf-btn wf-btn-primary">ボタン</button>
     </div>
 
-    <!-- インタラクティブコンポーネントを使う場合 -->
-    <script src="path/to/wafoo-css/dist/wafoo.js"></script>
+    <!-- インタラクティブコンポーネントを使う場合（minified版推奨） -->
+    <script src="path/to/wafoo-css/dist/wafoo.min.js"></script>
   </body>
 </html>
 ```
@@ -264,6 +274,39 @@ hamburger.addEventListener('click', () => {
   <a class="wf-page-link" href="#">次へ</a>
 </nav>
 ```
+
+### ヘッダー
+
+#### 基本的なヘッダー（ストライプ付き）
+
+```html
+<header class="wf-header">
+  <h1>wafoo-css</h1>
+  <p>伝統的な日本の美学を取り入れたCSSフレームワーク</p>
+</header>
+```
+
+デフォルトで下部に二色ストライプ装飾が付きます。テーマカラーとサブトル色が交互に配置され、テーマ切り替えに自動対応します。
+
+#### ストライプなし
+
+```html
+<header class="wf-header wf-header--no-stripe">
+  <h1>シンプルヘッダー</h1>
+</header>
+```
+
+`wf-header--no-stripe` モディファイアでストライプを非表示にできます。
+
+#### 暖簾風ヘッダー（旧クラス名）
+
+```html
+<header class="wf-header-noren">
+  <h1>暖簾風ヘッダー</h1>
+</header>
+```
+
+`.wf-header-noren` は後方互換性のために維持されています。新規プロジェクトでは `.wf-header` の使用を推奨します。
 
 ### ボタン
 
@@ -869,6 +912,67 @@ document.body.className = "theme-momiji";
 document.body.classList.remove("theme-sakura");
 document.body.classList.add("theme-koori");
 ```
+
+## ブラウザサポート
+
+wafoo-cssは以下のブラウザをサポートしています：
+
+- **Chrome**: 最新版および直近2バージョン
+- **Safari**: 最新版および直近2バージョン
+- **Edge**: 最新版および直近2バージョン
+- **Firefox**: 最新版および直近2バージョン
+
+**非サポート**: Internet Explorer 11以前（CSSカスタムプロパティを使用しているため）
+
+### フォントのフォールバック
+
+Google Fontsからの読み込みが失敗した場合、以下のフォールバック動作が発生します：
+
+```css
+font-family: "Noto Serif JP", serif;
+```
+
+システムのデフォルト明朝体（serifフォント）が代替として使用されます。
+
+自前ホスティングする場合は、以下の手順でフォントファイルを配置してください：
+
+1. [Google Fonts](https://fonts.google.com/specimen/Noto+Serif+JP)からフォントをダウンロード
+2. プロジェクトの`fonts/`ディレクトリに配置
+3. CSSで`@font-face`を定義
+
+### Clipboard APIのフォールバック
+
+コードブロックのコピー機能は、Clipboard APIが利用できない場合、`document.execCommand('copy')`にフォールバックします。
+
+## セキュリティ
+
+### Content Security Policy (CSP)
+
+Google Fontsを使用する場合の推奨CSP設定：
+
+```html
+<meta http-equiv="Content-Security-Policy" content="
+  default-src 'self';
+  script-src 'self';
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  font-src https://fonts.gstatic.com;
+  img-src 'self' data:;
+  connect-src 'self';
+">
+```
+
+**注意点**:
+- `style-src 'unsafe-inline'`: インラインスタイル（カスタムCSS変数など）を許可するために必要
+- `font-src https://fonts.gstatic.com`: Google Fontsのフォントファイル読み込みを許可
+- 自前ホスティングする場合は、Google Fonts関連のディレクティブを削除可能
+
+### セキュアな実装のベストプラクティス
+
+wafoo-cssのJavaScriptは以下の原則に従っています：
+
+- **innerHTML回避**: テキスト置換には`textContent`を使用
+- **イベントデリゲーション**: インラインイベント属性を使用せず、イベントリスナーを使用
+- **XSS対策**: ユーザー入力を直接DOM操作しない
 
 ## 作者
 
