@@ -4295,33 +4295,7 @@
   border-radius: 12px;
   padding: var(--wf-space-3);
   word-wrap: break-word;
-  position: relative;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
-}
-
-/* Message Bubble Tail */
-.wf-message__bubble::before {
-  content: "";
-  position: absolute;
-  top: 12px;
-  left: -7px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 6px 7px 6px 0;
-  border-color: transparent var(--wf-ink-200) transparent transparent;
-}
-
-.wf-message__bubble::after {
-  content: "";
-  position: absolute;
-  top: 12px;
-  left: -6px;
-  width: 0;
-  height: 0;
-  border-style: solid;
-  border-width: 6px 6px 6px 0;
-  border-color: transparent var(--wf-color-bg) transparent transparent;
 }
 
 /* Message Body */
@@ -4363,20 +4337,6 @@
   color: white;
 }
 
-.wf-message-sent .wf-message__bubble::before {
-  left: auto;
-  right: -7px;
-  border-width: 6px 0 6px 7px;
-  border-color: transparent transparent transparent var(--wf-accent-600);
-}
-
-.wf-message-sent .wf-message__bubble::after {
-  left: auto;
-  right: -6px;
-  border-width: 6px 0 6px 6px;
-  border-color: transparent transparent transparent var(--wf-accent-500);
-}
-
 /* System Message (Centered) */
 .wf-message-system {
   justify-content: center;
@@ -4400,10 +4360,6 @@
   color: var(--wf-ink-600);
 }
 
-.wf-message-system .wf-message__bubble::before,
-.wf-message-system .wf-message__bubble::after {
-  display: none;
-}
 
 /* Message Status Indicators */
 .wf-message__status {
