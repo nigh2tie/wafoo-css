@@ -1,12 +1,18 @@
 # wafoo-css
 
+[![npm version](https://badge.fury.io/js/wafoo-css.svg)](https://www.npmjs.com/package/wafoo-css)
+[![npm downloads](https://img.shields.io/npm/dm/wafoo-css.svg)](https://www.npmjs.com/package/wafoo-css)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+
 和風CSSフレームワーク - 伝統的な日本の美学を取り入れた、レスポンシブでモダンなウェブプロジェクト開発のためのCSSフレームワーク。
 
 ## 目次
 
 - [クイックスタート](#クイックスタート)
-  - [パターン1: すぐに使う](#パターン1-すぐに使う)
-  - [パターン2: カスタマイズして使う](#パターン2-カスタマイズして使う)
+  - [パターン1: npmでインストール（推奨）](#パターン1-npmでインストール推奨)
+  - [パターン2: CDN経由で使う](#パターン2-cdn経由で使う)
+  - [パターン3: ダウンロードして使う](#パターン3-ダウンロードして使う)
+  - [パターン4: カスタマイズして使う](#パターン4-カスタマイズして使う)
 - [特徴](#特徴)
 - [クイックリファレンス](#クイックリファレンス)
 - [含まれるファイル](#含まれるファイル)
@@ -19,21 +25,16 @@
 
 ## クイックスタート
 
-wafoo-cssは2つの使い方があります。
-
-オンラインデモ（GitHub Pages）
+**オンラインデモ（GitHub Pages）**
 
 - サンプルとコンポーネント一覧: https://nigh2tie.github.io/wafoo-css/
 - コンポーネントリファレンス: https://nigh2tie.github.io/wafoo-css/reference.html
 - CSS変数リファレンス: https://nigh2tie.github.io/wafoo-css/css-variables.html
 
-### パターン1: すぐに使う
-
-ビルド済みのCSSとJavaScriptをダウンロードして使います。
+### パターン1: npmでインストール（推奨）
 
 ```bash
-# リポジトリをダウンロード
-git clone https://github.com/nigh2tie/wafoo-css.git
+npm install wafoo-css
 ```
 
 HTMLに読み込みます：
@@ -55,7 +56,7 @@ HTMLに読み込みます：
     />
 
     <!-- wafoo-css（minified版推奨） -->
-    <link rel="stylesheet" href="path/to/wafoo-css/dist/wafoo.min.css" />
+    <link rel="stylesheet" href="node_modules/wafoo-css/dist/wafoo.min.css" />
   </head>
   <body>
     <div class="wf-container">
@@ -64,17 +65,76 @@ HTMLに読み込みます：
     </div>
 
     <!-- インタラクティブコンポーネントを使う場合（minified版推奨） -->
-    <script src="path/to/wafoo-css/dist/wafoo.min.js"></script>
+    <script src="node_modules/wafoo-css/dist/wafoo.min.js"></script>
   </body>
 </html>
 ```
 
-### パターン2: カスタマイズして使う
+### パターン2: CDN経由で使う
+
+npmインストール不要で、CDN経由で直接読み込むこともできます：
+
+```html
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My App - wafoo-css</title>
+
+    <!-- フォント読み込み -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- wafoo-css via unpkg CDN -->
+    <link rel="stylesheet" href="https://unpkg.com/wafoo-css@0.2.0/dist/wafoo.min.css" />
+  </head>
+  <body>
+    <div class="wf-container">
+      <h1>Hello, wafoo-css!</h1>
+      <button class="wf-btn wf-btn-primary">ボタン</button>
+    </div>
+
+    <!-- インタラクティブコンポーネントを使う場合 -->
+    <script src="https://unpkg.com/wafoo-css@0.2.0/dist/wafoo.min.js"></script>
+  </body>
+</html>
+```
+
+**注意**: バージョン指定なしで `https://unpkg.com/wafoo-css/dist/wafoo.min.css` とすることで、常に最新版を読み込むこともできますが、本番環境では特定のバージョンを指定することを推奨します。
+
+### パターン3: ダウンロードして使う
+
+ビルド済みのCSSとJavaScriptをダウンロードして使います。
+
+```bash
+# リポジトリをダウンロード
+git clone https://github.com/nigh2tie/wafoo-css.git
+```
+
+HTMLに読み込みます：
+
+```html
+<!-- wafoo-css（minified版推奨） -->
+<link rel="stylesheet" href="path/to/wafoo-css/dist/wafoo.min.css" />
+
+<!-- インタラクティブコンポーネントを使う場合 -->
+<script src="path/to/wafoo-css/dist/wafoo.min.js"></script>
+```
+
+### パターン4: カスタマイズして使う
 
 ソースファイルを編集して、自分専用のCSSフレームワークを作ります。
 
 ```bash
-# リポジトリをclone
+# npmパッケージとしてインストール
+npm install wafoo-css
+
+# または、リポジトリをclone
 git clone https://github.com/nigh2tie/wafoo-css.git
 cd wafoo-css
 

@@ -1,10 +1,38 @@
 {
   "name": "wafoo-css",
-  "private": true,
-  "version": "0.1.0",
-  "description": "Japanese-inspired CSS framework (MVP)",
+  "version": "0.2.0",
+  "description": "Japanese-inspired CSS framework with traditional aesthetics",
+  "main": "dist/wafoo.css",
+  "style": "dist/wafoo.css",
   "author": "Q_Q",
   "license": "MIT",
+  "keywords": [
+    "css",
+    "css-framework",
+    "japanese",
+    "wafoo",
+    "和風",
+    "ui",
+    "responsive",
+    "design-system",
+    "components"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nigh2tie/wafoo-css.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nigh2tie/wafoo-css/issues"
+  },
+  "homepage": "https://nigh2tie.github.io/wafoo-css/",
+  "files": [
+    "dist/",
+    "src/",
+    "scripts/",
+    "LICENSE",
+    "README.md",
+    "REFERENCE.md"
+  ],
   "scripts": {
     "build": "bash scripts/build.sh",
     "build:css": "postcss dist/wafoo.css -o dist/wafoo.min.css",
