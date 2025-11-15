@@ -449,6 +449,73 @@
   &lt;button class="wf-toast__close"&gt;×&lt;/button&gt;
 &lt;/div&gt;</code></pre>
 
+        <h3>ヘッダー</h3>
+        <div class="table-wrapper">
+          <table class="wf-table wf-table-striped">
+            <thead>
+              <tr>
+                <th scope="col">クラス名</th>
+                <th scope="col">用途</th>
+                <th scope="col">使用例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>wf-header</code></td>
+                <td>デフォルトヘッダー（暖簾風）</td>
+                <td><code>&lt;header class="wf-header"&gt;&lt;h1&gt;タイトル&lt;/h1&gt;&lt;/header&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-header--no-stripe</code></td>
+                <td>ストライプなしヘッダー</td>
+                <td><code>&lt;header class="wf-header wf-header--no-stripe"&gt;...&lt;/header&gt;</code></td>
+              </tr>
+              <tr>
+                <td><code>wf-header-noren</code></td>
+                <td>暖簾風ヘッダー（エイリアス）</td>
+                <td><code>&lt;header class="wf-header-noren"&gt;...&lt;/header&gt;</code></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4>ヘッダー詳細</h4>
+        <p>
+          <code>.wf-header</code>は墨色グラデーション背景とテーマカラーストライプ装飾を持つ暖簾（のれん）風デザインがデフォルトです。
+          日本の伝統的な店舗の暖簾をモチーフにしており、和風の雰囲気を演出します。
+        </p>
+
+        <div style="margin: 16px 0">
+          <strong>特徴:</strong>
+          <ul style="margin: 8px 0; padding-left: 24px">
+            <li>墨色（<code>--wf-sumi</code>）のグラデーション背景</li>
+            <li>下部にテーマカラーのストライプ装飾（<code>::after</code>疑似要素）</li>
+            <li>テーマ変更に自動対応（<code>var(--wf-color-accent)</code>使用）</li>
+            <li>中央揃えテキスト、2remの上下パディング</li>
+          </ul>
+        </div>
+
+        <pre><code>&lt;!-- デフォルト（暖簾風） --&gt;
+&lt;header class="wf-header"&gt;
+  &lt;h1&gt;wafoo-css&lt;/h1&gt;
+  &lt;p&gt;和風CSSフレームワーク&lt;/p&gt;
+&lt;/header&gt;
+
+&lt;!-- ストライプなし --&gt;
+&lt;header class="wf-header wf-header--no-stripe"&gt;
+  &lt;h1&gt;シンプルヘッダー&lt;/h1&gt;
+&lt;/header&gt;
+
+&lt;!-- エイリアス（後方互換） --&gt;
+&lt;header class="wf-header-noren"&gt;
+  &lt;h1&gt;暖簾ヘッダー&lt;/h1&gt;
+&lt;/header&gt;</code></pre>
+
+        <p style="margin-top: 16px; color: var(--wf-color-muted); font-size: 0.875rem">
+          <strong>注:</strong> <code>.wf-header-noren</code>は<code>.wf-header</code>のエイリアスで、後方互換性のために維持されています。
+          新規プロジェクトでは<code>.wf-header</code>の使用を推奨します。
+        </p>
+
         <h3>ナビゲーション</h3>
         <div class="table-wrapper">
           <table class="wf-table wf-table-striped">
@@ -934,10 +1001,10 @@ hamburger.addEventListener('click', () =&gt; {
             ) - モバイルメニュー
           </li>
           <li>
-            <strong>暖簾ヘッダー</strong>
+            <strong>ヘッダー</strong>
             (
-            <code>.wf-header-noren</code>
-            ) - 和風ヘッダー
+            <code>.wf-header</code>
+            ) - 暖簾風デザインのヘッダー
           </li>
           <li>
             <strong>ブレッドクラム</strong>

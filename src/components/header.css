@@ -1,5 +1,6 @@
 @layer components {
-  /* Header - Base with striped decoration (デフォルトで二色ストライプ装飾) */
+  /* Header - Default style with noren (暖簾) design */
+  /* 墨色グラデーション + ストライプ装飾がデフォルト */
   .wf-header {
     background: linear-gradient(180deg, var(--wf-sumi) 0%, rgba(44, 44, 44, 0.95) 100%);
     color: var(--wf-surface-base);
@@ -40,7 +41,8 @@
     display: none;
   }
 
-  /* Header - Noren (暖簾風) - 既存クラス(後方互換性のため維持) */
+  /* Alias: .wf-header-noren (後方互換性のため維持) */
+  /* 既存のコードで .wf-header-noren を使用している場合も動作します */
   .wf-header-noren {
     background: linear-gradient(180deg, var(--wf-sumi) 0%, rgba(44, 44, 44, 0.95) 100%);
     color: var(--wf-surface-base);
@@ -57,7 +59,6 @@
     letter-spacing: 0.2em;
   }
 
-  /* Theme color stripe (テーマカラーストライプ) */
   .wf-header-noren::after {
     content: "";
     position: absolute;

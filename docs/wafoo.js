@@ -1491,6 +1491,20 @@
     WFUI.tooltip = function (trigger, tip, opts) {
       var cfg = Object.assign({ margin: 8, placement: "auto" }, opts || {});
 
+      // ARIA attributes for accessibility
+      var tipId = tip.id || 'wf-tooltip-' + Math.random().toString(36).substr(2, 9);
+      if (!tip.id) tip.id = tipId;
+      if (!trigger.getAttribute('aria-describedby')) {
+        trigger.setAttribute('aria-describedby', tipId);
+      }
+      if (!tip.getAttribute('role')) {
+        tip.setAttribute('role', 'tooltip');
+      }
+      // Initial state: hidden
+      if (!tip.hasAttribute('aria-hidden')) {
+        tip.setAttribute('aria-hidden', 'true');
+      }
+
       function measure(el) {
         var prevHidden = el.hidden;
         var prevVis = el.style.visibility;
@@ -1552,6 +1566,7 @@
         if (v) position();
         tip.hidden = !v;
         tip.classList.toggle("is-open", v);
+        tip.setAttribute('aria-hidden', v ? 'false' : 'true');
       }
       on(trigger, "mouseenter", function () {
         show(true);

@@ -1,5 +1,15 @@
+# Modern browsers (last 2 versions)
 last 2 Chrome versions
 last 2 Safari versions
 last 2 Edge versions
+last 2 Firefox versions
+
+# No dead browsers
 not dead
+
+# No IE support (CSS custom properties required)
+not IE 11
+
+# Market share > 0.2%
+> 0.2%
 

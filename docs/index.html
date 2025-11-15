@@ -93,9 +93,10 @@
         background: var(--wf-surface-subtle);
       }
 
-      .theme-selector__toggle span:first-child {
-        font-size: 1.25rem;
+      .theme-selector__indicator {
+        font-size: 1rem;
         line-height: 1;
+        color: var(--wf-color-accent);
       }
 
       .theme-selector__label {
@@ -238,13 +239,12 @@
         aria-controls="theme-selector-content"
         aria-label="テーマ選択パネルを開く"
       >
-        <span>🎨</span>
-        <span class="theme-selector__label">テーマ</span>
+        <span class="theme-selector__indicator">◆</span>
+        <span class="theme-selector__label">テーマ選択</span>
       </button>
 
       <div id="theme-selector-content" class="theme-selector__content" hidden>
-        <label for="theme" class="wf-label">テーマ選択</label>
-        <select id="theme" class="wf-select">
+        <select id="theme" class="wf-select" aria-label="テーマ選択">
           <option value="">標準（藤紫）</option>
           <option value="theme-sakura">桜（sakura）</option>
           <option value="theme-koubai">紅梅（koubai）</option>
