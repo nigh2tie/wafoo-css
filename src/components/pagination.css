@@ -4,6 +4,8 @@
     display: flex;
     align-items: center;
     gap: var(--wf-space-2);
+    flex-wrap: wrap; /* 折り返し対応 */
+    justify-content: center; /* 中央揃え */
   }
   .wf-page-link {
     display: inline-block;
@@ -25,5 +27,18 @@
   .wf-page-link.is-disabled {
     opacity: 0.5;
     pointer-events: none;
+  }
+
+  /* モバイル対応 */
+  @media (max-width: 600px) {
+    .wf-pagination {
+      gap: var(--wf-space-1); /* モバイルでギャップを縮小 */
+    }
+
+    .wf-page-link {
+      padding: var(--wf-space-2) var(--wf-space-2);
+      min-width: 36px; /* タップターゲット確保 */
+      text-align: center;
+    }
   }
 }

@@ -99,13 +99,69 @@
     }
   }
 
-  /* モバイル時にハンバーガーを表示 */
+  /* Navbar variant: Primary (テーマカラー対応) */
+  .wf-navbar-primary {
+    background: var(--wf-primary-bg);
+    border-bottom-color: transparent;
+  }
+  .wf-navbar-primary .wf-navbar-brand {
+    color: var(--wf-primary-fg);
+  }
+  .wf-navbar-primary .wf-nav-link {
+    color: var(--wf-primary-fg);
+  }
+  .wf-navbar-primary .wf-nav-link:hover,
+  .wf-navbar-primary .wf-nav-link:focus-visible {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  .wf-navbar-primary .wf-nav-link.is-active {
+    background: rgba(255, 255, 255, 0.2);
+  }
+  .wf-navbar-primary .wf-hamburger__line {
+    background-color: var(--wf-primary-fg);
+  }
+
+  /* モバイル対応: デフォルト（ハンバーガーなし） */
   @media (max-width: 768px) {
-    .wf-hamburger {
-      display: flex;
+    /* ナビバーを縦並びに */
+    .wf-navbar {
+      flex-direction: column;
+      align-items: stretch;
     }
 
+    /* ナビゲーションリストも縦並びに */
     .wf-navbar-nav {
+      flex-direction: column;
+      width: 100%;
+    }
+
+    /* ナビゲーション項目をフル幅に */
+    .wf-nav-item {
+      width: 100%;
+    }
+
+    /* リンクをブロック表示 */
+    .wf-nav-link {
+      display: block;
+      width: 100%;
+    }
+
+    /* ハンバーガーメニューがある場合の上書き */
+    .wf-hamburger {
+      display: flex;
+      align-self: flex-end;
+      position: absolute;
+      top: var(--wf-space-2);
+      right: var(--wf-space-4);
+    }
+
+    /* ハンバーガーがある場合はサイドドロワーに */
+    .wf-navbar:has(.wf-hamburger) {
+      flex-direction: row;
+      align-items: center;
+    }
+
+    .wf-navbar:has(.wf-hamburger) .wf-navbar-nav {
       position: fixed;
       top: 0;
       left: -100%;
@@ -120,18 +176,17 @@
       z-index: 9998;
     }
 
-    .wf-navbar-nav.is-open {
+    .wf-navbar:has(.wf-hamburger) .wf-navbar-nav.is-open {
       left: 0;
     }
 
-    .wf-nav-item {
-      width: 100%;
+    .wf-navbar:has(.wf-hamburger) .wf-nav-link {
+      padding: var(--wf-space-3) var(--wf-space-4);
     }
 
-    .wf-nav-link {
-      display: block;
-      width: 100%;
-      padding: var(--wf-space-3) var(--wf-space-4);
+    /* Primary variant - モバイル時のサイドドロワー背景色 */
+    .wf-navbar-primary:has(.wf-hamburger) .wf-navbar-nav {
+      background: var(--wf-primary-bg);
     }
   }
 }

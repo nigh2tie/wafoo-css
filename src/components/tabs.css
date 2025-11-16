@@ -38,4 +38,23 @@
   .wf-tabpanel[aria-hidden="false"] {
     display: block;
   }
+
+  /* モバイル対応: 横スクロール */
+  @media (max-width: 600px) {
+    .wf-tablist {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
+    }
+
+    /* スクロールバーを薄く */
+    .wf-tablist::-webkit-scrollbar {
+      height: 4px;
+    }
+
+    .wf-tablist::-webkit-scrollbar-thumb {
+      background: var(--wf-color-border);
+      border-radius: 2px;
+    }
+  }
 }

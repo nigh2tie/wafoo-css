@@ -38,4 +38,17 @@
   .wf-dropdown__item:focus-visible {
     background: var(--wf-surface-muted);
   }
+
+  /* モバイル対応: 画面端はみ出し対策 */
+  @media (max-width: 600px) {
+    .wf-dropdown__menu {
+      /* 画面幅の90%を超えないように */
+      min-width: min(180px, 90vw);
+      max-width: 90vw;
+
+      /* 画面端ではみ出しを防ぐ（中央配置） */
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
 }

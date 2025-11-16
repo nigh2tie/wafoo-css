@@ -563,6 +563,11 @@
                 <td><code>&lt;span class="wf-hamburger__line"&gt;&lt;/span&gt;</code></td>
               </tr>
               <tr>
+                <td><code>wf-navbar-primary</code></td>
+                <td>プライマリバリアント（テーマカラー）</td>
+                <td><code>&lt;nav class="wf-navbar wf-navbar-primary"&gt;...&lt;/nav&gt;</code></td>
+              </tr>
+              <tr>
                 <td><code>is-active</code></td>
                 <td>アクティブ状態</td>
                 <td><code>&lt;a class="wf-nav-link is-active"&gt;現在地&lt;/a&gt;</code></td>
@@ -570,6 +575,36 @@
             </tbody>
           </table>
         </div>
+
+        <h4>ナビバーバリアント</h4>
+        <p>
+          <code>.wf-navbar-primary</code>バリアントを追加すると、テーマのプライマリカラー（<code>--wf-primary-bg</code>）を背景色として使用します。
+          テーマクラス（<code>theme-sakura</code>、<code>theme-koubai</code>など）と組み合わせることで、自動的にテーマカラーに対応したナビバーを作成できます。
+        </p>
+        <pre><code>&lt;!-- デフォルト（白背景） --&gt;
+&lt;nav class="wf-navbar"&gt;
+  &lt;a class="wf-navbar-brand" href="#"&gt;ブランド&lt;/a&gt;
+  &lt;ul class="wf-navbar-nav"&gt;
+    &lt;li class="wf-nav-item"&gt;&lt;a class="wf-nav-link is-active"&gt;ホーム&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;
+
+&lt;!-- プライマリバリアント（テーマカラー背景） --&gt;
+&lt;nav class="wf-navbar wf-navbar-primary"&gt;
+  &lt;a class="wf-navbar-brand" href="#"&gt;ブランド&lt;/a&gt;
+  &lt;ul class="wf-navbar-nav"&gt;
+    &lt;li class="wf-nav-item"&gt;&lt;a class="wf-nav-link is-active"&gt;ホーム&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/nav&gt;</code></pre>
+
+        <h4>モバイル対応</h4>
+        <p>
+          ナビバーはモバイルファースト設計により、デフォルトでモバイル端末に対応しています（768px以下で自動調整）:
+        </p>
+        <ul>
+          <li><strong>ハンバーガーなし</strong>: ナビゲーション項目が自動的に縦並びになります</li>
+          <li><strong>ハンバーガーあり</strong>: サイドドロワー形式のメニューになります（JavaScriptでトグル制御が必要）</li>
+        </ul>
 
         <h4>ハンバーガーメニュー詳細サンプル</h4>
         <p>

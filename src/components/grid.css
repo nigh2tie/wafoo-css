@@ -36,59 +36,53 @@
     --wf-gy: var(--wf-space-6);
   }
 
-  /* Columns */
+  /* Columns - モバイルファースト: デフォルトは100%幅 */
   [class^="wf-col-"],
   [class*=" wf-col-"] {
     padding-left: var(--wf-gx);
     padding-right: var(--wf-gx);
-  }
-  .wf-col-1 {
     flex: 0 0 auto;
-    width: 8.333333%;
+    width: 100%; /* モバイルデフォルト */
   }
-  .wf-col-2 {
-    flex: 0 0 auto;
-    width: 16.666667%;
-  }
-  .wf-col-3 {
-    flex: 0 0 auto;
-    width: 25%;
-  }
-  .wf-col-4 {
-    flex: 0 0 auto;
-    width: 33.333333%;
-  }
-  .wf-col-5 {
-    flex: 0 0 auto;
-    width: 41.666667%;
-  }
-  .wf-col-6 {
-    flex: 0 0 auto;
-    width: 50%;
-  }
-  .wf-col-7 {
-    flex: 0 0 auto;
-    width: 58.333333%;
-  }
-  .wf-col-8 {
-    flex: 0 0 auto;
-    width: 66.666667%;
-  }
-  .wf-col-9 {
-    flex: 0 0 auto;
-    width: 75%;
-  }
-  .wf-col-10 {
-    flex: 0 0 auto;
-    width: 83.333333%;
-  }
-  .wf-col-11 {
-    flex: 0 0 auto;
-    width: 91.666667%;
-  }
-  .wf-col-12 {
-    flex: 0 0 auto;
-    width: 100%;
+
+  /* sm以上（600px以上）でグリッド幅を適用 */
+  @media (min-width: var(--wf-breakpoint-sm)) {
+    .wf-col-1 {
+      width: 8.333333%;
+    }
+    .wf-col-2 {
+      width: 16.666667%;
+    }
+    .wf-col-3 {
+      width: 25%;
+    }
+    .wf-col-4 {
+      width: 33.333333%;
+    }
+    .wf-col-5 {
+      width: 41.666667%;
+    }
+    .wf-col-6 {
+      width: 50%;
+    }
+    .wf-col-7 {
+      width: 58.333333%;
+    }
+    .wf-col-8 {
+      width: 66.666667%;
+    }
+    .wf-col-9 {
+      width: 75%;
+    }
+    .wf-col-10 {
+      width: 83.333333%;
+    }
+    .wf-col-11 {
+      width: 91.666667%;
+    }
+    .wf-col-12 {
+      width: 100%;
+    }
   }
 
   /* Auto layout (equal flexible columns) */
@@ -97,18 +91,20 @@
     width: auto;
   }
 
-  /* Offsets (subset for demo) */
-  .wf-offset-1 {
-    margin-left: 8.333333%;
-  }
-  .wf-offset-2 {
-    margin-left: 16.666667%;
-  }
-  .wf-offset-3 {
-    margin-left: 25%;
-  }
-  .wf-offset-4 {
-    margin-left: 33.333333%;
+  /* Offsets - モバイルでは無効、sm以上で有効 */
+  @media (min-width: var(--wf-breakpoint-sm)) {
+    .wf-offset-1 {
+      margin-left: 8.333333%;
+    }
+    .wf-offset-2 {
+      margin-left: 16.666667%;
+    }
+    .wf-offset-3 {
+      margin-left: 25%;
+    }
+    .wf-offset-4 {
+      margin-left: 33.333333%;
+    }
   }
 
   /* Breakpoint: sm */

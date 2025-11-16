@@ -5,6 +5,7 @@
   }
   .wf-table {
     width: 100%;
+    min-width: 500px; /* 最小幅を設定してカラム圧縮を防ぐ */
     border-collapse: separate;
     border-spacing: 0;
     background: var(--wf-surface-base);
@@ -90,5 +91,12 @@
   .wf-table-loose td {
     padding: 14px 16px;
     font-size: var(--wf-font-lg);
+  }
+
+  /* モバイル対応 */
+  @media (max-width: 600px) {
+    .wf-table {
+      min-width: 400px; /* モバイルでは少し小さく */
+    }
   }
 }
