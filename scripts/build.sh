@@ -95,17 +95,18 @@ if [ -f "$JS_PATCH" ]; then
   fi
   cat "$OUT_DIR/.wafoo.base.js" "$JS_PATCH" > "$JS_OUT"
 
-  # Naive minify (no external deps)
-  MIN_CONTENT=$(cat "$JS_OUT" \
-    | sed -E 's:/\*[^*]*\*+([^/*][^*]*\*+)*/::g' \
-    | sed -E 's://[^\n]*::g' \
-    | tr '\n' ' ' \
-    | sed -E 's/[[:space:]]+/ /g' \
-    | sed -E 's/ ?([{}();,:\[\]]) ?/\1/g')
-  printf "%s" "$MIN_CONTENT" > "$JS_MIN_OUT"
+  # Minify with terser (proper JavaScript minification)
+  if command -v npx &> /dev/null; then
+    npx terser "$JS_OUT" -o "$JS_MIN_OUT" -c -m
+    echo "Built: $JS_OUT (+ patch)"
+    echo "Built: $JS_MIN_OUT (terser)"
+  else
+    echo "Warning: terser not found. Copying non-minified version..."
+    cp "$JS_OUT" "$JS_MIN_OUT"
+    echo "Built: $JS_OUT (+ patch)"
+    echo "Built: $JS_MIN_OUT (fallback, not minified)"
+  fi
   rm -f "$OUT_DIR/.wafoo.base.js"
-  echo "Built: $JS_OUT (+ patch)"
-  echo "Built: $JS_MIN_OUT (fallback)"
 fi
 
 # Copy assets into docs/ for GitHub Pages (docs folder is the site root)

@@ -51,7 +51,7 @@
 
     /* Semantic colors */
     --wf-color-text: var(--wf-ink-900);
-    --wf-color-muted: var(--wf-ink-500);
+    --wf-color-muted: var(--wf-ink-700); /* Changed from ink-500 to meet WCAG AA 4.5:1 contrast */
     --wf-color-accent: var(--wf-accent-500);
     --wf-link-color: var(--wf-accent-600);
     --wf-link-color-hover: var(--wf-accent-700);

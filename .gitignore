@@ -106,6 +106,9 @@ $RECYCLE_BIN/
 # -------------
 coverage/
 .nyc_output/
+test-results/
+playwright-report/
+playwright/.cache/
 
 # Build artifacts
 # ---------------
