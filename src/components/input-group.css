@@ -54,4 +54,21 @@
     border-top-right-radius: var(--wf-radius-md);
     border-bottom-right-radius: var(--wf-radius-md);
   }
+
+  /* モバイル対応: 縦並び */
+  @media (max-width: 600px) {
+    .wf-input-group {
+      flex-direction: column;
+    }
+
+    /* すべての子要素に角丸を復元 */
+    .wf-input-group > * {
+      border-radius: var(--wf-radius-md) !important;
+    }
+
+    /* 最初以外の要素に上マージンを追加 */
+    .wf-input-group > *:not(:first-child) {
+      margin-top: var(--wf-space-2);
+    }
+  }
 }

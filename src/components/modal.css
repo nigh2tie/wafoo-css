@@ -154,4 +154,14 @@
   .wf-modal--info .wf-modal__footer {
     border-top-color: var(--wf-color-accent);
   }
+
+  /* モバイル対応: パディング改善 */
+  @media (max-width: 600px) {
+    .wf-modal,
+    .wf-modal-sm,
+    .wf-modal-lg {
+      width: calc(100vw - var(--wf-space-4) * 2);
+      margin: var(--wf-space-4);
+    }
+  }
 }
