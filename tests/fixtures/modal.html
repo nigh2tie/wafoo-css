@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modal Test - wafoo-css</title>
+  <link rel="stylesheet" href="../../dist/wafoo.css">
+</head>
+<body>
+  <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+
+  <main id="main" class="wf-container" style="padding: 2rem;">
+    <h1>Modal Test</h1>
+
+    <button class="wf-btn wf-btn-primary" data-wf-modal="test-modal">
+      モーダルを開く
+    </button>
+
+    <!-- Modal -->
+    <div id="test-modal" class="wf-modal-overlay">
+      <div class="wf-modal">
+        <div class="wf-modal__header">
+          <h2 class="wf-modal__title">テストモーダル</h2>
+          <button class="wf-modal__close" aria-label="閉じる">×</button>
+        </div>
+        <div class="wf-modal__body">
+          <p>これはテスト用のモーダルです。</p>
+        </div>
+        <div class="wf-modal__footer">
+          <button class="wf-btn wf-btn-subtle">キャンセル</button>
+          <button class="wf-btn wf-btn-primary">OK</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="../../dist/wafoo.js"></script>
+</body>
+</html>
