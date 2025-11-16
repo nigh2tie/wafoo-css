@@ -105,7 +105,8 @@ npmインストール不要で、CDN経由で直接読み込むこともでき�
 </html>
 ```
 
-**注意**: バージョン指定なしで `https://unpkg.com/wafoo-css/dist/wafoo.min.css` とすることで、常に最新版を読み込むこともできますが、本番環境では特定のバージョンを指定することを推奨します。
+**注意**: バージョン指定なしで `https://unpkg.com/wafoo-css/dist/wafoo.min.css`
+とすることで、常に最新版を読み込むこともできますが、本番環境では特定のバージョンを指定することを推奨します。
 
 ### パターン3: ダウンロードして使う
 
@@ -171,11 +172,13 @@ bash scripts/build.sh
 
 wafoo-cssの詳細なリファレンスドキュメントを用意しています：
 
-- **[完全リファレンス (REFERENCE.md)](./REFERENCE.md)** - GitHub上で閲覧できるMarkdown形式の完全なリファレンス
+- **[完全リファレンス (REFERENCE.md)](./REFERENCE.md)** -
+  GitHub上で閲覧できるMarkdown形式の完全なリファレンス
 - **[コンポーネントリファレンス (docs/reference.html)](https://nigh2tie.github.io/wafoo-css/reference.html)** - ブラウザで見やすいHTML形式のコンポーネントリファレンス
 - **[CSS変数リファレンス (docs/css-variables.html)](https://nigh2tie.github.io/wafoo-css/css-variables.html)** - 全87個のCSS変数を視覚的なプレビュー付きで確認
 
 リファレンスには以下が含まれています：
+
 - よく使うコンポーネント一覧
 - 全CSS変数（カラー、タイポグラフィ、スペーシング等）
 - ユーティリティクラス一覧
@@ -213,6 +216,16 @@ wafoo-css/
 
 ```bash
 npm install
+```
+
+### ローカル開発サーバーを起動
+
+```bash
+# 開発用サーバーを起動（ポート8000）
+npx http-server -p 8000
+
+# ブラウザで以下にアクセス
+# http://localhost:8000/docs/
 ```
 
 ### CSSをビルド
@@ -298,14 +311,14 @@ npm run lint:css:fix  # 自動修正
 **JavaScript（メニュー開閉）:**
 
 ```javascript
-const hamburger = document.querySelector('.wf-hamburger');
-const navMenu = document.querySelector('.wf-navbar-nav');
+const hamburger = document.querySelector(".wf-hamburger");
+const navMenu = document.querySelector(".wf-navbar-nav");
 
-hamburger.addEventListener('click', () => {
-  hamburger.classList.toggle('is-active');
-  navMenu.classList.toggle('is-open');
-  const isOpen = navMenu.classList.contains('is-open');
-  hamburger.setAttribute('aria-expanded', isOpen);
+hamburger.addEventListener("click", () => {
+  hamburger.classList.toggle("is-active");
+  navMenu.classList.toggle("is-open");
+  const isOpen = navMenu.classList.contains("is-open");
+  hamburger.setAttribute("aria-expanded", isOpen);
 });
 ```
 
@@ -366,7 +379,8 @@ hamburger.addEventListener('click', () => {
 </header>
 ```
 
-`.wf-header-noren` は後方互換性のために維持されています。新規プロジェクトでは `.wf-header` の使用を推奨します。
+`.wf-header-noren` は後方互換性のために維持されています。新規プロジェクトでは `.wf-header`
+の使用を推奨します。
 
 ### ボタン
 
@@ -617,7 +631,7 @@ const instance = WFUI.schedule(element, {
   // timeRange はAPIのみで設定（デフォルト: 'all-day'）
   // プリセット: 'daytime' (8:00–18:00), 'extended' (10:00–20:00)
   // カスタム: { start: 6, end: 12, label: 'morning' } または (date)=>{...}
-  timeRange: 'all-day',
+  timeRange: "all-day",
   selectedDate: null, // ISO形式の日付文字列
   onSelect: slots => {} // 選択変更時のコールバック
 });
@@ -628,10 +642,10 @@ instance.clearSelection(); // 選択をクリア
 instance.setMode(mode); // モード切り替え
 instance.setTimeInterval(interval); // 時間刻み設定
 // 時間レンジ設定（APIのみ）
-instance.setTimeRange('daytime'); // プリセット（8:00–18:00）
-instance.setTimeRange('extended'); // プリセット（10:00–20:00）
-instance.setTimeRange({ start: 6, end: 12, label: 'morning' }); // カスタム
-instance.setTimeRange(date => ({ start: date.getDay() === 0 ? 10 : 8, end: 18, label: 'dynamic' })); // 関数
+instance.setTimeRange("daytime"); // プリセット（8:00–18:00）
+instance.setTimeRange("extended"); // プリセット（10:00–20:00）
+instance.setTimeRange({ start: 6, end: 12, label: "morning" }); // カスタム
+instance.setTimeRange(date => ({ start: date.getDay() === 0 ? 10 : 8, end: 18, label: "dynamic" })); // 関数
 instance.setSelectedDate(date); // 選択日付設定
 instance.navigateWeek(direction); // 週ナビゲーション（-1: 前週, 1: 次週）
 instance.getCurrentWeekStart(); // 現在の週の開始日を取得
@@ -640,8 +654,11 @@ instance.generateText(); // 選択をテキスト形式で生成
 ```
 
 注意
-- `work1` / `work2` は使用できません。代わりに `daytime` / `extended` またはカスタム `{ start, end, label }` を使用してください。
-- デフォルトは `all-day`（24時間表示）です。APIで `setTimeRange()` を呼び出した場合のみ時間レンジが適用されます。
+
+- `work1` / `work2` は使用できません。代わりに `daytime` / `extended` またはカスタム
+  `{ start, end, label }` を使用してください。
+- デフォルトは `all-day`（24時間表示）です。APIで `setTimeRange()`
+  を呼び出した場合のみ時間レンジが適用されます。
 
 #### Calendar（カレンダー）
 
@@ -977,12 +994,8 @@ document.body.classList.add("theme-koori");
 
 wafoo-cssは以下のブラウザをサポートしています：
 
-- **Chrome**: 最新版および直近2バージョン
-- **Safari**: 最新版および直近2バージョン
-- **Edge**: 最新版および直近2バージョン
-- **Firefox**: 最新版および直近2バージョン
-
-**非サポート**: Internet Explorer 11以前（CSSカスタムプロパティを使用しているため）
+- **Chrome**: 最新版
+- **Safari**: 最新版
 
 ### フォントのフォールバック
 
@@ -1002,7 +1015,8 @@ font-family: "Noto Serif JP", serif;
 
 ### Clipboard APIのフォールバック
 
-コードブロックのコピー機能は、Clipboard APIが利用できない場合、`document.execCommand('copy')`にフォールバックします。
+コードブロックのコピー機能は、Clipboard
+APIが利用できない場合、`document.execCommand('copy')`にフォールバックします。
 
 ## セキュリティ
 
@@ -1011,17 +1025,21 @@ font-family: "Noto Serif JP", serif;
 Google Fontsを使用する場合の推奨CSP設定：
 
 ```html
-<meta http-equiv="Content-Security-Policy" content="
+<meta
+  http-equiv="Content-Security-Policy"
+  content="
   default-src 'self';
   script-src 'self';
   style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
   font-src https://fonts.gstatic.com;
   img-src 'self' data:;
   connect-src 'self';
-">
+"
+/>
 ```
 
 **注意点**:
+
 - `style-src 'unsafe-inline'`: インラインスタイル（カスタムCSS変数など）を許可するために必要
 - `font-src https://fonts.gstatic.com`: Google Fontsのフォントファイル読み込みを許可
 - 自前ホスティングする場合は、Google Fonts関連のディレクティブを削除可能
@@ -1040,5 +1058,5 @@ wafoo-cssのJavaScriptは以下の原則に従っています：
 
 ## 著作権とライセンス
 
-コードとドキュメントの著作権 2025 Q_Q。コードは [MITライセンス](LICENSE)
-の下で公開されています。使う際にはAIにコードを喰わせて、自由にカスタマイズして利用してOKです。
+コードとドキュメントの著作権 2025 Q_Q。コードは
+[MITライセンス](LICENSE)の下で公開されています。使う際にはAIにコードを喰わせて、自由にカスタマイズして利用してOKです。

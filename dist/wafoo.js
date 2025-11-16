@@ -483,6 +483,12 @@
         t.classList.toggle("is-active", isActive);
         panels[i].setAttribute("aria-hidden", String(!isActive));
         panels[i].classList.toggle("is-active", isActive);
+        // Set hidden attribute for proper visibility handling
+        if (isActive) {
+          panels[i].removeAttribute("hidden");
+        } else {
+          panels[i].setAttribute("hidden", "");
+        }
       });
       tabs[index].focus();
     }
