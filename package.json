@@ -1,6 +1,6 @@
 {
   "name": "wafoo-css",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Japanese-inspired CSS framework with traditional aesthetics",
   "main": "dist/wafoo.css",
   "style": "dist/wafoo.css",
