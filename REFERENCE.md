@@ -15,6 +15,7 @@
   - [コンポーネント固有](#コンポーネント固有)
 - [ユーティリティクラス](#ユーティリティクラス)
 - [全コンポーネント一覧](#全コンポーネント一覧)
+- [アクセシビリティ](#アクセシビリティ)
 
 ---
 
@@ -22,18 +23,131 @@
 
 ### ボタン
 
+#### 基本的な使用例
+
+```html
+<!-- プライマリーボタン -->
+<button class="wf-btn wf-btn-primary">実行</button>
+
+<!-- セカンダリーボタン -->
+<button class="wf-btn wf-btn-secondary">キャンセル</button>
+
+<!-- アウトラインボタン -->
+<button class="wf-btn wf-btn-outline">詳細</button>
+
+<!-- サブトルボタン -->
+<button class="wf-btn wf-btn-subtle">その他</button>
+```
+
+#### サイズバリエーション
+
+```html
+<!-- 小サイズ -->
+<button class="wf-btn wf-btn-primary wf-btn-sm">小</button>
+
+<!-- 通常サイズ（デフォルト） -->
+<button class="wf-btn wf-btn-primary">通常</button>
+
+<!-- 大サイズ -->
+<button class="wf-btn wf-btn-primary wf-btn-lg">大</button>
+```
+
+#### ステータスボタン
+
+```html
+<!-- 成功 -->
+<button class="wf-btn wf-btn-success">保存</button>
+
+<!-- 警告 -->
+<button class="wf-btn wf-btn-warning">注意</button>
+
+<!-- 危険な操作 -->
+<button class="wf-btn wf-btn-danger">削除</button>
+```
+
+#### グラデーションボタン（和風）
+
+```html
+<button class="wf-btn wf-btn-gradient">グラデーション</button>
+```
+
+#### 読み込み中状態
+
+```html
+<button class="wf-btn wf-btn-primary is-loading" disabled>
+  処理中...
+</button>
+```
+
+#### 無効化
+
+```html
+<button class="wf-btn wf-btn-primary" disabled>無効</button>
+```
+
+#### アイコン付きボタン
+
+```html
+<button class="wf-btn wf-btn-primary">
+  <span class="wf-icon">◆</span>
+  保存
+</button>
+```
+
 | クラス名 | 用途 | 使用例 |
 |---------|------|--------|
 | `wf-btn` | ベースボタン | `<button class="wf-btn">ボタン</button>` |
 | `wf-btn-primary` | プライマリーボタン | `<button class="wf-btn wf-btn-primary">実行</button>` |
 | `wf-btn-secondary` | セカンダリーボタン | `<button class="wf-btn wf-btn-secondary">キャンセル</button>` |
 | `wf-btn-outline` | アウトラインボタン | `<button class="wf-btn wf-btn-outline">詳細</button>` |
+| `wf-btn-subtle` | サブトルボタン | `<button class="wf-btn wf-btn-subtle">その他</button>` |
+| `wf-btn-gradient` | グラデーションボタン | `<button class="wf-btn wf-btn-gradient">グラデーション</button>` |
+| `wf-btn-success` | 成功ボタン | `<button class="wf-btn wf-btn-success">保存</button>` |
+| `wf-btn-warning` | 警告ボタン | `<button class="wf-btn wf-btn-warning">注意</button>` |
 | `wf-btn-danger` | 危険な操作 | `<button class="wf-btn wf-btn-danger">削除</button>` |
 | `wf-btn-sm` | 小サイズ | `<button class="wf-btn wf-btn-sm">小</button>` |
 | `wf-btn-lg` | 大サイズ | `<button class="wf-btn wf-btn-lg">大</button>` |
 | `is-loading` | 読み込み中状態 | `<button class="wf-btn is-loading">処理中...</button>` |
 
 ### カード
+
+#### 基本的な使用例
+
+```html
+<!-- 通常カード -->
+<div class="wf-card">
+  <h3>タイトル</h3>
+  <p>本文内容</p>
+</div>
+
+<!-- 和紙風カード（四隅に飾り枠） -->
+<div class="wf-card wf-card-washi">
+  <h3>和紙風カード</h3>
+  <p>四隅に紅梅色の飾り枠があり、和紙のような質感を表現しています。</p>
+</div>
+
+<!-- ボーダー付きカード -->
+<div class="wf-card wf-card-bordered">
+  <h3>ボーダー付きカード</h3>
+  <p>枠線が強調されたカードです。</p>
+</div>
+```
+
+#### カード内のレイアウト
+
+```html
+<div class="wf-card">
+  <div class="wf-card__header">
+    <h3>カードタイトル</h3>
+  </div>
+  <div class="wf-card__body">
+    <p>カードの本文内容</p>
+  </div>
+  <div class="wf-card__footer">
+    <button class="wf-btn wf-btn-primary">アクション</button>
+  </div>
+</div>
+```
 
 | クラス名 | 用途 | 使用例 |
 |---------|------|--------|
@@ -43,6 +157,107 @@
 
 ### フォーム
 
+#### 基本的な入力フィールド
+
+```html
+<!-- テキスト入力 -->
+<label class="wf-label" for="name">名前</label>
+<input type="text" id="name" class="wf-input" placeholder="名前を入力">
+
+<!-- メールアドレス -->
+<label class="wf-label" for="email">メールアドレス</label>
+<input type="email" id="email" class="wf-input" placeholder="name@example.com">
+
+<!-- パスワード -->
+<label class="wf-label" for="password">パスワード</label>
+<input type="password" id="password" class="wf-input" placeholder="パスワードを入力">
+```
+
+#### テキストエリア
+
+```html
+<label class="wf-label" for="comment">コメント</label>
+<textarea id="comment" class="wf-textarea" rows="4" placeholder="コメントを入力"></textarea>
+```
+
+#### セレクトボックス
+
+```html
+<label class="wf-label" for="country">国</label>
+<select id="country" class="wf-select">
+  <option value="">選択してください</option>
+  <option value="jp">日本</option>
+  <option value="us">アメリカ</option>
+  <option value="uk">イギリス</option>
+</select>
+```
+
+#### チェックボックス
+
+```html
+<label class="wf-checkbox__label">
+  <input type="checkbox" class="wf-checkbox" id="agree">
+  利用規約に同意する
+</label>
+```
+
+#### ラジオボタン
+
+```html
+<fieldset>
+  <legend>選択してください</legend>
+  <label class="wf-radio__label">
+    <input type="radio" name="option" class="wf-radio" value="option1">
+    オプション1
+  </label>
+  <label class="wf-radio__label">
+    <input type="radio" name="option" class="wf-radio" value="option2">
+    オプション2
+  </label>
+</fieldset>
+```
+
+#### スイッチ
+
+```html
+<label class="wf-switch__label">
+  <input type="checkbox" class="wf-switch" role="switch" id="notifications">
+  通知を有効にする
+</label>
+```
+
+#### エラー状態
+
+```html
+<label class="wf-label" for="email-error">メールアドレス</label>
+<input 
+  type="email" 
+  id="email-error" 
+  class="wf-input is-invalid" 
+  aria-invalid="true"
+  aria-describedby="email-error-message"
+>
+<div id="email-error-message" class="wf-alert wf-alert-danger" role="alert">
+  メールアドレスの形式が正しくありません
+</div>
+```
+
+#### 必須項目の表示
+
+```html
+<label class="wf-label" for="required-field">
+  名前
+  <span aria-label="必須項目">◆</span>
+</label>
+<input 
+  type="text" 
+  id="required-field" 
+  class="wf-input" 
+  required 
+  aria-required="true"
+>
+```
+
 | クラス名 | 用途 | 使用例 |
 |---------|------|--------|
 | `wf-input` | テキスト入力 | `<input type="text" class="wf-input">` |
@@ -50,6 +265,7 @@
 | `wf-select` | セレクトボックス | `<select class="wf-select"><option>選択</option></select>` |
 | `wf-checkbox` | チェックボックス | `<input type="checkbox" class="wf-checkbox">` |
 | `wf-radio` | ラジオボタン | `<input type="radio" class="wf-radio">` |
+| `wf-switch` | スイッチ | `<input type="checkbox" class="wf-switch" role="switch">` |
 | `wf-label` | ラベル | `<label class="wf-label">名前</label>` |
 | `is-invalid` | エラー状態 | `<input class="wf-input is-invalid">` |
 
@@ -419,12 +635,91 @@ wafoo-cssには10種類の和風カラーテーマが用意されています。
 
 ---
 
+## アクセシビリティ
+
+wafoo-cssは、WCAG 2.1 Level AA準拠を目標としています。アクセシブルなWebアプリケーションを構築するためのガイドを用意しています。
+
+### アクセシビリティガイド
+
+詳細なアクセシビリティガイドは、[docs/accessibility.md](./docs/accessibility.md)を参照してください。
+
+ガイドには以下の内容が含まれています：
+
+- **基本原則**: WCAG 2.1準拠のための原則
+- **ARIA属性の使い方**: `role`, `aria-label`, `aria-expanded`などの適切な使用
+- **キーボードナビゲーション**: Tabキー、Escキー、矢印キーなどの操作
+- **コンポーネント別のアクセシビリティ**: モーダル、タブ、ドロップダウンなどの実装例
+- **テスト方法**: キーボード操作テスト、スクリーンリーダーテスト、コントラスト比の確認
+
+### 主要なポイント
+
+1. **セマンティックHTMLを使用**: `<button>`, `<nav>`, `<dialog>`などの適切な要素を使用
+2. **ARIA属性を適切に使用**: `role`, `aria-label`, `aria-expanded`などを適切に設定
+3. **キーボード操作をサポート**: すべての機能がキーボードで操作可能にする
+4. **フォーカス管理**: モーダルなどのフォーカストラップを実装
+5. **コントラスト比を確保**: テキストと背景のコントラスト比が4.5:1以上
+
+### クイックリファレンス
+
+#### モーダル
+
+```html
+<div id="modal-1" class="wf-modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modal-title" hidden>
+  <div class="wf-modal">
+    <div class="wf-modal__header">
+      <h2 id="modal-title">モーダルタイトル</h2>
+      <button class="wf-modal__close" aria-label="閉じる">×</button>
+    </div>
+    <div class="wf-modal__body">モーダルの内容</div>
+  </div>
+</div>
+```
+
+#### タブ
+
+```html
+<div class="wf-tabs" data-wf-tabs>
+  <div class="wf-tablist" role="tablist" aria-label="タブナビゲーション">
+    <button class="wf-tab" role="tab" aria-selected="true" aria-controls="panel-1" id="tab-1">
+      タブ1
+    </button>
+    <button class="wf-tab" role="tab" aria-selected="false" aria-controls="panel-2" id="tab-2">
+      タブ2
+    </button>
+  </div>
+  <div class="wf-tabpanel" role="tabpanel" id="panel-1" aria-labelledby="tab-1">
+    パネル1の内容
+  </div>
+  <div class="wf-tabpanel" role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
+    パネル2の内容
+  </div>
+</div>
+```
+
+#### フォーム
+
+```html
+<label class="wf-label" for="email">メールアドレス</label>
+<input 
+  type="email" 
+  id="email" 
+  class="wf-input" 
+  aria-required="true"
+  aria-describedby="email-help"
+  required
+>
+<div id="email-help" class="wf-text-muted">メールアドレスを入力してください</div>
+```
+
+---
+
 ## 詳細ドキュメント
 
 より詳しい使用方法やサンプルコードは、以下をご覧ください：
 
 - [メインドキュメント (README.md)](./README.md)
 - [ブラウザ版リファレンス (docs/reference.html)](https://nigh2tie.github.io/wafoo-css/reference.html)
+- [アクセシビリティガイド (docs/accessibility.md)](./docs/accessibility.md)
 - [デモサイト (docs/index.html)](https://nigh2tie.github.io/wafoo-css/)
 
 ---
