@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Autocomplete Example - wafoo-css</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="../dist/wafoo.min.css">
+    <style>
+      body {
+        margin: 0;
+        padding: var(--wf-space-4);
+      }
+    </style>
+  </head>
+  <body class="theme-sakura">
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+    <header class="wf-header-noren" role="banner">
+      <div class="wf-container" style="padding: 0">
+        <h1>オートコンプリート</h1>
+        <p class="wf-text-sm wf-text-muted" style="margin: 4px 0 0">WFUI.autocomplete APIの使用例</p>
+      </div>
+    </header>
+    <main class="wf-container" role="main" id="main" style="margin-top: var(--wf-space-6); max-width: 600px">
+      <div class="wf-card">
+        <h2>都道府県検索</h2>
+        <div class="wf-field">
+          <label class="wf-label" for="prefecture-input">都道府県</label>
+          <div class="wf-autocomplete">
+            <input type="text" id="prefecture-input" class="wf-input wf-autocomplete__input" placeholder="都道府県名を入力...">
+          </div>
+          <p class="wf-text-sm wf-text-muted" style="margin-top: var(--wf-space-2)">
+            2文字以上入力すると候補が表示されます。矢印キーで選択、Enterで確定できます。
+          </p>
+        </div>
+        <div id="selected-result" class="wf-mt-4" style="display: none;">
+          <p><strong>選択された都道府県:</strong> <span id="selected-value"></span></p>
+        </div>
+      </div>
+
+      <div class="wf-card wf-mt-4">
+        <h2>商品名検索（非同期）</h2>
+        <div class="wf-field">
+          <label class="wf-label" for="product-input">商品名</label>
+          <div class="wf-autocomplete">
+            <input type="text" id="product-input" class="wf-input wf-autocomplete__input" placeholder="商品名を入力...">
+          </div>
+          <p class="wf-text-sm wf-text-muted" style="margin-top: var(--wf-space-2)">
+            非同期でデータを取得する例（実際のAPI呼び出しはシミュレート）
+          </p>
+        </div>
+        <div id="selected-product" class="wf-mt-4" style="display: none;">
+          <p><strong>選択された商品:</strong> <span id="product-value"></span></p>
+        </div>
+      </div>
+    </main>
+    <script src="../dist/wafoo.js"></script>
+    <script>
+      // 都道府県データ
+      const prefectures = [
+        '北海道', '青森県', '岩手県', '宮城県', '秋田県', '山形県', '福島県',
+        '茨城県', '栃木県', '群馬県', '埼玉県', '千葉県', '東京都', '神奈川県',
+        '新潟県', '富山県', '石川県', '福井県', '山梨県', '長野県', '岐阜県',
+        '静岡県', '愛知県', '三重県', '滋賀県', '京都府', '大阪府', '兵庫県',
+        '奈良県', '和歌山県', '鳥取県', '島根県', '岡山県', '広島県', '山口県',
+        '徳島県', '香川県', '愛媛県', '高知県', '福岡県', '佐賀県', '長崎県',
+        '熊本県', '大分県', '宮崎県', '鹿児島県', '沖縄県'
+      ];
+
+      // 商品データ（シミュレート）
+      const products = [
+        { value: '商品A', label: '商品A - 価格: 1,000円' },
+        { value: '商品B', label: '商品B - 価格: 2,000円' },
+        { value: '商品C', label: '商品C - 価格: 3,000円' },
+        { value: '商品D', label: '商品D - 価格: 4,000円' },
+        { value: '商品E', label: '商品E - 価格: 5,000円' }
+      ];
+
+      // 都道府県オートコンプリート
+      const prefectureAutocomplete = WFUI.autocomplete(
+        document.querySelector('#prefecture-input'),
+        {
+          source: function(query, callback) {
+            const filtered = prefectures.filter(function(pref) {
+              return pref.indexOf(query) >= 0;
+            });
+            callback(filtered);
+          },
+          minLength: 1,
+          delay: 100,
+          onSelect: function(item) {
+            document.getElementById('selected-value').textContent = item;
+            document.getElementById('selected-result').style.display = 'block';
+            WFUI.snackbar.show({
+              message: '選択: ' + item,
+              type: 'success',
+              duration: 2000
+            });
+          }
+        }
+      );
+
+      // 商品オートコンプリート（非同期シミュレート）
+      const productAutocomplete = WFUI.autocomplete(
+        document.querySelector('#product-input'),
+        {
+          source: function(query, callback) {
+            // 非同期データ取得をシミュレート
+            setTimeout(function() {
+              const filtered = products.filter(function(product) {
+                return product.value.indexOf(query) >= 0 || product.label.indexOf(query) >= 0;
+              });
+              callback(filtered);
+            }, 300);
+          },
+          minLength: 1,
+          delay: 300,
+          onSelect: function(item) {
+            const value = typeof item === 'string' ? item : item.value;
+            document.getElementById('product-value').textContent = typeof item === 'string' ? item : item.label;
+            document.getElementById('selected-product').style.display = 'block';
+            WFUI.snackbar.show({
+              message: '選択: ' + value,
+              type: 'info',
+              duration: 2000
+            });
+          }
+        }
+      );
+    </script>
+  </body>
+</html>
+
