@@ -470,5 +470,363 @@
       return inst;
     };
   })();
+
+  // --- Data Table API ---
+  (function addDataTable() {
+    if (!WFUI.dataTable) {
+      WFUI.dataTable = function (element, options) {
+        var opts = Object.assign({
+          columns: [],
+          data: [],
+          sortable: true,
+          filterable: true,
+          pagination: true,
+          pageSize: 10,
+          selectable: false
+        }, options || {});
+
+        var currentSort = { column: null, direction: null };
+        var currentFilter = '';
+        var currentPage = 1;
+        var selectedRows = new Set();
+
+        function render() {
+          var filtered = opts.data.filter(function (row) {
+            if (!currentFilter) return true;
+            return opts.columns.some(function (col) {
+              var val = String(row[col.key] || '').toLowerCase();
+              return val.indexOf(currentFilter.toLowerCase()) >= 0;
+            });
+          });
+
+          var sorted = filtered.slice();
+          if (currentSort.column !== null) {
+            sorted.sort(function (a, b) {
+              var aVal = a[currentSort.column];
+              var bVal = b[currentSort.column];
+              if (aVal < bVal) return currentSort.direction === 'asc' ? -1 : 1;
+              if (aVal > bVal) return currentSort.direction === 'asc' ? 1 : -1;
+              return 0;
+            });
+          }
+
+          var start = (currentPage - 1) * opts.pageSize;
+          var end = start + opts.pageSize;
+          var paged = sorted.slice(start, end);
+
+          var tbody = element.querySelector('tbody');
+          if (!tbody) return;
+
+          tbody.innerHTML = '';
+          paged.forEach(function (row, idx) {
+            var tr = document.createElement('tr');
+            if (selectedRows.has(start + idx)) {
+              tr.classList.add('is-selected');
+            }
+
+            if (opts.selectable) {
+              var td = document.createElement('td');
+              var checkbox = document.createElement('input');
+              checkbox.type = 'checkbox';
+              checkbox.className = 'wf-data-table__checkbox';
+              checkbox.checked = selectedRows.has(start + idx);
+              checkbox.addEventListener('change', function () {
+                if (checkbox.checked) {
+                  selectedRows.add(start + idx);
+                } else {
+                  selectedRows.delete(start + idx);
+                }
+                render();
+              });
+              td.appendChild(checkbox);
+              tr.appendChild(td);
+            }
+
+            opts.columns.forEach(function (col) {
+              var td = document.createElement('td');
+              td.textContent = row[col.key] || '';
+              tr.appendChild(td);
+            });
+
+            tbody.appendChild(tr);
+          });
+
+          var info = element.querySelector('.wf-data-table__info');
+          if (info) {
+            info.textContent = (start + 1) + '-' + Math.min(end, sorted.length) + ' / ' + sorted.length + '件';
+          }
+        }
+
+        function init() {
+          var searchInput = element.querySelector('.wf-data-table__search input');
+          if (searchInput && opts.filterable) {
+            var timeout;
+            searchInput.addEventListener('input', function () {
+              clearTimeout(timeout);
+              timeout = setTimeout(function () {
+                currentFilter = searchInput.value;
+                currentPage = 1;
+                render();
+              }, 300);
+            });
+          }
+
+          var thead = element.querySelector('thead');
+          if (thead && opts.sortable) {
+            thead.querySelectorAll('th').forEach(function (th, idx) {
+              if (idx === 0 && opts.selectable) return;
+              var col = opts.columns[idx - (opts.selectable ? 1 : 0)];
+              if (!col || !col.sortable) return;
+
+              var button = document.createElement('button');
+              button.className = 'wf-data-table__sort';
+              button.innerHTML = (th.textContent || '') + '<span class="wf-data-table__sort-icon"></span>';
+              button.setAttribute('aria-label', 'ソート: ' + (th.textContent || ''));
+              th.innerHTML = '';
+              th.appendChild(button);
+
+              button.addEventListener('click', function () {
+                if (currentSort.column === col.key) {
+                  currentSort.direction = currentSort.direction === 'asc' ? 'desc' : 'asc';
+                } else {
+                  currentSort.column = col.key;
+                  currentSort.direction = 'asc';
+                }
+                th.setAttribute('aria-sort', currentSort.direction === 'asc' ? 'ascending' : 'descending');
+                thead.querySelectorAll('th').forEach(function (otherTh) {
+                  if (otherTh !== th) {
+                    otherTh.removeAttribute('aria-sort');
+                  }
+                });
+                render();
+              });
+            });
+          }
+
+          render();
+        }
+
+        init();
+
+        return {
+          sort: function (column, direction) {
+            currentSort.column = column;
+            currentSort.direction = direction || 'asc';
+            render();
+          },
+          filter: function (query) {
+            currentFilter = query;
+            currentPage = 1;
+            render();
+          },
+          setPage: function (page) {
+            currentPage = page;
+            render();
+          },
+          getSelectedRows: function () {
+            return Array.from(selectedRows);
+          }
+        };
+      };
+    }
+  })();
+
+  // --- Autocomplete API ---
+  (function addAutocomplete() {
+    if (!WFUI.autocomplete) {
+      WFUI.autocomplete = function (inputElement, options) {
+        var opts = Object.assign({
+          source: function (query, callback) { callback([]); },
+          minLength: 2,
+          delay: 300
+        }, options || {});
+
+        var menu = document.createElement('div');
+        menu.className = 'wf-autocomplete__menu';
+        menu.setAttribute('role', 'listbox');
+        menu.hidden = true;
+        inputElement.parentNode.appendChild(menu);
+
+        var highlightedIndex = -1;
+        var items = [];
+        var timeout;
+
+        function showMenu() {
+          menu.classList.add('is-open');
+          menu.hidden = false;
+          menu.setAttribute('aria-expanded', 'true');
+        }
+
+        function hideMenu() {
+          menu.classList.remove('is-open');
+          menu.hidden = true;
+          menu.setAttribute('aria-expanded', 'false');
+          highlightedIndex = -1;
+        }
+
+        function renderItems(data) {
+          items = data;
+          menu.innerHTML = '';
+          if (data.length === 0) {
+            var empty = document.createElement('div');
+            empty.className = 'wf-autocomplete__empty';
+            empty.textContent = '候補が見つかりません';
+            menu.appendChild(empty);
+          } else {
+            data.forEach(function (item, idx) {
+              var div = document.createElement('div');
+              div.className = 'wf-autocomplete__item';
+              div.setAttribute('role', 'option');
+              div.setAttribute('data-index', idx);
+              div.textContent = typeof item === 'string' ? item : (item.label || item.value || '');
+              div.addEventListener('click', function () {
+                selectItem(item);
+              });
+              menu.appendChild(div);
+            });
+          }
+          showMenu();
+        }
+
+        function selectItem(item) {
+          inputElement.value = typeof item === 'string' ? item : (item.value || item.label || '');
+          hideMenu();
+          if (opts.onSelect) opts.onSelect(item);
+        }
+
+        inputElement.addEventListener('input', function () {
+          var query = inputElement.value.trim();
+          clearTimeout(timeout);
+          if (query.length < opts.minLength) {
+            hideMenu();
+            return;
+          }
+          timeout = setTimeout(function () {
+            opts.source(query, renderItems);
+          }, opts.delay);
+        });
+
+        inputElement.addEventListener('keydown', function (e) {
+          if (!menu.hidden && items.length > 0) {
+            if (e.key === 'ArrowDown') {
+              e.preventDefault();
+              highlightedIndex = Math.min(highlightedIndex + 1, items.length - 1);
+              updateHighlight();
+            } else if (e.key === 'ArrowUp') {
+              e.preventDefault();
+              highlightedIndex = Math.max(highlightedIndex - 1, -1);
+              updateHighlight();
+            } else if (e.key === 'Enter' && highlightedIndex >= 0) {
+              e.preventDefault();
+              selectItem(items[highlightedIndex]);
+            } else if (e.key === 'Escape') {
+              hideMenu();
+            }
+          }
+        });
+
+        function updateHighlight() {
+          menu.querySelectorAll('.wf-autocomplete__item').forEach(function (el, idx) {
+            el.classList.toggle('is-highlighted', idx === highlightedIndex);
+          });
+        }
+
+        document.addEventListener('click', function (e) {
+          if (!menu.contains(e.target) && e.target !== inputElement) {
+            hideMenu();
+          }
+        });
+
+        return {
+          destroy: function () {
+            menu.remove();
+          }
+        };
+      };
+    }
+  })();
+
+  // --- Snackbar API ---
+  (function addSnackbar() {
+    if (!WFUI.snackbar) {
+      var containers = {};
+
+      function getContainer(position) {
+        if (!containers[position]) {
+          var container = document.createElement('div');
+          container.className = 'wf-snackbar-container wf-snackbar-container--' + position;
+          document.body.appendChild(container);
+          containers[position] = container;
+        }
+        return containers[position];
+      }
+
+      WFUI.snackbar = {
+        show: function (options) {
+          var opts = Object.assign({
+            message: '',
+            type: 'info',
+            duration: 3000,
+            position: 'bottom-right'
+          }, options || {});
+
+          var container = getContainer(opts.position);
+          var snackbar = document.createElement('div');
+          snackbar.className = 'wf-snackbar wf-snackbar--' + opts.type;
+          snackbar.setAttribute('role', 'alert');
+
+          var content = document.createElement('div');
+          content.className = 'wf-snackbar__content';
+          var message = document.createElement('p');
+          message.className = 'wf-snackbar__message';
+          message.textContent = opts.message;
+          content.appendChild(message);
+          snackbar.appendChild(content);
+
+          var close = document.createElement('button');
+          close.className = 'wf-snackbar__close';
+          close.setAttribute('aria-label', '閉じる');
+          close.innerHTML = '×';
+          close.addEventListener('click', function () {
+            removeSnackbar(snackbar);
+          });
+          snackbar.appendChild(close);
+
+          container.appendChild(snackbar);
+
+          if (opts.duration > 0) {
+            setTimeout(function () {
+              removeSnackbar(snackbar);
+            }, opts.duration);
+          }
+
+          return {
+            close: function () {
+              removeSnackbar(snackbar);
+            }
+          };
+        },
+        clear: function (position) {
+          if (position) {
+            var container = containers[position];
+            if (container) {
+              container.querySelectorAll('.wf-snackbar').forEach(removeSnackbar);
+            }
+          } else {
+            Object.keys(containers).forEach(function (pos) {
+              containers[pos].querySelectorAll('.wf-snackbar').forEach(removeSnackbar);
+            });
+          }
+        }
+      };
+
+      function removeSnackbar(snackbar) {
+        snackbar.classList.add('is-removing');
+        setTimeout(function () {
+          snackbar.remove();
+        }, 200);
+      }
+    }
+  })();
 })();
 /* WFUI PATCH END */

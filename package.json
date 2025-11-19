@@ -1,6 +1,6 @@
 {
   "name": "wafoo-css",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Japanese-inspired CSS framework with traditional aesthetics",
   "main": "dist/wafoo.css",
   "style": "dist/wafoo.css",
@@ -28,7 +28,6 @@
   "files": [
     "dist/",
     "src/",
-    "scripts/",
     "LICENSE",
     "README.md",
     "REFERENCE.md"

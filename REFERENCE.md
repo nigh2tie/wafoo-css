@@ -320,6 +320,148 @@
 | `wf-table-bordered` | ボーダー付き | `<table class="wf-table wf-table-bordered">...</table>` |
 | `wf-table-hover` | ホバー効果 | `<table class="wf-table wf-table-hover">...</table>` |
 
+### データテーブル（ソート・フィルタ機能付き）
+
+データテーブルは、ソート、フィルタ、ページネーション機能を持つ拡張テーブルコンポーネントです。
+
+#### 基本的な使用例
+
+```html
+<div class="wf-data-table">
+  <div class="wf-data-table__toolbar">
+    <div class="wf-data-table__search">
+      <input type="text" class="wf-input" placeholder="検索...">
+    </div>
+  </div>
+  <div class="wf-data-table__wrapper">
+    <table class="wf-data-table__table">
+      <thead>
+        <tr>
+          <th>名前</th>
+          <th>年齢</th>
+          <th>メール</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- JavaScript APIで動的に生成 -->
+      </tbody>
+    </table>
+  </div>
+  <div class="wf-data-table__footer">
+    <div class="wf-data-table__info">1-10 / 50件</div>
+  </div>
+</div>
+```
+
+#### JavaScript API
+
+```javascript
+const table = WFUI.dataTable(document.querySelector('.wf-data-table'), {
+  columns: [
+    { key: 'name', label: '名前', sortable: true },
+    { key: 'age', label: '年齢', sortable: true },
+    { key: 'email', label: 'メール', filterable: true }
+  ],
+  data: [
+    { name: '山田太郎', age: 30, email: 'yamada@example.com' },
+    { name: '佐藤花子', age: 25, email: 'sato@example.com' }
+  ],
+  sortable: true,
+  filterable: true,
+  pagination: true,
+  pageSize: 10,
+  selectable: false
+});
+
+// メソッド
+table.sort('name', 'asc'); // ソート
+table.filter('山田'); // フィルタ
+table.setPage(2); // ページ変更
+```
+
+### オートコンプリート
+
+オートコンプリートは、入力時に候補を表示する入力補完コンポーネントです。
+
+#### 基本的な使用例
+
+```html
+<div class="wf-autocomplete">
+  <input type="text" class="wf-input wf-autocomplete__input" placeholder="検索...">
+</div>
+```
+
+#### JavaScript API
+
+```javascript
+const autocomplete = WFUI.autocomplete(document.querySelector('.wf-autocomplete__input'), {
+  source: function(query, callback) {
+    // 非同期データ取得
+    fetch(`/api/search?q=${query}`)
+      .then(res => res.json())
+      .then(data => callback(data));
+  },
+  minLength: 2,
+  delay: 300,
+  onSelect: function(item) {
+    console.log('選択:', item);
+  }
+});
+
+// 破棄
+autocomplete.destroy();
+```
+
+### スナックバー（スタック管理）
+
+スナックバーは、複数の通知をスタック表示する通知コンポーネントです。
+
+#### 基本的な使用例
+
+```javascript
+// スナックバーの表示
+WFUI.snackbar.show({
+  message: '保存しました',
+  type: 'success', // 'success' | 'warning' | 'danger' | 'info'
+  duration: 3000,
+  position: 'bottom-right' // 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right' | 'top-center' | 'bottom-center'
+});
+
+// すべて削除
+WFUI.snackbar.clear();
+
+// 特定の位置のスナックバーを削除
+WFUI.snackbar.clear('bottom-right');
+```
+
+#### バリエーション
+
+```javascript
+// 成功メッセージ
+WFUI.snackbar.show({
+  message: '保存しました',
+  type: 'success'
+});
+
+// 警告メッセージ
+WFUI.snackbar.show({
+  message: '注意が必要です',
+  type: 'warning'
+});
+
+// エラーメッセージ
+WFUI.snackbar.show({
+  message: 'エラーが発生しました',
+  type: 'danger'
+});
+
+// 情報メッセージ
+WFUI.snackbar.show({
+  message: '情報',
+  type: 'info'
+});
+```
+
 ---
 
 ## CSS変数リファレンス
@@ -667,6 +809,7 @@ wafoo-cssは、Tailwind CSSの命名規則を採用していますが、`wf-` �
 19. **スイッチ** (`.wf-switch`) - トグルスイッチ
 20. **ラベル** (`.wf-label`) - フォームラベル
 21. **フォームグループ** (`.wf-form-group`) - フォーム要素グループ
+22. **オートコンプリート** (`.wf-autocomplete`) - 入力補完
 
 ### ボタン・インタラクション
 
@@ -678,22 +821,24 @@ wafoo-cssは、Tailwind CSSの命名規則を採用していますが、`wf-` �
 
 25. **アラート** (`.wf-alert`) - アラートメッセージ
 26. **トースト** (`.wf-toast`) - トースト通知
-27. **モーダル** (`.wf-modal`) - モーダルダイアログ
-28. **オフキャンバス** (`.wf-offcanvas`) - サイドパネル
-29. **ツールチップ** (`.wf-tooltip`) - ツールチップ
-30. **ポップオーバー** (`.wf-popover`) - ポップオーバー
+27. **スナックバー** (`.wf-snackbar`) - スタック管理通知
+28. **モーダル** (`.wf-modal`) - モーダルダイアログ
+29. **オフキャンバス** (`.wf-offcanvas`) - サイドパネル
+30. **ツールチップ** (`.wf-tooltip`) - ツールチップ
+31. **ポップオーバー** (`.wf-popover`) - ポップオーバー
 
 ### データ表示
 
-31. **テーブル** (`.wf-table`) - データテーブル
-32. **リスト** (`.wf-list`) - リスト表示
-33. **スケジュール** (`.wf-schedule`) - スケジュール表示
-34. **カレンダー** (`.wf-calendar`) - カレンダー表示
+32. **テーブル** (`.wf-table`) - データテーブル
+33. **データテーブル** (`.wf-data-table`) - ソート・フィルタ機能付きテーブル
+34. **リスト** (`.wf-list`) - リスト表示
+35. **スケジュール** (`.wf-schedule`) - スケジュール表示
+36. **カレンダー** (`.wf-calendar`) - カレンダー表示
 
 ### その他
 
-35. **ドロップダウン** (`.wf-dropdown`) - ドロップダウンメニュー
-36. **ディバイダー** (`.wf-divider`) - 区切り線
+37. **ドロップダウン** (`.wf-dropdown`) - ドロップダウンメニュー
+38. **ディバイダー** (`.wf-divider`) - 区切り線
 37. **スピナー** (`.wf-spinner`) - ローディングスピナー
 
 ---

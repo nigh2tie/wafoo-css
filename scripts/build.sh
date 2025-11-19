@@ -54,6 +54,9 @@ FILES=(
   "$ROOT_DIR/src/components/message.css"
   "$ROOT_DIR/src/components/sidebar.css"
   "$ROOT_DIR/src/components/carousel.css"
+  "$ROOT_DIR/src/components/data-table.css"
+  "$ROOT_DIR/src/components/autocomplete.css"
+  "$ROOT_DIR/src/components/snackbar.css"
   "$ROOT_DIR/src/utilities.css"
 )
 
