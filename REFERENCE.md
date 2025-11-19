@@ -14,6 +14,7 @@
   - [ブレークポイント](#ブレークポイント)
   - [コンポーネント固有](#コンポーネント固有)
 - [ユーティリティクラス](#ユーティリティクラス)
+- [命名規則](#命名規則)
 - [全コンポーネント一覧](#全コンポーネント一覧)
 - [アクセシビリティ](#アクセシビリティ)
 
@@ -540,6 +541,95 @@
 | クラス名 | 用途 |
 |---------|------|
 | `wf-sr-only` | スクリーンリーダー専用（視覚的に非表示） |
+
+---
+
+## 命名規則
+
+wafoo-cssは、Tailwind CSSの命名規則を採用していますが、すべてのクラス名に `wf-` プレフィックスを付けます。
+
+### 基本原則
+
+1. **`wf-` プレフィックス**: すべてのクラス名は `wf-` で始まります
+2. **Tailwind風の命名**: Tailwind CSSの命名規則を採用
+3. **セマンティックなカラー**: 具体的な色名ではなく、セマンティックな名前を使用（テーマ変数ベース）
+
+### クイックリファレンス
+
+#### スペーシング
+
+```html
+<!-- マージン -->
+<div class="wf-mt-4">マージントップ 16px</div>
+<div class="wf-mx-2">左右マージン 8px</div>
+
+<!-- パディング -->
+<div class="wf-p-4">パディング 16px</div>
+<div class="wf-px-2 wf-py-4">左右8px、上下16px</div>
+
+<!-- ギャップ -->
+<div class="wf-flex wf-gap-4">ギャップ 16px</div>
+```
+
+#### ディスプレイ
+
+```html
+<div class="wf-flex wf-items-center wf-justify-between">フレックスレイアウト</div>
+<div class="wf-grid wf-grid-cols-3 wf-gap-4">3列グリッド</div>
+<div class="wf-hidden">非表示</div>
+```
+
+#### カラー（テーマ変数ベース）
+
+```html
+<!-- テキスト色 -->
+<p class="wf-text-accent">アクセント色</p>
+<p class="wf-text-primary">プライマリ色</p>
+<p class="wf-text-muted">ミュート色</p>
+
+<!-- 背景色 -->
+<div class="wf-bg-primary">プライマリ背景</div>
+<div class="wf-bg-surface">サーフェス背景</div>
+
+<!-- ボーダー色 -->
+<div class="wf-border-accent">アクセントボーダー</div>
+```
+
+#### シャドウ
+
+```html
+<div class="wf-card wf-shadow-md">シャドウ付きカード</div>
+```
+
+#### レスポンシブ
+
+```html
+<!-- モバイルでは非表示、デスクトップでは表示 -->
+<div class="wf-hidden wf-md-flex">デスクトップのみ表示</div>
+
+<!-- モバイルでは中央揃え、デスクトップでは左揃え -->
+<p class="wf-text-center wf-md-text-left">レスポンシブテキスト</p>
+```
+
+### Tailwind互換性
+
+wafoo-cssは、Tailwind CSSの命名規則を採用していますが、`wf-` プレフィックスを付ける必要があります。
+
+| Tailwind | wafoo-css |
+|----------|-----------|
+| `flex` | `wf-flex` |
+| `items-center` | `wf-items-center` |
+| `justify-between` | `wf-justify-between` |
+| `gap-4` | `wf-gap-4` |
+| `p-6` | `wf-p-6` |
+| `mt-4` | `wf-mt-4` |
+| `text-center` | `wf-text-center` |
+| `bg-white` | `wf-bg-surface` |
+| `shadow-md` | `wf-shadow-md` |
+
+### 詳細な命名規則
+
+完全な命名規則のリファレンスは、[docs/naming-conventions.md](./docs/naming-conventions.md)を参照してください。
 
 ---
 

@@ -1,0 +1,223 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "wafoo-css Components Schema",
+  "description": "wafoo-cssコンポーネントの構造化データ。AI生成ツールやドキュメント生成に使用します。",
+  "type": "object",
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "スキーマのバージョン"
+    },
+    "components": {
+      "type": "array",
+      "description": "wafoo-cssコンポーネントの一覧",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "コンポーネント名（例: 'Button', 'Card'）"
+          },
+          "category": {
+            "type": "string",
+            "enum": [
+              "layout",
+              "navigation",
+              "content",
+              "form",
+              "button",
+              "feedback",
+              "data",
+              "other"
+            ],
+            "description": "コンポーネントのカテゴリ"
+          },
+          "description": {
+            "type": "string",
+            "description": "コンポーネントの説明"
+          },
+          "baseClass": {
+            "type": "string",
+            "description": "ベースクラス名（例: 'wf-btn'）"
+          },
+          "classes": {
+            "type": "array",
+            "description": "利用可能なクラス名の一覧",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "クラス名（例: 'wf-btn-primary'）"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "クラスの説明"
+                },
+                "required": {
+                  "type": "boolean",
+                  "description": "必須クラスかどうか",
+                  "default": false
+                },
+                "variants": {
+                  "type": "array",
+                  "description": "バリエーション（例: ['sm', 'md', 'lg']）",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": ["name", "description"]
+            }
+          },
+          "examples": {
+            "type": "array",
+            "description": "使用例の一覧",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "例のタイトル"
+                },
+                "html": {
+                  "type": "string",
+                  "description": "HTMLコード例"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "例の説明"
+                }
+              },
+              "required": ["title", "html"]
+            }
+          },
+          "javascript": {
+            "type": "object",
+            "description": "JavaScript API情報",
+            "properties": {
+              "required": {
+                "type": "boolean",
+                "description": "JavaScriptが必要かどうか",
+                "default": false
+              },
+              "autoInit": {
+                "type": "boolean",
+                "description": "data-wf-*属性による自動初期化が可能かどうか",
+                "default": false
+              },
+              "dataAttribute": {
+                "type": "string",
+                "description": "自動初期化用のdata属性（例: 'data-wf-tabs'）"
+              },
+              "api": {
+                "type": "string",
+                "description": "JavaScript APIの説明"
+              },
+              "methods": {
+                "type": "array",
+                "description": "利用可能なメソッド",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "parameters": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "name": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              "events": {
+                "type": "array",
+                "description": "発火するイベント",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "accessibility": {
+            "type": "object",
+            "description": "アクセシビリティ情報",
+            "properties": {
+              "aria": {
+                "type": "array",
+                "description": "必要なARIA属性",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "attribute": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "required": {
+                      "type": "boolean",
+                      "default": false
+                    }
+                  }
+                }
+              },
+              "keyboard": {
+                "type": "array",
+                "description": "キーボード操作",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "key": {
+                      "type": "string"
+                    },
+                    "action": {
+                      "type": "string"
+                    }
+                  }
+                }
+              },
+              "focusManagement": {
+                "type": "boolean",
+                "description": "フォーカス管理が必要かどうか",
+                "default": false
+              }
+            }
+          },
+          "themeAware": {
+            "type": "boolean",
+            "description": "テーマシステムに対応しているかどうか",
+            "default": true
+          }
+        },
+        "required": ["name", "category", "description", "baseClass"]
+      }
+    }
+  },
+  "required": ["version", "components"]
+}
+

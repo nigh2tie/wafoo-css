@@ -234,6 +234,8 @@
 
 /* Size helpers */
 .wf-w-100 { width: 100%; }
+.wf-w-full { width: 100%; } /* Tailwind互換（推奨） */
+.wf-w-screen { width: 100vw; } /* Tailwind互換 */
 .wf-max-w-sm { max-width: 480px; }
 .wf-max-w-md { max-width: 720px; }
 .wf-max-w-lg { max-width: 960px; }
@@ -241,6 +243,7 @@
 .wf-container-fluid { max-width: none !important; }
 /* Full-height helpers */
 .wf-h-100 { height: 100%; }
+.wf-h-full { height: 100%; } /* Tailwind互換（推奨） */
 .wf-h-screen { height: 100vh; }
 .wf-min-h-screen { min-height: 100vh; }
 
