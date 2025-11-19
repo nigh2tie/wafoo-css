@@ -9,7 +9,7 @@ const path = require("path");
 
 const config = {
   spacing: {
-    values: [0, 2, 4, 6, 8, 10, 12],
+    values: [0, 1, 2, 3, 4, 6, 8, 10, 12, 16],
     properties: {
       m: "margin",
       mt: "margin-top",
@@ -28,7 +28,7 @@ const config = {
     }
   },
   gap: {
-    values: [0, 2, 4, 6, 8, 10, 12]
+    values: [0, 1, 2, 3, 4, 6, 8, 10, 12, 16]
   },
   display: [
     { class: "block", value: "block" },
@@ -139,7 +139,6 @@ function generateText() {
     css += `.wf-text-${size} { font-size: ${varName}; }\n`;
   }
 
-  css += `.wf-text-muted { color: var(--wf-color-muted); }\n`;
   css += `.wf-nowrap { white-space: nowrap; }\n`;
 
   // align
@@ -148,6 +147,50 @@ function generateText() {
   }
 
   css += `.wf-font-bold { font-weight: 700; }\n`;
+
+  return css;
+}
+
+function generateColorUtilities() {
+  let css = "\n/* Color utilities (theme-aware) */\n";
+
+  // Text colors
+  css += `.wf-text-accent { color: var(--wf-color-accent); }\n`;
+  css += `.wf-text-primary { color: var(--wf-primary-bg); }\n`;
+  css += `.wf-text-muted { color: var(--wf-color-muted); }\n`;
+  css += `.wf-text-success { color: var(--wf-success); }\n`;
+  css += `.wf-text-warning { color: var(--wf-warning); }\n`;
+  css += `.wf-text-danger { color: var(--wf-danger); }\n`;
+  css += `.wf-text-link { color: var(--wf-link-color); }\n`;
+
+  // Background colors
+  css += `.wf-bg-accent { background-color: var(--wf-color-accent); }\n`;
+  css += `.wf-bg-primary { background-color: var(--wf-primary-bg); }\n`;
+  css += `.wf-bg-surface { background-color: var(--wf-surface-base); }\n`;
+  css += `.wf-bg-surface-subtle { background-color: var(--wf-surface-subtle); }\n`;
+  css += `.wf-bg-surface-muted { background-color: var(--wf-surface-muted); }\n`;
+  css += `.wf-bg-success { background-color: var(--wf-success); }\n`;
+  css += `.wf-bg-warning { background-color: var(--wf-warning); }\n`;
+  css += `.wf-bg-danger { background-color: var(--wf-danger); }\n`;
+
+  // Border colors
+  css += `.wf-border-accent { border-color: var(--wf-color-accent); }\n`;
+  css += `.wf-border-primary { border-color: var(--wf-primary-bg); }\n`;
+  css += `.wf-border-subtle { border-color: var(--wf-color-border-subtle); }\n`;
+  css += `.wf-border-strong { border-color: var(--wf-color-border-strong); }\n`;
+  css += `.wf-border { border-color: var(--wf-color-border); }\n`;
+
+  return css;
+}
+
+function generateShadowUtilities() {
+  let css = "\n/* Shadow utilities */\n";
+
+  css += `.wf-shadow-sm { box-shadow: var(--wf-shadow-sm); }\n`;
+  css += `.wf-shadow-md { box-shadow: var(--wf-shadow-md); }\n`;
+  css += `.wf-shadow-lg { box-shadow: var(--wf-shadow-lg); }\n`;
+  css += `.wf-shadow-xl { box-shadow: var(--wf-shadow-xl); }\n`;
+  css += `.wf-shadow-none { box-shadow: none; }\n`;
 
   return css;
 }
@@ -290,6 +333,8 @@ function generate() {
     generateFlex() +
     generateGrid() +
     generateText() +
+    generateColorUtilities() +
+    generateShadowUtilities() +
     generateStaticUtilities() +
     generateResponsive() +
     "}\n";

@@ -102,6 +102,7 @@
     --wf-space-8: 32px; /* 8x = 4 * 8px */
     --wf-space-10: 40px; /* 10x = 5 * 8px */
     --wf-space-12: 48px; /* 12x = 6 * 8px */
+    --wf-space-16: 64px; /* 16x = 8 * 8px */
 
     /* Breakpoints */
     --wf-breakpoint-sm: 600px;
