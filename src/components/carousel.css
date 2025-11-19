@@ -181,7 +181,8 @@
 
 /* Autoplay Indicator */
 .wf-carousel.is-playing .wf-carousel__button-play::before {
-  content: "⏸";
+  content: "■ ■";
+  letter-spacing: 0.1em;
 }
 
 .wf-carousel:not(.is-playing) .wf-carousel__button-play::before {

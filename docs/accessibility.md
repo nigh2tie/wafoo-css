@@ -472,10 +472,10 @@ closeButton.addEventListener('click', closeModal);
 ### 1. セマンティックHTMLを使用
 
 ```html
-<!-- ❌ 悪い例 -->
+<!-- 悪い例 -->
 <div onclick="handleClick()">ボタン</div>
 
-<!-- ✅ 良い例 -->
+<!-- 良い例 -->
 <button onclick="handleClick()">ボタン</button>
 ```
 
@@ -491,10 +491,10 @@ closeButton.addEventListener('click', closeModal);
 ### 3. リンクのテキストを明確に
 
 ```html
-<!-- ❌ 悪い例 -->
+<!-- 悪い例 -->
 <a href="/page">詳細</a>
 
-<!-- ✅ 良い例 -->
+<!-- 良い例 -->
 <a href="/page">商品の詳細を見る</a>
 ```
 

@@ -19,10 +19,10 @@
 すべてのwafoo-cssクラスは `wf-` プレフィックスで始まります。これにより、名前空間の衝突を避け、他のCSSフレームワークとの共存が可能です。
 
 ```html
-<!-- ✅ 正しい -->
+<!-- 正しい -->
 <button class="wf-btn wf-btn-primary">ボタン</button>
 
-<!-- ❌ 間違い -->
+<!-- 間違い -->
 <button class="btn btn-primary">ボタン</button>
 ```
 
@@ -43,10 +43,10 @@ wafoo-cssは、Tailwind CSSの命名規則を採用しています。これに�
 カラーユーティリティは、具体的な色名（`text-red-500`など）ではなく、セマンティックな名前（`text-accent`など）を使用します。これにより、テーマシステムとの統合が可能です。
 
 ```html
-<!-- ✅ 正しい（テーマ変数ベース） -->
+<!-- 正しい（テーマ変数ベース） -->
 <div class="wf-text-accent wf-bg-primary">
 
-<!-- ❌ 間違い（具体的な色名） -->
+<!-- 間違い（具体的な色名） -->
 <div class="wf-text-red-500 wf-bg-blue-300">
 ```
 
@@ -529,12 +529,12 @@ wafoo-cssは、Tailwind CSSの命名規則を採用していますが、`wf-` �
 複数のユーティリティクラスを組み合わせて使用します。
 
 ```html
-<!-- ✅ 良い例 -->
+<!-- 良い例 -->
 <div class="wf-flex wf-items-center wf-justify-between wf-gap-4 wf-p-6 wf-bg-surface wf-shadow-md">
   コンテンツ
 </div>
 
-<!-- ❌ 悪い例（インラインスタイルを使用） -->
+<!-- 悪い例（インラインスタイルを使用） -->
 <div style="display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 24px; background-color: white; box-shadow: ...">
   コンテンツ
 </div>
@@ -545,10 +545,10 @@ wafoo-cssは、Tailwind CSSの命名規則を採用していますが、`wf-` �
 テーマ変数ベースのカラーユーティリティを使用します。
 
 ```html
-<!-- ✅ 良い例（テーマ対応） -->
+<!-- 良い例（テーマ対応） -->
 <div class="wf-text-accent wf-bg-primary">
 
-<!-- ❌ 悪い例（具体的な色名） -->
+<!-- 悪い例（具体的な色名） -->
 <div class="wf-text-red-500 wf-bg-blue-300">
 ```
 
@@ -557,7 +557,7 @@ wafoo-cssは、Tailwind CSSの命名規則を採用していますが、`wf-` �
 モバイルファーストで設計し、必要に応じてレスポンシブユーティリティを追加します。
 
 ```html
-<!-- ✅ 良い例（モバイルファースト） -->
+<!-- 良い例（モバイルファースト） -->
 <div class="wf-flex wf-flex-col wf-gap-4 wf-md-flex-row wf-md-gap-6">
   コンテンツ
 </div>

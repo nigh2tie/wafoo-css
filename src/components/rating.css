@@ -34,7 +34,7 @@
 }
 
 .wf-rating__star.is-half::before {
-  content: "★";
+  content: "◆";
   position: absolute;
   top: 0;
   left: 0;
