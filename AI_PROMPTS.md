@@ -68,14 +68,14 @@ wafoo-cssで{size}サイズの{style}ボタンを作成してください。
 wafoo-cssで{type}カードを作成してください。
 
 要件:
-- タイプ: {normal|washi|bordered}
+- タイプ: {normal|washi}
 - タイトル: {title}
 - 本文: {content}
 - フッター: {optional}
 
 クラス名:
 - ベース: `wf-card`
-- タイプ: `wf-card-washi`（和紙風）、`wf-card-bordered`（ボーダー付き）
+- タイプ: `wf-card-washi`（和紙風、四隅に装飾）
 
 例:
 <div class="wf-card wf-card-washi">

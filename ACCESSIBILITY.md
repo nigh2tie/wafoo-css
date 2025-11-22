@@ -459,12 +459,6 @@ closeButton.addEventListener('click', closeModal);
 
 通常のテキストは4.5:1以上、大きなテキスト（18pt以上、または14pt以上の太字）は3:1以上が必要です。
 
-### 4. 自動テストツール
-
-- [axe DevTools](https://www.deque.com/axe/devtools/)
-- [WAVE](https://wave.webaim.org/)
-- [Lighthouse](https://developers.google.com/web/tools/lighthouse)
-
 ---
 
 ## ベストプラクティス
@@ -513,15 +507,3 @@ closeButton.addEventListener('click', closeModal);
 フォーカス可能な要素は、視覚的な順序と同じ順序でフォーカスが移動するようにします。
 
 ---
-
-## 参考資料
-
-- [WCAG 2.1 Guidelines](https://www.w3.org/WAI/WCAG21/quickref/)
-- [ARIA Authoring Practices Guide](https://www.w3.org/WAI/ARIA/apg/)
-- [WebAIM](https://webaim.org/)
-- [MDN Web Docs - Accessibility](https://developer.mozilla.org/en-US/docs/Web/Accessibility)
-
----
-
-**最終更新**: 2025-11-19
-

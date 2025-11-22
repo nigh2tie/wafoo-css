@@ -116,8 +116,8 @@ npmインストール不要で、CDN経由で直接読み込むこともでき�
       rel="stylesheet"
     />
 
-    <!-- wafoo-css via unpkg CDN -->
-    <link rel="stylesheet" href="https://unpkg.com/wafoo-css@0.2.0/dist/wafoo.min.css" />
+    <!-- wafoo-css via unpkg CDN（最新版を自動取得） -->
+    <link rel="stylesheet" href="https://unpkg.com/wafoo-css/dist/wafoo.min.css" />
   </head>
   <body>
     <div class="wf-container">
@@ -126,13 +126,18 @@ npmインストール不要で、CDN経由で直接読み込むこともでき�
     </div>
 
     <!-- インタラクティブコンポーネントを使う場合 -->
-    <script src="https://unpkg.com/wafoo-css@0.2.0/dist/wafoo.min.js"></script>
+    <script src="https://unpkg.com/wafoo-css/dist/wafoo.min.js"></script>
   </body>
 </html>
 ```
 
-**注意**: バージョン指定なしで `https://unpkg.com/wafoo-css/dist/wafoo.min.css`
-とすることで、常に最新版を読み込むこともできますが、本番環境では特定のバージョンを指定することを推奨します。
+**注意**: 上記は常に最新版を読み込みます。本番環境で予期しない破壊的変更を避けたい場合は、特定のバージョンを指定してください：
+
+```html
+<!-- 特定バージョンを指定（推奨：本番環境） -->
+<link rel="stylesheet" href="https://unpkg.com/wafoo-css@1.0.0/dist/wafoo.min.css" />
+<script src="https://unpkg.com/wafoo-css@1.0.0/dist/wafoo.min.js"></script>
+```
 
 ### パターン3: ダウンロードして使う
 
@@ -235,9 +240,9 @@ wafoo-css/
 │   ├── base.css         # ベーススタイル
 │   ├── components/      # コンポーネントCSS（29ファイル）
 │   ├── utilities.css    # ユーティリティクラス
-│   └── themes.css       # 10種類のテーマ
+│   ├── themes.css       # 10種類のテーマ
 │   └── js/
-│       └── wafoo.js     # JS拡張（任意。dist/wafoo.js 末尾に連結されるパッチ）
+│       └── wafoo.js     # インタラクティブコンポーネント（タブ、モーダル等）
 │
 ├── scripts/
 │   ├── build.sh         # ビルドスクリプト

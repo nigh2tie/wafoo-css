@@ -234,7 +234,7 @@ Prefixes available for utilities:
 - `wf-active:` (Active state)
 - `wf-disabled:` (Disabled state)
 
-## JS API Reference (`docs/ui.js`)
+## JS API Reference (`docs/wafoo.js`)
 | Component | Auto-Init Attribute | JS Method | Description |
 |-----------|---------------------|-----------|-------------|
 | **Tabs** | `data-wf-tabs` | `WFUI.tabs(el)` | Keyboard nav, roving tabindex |
