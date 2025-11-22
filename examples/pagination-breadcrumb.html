@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pagination & Breadcrumb - wafoo-css</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="../dist/wafoo.min.css">
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+    <header class="wf-header-noren" role="banner">
+      <div class="wf-container" style="padding: 0"><h1>Pagination & Breadcrumb</h1></div>
+    </header>
+    <main class="wf-container" role="main" id="main">
+      <nav aria-label="Breadcrumb" class="wf-mb-4">
+        <ol class="wf-breadcrumb">
+          <li class="wf-breadcrumb-item"><a href="#">Home</a></li>
+          <li class="wf-breadcrumb-item"><a href="#">Library</a></li>
+          <li class="wf-breadcrumb-item" aria-current="page">Data</li>
+        </ol>
+      </nav>
+
+      <nav class="wf-pagination" aria-label="Pagination">
+        <a class="wf-page-link is-disabled" aria-disabled="true">Prev</a>
+        <a class="wf-page-link" href="#">1</a>
+        <a class="wf-page-link is-active" aria-current="page">2</a>
+        <a class="wf-page-link" href="#">3</a>
+        <a class="wf-page-link" href="#">Next</a>
+      </nav>
+
+      <p class="wf-text-sm wf-text-muted wf-mt-4">
+        <a class="wf-link" href="./showcase-wafu.html">ショーケースへ戻る</a>
+      </p>
+    </main>
+  </body>
+</html>

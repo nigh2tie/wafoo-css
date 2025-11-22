@@ -1,5 +1,16 @@
+/*!
+ * @component Forms
+ * @description Forms component.
+ * @selector .wf-label
+ * @variants .wf-input, .wf-textarea, .wf-select, .wf-field, .wf-checkbox
+ * @variables --wf-space-2, --wf-color-accent, --wf-space-3, --wf-color-border-strong, --wf-radius-md
+ */
 @layer components {
-  /* Forms */
+  /* @meta id="forms" description="Form controls including inputs, selects, checkboxes, radios, and validation states." */
+/*
+  Forms
+  フォーム
+*/
   .wf-label {
     display: block;
     margin: 0 0 var(--wf-space-2);

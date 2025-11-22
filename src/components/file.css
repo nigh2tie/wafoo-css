@@ -1,3 +1,10 @@
+/*!
+ * @component File
+ * @description File component.
+ * @selector .wf-file
+ * @variants 
+ * @variables --wf-space-2, --wf-space-3, --wf-color-border-strong, --wf-radius-md, --wf-surface-base
+ */
 @layer components {
   /* File input */
   .wf-file {

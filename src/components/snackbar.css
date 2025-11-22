@@ -1,3 +1,10 @@
+/*!
+ * @component Snackbar
+ * @description Snackbar component.
+ * @selector .wf-snackbar-container
+ * @variants .wf-snackbar-container--top-left, .wf-snackbar-container--top-right, .wf-snackbar-container--bottom-left, .wf-snackbar-container--bottom-right, .wf-snackbar-container--top-center
+ * @variables --wf-space-2, --wf-space-4, --wf-space-3, --wf-surface-base, --wf-color-border
+ */
 @layer components {
   /* Snackbar - Stack-managed notifications */
   .wf-snackbar-container {

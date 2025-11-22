@@ -1,3 +1,10 @@
+/*!
+ * @component Skeleton
+ * @description Skeleton component.
+ * @selector .wf-skeleton
+ * @variants .wf-skeleton-line, .wf-sm, .wf-lg, .wf-skeleton-circle, .wf-skeleton-rect
+ * @variables --wf-surface-muted, --wf-surface-subtle, --wf-skeleton-duration, --wf-radius-sm
+ */
 @layer components {
   /* Skeleton Loader */
   @keyframes wf-shimmer {

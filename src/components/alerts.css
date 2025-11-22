@@ -1,3 +1,10 @@
+/*!
+ * @component Alerts
+ * @description Alerts component.
+ * @selector .wf-alert
+ * @variants .wf-alert-success, .wf-alert-warning, .wf-alert-danger, .wf-icon, .wf-alert-sm
+ * @variables --wf-space-3, --wf-space-4, --wf-color-border, --wf-radius-md, --wf-surface-muted
+ */
 @layer components {
   /* Alerts */
   .wf-alert {

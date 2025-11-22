@@ -1,3 +1,10 @@
+/*!
+ * @component Calendar
+ * @description Calendar component.
+ * @selector .wf-calendar
+ * @variants .wf-calendar-fluid
+ * @variables --wf-surface-base, --wf-radius-md, --wf-shadow-md, --wf-space-4, --wf-breakpoint-md
+ */
 @layer components {
   /* Calendar Component */
   .wf-calendar {

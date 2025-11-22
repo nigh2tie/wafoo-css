@@ -1,3 +1,10 @@
+/*!
+ * @component Accordion
+ * @description Accordion component.
+ * @selector .wf-accordion
+ * @variants 
+ * @variables --wf-color-border, --wf-radius-md, --wf-surface-base, --wf-space-3, --wf-space-4
+ */
 @layer components {
   /* Accordion */
   .wf-accordion {

@@ -1,5 +1,16 @@
+/*!
+ * @component Cards
+ * @description Cards component.
+ * @selector .wf-card
+ * @variants .wf-card-washi
+ * @variables --wf-surface-base, --wf-color-border, --wf-radius-md, --wf-space-4, --wf-overlay-light
+ */
 @layer components {
-  /* Cards */
+  /* @meta id="cards" description="Card component with standard and 'washi' (Japanese paper) texture variants." */
+/*
+  Cards
+  カード
+*/
   .wf-card {
     background: var(--wf-surface-base);
     border: 1px solid var(--wf-color-border);

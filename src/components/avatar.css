@@ -1,3 +1,10 @@
+/*!
+ * @component Avatar
+ * @description Avatar component.
+ * @selector .wf-avatar
+ * @variants .wf-avatar-sm, .wf-avatar-lg, .wf-avatar-img, .wf-avatar-square, .wf-avatar-status
+ * @variables --wf-accent-100, --wf-color-text, --wf-font-sm, --wf-font-lg, --wf-radius-md
+ */
 @layer components {
   /* Avatar */
   .wf-avatar {

@@ -1,3 +1,10 @@
+/*!
+ * @component Input Group
+ * @description Input Group component.
+ * @selector .wf-input-group
+ * @variants .wf-input, .wf-select, .wf-textarea, .wf-btn
+ * @variables --wf-radius-md, --wf-space-3, --wf-color-accent, --wf-surface-subtle, --wf-color-text
+ */
 @layer components {
   /* Input Group */
   .wf-input-group {

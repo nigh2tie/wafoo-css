@@ -98,11 +98,15 @@
     --wf-space-2: 8px; /* 2x = 8px grid */
     --wf-space-3: 12px; /* 3x */
     --wf-space-4: 16px; /* 4x = 2 * 8px */
+    --wf-space-5: 20px; /* 5x */
     --wf-space-6: 24px; /* 6x = 3 * 8px */
+    --wf-space-7: 28px; /* 7x */
     --wf-space-8: 32px; /* 8x = 4 * 8px */
     --wf-space-10: 40px; /* 10x = 5 * 8px */
     --wf-space-12: 48px; /* 12x = 6 * 8px */
+    --wf-space-14: 56px; /* 14x = 7 * 8px */
     --wf-space-16: 64px; /* 16x = 8 * 8px */
+    --wf-space-20: 80px; /* 20x = 10 * 8px */
 
     /* Breakpoints */
     --wf-breakpoint-sm: 600px;

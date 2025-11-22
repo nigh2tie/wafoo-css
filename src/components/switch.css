@@ -1,3 +1,10 @@
+/*!
+ * @component Switch
+ * @description Switch component.
+ * @selector .wf-switch
+ * @variants 
+ * @variables --wf-color-border-strong, --wf-surface-base, --wf-color-accent, --wf-focus, --wf-space-2
+ */
 @layer components {
   /* Switch */
   .wf-switch {

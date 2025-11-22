@@ -1,3 +1,10 @@
+/*!
+ * @component Grid
+ * @description Grid component.
+ * @selector .wf-row
+ * @variants .wf-g-0, .wf-g-1, .wf-g-2, .wf-g-3, .wf-g-4
+ * @variables --wf-gx, --wf-gy, --wf-space-1, --wf-space-2, --wf-space-3
+ */
 @layer components {
   /* Grid System (12 columns, flex-based) */
   .wf-row {

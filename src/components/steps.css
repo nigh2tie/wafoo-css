@@ -1,3 +1,10 @@
+/*!
+ * @component Steps
+ * @description Steps component.
+ * @selector .wf-steps
+ * @variants .wf-step
+ * @variables --wf-space-4, --wf-space-2, --wf-color-muted, --wf-step-bullet-size, --wf-radius-full
+ */
 @layer components {
   /* Steps */
   .wf-steps {

@@ -1,0 +1,20 @@
+{
+  "name": "wafoo-react-helpers",
+  "version": "0.1.0",
+  "description": "React helpers for Wafoo CSS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wafoo",
+    "css",
+    "react",
+    "helpers"
+  ],
+  "author": "Q_Q",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  }
+}

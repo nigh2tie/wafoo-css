@@ -1,0 +1,20 @@
+{
+  "name": "wafoo-vue-helpers",
+  "version": "0.1.0",
+  "description": "Vue helpers for Wafoo CSS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "wafoo",
+    "css",
+    "vue",
+    "helpers"
+  ],
+  "author": "Q_Q",
+  "license": "MIT",
+  "peerDependencies": {
+    "vue": ">=3.0.0"
+  }
+}

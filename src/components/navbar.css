@@ -1,3 +1,10 @@
+/*!
+ * @component Navbar
+ * @description Navbar component.
+ * @selector .wf-navbar
+ * @variants .wf-navbar-brand, .wf-navbar-nav, .wf-nav-item, .wf-nav-link, .wf-hamburger
+ * @variables --wf-space-2, --wf-surface-base, --wf-color-border, --wf-space-4, --wf-color-text
+ */
 @layer components {
   /* Navbar */
   .wf-navbar {

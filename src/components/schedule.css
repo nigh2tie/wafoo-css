@@ -1,3 +1,10 @@
+/*!
+ * @component Schedule
+ * @description Schedule component.
+ * @selector .wf-schedule
+ * @variants 
+ * @variables --wf-space-2, --wf-space-6, --wf-space-3, --wf-color-border, --wf-radius-md
+ */
 @layer components {
   /* Schedule Component */
   .wf-schedule {
@@ -172,18 +179,15 @@
     user-select: none;
   }
 
-  .wf-schedule__time-grid--cols-4,
-  .wf-schedule__time-grid[class~="cols-4"] {
+  .wf-schedule__time-grid--cols-4 {
     grid-template-columns: repeat(2, 1fr);
   }
 
-  .wf-schedule__time-grid--cols-6,
-  .wf-schedule__time-grid[class~="cols-6"] {
+  .wf-schedule__time-grid--cols-6 {
     grid-template-columns: repeat(3, 1fr);
   }
 
-  .wf-schedule__time-grid--cols-8,
-  .wf-schedule__time-grid[class~="cols-8"] {
+  .wf-schedule__time-grid--cols-8 {
     grid-template-columns: repeat(4, 1fr);
   }
 
@@ -193,18 +197,15 @@
       gap: var(--wf-space-1);
     }
 
-    .wf-schedule__time-grid--cols-4,
-    .wf-schedule__time-grid[class~="cols-4"] {
+    .wf-schedule__time-grid--cols-4 {
       grid-template-columns: repeat(4, 1fr);
     }
 
-    .wf-schedule__time-grid--cols-6,
-    .wf-schedule__time-grid[class~="cols-6"] {
+    .wf-schedule__time-grid--cols-6 {
       grid-template-columns: repeat(6, 1fr);
     }
 
-    .wf-schedule__time-grid--cols-8,
-    .wf-schedule__time-grid[class~="cols-8"] {
+    .wf-schedule__time-grid--cols-8 {
       grid-template-columns: repeat(8, 1fr);
     }
   }

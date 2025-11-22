@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>wafoo-core.css Verification</title>
+  <!-- Load ONLY Core -->
+  <link rel="stylesheet" href="../dist/wafoo-core.css">
+  <style>
+    body { padding: 2rem; }
+    section { margin-bottom: 3rem; border-bottom: 1px solid #eee; padding-bottom: 2rem; }
+    h2 { margin-bottom: 1.5rem; }
+  </style>
+</head>
+<body>
+  <header class="wf-navbar">
+    <div class="wf-container-fluid">
+      <a href="#" class="wf-navbar__brand">Wafoo Core</a>
+      <nav class="wf-navbar__nav">
+        <a href="#" class="wf-navbar__link">Home</a>
+        <a href="#" class="wf-navbar__link">Docs</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="wf-container">
+    <h1>Core Bundle Verification</h1>
+    <p>This page uses only <code>wafoo-core.css</code>. Interactive components (Modal, Tabs) should NOT work or be styled.</p>
+
+    <section>
+      <h2>Buttons</h2>
+      <button class="wf-btn">Default</button>
+      <button class="wf-btn wf-btn-primary">Primary</button>
+      <button class="wf-btn wf-btn-outline">Outline</button>
+    </section>
+
+    <section>
+      <h2>Grid</h2>
+      <div class="wf-grid wf-grid-cols-3 wf-gap-4">
+        <div class="wf-card">Col 1</div>
+        <div class="wf-card">Col 2</div>
+        <div class="wf-card">Col 3</div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Forms</h2>
+      <div class="wf-field">
+        <label class="wf-label">Email</label>
+        <input type="email" class="wf-input" placeholder="hello@example.com">
+      </div>
+    </section>
+
+    <section>
+      <h2>Utilities</h2>
+      <div class="wf-p-4 wf-bg-surface-muted wf-text-center">
+        Padding 4, Muted BG, Center Text
+      </div>
+    </section>
+  </main>
+</body>
+</html>

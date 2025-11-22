@@ -1,3 +1,10 @@
+/*!
+ * @component Header
+ * @description Header component.
+ * @selector .wf-header
+ * @variants .wf-header--no-stripe, .wf-header-noren
+ * @variables --wf-sumi, --wf-surface-base, --wf-color-accent, --wf-surface-subtle
+ */
 @layer components {
   /* Header - Default style with noren (暖簾) design */
   /* 墨色グラデーション + ストライプ装飾がデフォルト */

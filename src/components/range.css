@@ -1,3 +1,10 @@
+/*!
+ * @component Range
+ * @description Range component.
+ * @selector .wf-range
+ * @variants 
+ * @variables --wf-color-border, --wf-radius-full, --wf-color-accent, --wf-surface-base, --wf-focus
+ */
 @layer components {
   /* Range */
   .wf-range {

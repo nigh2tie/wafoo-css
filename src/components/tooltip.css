@@ -1,3 +1,10 @@
+/*!
+ * @component Tooltip
+ * @description Tooltip component.
+ * @selector .wf-tooltip
+ * @variants 
+ * @variables --wf-color-text, --wf-surface-base, --wf-radius-sm, --wf-font-sm, --wf-arrow-x
+ */
 @layer components {
   /* Tooltip */
   .wf-tooltip {

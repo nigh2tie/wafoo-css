@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>インタラクティブデモ - wafoo-css</title>
+  <link rel="stylesheet" href="../dist/wafoo.min.css?v=20251102">
+  <script src="../dist/wafoo.min.js?v=20251102"></script>
+  <style>
+    body {
+      margin: 0;
+      padding-bottom: 80px;
+    }
+    .demo-section {
+      margin-bottom: 48px;
+    }
+    .demo-section h2 {
+      font-size: 1.5rem;
+      margin-bottom: 24px;
+      padding-bottom: 12px;
+      border-bottom: 2px solid var(--wf-color-accent);
+    }
+    .toast-container {
+      position: fixed;
+      top: 80px;
+      right: 20px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 400px;
+    }
+    .theme-selector {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: var(--wf-surface-base);
+      padding: 12px;
+      border: 1px solid var(--wf-color-border);
+      border-radius: var(--wf-radius-md);
+      box-shadow: var(--wf-shadow-md);
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+
+  <!-- テーマ選択 -->
+  <div class="theme-selector">
+    <label for="theme" style="display: block; margin-bottom: 4px; font-size: 0.875rem;">テーマ:</label>
+    <select id="theme" class="wf-input" style="font-size: 0.875rem;">
+      <option value="">デフォルト</option>
+      <option value="theme-sakura">桜</option>
+      <option value="theme-koubai">紅梅</option>
+      <option value="theme-moe">萌黄</option>
+      <option value="theme-kiku">菊</option>
+      <option value="theme-koori">氷</option>
+      <option value="theme-yanagi">柳</option>
+      <option value="theme-momiji">紅葉</option>
+      <option value="theme-fuji">藤</option>
+      <option value="theme-uguisu">鶯</option>
+      <option value="theme-yuki">雪</option>
+    </select>
+  </div>
+
+  <!-- Toast Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Header -->
+  <header class="wf-header-noren" role="banner">
+    <div class="wf-container" style="padding: 0">
+      <h1>インタラクティブデモ</h1>
+      <p style="margin: 8px 0 0; opacity: 0.9;">Toast / Divider / Code のデモンストレーション</p>
+    </div>
+  </header>
+
+  <main id="main" class="wf-container" role="main" style="padding-top: 48px;">
+
+    <!-- Toast Demos -->
+    <section class="demo-section">
+      <h2>Toast（通知）</h2>
+
+      <div class="wf-card">
+        <h3>通知を表示</h3>
+        <p style="color: var(--wf-color-muted); margin-bottom: 16px;">
+          ボタンをクリックすると、右上に通知が表示されます。「×」ボタンまたは自動的に5秒後に消えます。
+        </p>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <button class="wf-btn wf-btn-primary" onclick="showToast('info')">
+            基本通知
+          </button>
+          <button class="wf-btn wf-btn-success" onclick="showToast('success')">
+            成功通知
+          </button>
+          <button class="wf-btn wf-btn-warning" onclick="showToast('warning')">
+            警告通知
+          </button>
+          <button class="wf-btn wf-btn-danger" onclick="showToast('danger')">
+            エラー通知
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Divider Demos -->
+    <section class="demo-section">
+      <h2>Divider（区切り線）</h2>
+
+      <div class="wf-card">
+        <h3>水平線</h3>
+        <p>セクションの前</p>
+        <hr class="wf-divider">
+        <p>セクションの後</p>
+      </div>
+
+      <div class="wf-card">
+        <h3>強調線</h3>
+        <p>重要なセクション</p>
+        <hr class="wf-divider wf-divider--strong">
+        <p>次のセクション</p>
+      </div>
+
+      <div class="wf-card">
+        <h3>テキスト付き区切り</h3>
+        <div style="background: var(--wf-surface-muted); padding: 16px; border-radius: var(--wf-radius-md);">
+          <label class="wf-label" for="email">メールアドレス</label>
+          <input type="email" id="email" class="wf-input" placeholder="name@example.com">
+        </div>
+
+        <div class="wf-divider wf-divider--text">または</div>
+
+        <div style="display: flex; gap: 12px;">
+          <button class="wf-btn wf-btn-outline" style="flex: 1;">Google</button>
+          <button class="wf-btn wf-btn-outline" style="flex: 1;">GitHub</button>
+        </div>
+      </div>
+
+      <div class="wf-card">
+        <h3>垂直線</h3>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 24px; padding: 24px; background: var(--wf-surface-subtle); border-radius: var(--wf-radius-md);">
+          <button class="wf-btn wf-btn-subtle">保存</button>
+          <div class="wf-divider wf-divider--vertical"></div>
+          <button class="wf-btn wf-btn-subtle">キャンセル</button>
+          <div class="wf-divider wf-divider--vertical"></div>
+          <button class="wf-btn wf-btn-danger">削除</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Code Demos -->
+    <section class="demo-section">
+      <h2>KBD / Code</h2>
+
+      <div class="wf-card">
+        <h3>キーボードショートカット</h3>
+        <div style="background: var(--wf-surface-subtle); padding: 16px; border-radius: var(--wf-radius-md);">
+          <p style="margin: 0 0 12px 0;">ファイルを保存: <kbd class="wf-kbd">Ctrl</kbd> + <kbd class="wf-kbd">S</kbd></p>
+          <p style="margin: 0 0 12px 0;">検索: <kbd class="wf-kbd">Ctrl</kbd> + <kbd class="wf-kbd">F</kbd></p>
+          <p style="margin: 0 0 12px 0;">すべて選択: <kbd class="wf-kbd">Ctrl</kbd> + <kbd class="wf-kbd">A</kbd></p>
+          <p style="margin: 0;">モーダルを閉じる: <kbd class="wf-kbd">Esc</kbd></p>
+        </div>
+      </div>
+
+      <div class="wf-card">
+        <h3>インラインコード</h3>
+        <p>
+          変数を宣言するには <code class="wf-code">const name = "wafoo"</code> を使います。
+        </p>
+        <p>
+          関数を呼び出すには <code class="wf-code">getUserName()</code> のように記述します。
+        </p>
+      </div>
+
+      <div class="wf-card">
+        <h3>コードブロック（コピー機能付き）</h3>
+        <p style="color: var(--wf-color-muted); margin-bottom: 16px;">
+          右上の「コピー」ボタンをクリックすると、コードがクリップボードにコピーされます。
+        </p>
+
+        <pre class="wf-code-block" data-wf-codeblock><code>// 和風グリーティング関数
+function greet(name) {
+  const greetings = ['こんにちは', 'おはよう', 'こんばんは'];
+  const random = Math.floor(Math.random() * greetings.length);
+  return `${greetings[random]}、${name}さん！`;
+}
+
+// 使用例
+console.log(greet('太郎'));  // "こんにちは、太郎さん！"</code></pre>
+      </div>
+
+      <div class="wf-card">
+        <h3>複数のコードブロック</h3>
+
+        <h4 style="margin-top: 0;">HTML</h4>
+        <pre class="wf-code-block" data-wf-codeblock><code>&lt;div class="wf-card"&gt;
+  &lt;h3&gt;タイトル&lt;/h3&gt;
+  &lt;p&gt;本文内容&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+        <h4>CSS</h4>
+        <pre class="wf-code-block" data-wf-codeblock><code>.wf-card {
+  background: var(--wf-surface-base);
+  border: 1px solid var(--wf-color-border);
+  border-radius: var(--wf-radius-md);
+  padding: var(--wf-space-4);
+}</code></pre>
+
+        <h4>JavaScript</h4>
+        <pre class="wf-code-block" data-wf-codeblock><code>// テーマを動的に変更
+document.body.className = 'theme-sakura';
+
+// 複数クラスがある場合
+document.body.classList.add('theme-koori');</code></pre>
+      </div>
+    </section>
+
+    <!-- Combined Demo -->
+    <section class="demo-section">
+      <h2>組み合わせデモ</h2>
+
+      <div class="wf-card-washi">
+        <h3>通知システムの実装例</h3>
+        <p>以下のコードで簡単に通知システムを実装できます：</p>
+
+        <pre class="wf-code-block" data-wf-codeblock><code>function showToast(type) {
+  const container = document.getElementById('toast-container');
+  const toast = document.createElement('div');
+  toast.className = `wf-toast${type !== 'info' ? ' wf-toast--' + type : ''}`;
+
+  const messages = {
+    info: { title: 'お知らせ', text: '新しい情報があります' },
+    success: { title: '成功', text: 'データが正常に保存されました' },
+    warning: { title: '注意', text: 'この操作は元に戻せません' },
+    danger: { title: 'エラー', text: '処理中にエラーが発生しました' }
+  };
+
+  const msg = messages[type];
+  toast.innerHTML = `
+    &lt;div class="wf-toast__content"&gt;
+      &lt;div class="wf-toast__title"&gt;${msg.title}&lt;/div&gt;
+      ${msg.text}
+    &lt;/div&gt;
+    &lt;button class="wf-toast__close" aria-label="閉じる"&gt;×&lt;/button&gt;
+  `;
+
+  container.appendChild(toast);
+
+  // 閉じるボタン
+  toast.querySelector('.wf-toast__close').addEventListener('click', () => {
+    toast.style.animation = 'wf-toast-out 0.2s ease forwards';
+    setTimeout(() => toast.remove(), 200);
+  });
+
+  // 自動削除（5秒後）
+  setTimeout(() => {
+    if (toast.parentElement) {
+      toast.style.animation = 'wf-toast-out 0.2s ease forwards';
+      setTimeout(() => toast.remove(), 200);
+    }
+  }, 5000);
+}</code></pre>
+
+        <hr class="wf-divider">
+
+        <p style="text-align: center; margin: 24px 0;">
+          <button class="wf-btn wf-btn-gradient wf-btn-lg" onclick="showToast('success')">
+            実際に試してみる
+          </button>
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Theme switching
+    function applyTheme(theme) {
+      const t = theme || localStorage.getItem('wf-theme') || '';
+      document.body.className = document.body.className
+        .split(' ')
+        .filter(c => !c.startsWith('theme-'))
+        .join(' ');
+      if (t) document.body.classList.add(t);
+      localStorage.setItem('wf-theme', t);
+      const sel = document.getElementById('theme');
+      if (sel) sel.value = t;
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      applyTheme();
+      const theme = document.getElementById('theme');
+      if (theme) {
+        theme.addEventListener('change', () => applyTheme(theme.value));
+      }
+    });
+
+    // Toast functionality
+    function showToast(type) {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      toast.className = `wf-toast${type !== 'info' ? ' wf-toast--' + type : ''}`;
+
+      const messages = {
+        info: { title: 'お知らせ', text: '新しい情報があります' },
+        success: { title: '成功', text: 'データが正常に保存されました' },
+        warning: { title: '注意', text: 'この操作は元に戻せません' },
+        danger: { title: 'エラー', text: '処理中にエラーが発生しました' }
+      };
+
+      const msg = messages[type];
+      toast.innerHTML = `
+        <div class="wf-toast__content">
+          <div class="wf-toast__title">${msg.title}</div>
+          ${msg.text}
+        </div>
+        <button class="wf-toast__close" aria-label="閉じる">×</button>
+      `;
+
+      // アニメーション
+      toast.style.animation = 'wf-toast-in 0.3s ease forwards';
+      container.appendChild(toast);
+
+      // 閉じるボタン
+      toast.querySelector('.wf-toast__close').addEventListener('click', () => {
+        toast.style.animation = 'wf-toast-out 0.2s ease forwards';
+        setTimeout(() => toast.remove(), 200);
+      });
+
+      // 自動削除（5秒後）
+      setTimeout(() => {
+        if (toast.parentElement) {
+          toast.style.animation = 'wf-toast-out 0.2s ease forwards';
+          setTimeout(() => toast.remove(), 200);
+        }
+      }, 5000);
+    }
+
+    // アニメーション定義を追加
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes wf-toast-in {
+        from {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes wf-toast-out {
+        from {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        to {
+          opacity: 0;
+          transform: translateX(100%);
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
+</body>
+</html>

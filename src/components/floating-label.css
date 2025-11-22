@@ -1,3 +1,10 @@
+/*!
+ * @component Floating Label
+ * @description Floating Label component.
+ * @selector .wf-form-floating
+ * @variants .wf-input, .wf-textarea
+ * @variables --wf-space-4, --wf-color-muted, --wf-color-accent
+ */
 @layer components {
   /* Floating Label */
   .wf-form-floating {

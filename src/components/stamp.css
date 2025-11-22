@@ -1,3 +1,10 @@
+/*!
+ * @component Stamp
+ * @description Stamp component.
+ * @selector .wf-stamp
+ * @variants 
+ * @variables --wf-stamp-py, --wf-stamp-px, --wf-stamp-weight, --wf-stamp-color, --wf-surface-base
+ */
 @layer components {
   /* Stamp (判子) */
   .wf-stamp {

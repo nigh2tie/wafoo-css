@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Grid（12列） - wafoo-css</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="../dist/wafoo.min.css">
+    <style>
+      body {
+        margin: 0;
+      }
+      .demo-grid-item {
+        background: var(--wf-surface-subtle);
+        border: 2px solid var(--wf-color-accent);
+        padding: var(--wf-space-4);
+        text-align: center;
+        border-radius: var(--wf-radius-md);
+        font-weight: 600;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+    <header class="wf-header-noren">
+      <div class="wf-container" style="padding: 0"><h1>Grid（12列）</h1></div>
+    </header>
+    <main class="wf-container" id="main">
+      <h2>12列グリッドシステム</h2>
+      <p class="wf-text-muted">全12列の構成を確認できます。</p>
+      <div class="wf-row wf-g-2 wf-mb-4">
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+        <div class="wf-col-1"><div class="demo-grid-item">1</div></div>
+      </div>
+
+      <h2 class="wf-mt-5">2列レイアウト</h2>
+      <div class="wf-row wf-g-3 wf-mb-4">
+        <div class="wf-col-6"><div class="demo-grid-item">.wf-col-6</div></div>
+        <div class="wf-col-6"><div class="demo-grid-item">.wf-col-6</div></div>
+      </div>
+
+      <h2 class="wf-mt-5">3列レイアウト</h2>
+      <div class="wf-row wf-g-3 wf-mb-4">
+        <div class="wf-col-4"><div class="demo-grid-item">.wf-col-4</div></div>
+        <div class="wf-col-4"><div class="demo-grid-item">.wf-col-4</div></div>
+        <div class="wf-col-4"><div class="demo-grid-item">.wf-col-4</div></div>
+      </div>
+
+      <h2 class="wf-mt-5">4列レイアウト</h2>
+      <div class="wf-row wf-g-2 wf-mb-4">
+        <div class="wf-col-3"><div class="demo-grid-item">.wf-col-3</div></div>
+        <div class="wf-col-3"><div class="demo-grid-item">.wf-col-3</div></div>
+        <div class="wf-col-3"><div class="demo-grid-item">.wf-col-3</div></div>
+        <div class="wf-col-3"><div class="demo-grid-item">.wf-col-3</div></div>
+      </div>
+
+      <h2 class="wf-mt-5">8:4 レイアウト（サイドバー）</h2>
+      <div class="wf-row wf-g-3 wf-mb-4">
+        <div class="wf-col-12 wf-col-sm-8"><div class="demo-grid-item">.wf-col-12 .wf-col-sm-8<br>メインコンテンツ</div></div>
+        <div class="wf-col-12 wf-col-sm-4"><div class="demo-grid-item">.wf-col-12 .wf-col-sm-4<br>サイドバー</div></div>
+      </div>
+
+      <h2 class="wf-mt-5">複雑なレイアウト</h2>
+      <div class="wf-row wf-g-3 wf-mb-4">
+        <div class="wf-col-12"><div class="demo-grid-item">.wf-col-12（フル幅）</div></div>
+        <div class="wf-col-8"><div class="demo-grid-item">.wf-col-8</div></div>
+        <div class="wf-col-4"><div class="demo-grid-item">.wf-col-4</div></div>
+        <div class="wf-col-3"><div class="demo-grid-item">.wf-col-3</div></div>
+        <div class="wf-col-9"><div class="demo-grid-item">.wf-col-9</div></div>
+      </div>
+
+      <h2 class="wf-mt-5">オフセット（中央配置）</h2>
+      <p class="wf-text-muted">offset クラスで左余白を追加し、要素を中央や任意の位置に配置できます。</p>
+      <div class="wf-row wf-g-3 wf-mb-4">
+        <div class="wf-col-6 wf-offset-3"><div class="demo-grid-item">.wf-col-6 .wf-offset-3<br>中央配置</div></div>
+      </div>
+      <div class="wf-row wf-g-3 wf-mb-4">
+        <div class="wf-col-4 wf-offset-2"><div class="demo-grid-item">.wf-col-4 .wf-offset-2</div></div>
+        <div class="wf-col-4"><div class="demo-grid-item">.wf-col-4</div></div>
+      </div>
+
+      <h2 class="wf-mt-5">オートレイアウト（均等幅）</h2>
+      <p class="wf-text-muted">.wf-col-auto で要素数に応じて自動的に均等幅になります。</p>
+      <div class="wf-row wf-g-3 wf-mb-4">
+        <div class="wf-col-auto"><div class="demo-grid-item">.wf-col-auto<br>自動幅</div></div>
+        <div class="wf-col-auto"><div class="demo-grid-item">.wf-col-auto<br>自動幅</div></div>
+        <div class="wf-col-auto"><div class="demo-grid-item">.wf-col-auto<br>自動幅</div></div>
+      </div>
+      <div class="wf-row wf-g-3 wf-mb-4">
+        <div class="wf-col-auto"><div class="demo-grid-item">.wf-col-auto</div></div>
+        <div class="wf-col-auto"><div class="demo-grid-item">.wf-col-auto</div></div>
+      </div>
+
+      <p class="wf-text-sm wf-text-muted wf-mt-5">
+        <a class="wf-link" href="./showcase-wafu.html">ショーケースへ戻る</a>
+      </p>
+    </main>
+  </body>
+</html>

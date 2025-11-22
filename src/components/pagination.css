@@ -1,3 +1,10 @@
+/*!
+ * @component Pagination
+ * @description Pagination component.
+ * @selector .wf-pagination
+ * @variants .wf-page-link
+ * @variables --wf-space-2, --wf-color-border, --wf-radius-md, --wf-color-text, --wf-surface-muted
+ */
 @layer components {
   /* Pagination */
   .wf-pagination {

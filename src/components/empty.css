@@ -1,3 +1,10 @@
+/*!
+ * @component Empty
+ * @description Empty component.
+ * @selector .wf-empty
+ * @variants 
+ * @variables --wf-color-border, --wf-radius-md, --wf-surface-base, --wf-space-6, --wf-color-muted
+ */
 @layer components {
   /* Empty State */
   .wf-empty {

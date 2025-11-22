@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wafoo CSS - OG画像ジェネレーター</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background: #f5f5f5;
+    }
+    .container {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    h1 {
+      margin-top: 0;
+      color: #333;
+    }
+    canvas {
+      border: 1px solid #ddd;
+      margin: 20px 0;
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+    button {
+      background: #6a5c7c;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    button:hover {
+      background: #5e516f;
+    }
+    .controls {
+      margin: 20px 0;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      font-weight: 600;
+      color: #333;
+    }
+    select, input[type="text"] {
+      width: 100%;
+      max-width: 400px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+    .preview-note {
+      background: #fff3cd;
+      border: 1px solid #ffc107;
+      padding: 12px;
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Wafoo CSS - OG画像ジェネレーター</h1>
+
+    <div class="controls">
+      <label for="colorScheme">配色:</label>
+      <select id="colorScheme">
+        <option value="haizakura">案1: 灰桜ベース（推奨）</option>
+        <option value="fuji">案2: 藤紫グラデーション</option>
+        <option value="shirayuri">案3: 和紙風</option>
+      </select>
+
+      <label for="mainText">メインテキスト:</label>
+      <input type="text" id="mainText" value="Wafoo CSS">
+
+      <label for="subText">サブテキスト:</label>
+      <input type="text" id="subText" value="和風CSSフレームワーク">
+
+      <label for="descText">説明文:</label>
+      <input type="text" id="descText" value="伝統的な日本の美学を取り入れた軽量CSSフレームワーク">
+    </div>
+
+    <button onclick="generateImage()">画像を生成</button>
+    <button onclick="downloadImage()">画像をダウンロード</button>
+
+    <div class="preview-note">
+      <strong>使い方:</strong>
+      <ol>
+        <li>配色とテキストを選択</li>
+        <li>「画像を生成」ボタンをクリック</li>
+        <li>プレビューを確認</li>
+        <li>「画像をダウンロード」ボタンで保存</li>
+      </ol>
+    </div>
+
+    <canvas id="canvas" width="1200" height="630"></canvas>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    const colorSchemes = {
+      haizakura: {
+        bg: '#e7ddd4',
+        text: '#1f1f1f',
+        accent: '#6a5c7c',
+        sub: '#666666'
+      },
+      fuji: {
+        bg: 'linear',
+        bgStart: '#b28fce',
+        bgEnd: '#f0ecf3',
+        text: '#1f1f1f',
+        accent: '#ffffff',
+        sub: '#2c2c2c'
+      },
+      shirayuri: {
+        bg: '#f8f4e6',
+        text: '#1f1f1f',
+        accent: '#f4a7b9',
+        sub: '#666666',
+        border: '#e5e5e5'
+      }
+    };
+
+    function generateImage() {
+      const scheme = document.getElementById('colorScheme').value;
+      const mainText = document.getElementById('mainText').value;
+      const subText = document.getElementById('subText').value;
+      const descText = document.getElementById('descText').value;
+      const colors = colorSchemes[scheme];
+
+      // 背景を描画
+      if (colors.bg === 'linear') {
+        const gradient = ctx.createLinearGradient(0, 0, 0, 630);
+        gradient.addColorStop(0, colors.bgStart);
+        gradient.addColorStop(1, colors.bgEnd);
+        ctx.fillStyle = gradient;
+      } else {
+        ctx.fillStyle = colors.bg;
+      }
+      ctx.fillRect(0, 0, 1200, 630);
+
+      // 和紙風の枠線（案3の場合）
+      if (scheme === 'shirayuri') {
+        ctx.strokeStyle = colors.border;
+        ctx.lineWidth = 2;
+        ctx.strokeRect(40, 40, 1120, 550);
+      }
+
+      // アイコンを描画（シンプルな和風デザイン）
+      drawIcon(colors);
+
+      // テキストを描画
+      ctx.textAlign = 'center';
+
+      // メインテキスト
+      ctx.fillStyle = colors.text;
+      ctx.font = 'bold 72px "Noto Serif JP", serif';
+      ctx.fillText(mainText, 600, 340);
+
+      // サブテキスト
+      ctx.fillStyle = colors.accent;
+      ctx.font = '600 36px "Noto Serif JP", serif';
+      ctx.fillText(subText, 600, 400);
+
+      // 説明文
+      ctx.fillStyle = colors.sub;
+      ctx.font = '400 24px "Noto Serif JP", serif';
+      ctx.fillText(descText, 600, 470);
+    }
+
+    function drawIcon(colors) {
+      const centerX = 600;
+      const centerY = 180;
+      const size = 100;
+
+      // 重なる四角形（CSS要素を表現）
+      ctx.fillStyle = colors.accent;
+      ctx.globalAlpha = 0.8;
+
+      // 左の四角
+      ctx.fillRect(centerX - size, centerY - size/2, size, size);
+
+      // 右の四角
+      ctx.fillStyle = colors.text;
+      ctx.globalAlpha = 0.6;
+      ctx.fillRect(centerX, centerY - size/2, size, size);
+
+      // 中央の筆アイコン（和風を表現）
+      ctx.globalAlpha = 1;
+      ctx.fillStyle = colors.accent;
+      ctx.beginPath();
+      ctx.moveTo(centerX - 10, centerY - 30);
+      ctx.lineTo(centerX + 10, centerY - 30);
+      ctx.lineTo(centerX + 5, centerY + 40);
+      ctx.lineTo(centerX - 5, centerY + 40);
+      ctx.closePath();
+      ctx.fill();
+
+      // 筆先
+      ctx.fillStyle = colors.text;
+      ctx.beginPath();
+      ctx.moveTo(centerX - 5, centerY + 40);
+      ctx.lineTo(centerX + 5, centerY + 40);
+      ctx.lineTo(centerX, centerY + 50);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.globalAlpha = 1;
+    }
+
+    function downloadImage() {
+      const link = document.createElement('a');
+      link.download = 'wafoo-css-og-image.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+    }
+
+    // ページ読み込み時に自動生成
+    window.addEventListener('load', function() {
+      // フォントの読み込みを待つ
+      if (document.fonts) {
+        document.fonts.load('bold 72px "Noto Serif JP"').then(() => {
+          document.fonts.load('600 36px "Noto Serif JP"').then(() => {
+            document.fonts.load('400 24px "Noto Serif JP"').then(() => {
+              setTimeout(generateImage, 100);
+            });
+          });
+        });
+      } else {
+        // フォントAPIがない場合は少し待ってから生成
+        setTimeout(generateImage, 1000);
+      }
+    });
+
+    // セレクトボックスの変更時に自動再生成
+    document.getElementById('colorScheme').addEventListener('change', generateImage);
+    document.getElementById('mainText').addEventListener('input', generateImage);
+    document.getElementById('subText').addEventListener('input', generateImage);
+    document.getElementById('descText').addEventListener('input', generateImage);
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700;900&display=swap" rel="stylesheet">
+</body>
+</html>

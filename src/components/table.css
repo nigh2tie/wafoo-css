@@ -1,5 +1,16 @@
+/*!
+ * @component Table
+ * @description Table component.
+ * @selector .wf-table-wrap
+ * @variants .wf-table, .wf-sort, .wf-table-striped, .wf-table-hover, .wf-table-bordered
+ * @variables --wf-surface-base, --wf-color-border, --wf-color-muted, --wf-color-accent, --wf-surface-muted
+ */
 @layer components {
-  /* Table */
+  /* @meta id="table" description="Table styles with striped, hover, and responsive variants." */
+/*
+  Table
+  テーブル
+*/
   .wf-table-wrap {
     overflow: auto;
   }

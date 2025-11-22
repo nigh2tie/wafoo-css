@@ -1,3 +1,10 @@
+/*!
+ * @component Rating
+ * @description Rating component.
+ * @selector .wf-rating
+ * @variants .wf-rating-sm, .wf-rating-lg
+ * @variables --wf-space-1, --wf-icon-md, --wf-ink-200, --wf-duration-fast, --wf-accent-500
+ */
 /**
  * Rating/Star Component
  * 評価表示・入力コンポーネント

@@ -1,3 +1,10 @@
+/*!
+ * @component List Group
+ * @description List Group component.
+ * @selector .wf-list-group
+ * @variants .wf-list-item, .wf-meta, .wf-icon
+ * @variables --wf-color-border, --wf-radius-md, --wf-surface-base, --wf-space-3, --wf-space-4
+ */
 @layer components {
   /* List Group */
   .wf-list-group {

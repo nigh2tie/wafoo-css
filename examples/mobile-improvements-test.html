@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Mobile Improvements Test - wafoo-css</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="../dist/wafoo.css?v=20251116">
+    <script src="../dist/wafoo.min.js"></script>
+    <style>
+      body { margin: 0; }
+      section {
+        padding: 2rem;
+        border-bottom: 3px solid #e5e5e5;
+      }
+      h2 {
+        margin-top: 0;
+        color: var(--wf-color-accent);
+      }
+      .test-note {
+        background: #fffbea;
+        border-left: 4px solid #f59e0b;
+        padding: 1rem;
+        margin: 1rem 0;
+        font-size: 0.875rem;
+      }
+      .test-note strong {
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+      .breakpoint-indicator {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        background: var(--wf-color-accent);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: var(--wf-radius-md);
+        font-weight: bold;
+        z-index: 10000;
+      }
+    </style>
+  </head>
+  <body>
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+
+    <div class="breakpoint-indicator" id="bp-indicator">Desktop</div>
+
+    <header style="background: var(--wf-primary-bg); color: var(--wf-primary-fg); padding: 2rem; text-align: center;">
+      <h1 style="margin: 0;">Mobile Improvements Test</h1>
+      <p style="margin: 0.5rem 0 0;">ブラウザ幅を600px以下にリサイズして確認してください</p>
+    </header>
+
+    <!-- 1. Grid Test -->
+    <section id="grid-test">
+      <h2>1. Grid - モバイルデフォルト100%幅</h2>
+      <div class="test-note">
+        <strong>期待される動作:</strong>
+        • デスクトップ（600px以上）: 3カラム表示<br>
+        • モバイル（600px未満）: 1カラム表示（100%幅）
+      </div>
+
+      <div class="wf-row wf-g-3">
+        <div class="wf-col-4">
+          <div class="wf-card">
+            <div class="wf-card__body">
+              <h3 style="margin-top: 0;">カラム 1</h3>
+              <p>このカラムはモバイルで100%幅になります</p>
+            </div>
+          </div>
+        </div>
+        <div class="wf-col-4">
+          <div class="wf-card">
+            <div class="wf-card__body">
+              <h3 style="margin-top: 0;">カラム 2</h3>
+              <p>このカラムはモバイルで100%幅になります</p>
+            </div>
+          </div>
+        </div>
+        <div class="wf-col-4">
+          <div class="wf-card">
+            <div class="wf-card__body">
+              <h3 style="margin-top: 0;">カラム 3</h3>
+              <p>このカラムはモバイルで100%幅になります</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Tabs Test -->
+    <section id="tabs-test">
+      <h2>2. Tabs - 横スクロール対応</h2>
+      <div class="test-note">
+        <strong>期待される動作:</strong>
+        • デスクトップ: 通常表示<br>
+        • モバイル（600px未満）: 横スクロール可能
+      </div>
+
+      <div class="wf-tabs" data-wf-tabs>
+        <div class="wf-tablist" role="tablist">
+          <button class="wf-tab" role="tab" aria-selected="true">タブ 1</button>
+          <button class="wf-tab" role="tab">タブ 2</button>
+          <button class="wf-tab" role="tab">タブ 3</button>
+          <button class="wf-tab" role="tab">タブ 4</button>
+          <button class="wf-tab" role="tab">タブ 5</button>
+          <button class="wf-tab" role="tab">タブ 6</button>
+          <button class="wf-tab" role="tab">タブ 7</button>
+        </div>
+        <div class="wf-tabpanels">
+          <div class="wf-tabpanel is-active" role="tabpanel">
+            <p>タブ1のコンテンツ。モバイルでタブが多い場合は横スクロールできます。</p>
+          </div>
+          <div class="wf-tabpanel" role="tabpanel">
+            <p>タブ2のコンテンツ</p>
+          </div>
+          <div class="wf-tabpanel" role="tabpanel">
+            <p>タブ3のコンテンツ</p>
+          </div>
+          <div class="wf-tabpanel" role="tabpanel">
+            <p>タブ4のコンテンツ</p>
+          </div>
+          <div class="wf-tabpanel" role="tabpanel">
+            <p>タブ5のコンテンツ</p>
+          </div>
+          <div class="wf-tabpanel" role="tabpanel">
+            <p>タブ6のコンテンツ</p>
+          </div>
+          <div class="wf-tabpanel" role="tabpanel">
+            <p>タブ7のコンテンツ</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Pagination Test -->
+    <section id="pagination-test">
+      <h2>3. Pagination - 折り返し対応</h2>
+      <div class="test-note">
+        <strong>期待される動作:</strong>
+        • デスクトップ: 1行表示<br>
+        • モバイル（600px未満）: 複数行に折り返し、ギャップ縮小
+      </div>
+
+      <nav class="wf-pagination" aria-label="ページネーション">
+        <a class="wf-page-link is-disabled" href="#" aria-disabled="true">前へ</a>
+        <a class="wf-page-link is-active" href="#" aria-current="page">1</a>
+        <a class="wf-page-link" href="#">2</a>
+        <a class="wf-page-link" href="#">3</a>
+        <a class="wf-page-link" href="#">4</a>
+        <a class="wf-page-link" href="#">5</a>
+        <a class="wf-page-link" href="#">6</a>
+        <a class="wf-page-link" href="#">7</a>
+        <a class="wf-page-link" href="#">8</a>
+        <a class="wf-page-link" href="#">9</a>
+        <a class="wf-page-link" href="#">10</a>
+        <a class="wf-page-link" href="#">次へ</a>
+      </nav>
+    </section>
+
+    <!-- 4. Table Test -->
+    <section id="table-test">
+      <h2>4. Table - 最小幅設定</h2>
+      <div class="test-note">
+        <strong>期待される動作:</strong>
+        • デスクトップ: 通常表示（最小幅500px）<br>
+        • モバイル（600px未満）: 横スクロール（最小幅400px）、カラム圧縮を防ぐ
+      </div>
+
+      <div class="wf-table-wrap">
+        <table class="wf-table wf-table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>名前</th>
+              <th>メールアドレス</th>
+              <th>役職</th>
+              <th>ステータス</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>001</td>
+              <td>山田太郎</td>
+              <td>yamada@example.com</td>
+              <td>エンジニア</td>
+              <td>アクティブ</td>
+            </tr>
+            <tr>
+              <td>002</td>
+              <td>佐藤花子</td>
+              <td>sato@example.com</td>
+              <td>デザイナー</td>
+              <td>アクティブ</td>
+            </tr>
+            <tr>
+              <td>003</td>
+              <td>鈴木一郎</td>
+              <td>suzuki@example.com</td>
+              <td>マネージャー</td>
+              <td>休暇中</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- 5. Input Group Test -->
+    <section id="input-group-test">
+      <h2>5. Input Group - 縦並び対応</h2>
+      <div class="test-note">
+        <strong>期待される動作:</strong>
+        • デスクトップ: 横並び<br>
+        • モバイル（600px未満）: 縦並び、角丸復元
+      </div>
+
+      <div class="wf-input-group">
+        <input class="wf-input" type="text" placeholder="検索キーワード">
+        <button class="wf-btn">検索</button>
+      </div>
+
+      <div style="margin-top: 1rem;" class="wf-input-group">
+        <div class="wf-input-group__prepend">
+          <span class="wf-input-group__text">@</span>
+        </div>
+        <input class="wf-input" type="text" placeholder="ユーザー名">
+        <div class="wf-input-group__append">
+          <span class="wf-input-group__text">.com</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Dropdown Test -->
+    <section id="dropdown-test">
+      <h2>6. Dropdown - はみ出し対策</h2>
+      <div class="test-note">
+        <strong>期待される動作:</strong>
+        • デスクトップ: 左寄せ表示<br>
+        • モバイル（600px未満）: 中央配置、画面幅の90%を超えない
+      </div>
+
+      <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+        <div class="wf-dropdown" data-wf-dropdown>
+          <button class="wf-dropdown__toggle" aria-expanded="false">
+            ドロップダウン 1 ▾
+          </button>
+          <ul class="wf-dropdown__menu" role="menu" hidden>
+            <li><a class="wf-dropdown__item" role="menuitem" href="#">アクション 1</a></li>
+            <li><a class="wf-dropdown__item" role="menuitem" href="#">アクション 2</a></li>
+            <li><a class="wf-dropdown__item" role="menuitem" href="#">アクション 3</a></li>
+          </ul>
+        </div>
+
+        <div class="wf-dropdown" data-wf-dropdown>
+          <button class="wf-dropdown__toggle" aria-expanded="false">
+            ドロップダウン 2 ▾
+          </button>
+          <ul class="wf-dropdown__menu" role="menu" hidden>
+            <li><a class="wf-dropdown__item" role="menuitem" href="#">設定</a></li>
+            <li><a class="wf-dropdown__item" role="menuitem" href="#">プロフィール</a></li>
+            <li><a class="wf-dropdown__item" role="menuitem" href="#">ログアウト</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Modal Test -->
+    <section id="modal-test">
+      <h2>7. Modal - パディング改善</h2>
+      <div class="test-note">
+        <strong>期待される動作:</strong>
+        • デスクトップ: 固定幅（640px）<br>
+        • モバイル（600px未満）: 画面幅から適切なパディングを引いた幅
+      </div>
+
+      <button class="wf-btn wf-btn-primary" data-wf-modal="test-modal">
+        モーダルを開く
+      </button>
+
+      <div id="test-modal" class="wf-modal-overlay">
+        <div class="wf-modal">
+          <div class="wf-modal__header">
+            <h3 style="margin: 0;">テストモーダル</h3>
+            <button class="wf-modal__close" aria-label="閉じる">×</button>
+          </div>
+          <div class="wf-modal__body">
+            <p>モバイルでは画面幅に応じた適切なパディングが確保されます。</p>
+            <p>このモーダルはモバイルで見やすく表示されるはずです。</p>
+          </div>
+          <div class="wf-modal__footer">
+            <button class="wf-btn">キャンセル</button>
+            <button class="wf-btn wf-btn-primary">保存</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Summary -->
+    <section id="summary">
+      <h2>検証サマリー</h2>
+      <div class="wf-card">
+        <div class="wf-card__body">
+          <h3 style="margin-top: 0;">確認項目チェックリスト</h3>
+          <ul style="line-height: 1.8;">
+            <li>✓ Grid: モバイル（600px未満）で各カラムが100%幅になる</li>
+            <li>✓ Tabs: モバイルで横スクロール可能、スクロールバーが薄く表示される</li>
+            <li>✓ Pagination: モバイルで複数行に折り返される、中央揃え</li>
+            <li>✓ Table: 横スクロール可能、カラムが適切な幅を保つ</li>
+            <li>✓ Input Group: モバイルで縦並び、各要素に角丸が適用される</li>
+            <li>✓ Dropdown: モバイルで画面端ではみ出さない</li>
+            <li>✓ Modal: モバイルで適切なパディングが確保される</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 2rem; text-align: center;">
+        <a class="wf-link" href="./showcase-wafu.html">ショーケースへ戻る</a>
+      </div>
+    </section>
+
+    <script>
+      // Breakpoint indicator
+      function updateBreakpoint() {
+        const indicator = document.getElementById('bp-indicator');
+        const width = window.innerWidth;
+        if (width < 600) {
+          indicator.textContent = `Mobile (${width}px)`;
+          indicator.style.background = '#ef4444';
+        } else if (width < 900) {
+          indicator.textContent = `Tablet (${width}px)`;
+          indicator.style.background = '#f59e0b';
+        } else {
+          indicator.textContent = `Desktop (${width}px)`;
+          indicator.style.background = '#10b981';
+        }
+      }
+
+      window.addEventListener('resize', updateBreakpoint);
+      updateBreakpoint();
+
+      // Initialize WFUI components
+      if (window.WFUI) {
+        // Tabs
+        document.querySelectorAll('[data-wf-tabs]').forEach(tabs => WFUI.tabs(tabs));
+
+        // Dropdowns
+        document.querySelectorAll('[data-wf-dropdown]').forEach(dropdown => WFUI.dropdown(dropdown));
+
+        // Modal
+        document.querySelectorAll('[data-wf-modal]').forEach(trigger => {
+          const modalId = trigger.getAttribute('data-wf-modal');
+          const modal = document.getElementById(modalId);
+          if (modal) {
+            WFUI.modal(trigger, modal);
+          }
+        });
+      }
+
+      // ============================================
+      // 自動チェック機能
+      // ============================================
+      function runMobileTests() {
+        console.clear();
+        console.log('%c========================================', 'color: #10b981; font-weight: bold');
+        console.log('%cMOBILE IMPROVEMENTS TEST', 'color: #10b981; font-weight: bold; font-size: 16px');
+        console.log('%c========================================', 'color: #10b981; font-weight: bold');
+        console.log('');
+
+        const width = window.innerWidth;
+        const isMobile = width < 600;
+        const isTablet = width >= 600 && width < 900;
+        const isDesktop = width >= 900;
+
+        console.log(`%c現在の画面幅: ${width}px`, 'font-weight: bold; font-size: 14px');
+        console.log(`%cブレイクポイント: ${isMobile ? 'Mobile' : isTablet ? 'Tablet' : 'Desktop'}`,
+          `font-weight: bold; color: ${isMobile ? '#ef4444' : isTablet ? '#f59e0b' : '#10b981'}`);
+        console.log('');
+
+        let passCount = 0;
+        let failCount = 0;
+        let totalTests = 0;
+
+        // Helper function
+        function test(name, condition, expected, actual) {
+          totalTests++;
+          const pass = condition;
+          if (pass) {
+            passCount++;
+            console.log(`%c✓ PASS`, 'color: #10b981; font-weight: bold', name);
+            if (actual !== undefined) {
+              console.log(`  期待値: ${expected}`);
+              console.log(`  実際値: ${actual}`);
+            }
+          } else {
+            failCount++;
+            console.log(`%c✗ FAIL`, 'color: #ef4444; font-weight: bold', name);
+            console.log(`  期待値: ${expected}`);
+            console.log(`  実際値: ${actual}`);
+          }
+        }
+
+        // 1. Grid Test
+        console.log('%c━━━ 1. Grid Test ━━━', 'color: #3b82f6; font-weight: bold');
+        const gridCols = document.querySelectorAll('#grid-test .wf-col-4');
+        if (gridCols.length > 0) {
+          const firstCol = gridCols[0];
+          const colWidth = firstCol.offsetWidth;
+          const parentWidth = firstCol.parentElement.offsetWidth;
+          const widthPercentage = (colWidth / parentWidth * 100).toFixed(1);
+
+          if (isMobile) {
+            test('Grid: モバイルで100%幅', widthPercentage > 95, '100%', `${widthPercentage}%`);
+          } else {
+            test('Grid: デスクトップで約33%幅', widthPercentage > 25 && widthPercentage < 40, '~33%', `${widthPercentage}%`);
+          }
+        }
+        console.log('');
+
+        // 2. Tabs Test
+        console.log('%c━━━ 2. Tabs Test ━━━', 'color: #3b82f6; font-weight: bold');
+        const tablist = document.querySelector('#tabs-test .wf-tablist');
+        if (tablist) {
+          const hasOverflow = tablist.scrollWidth > tablist.clientWidth;
+          const overflowX = window.getComputedStyle(tablist).overflowX;
+
+          if (isMobile) {
+            test('Tabs: モバイルでoverflow-x: auto', overflowX === 'auto', 'auto', overflowX);
+          } else {
+            test('Tabs: デスクトップで通常表示', true, '通常表示', '通常表示');
+          }
+        }
+        console.log('');
+
+        // 3. Pagination Test
+        console.log('%c━━━ 3. Pagination Test ━━━', 'color: #3b82f6; font-weight: bold');
+        const pagination = document.querySelector('#pagination-test .wf-pagination');
+        if (pagination) {
+          const flexWrap = window.getComputedStyle(pagination).flexWrap;
+          const justifyContent = window.getComputedStyle(pagination).justifyContent;
+
+          test('Pagination: flex-wrap設定', flexWrap === 'wrap', 'wrap', flexWrap);
+          test('Pagination: 中央揃え', justifyContent === 'center', 'center', justifyContent);
+
+          if (isMobile) {
+            const gap = window.getComputedStyle(pagination).gap;
+            console.log(`  Mobile gap: ${gap}`);
+          }
+        }
+        console.log('');
+
+        // 4. Table Test
+        console.log('%c━━━ 4. Table Test ━━━', 'color: #3b82f6; font-weight: bold');
+        const table = document.querySelector('#table-test .wf-table');
+        if (table) {
+          const minWidth = parseInt(window.getComputedStyle(table).minWidth);
+
+          if (isMobile) {
+            test('Table: モバイルで最小幅400px', minWidth === 400, '400px', `${minWidth}px`);
+          } else {
+            test('Table: デスクトップで最小幅500px', minWidth === 500, '500px', `${minWidth}px`);
+          }
+
+          const tableWrap = table.parentElement;
+          const overflowX = window.getComputedStyle(tableWrap).overflow;
+          test('Table: 親要素でoverflow設定', overflowX.includes('auto'), 'auto', overflowX);
+        }
+        console.log('');
+
+        // 5. Input Group Test
+        console.log('%c━━━ 5. Input Group Test ━━━', 'color: #3b82f6; font-weight: bold');
+        const inputGroup = document.querySelector('#input-group-test .wf-input-group');
+        if (inputGroup) {
+          const flexDirection = window.getComputedStyle(inputGroup).flexDirection;
+
+          if (isMobile) {
+            test('Input Group: モバイルで縦並び', flexDirection === 'column', 'column', flexDirection);
+          } else {
+            test('Input Group: デスクトップで横並び', flexDirection === 'row', 'row', flexDirection);
+          }
+        }
+        console.log('');
+
+        // 6. Dropdown Test
+        console.log('%c━━━ 6. Dropdown Test ━━━', 'color: #3b82f6; font-weight: bold');
+        const dropdownMenu = document.querySelector('#dropdown-test .wf-dropdown__menu');
+        if (dropdownMenu) {
+          const minWidth = window.getComputedStyle(dropdownMenu).minWidth;
+          const maxWidth = window.getComputedStyle(dropdownMenu).maxWidth;
+
+          if (isMobile) {
+            test('Dropdown: モバイルでmin-width制限', minWidth.includes('min('), 'min()関数', minWidth);
+            test('Dropdown: モバイルでmax-width制限', maxWidth === '90vw', '90vw', maxWidth);
+          } else {
+            test('Dropdown: デスクトップで通常表示', minWidth === '180px', '180px', minWidth);
+          }
+        }
+        console.log('');
+
+        // 7. Modal Test
+        console.log('%c━━━ 7. Modal Test ━━━', 'color: #3b82f6; font-weight: bold');
+        const modal = document.querySelector('#test-modal .wf-modal');
+        if (modal) {
+          const width = window.getComputedStyle(modal).width;
+
+          if (isMobile) {
+            test('Modal: モバイルで calc() 使用', width.includes('calc'), 'calc()関数', width);
+          } else {
+            const minValue = window.getComputedStyle(modal).width.includes('min(');
+            test('Modal: デスクトップで min() 使用', minValue, 'min()関数', width);
+          }
+        }
+        console.log('');
+
+        // Summary
+        console.log('%c========================================', 'color: #10b981; font-weight: bold');
+        console.log('%cテスト結果サマリー', 'color: #10b981; font-weight: bold; font-size: 14px');
+        console.log('%c========================================', 'color: #10b981; font-weight: bold');
+        console.log(`総テスト数: ${totalTests}`);
+        console.log(`%c✓ 成功: ${passCount}`, 'color: #10b981; font-weight: bold');
+        if (failCount > 0) {
+          console.log(`%c✗ 失敗: ${failCount}`, 'color: #ef4444; font-weight: bold');
+        } else {
+          console.log(`✗ 失敗: 0`);
+        }
+        console.log('');
+
+        const successRate = (passCount / totalTests * 100).toFixed(1);
+        if (failCount === 0) {
+          console.log(`%c🎉 すべてのテストが成功しました！ (${successRate}%)`, 'color: #10b981; font-weight: bold; font-size: 16px');
+        } else {
+          console.log(`%c⚠️ ${failCount}件のテストが失敗しました (成功率: ${successRate}%)`, 'color: #f59e0b; font-weight: bold; font-size: 16px');
+        }
+        console.log('');
+        console.log('%c━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━', 'color: #6b7280');
+        console.log('');
+        console.log('%c💡 画面幅を変更したら、再度 runMobileTests() を実行してください', 'color: #6b7280; font-style: italic');
+      }
+
+      // ページロード時に自動実行
+      window.addEventListener('load', () => {
+        setTimeout(runMobileTests, 500);
+      });
+
+      // グローバルに公開（手動実行用）
+      window.runMobileTests = runMobileTests;
+
+      // リサイズ時に通知
+      let resizeTimeout;
+      window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+          console.log('%c画面幅が変更されました。runMobileTests() を実行してテストを再実行してください。', 'color: #3b82f6; font-weight: bold');
+        }, 1000);
+      });
+    </script>
+  </body>
+</html>

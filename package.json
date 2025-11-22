@@ -1,9 +1,17 @@
 {
   "name": "wafoo-css",
-  "version": "0.3.1",
+  "version": "1.0.0",
   "description": "Japanese-inspired CSS framework with traditional aesthetics",
   "main": "dist/wafoo.css",
   "style": "dist/wafoo.css",
+  "exports": {
+    ".": "./dist/wafoo.css",
+    "./core": "./dist/wafoo-core.css",
+    "./extras": "./dist/wafoo-extras.css",
+    "./wafoo.css": "./dist/wafoo.css",
+    "./wafoo-core.css": "./dist/wafoo-core.css",
+    "./wafoo-extras.css": "./dist/wafoo-extras.css"
+  },
   "author": "Q_Q",
   "license": "MIT",
   "keywords": [
@@ -38,6 +46,8 @@
     "build:full": "bash scripts/build.sh && gzip -c dist/wafoo.min.css | wc -c",
     "generate:utils": "node scripts/generate-utilities.js",
     "size": "gzip -c dist/wafoo.min.css | wc -c",
+    "size:core": "gzip -c dist/wafoo-core.min.css | wc -c",
+    "size:extras": "gzip -c dist/wafoo-extras.min.css | wc -c",
     "format": "prettier --write \"{src,docs,examples,devserver,scripts}/**/*.{css,html,js,md}\"",
     "format:check": "prettier -c \"{src,docs,examples,devserver,scripts}/**/*.{css,html,js,md}\"",
     "lint:css": "stylelint \"src/**/*.css\"",

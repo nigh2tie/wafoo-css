@@ -1,3 +1,10 @@
+/*!
+ * @component Carousel
+ * @description Carousel component.
+ * @selector .wf-carousel
+ * @variants .wf-carousel-thumbnails, .wf-carousel-multiple, .wf-carousel-fade, .wf-carousel-16-9, .wf-carousel-4-3
+ * @variables --wf-ink-100, --wf-duration-normal, --wf-space-4, --wf-space-2, --wf-font-lg
+ */
 /**
  * Image/Carousel Component
  * 画像スライダーコンポーネント

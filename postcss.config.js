@@ -5,7 +5,11 @@ module.exports = {
     autoprefixer: {},
     // CSS圧縮最適化
     cssnano: {
-      preset: 'default'
+      preset: ['default', {
+        discardComments: {
+          removeAll: true,
+        },
+      }]
     }
   }
 }

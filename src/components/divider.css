@@ -1,3 +1,10 @@
+/*!
+ * @component Divider
+ * @description Divider component.
+ * @selector .wf-divider
+ * @variants .wf-divider--horizontal, .wf-divider--vertical, .wf-divider--strong, .wf-divider--sm, .wf-divider--lg
+ * @variables --wf-color-border, --wf-space-6, --wf-space-3, --wf-color-border-strong, --wf-space-10
+ */
 @layer components {
   /* Divider - Simple visual separator */
   .wf-divider {

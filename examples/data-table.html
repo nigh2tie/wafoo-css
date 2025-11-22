@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>データ表示（テーブル） - wafoo-css</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <meta name="robots" content="noindex,nofollow">
+    <link rel="stylesheet" href="../dist/wafoo.min.css">
+    <script src="../dist/wafoo.min.js"></script>
+    <style>
+      body {
+        margin: 0;
+      }
+    </style>
+    <script>
+      window.addEventListener("DOMContentLoaded", () => {
+        const q = document.getElementById("q");
+        const table = document.getElementById("tbl");
+        function filter() {
+          const v = (q.value || "").toLowerCase();
+          const rows = Array.from(table.tBodies[0].rows);
+          rows.forEach(r => {
+            const text = r.textContent.toLowerCase();
+            r.style.display = text.includes(v) ? "" : "none";
+          });
+        }
+        if (q) q.addEventListener("input", filter);
+      });
+    </script>
+  </head>
+  <body>
+    <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+    <header class="wf-header-noren" role="banner">
+      <div class="wf-container" style="padding: 0"><h1>データ表示（テーブル）</h1></div>
+    </header>
+    <main class="wf-container" role="main" id="main">
+      <div class="wf-field" style="max-width: 420px">
+        <label class="wf-label" for="q">検索</label>
+        <input id="q" class="wf-input" placeholder="ID/氏名/状態でフィルタ">
+      </div>
+      <div class="wf-table-wrap">
+        <table
+          id="tbl"
+          class="wf-table wf-table-striped wf-table-hover wf-table-sticky"
+          data-wf-sortable-table
+        >
+          <thead>
+            <tr>
+              <th scope="col" aria-sort="ascending">
+                <button class="wf-sort" aria-label="ID でソート" aria-controls="tbl" data-index="0">
+                  ID
+                </button>
+              </th>
+              <th scope="col" aria-sort="none">
+                <button
+                  class="wf-sort"
+                  aria-label="氏名でソート"
+                  aria-controls="tbl"
+                  data-index="1"
+                >
+                  氏名
+                </button>
+              </th>
+              <th scope="col" class="wf-nowrap" aria-sort="none">
+                <button
+                  class="wf-sort"
+                  aria-label="状態でソート"
+                  aria-controls="tbl"
+                  data-index="2"
+                >
+                  状態
+                </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>C-1001</td>
+              <td>山田 太郎</td>
+              <td><span class="wf-badge wf-badge-success">アクティブ</span></td>
+            </tr>
+            <tr>
+              <td>C-1003</td>
+              <td>鈴木 次郎</td>
+              <td><span class="wf-badge wf-badge-warning">保留中</span></td>
+            </tr>
+            <tr>
+              <td>C-1002</td>
+              <td>佐藤 花子</td>
+              <td><span class="wf-badge wf-badge-success">アクティブ</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <nav class="wf-pagination wf-mt-3" aria-label="Pagination">
+        <a class="wf-page-link is-disabled" aria-disabled="true">Prev</a>
+        <a class="wf-page-link is-active" aria-current="page">1</a>
+        <a class="wf-page-link" href="#">2</a>
+        <a class="wf-page-link" href="#">Next</a>
+      </nav>
+      <p class="wf-text-sm wf-text-muted wf-mt-4">
+        <a class="wf-link" href="./showcase-wafu.html">ショーケースへ戻る</a>
+      </p>
+    </main>
+  </body>
+</html>

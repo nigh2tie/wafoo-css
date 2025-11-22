@@ -1,0 +1,177 @@
+{
+  "nodes": [
+    {
+      "id": "accordion",
+      "type": "component"
+    },
+    {
+      "id": "alerts",
+      "type": "component"
+    },
+    {
+      "id": "autocomplete",
+      "type": "component"
+    },
+    {
+      "id": "avatar",
+      "type": "component"
+    },
+    {
+      "id": "breadcrumb",
+      "type": "component"
+    },
+    {
+      "id": "buttons",
+      "type": "component"
+    },
+    {
+      "id": "calendar",
+      "type": "component"
+    },
+    {
+      "id": "cards",
+      "type": "component"
+    },
+    {
+      "id": "carousel",
+      "type": "component"
+    },
+    {
+      "id": "code",
+      "type": "component"
+    },
+    {
+      "id": "data-table",
+      "type": "component"
+    },
+    {
+      "id": "divider",
+      "type": "component"
+    },
+    {
+      "id": "dropdown",
+      "type": "component"
+    },
+    {
+      "id": "empty",
+      "type": "component"
+    },
+    {
+      "id": "file",
+      "type": "component"
+    },
+    {
+      "id": "floating-label",
+      "type": "component"
+    },
+    {
+      "id": "forms",
+      "type": "component"
+    },
+    {
+      "id": "grid",
+      "type": "component"
+    },
+    {
+      "id": "header",
+      "type": "component"
+    },
+    {
+      "id": "input-group",
+      "type": "component"
+    },
+    {
+      "id": "list-group",
+      "type": "component"
+    },
+    {
+      "id": "message",
+      "type": "component"
+    },
+    {
+      "id": "modal",
+      "type": "component"
+    },
+    {
+      "id": "navbar",
+      "type": "component"
+    },
+    {
+      "id": "offcanvas",
+      "type": "component"
+    },
+    {
+      "id": "pagination",
+      "type": "component"
+    },
+    {
+      "id": "popover",
+      "type": "component"
+    },
+    {
+      "id": "progress",
+      "type": "component"
+    },
+    {
+      "id": "range",
+      "type": "component"
+    },
+    {
+      "id": "rating",
+      "type": "component"
+    },
+    {
+      "id": "schedule",
+      "type": "component"
+    },
+    {
+      "id": "sidebar",
+      "type": "component"
+    },
+    {
+      "id": "skeleton",
+      "type": "component"
+    },
+    {
+      "id": "snackbar",
+      "type": "component"
+    },
+    {
+      "id": "spinner",
+      "type": "component"
+    },
+    {
+      "id": "stamp",
+      "type": "component"
+    },
+    {
+      "id": "steps",
+      "type": "component"
+    },
+    {
+      "id": "switch",
+      "type": "component"
+    },
+    {
+      "id": "table",
+      "type": "component"
+    },
+    {
+      "id": "tabs",
+      "type": "component"
+    },
+    {
+      "id": "timeline",
+      "type": "component"
+    },
+    {
+      "id": "toast",
+      "type": "component"
+    },
+    {
+      "id": "tooltip",
+      "type": "component"
+    }
+  ],
+  "links": []
+}

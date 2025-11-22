@@ -1,3 +1,10 @@
+/*!
+ * @component Timeline
+ * @description Timeline component.
+ * @selector .wf-timeline
+ * @variants .wf-timeline-horizontal
+ * @variables --wf-space-4, --wf-space-8, --wf-space-6, --wf-ink-200, --wf-accent-500
+ */
 /**
  * Timeline Component
  * 時系列表示コンポーネント

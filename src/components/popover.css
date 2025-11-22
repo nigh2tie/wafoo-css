@@ -1,3 +1,10 @@
+/*!
+ * @component Popover
+ * @description Popover component.
+ * @selector .wf-popover
+ * @variants 
+ * @variables --wf-surface-base, --wf-color-text, --wf-color-border, --wf-radius-md, --wf-space-3
+ */
 @layer components {
   /* Popover */
   .wf-popover {

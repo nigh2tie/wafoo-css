@@ -1,3 +1,10 @@
+/*!
+ * @component Offcanvas
+ * @description Offcanvas component.
+ * @selector .wf-offcanvas-overlay
+ * @variants .wf-offcanvas, .wf-offcanvas-start, .wf-offcanvas-end, .wf-offcanvas-top, .wf-offcanvas-bottom
+ * @variables --wf-surface-base, --wf-color-text, --wf-color-border, --wf-space-2, --wf-space-3
+ */
 @layer components {
   /* Offcanvas */
   .wf-offcanvas-overlay {

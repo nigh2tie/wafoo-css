@@ -1,3 +1,10 @@
+/*!
+ * @component Tabs
+ * @description Tabs component.
+ * @selector .wf-tabs
+ * @variants .wf-tablist, .wf-tab, .wf-tabpanels, .wf-tabpanel
+ * @variables --wf-space-2, --wf-color-border, --wf-space-3, --wf-color-muted, --wf-color-text
+ */
 @layer components {
   /* Tabs */
   .wf-tabs {

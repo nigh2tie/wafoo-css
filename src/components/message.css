@@ -1,3 +1,10 @@
+/*!
+ * @component Message
+ * @description Message component.
+ * @selector .wf-message
+ * @variants .wf-message-sent, .wf-message-system, .wf-icon, .wf-message-compact
+ * @variables --wf-space-3, --wf-space-4, --wf-ink-200, --wf-ink-600, --wf-font-sm
+ */
 /**
  * Chat/Message Component
  * チャット風メッセージ表示コンポーネント

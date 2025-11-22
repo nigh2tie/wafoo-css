@@ -31,10 +31,41 @@
 - コンポーネントリファレンス: https://nigh2tie.github.io/wafoo-css/reference.html
 - CSS変数リファレンス: https://nigh2tie.github.io/wafoo-css/css-variables.html
 
-### パターン1: npmでインストール（推奨）
+### Installation
 
 ```bash
 npm install wafoo-css
+```
+
+### Usage
+
+#### Full Bundle (Recommended for most users)
+Includes all features and components.
+
+```javascript
+import 'wafoo-css';
+// or
+import 'wafoo-css/dist/wafoo.css';
+```
+
+#### Core Only (Lightweight)
+Includes only essential components (Base, Grid, Buttons, Forms, Cards, Navbar).
+~20KB gzipped.
+
+```javascript
+import 'wafoo-css/core';
+// or
+import 'wafoo-css/dist/wafoo-core.css';
+```
+
+#### Extras (Optional Add-ons)
+Includes interactive components (Modals, Tabs, Carousel, etc.).
+~20KB gzipped.
+
+```javascript
+import 'wafoo-css/extras';
+// or
+import 'wafoo-css/dist/wafoo-extras.css';
 ```
 
 HTMLに読み込みます：
@@ -165,7 +196,7 @@ bash scripts/build.sh
 - **和風コンポーネント** - 判子（ハンコ）、暖簾ヘッダー、和紙風カード
 - **漢数字サポート** - 壱・弐・参・肆などの表示
 - **拡張されたデザイントークン** - 行間、シャドウ、アニメーション時間、イージング関数を体系化
-- **軽量** - gzip圧縮後約12KB（20KB予算内、将来的にcore/extras分割予定）
+- **軽量** - Core/Extrasともにgzip圧縮後 ~20KB 目安（Full ~30KB）
 - **自動初期化** - `data-wf-*`属性による宣言的なコンポーネント制御
 
 ## クイックリファレンス
@@ -270,7 +301,7 @@ npm run lint:css:fix  # 自動修正
 
 ### レイアウト
 
-#### Grid System（12列）
+#### Ecosystem（12列）
 
 ```html
 <div class="wf-container">

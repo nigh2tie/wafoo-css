@@ -1,3 +1,10 @@
+/*!
+ * @component Spinner
+ * @description Spinner component.
+ * @selector .wf-spinner
+ * @variants .wf-spinner-sm, .wf-spinner-success, .wf-spinner-warning, .wf-spinner-danger, .wf-spinner-lg
+ * @variables --wf-color-border, --wf-color-accent, --wf-success, --wf-warning, --wf-danger
+ */
 @layer components {
   /* Spinner */
   .wf-spinner {

@@ -1,3 +1,10 @@
+/*!
+ * @component Progress
+ * @description Progress component.
+ * @selector .wf-progress
+ * @variants .wf-progress-sm, .wf-progress-lg, .wf-progress-success, .wf-progress-warning, .wf-progress-danger
+ * @variables --wf-surface-muted, --wf-color-border, --wf-radius-md, --wf-color-accent, --wf-success
+ */
 @layer components {
   /* Progress */
   .wf-progress {

@@ -1,3 +1,10 @@
+/*!
+ * @component Code
+ * @description Code component.
+ * @selector .wf-code
+ * @variants .wf-kbd, .wf-code-block, .wf-code-block--copy, .wf-code-copy, .wf-code--sm
+ * @variables --wf-space-2, --wf-leading-tight, --wf-color-text, --wf-surface-muted, --wf-color-border
+ */
 @layer components {
   /* Code - Inline code and keyboard elements */
 

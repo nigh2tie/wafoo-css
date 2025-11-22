@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utility States Verification</title>
+  <link rel="stylesheet" href="../dist/wafoo.css">
+  <style>
+    body { padding: 2rem; }
+    section { margin-bottom: 3rem; border-bottom: 1px solid #eee; padding-bottom: 2rem; }
+    h2 { margin-bottom: 1.5rem; }
+    .demo-box {
+      display: inline-block;
+      padding: 1rem;
+      border: 1px solid #ccc;
+      margin-right: 1rem;
+      transition: all 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <main class="wf-container">
+    <h1>Utility States & New Features Verification</h1>
+
+    <section>
+      <h2>State Variants (Hover, Focus, Active)</h2>
+      <button class="wf-btn wf-bg-primary wf-hover:bg-accent wf-text-white">
+        Hover me (Primary -> Accent)
+      </button>
+      <input type="text" class="wf-input wf-focus:bg-surface-muted" placeholder="Focus me (BG changes)">
+      <button class="wf-btn wf-active:bg-danger">
+        Click me (Active -> Danger)
+      </button>
+    </section>
+
+    <section>
+      <h2>Disabled State</h2>
+      <button class="wf-btn wf-bg-primary wf-disabled:bg-surface-muted" disabled>
+        Disabled Button (Should be muted)
+      </button>
+    </section>
+
+    <section>
+      <h2>Border Sides & Radius</h2>
+      <div class="wf-p-4 wf-border-t-4 wf-border-primary wf-bg-surface-subtle">
+        Top Border Only (4px)
+      </div>
+      <div class="wf-mt-4 wf-p-4 wf-border wf-rounded-t-lg wf-bg-surface-subtle">
+        Top Radius Only (lg)
+      </div>
+    </section>
+
+    <section>
+      <h2>Sizing (Fixed & Min/Max)</h2>
+      <div class="wf-w-32 wf-h-16 wf-bg-primary wf-text-white wf-flex wf-items-center wf-justify-center">
+        w-32 (128px)
+      </div>
+      <div class="wf-mt-4 wf-max-w-sm wf-bg-surface-muted wf-p-4">
+        Max Width SM (480px) - Resize window to see effect
+      </div>
+    </section>
+  </main>
+</body>
+</html>

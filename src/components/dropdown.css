@@ -1,3 +1,10 @@
+/*!
+ * @component Dropdown
+ * @description Dropdown component.
+ * @selector .wf-dropdown
+ * @variants 
+ * @variables --wf-color-border, --wf-surface-base, --wf-space-2, --wf-space-3, --wf-radius-md
+ */
 @layer components {
   /* Dropdown */
   .wf-dropdown {

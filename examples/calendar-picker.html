@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>日付ピッカー - wafoo-css</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="../dist/wafoo.min.css">
+  <script src="../dist/wafoo.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+    }
+
+    .wf-date-picker {
+      position: relative;
+      display: inline-block;
+    }
+
+    .wf-date-picker__input-group {
+      position: relative;
+      display: inline-block;
+    }
+
+    .wf-date-picker__toggle {
+      position: absolute;
+      right: var(--wf-space-2);
+      top: 50%;
+      transform: translateY(-50%);
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--wf-color-muted);
+      padding: var(--wf-space-1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color var(--wf-duration-fast) ease;
+    }
+
+    .wf-date-picker__toggle:hover {
+      color: var(--wf-color-accent);
+    }
+
+    .wf-date-picker__calendar {
+      position: absolute;
+      top: calc(100% + var(--wf-space-2));
+      left: 0;
+      z-index: 1000;
+      display: none;
+    }
+
+    .wf-date-picker__calendar.is-open {
+      display: block;
+    }
+
+    .wf-date-picker__calendar-wrapper {
+      position: relative;
+      padding-top: var(--wf-space-8);
+    }
+
+    .wf-date-picker__close {
+      position: absolute;
+      top: var(--wf-space-2);
+      right: var(--wf-space-2);
+      background: var(--wf-surface-muted);
+      border: 1px solid var(--wf-color-border);
+      border-radius: var(--wf-radius-sm);
+      padding: var(--wf-space-1) var(--wf-space-2);
+      cursor: pointer;
+      font-size: var(--wf-font-sm);
+      color: var(--wf-color-text);
+      transition: all var(--wf-duration-fast) ease;
+      z-index: 1001;
+      width: 28px;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+
+    .wf-date-picker__calendar .wf-calendar {
+      max-width: 320px;
+      margin: 0;
+    }
+
+    .wf-date-picker__calendar .wf-calendar__header {
+      padding-right: var(--wf-space-10);
+    }
+
+    .wf-date-picker__close:hover {
+      background: var(--wf-surface-subtle);
+      border-color: var(--wf-color-accent);
+    }
+
+    @media (max-width: 767px) {
+      .wf-date-picker__calendar {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        max-width: 90vw;
+        max-height: 90vh;
+        overflow: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+  <header class="wf-header-noren" role="banner">
+    <div class="wf-container" style="padding: 0">
+      <h1>日付ピッカー</h1>
+    </div>
+  </header>
+  <main class="wf-container" role="main" id="main">
+    <h2>基本的な日付ピッカー</h2>
+    <div class="wf-card wf-mb-4">
+      <div class="wf-date-picker" id="date-picker-1">
+        <div class="wf-date-picker__input-group">
+          <input type="text" class="wf-input" id="date-input-1" placeholder="日付を選択" readonly>
+          <button type="button" class="wf-date-picker__toggle" aria-label="カレンダーを開く">日付</button>
+        </div>
+        <div class="wf-date-picker__calendar" id="calendar-1">
+          <div class="wf-date-picker__calendar-wrapper">
+            <button type="button" class="wf-date-picker__close" aria-label="閉じる">×</button>
+            <div class="wf-calendar" data-wf-calendar>
+              <div class="wf-calendar__header">
+                <button class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">‹</button>
+                <div class="wf-calendar__title"></div>
+                <button class="wf-calendar__nav-btn" data-action="next" aria-label="次月">›</button>
+              </div>
+              <div class="wf-calendar__weekdays"></div>
+              <div class="wf-calendar__grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2>日付制限ありの日付ピッカー</h2>
+    <div class="wf-card wf-mb-4">
+      <div class="wf-date-picker" id="date-picker-2">
+        <div class="wf-date-picker__input-group">
+          <input type="text" class="wf-input" id="date-input-2" placeholder="2024年11月の日付を選択" readonly>
+          <button type="button" class="wf-date-picker__toggle" aria-label="カレンダーを開く">日付</button>
+        </div>
+        <div class="wf-date-picker__calendar" id="calendar-2">
+          <div class="wf-date-picker__calendar-wrapper">
+            <button type="button" class="wf-date-picker__close" aria-label="閉じる">×</button>
+            <div class="wf-calendar" data-wf-calendar data-wf-calendar-min-date="2024-11-01" data-wf-calendar-max-date="2024-11-30">
+              <div class="wf-calendar__header">
+                <button class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">‹</button>
+                <div class="wf-calendar__title"></div>
+                <button class="wf-calendar__nav-btn" data-action="next" aria-label="次月">›</button>
+              </div>
+              <div class="wf-calendar__weekdays"></div>
+              <div class="wf-calendar__grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="wf-text-sm wf-text-muted wf-mt-2">2024年11月のみ選択可能</p>
+    </div>
+
+    <h2>範囲選択の日付ピッカー</h2>
+    <div class="wf-card wf-mb-4">
+      <div class="wf-date-picker" id="date-picker-3">
+        <div class="wf-date-picker__input-group">
+          <input type="text" class="wf-input" id="date-input-3-start" placeholder="開始日" readonly style="width: 150px;">
+          <span style="margin: 0 var(--wf-space-2);">〜</span>
+          <div class="wf-date-picker__input-group" style="display: inline-block;">
+            <input type="text" class="wf-input" id="date-input-3-end" placeholder="終了日" readonly style="width: 150px;">
+            <button type="button" class="wf-date-picker__toggle" aria-label="カレンダーを開く">日付</button>
+          </div>
+        </div>
+        <div class="wf-date-picker__calendar" id="calendar-3">
+          <div class="wf-date-picker__calendar-wrapper">
+            <button type="button" class="wf-date-picker__close" aria-label="閉じる">×</button>
+            <div class="wf-calendar" data-wf-calendar data-wf-calendar-range="true">
+              <div class="wf-calendar__header">
+                <button class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">‹</button>
+                <div class="wf-calendar__title"></div>
+                <button class="wf-calendar__nav-btn" data-action="next" aria-label="次月">›</button>
+              </div>
+              <div class="wf-calendar__weekdays"></div>
+              <div class="wf-calendar__grid"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="wf-text-sm wf-text-muted wf-mt-2" id="range-result">選択範囲: なし</p>
+    </div>
+
+    <p class="wf-text-sm wf-text-muted wf-mt-4">
+      <a class="wf-link" href="./showcase-wafu.html">ショーケースへ戻る</a>
+    </p>
+  </main>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // 日付ピッカーの初期化関数
+      function initDatePicker(pickerId, inputId, calendarId, options = {}) {
+        const picker = document.getElementById(pickerId);
+        const input = document.getElementById(inputId);
+        const calendarEl = document.getElementById(calendarId);
+        const toggle = picker.querySelector(".wf-date-picker__toggle");
+        const close = calendarEl.querySelector(".wf-date-picker__close");
+
+        let calendarInstance = null;
+
+        // カレンダーを開く
+        function openCalendar() {
+          calendarEl.classList.add("is-open");
+          if (!calendarInstance) {
+            setTimeout(() => {
+              const calendarContainer = calendarEl.querySelector(".wf-calendar");
+              calendarInstance = WFUI.calendar(calendarContainer, options);
+              
+              // 日付選択時のコールバック
+              calendarContainer.addEventListener("wf-calendar-select", function (e) {
+                const selectedDate = e.detail;
+                if (typeof selectedDate === "string") {
+                  input.value = selectedDate;
+                  closeCalendar();
+                } else if (options.allowRange && selectedDate && selectedDate.end) {
+                  // 範囲選択の場合
+                  const startInput = document.getElementById("date-input-3-start");
+                  const endInput = document.getElementById("date-input-3-end");
+                  if (startInput) startInput.value = selectedDate.start;
+                  if (endInput) endInput.value = selectedDate.end;
+                  closeCalendar();
+                }
+              });
+            }, 100);
+          }
+        }
+
+        // カレンダーを閉じる
+        function closeCalendar() {
+          calendarEl.classList.remove("is-open");
+        }
+
+        // イベントリスナー
+        toggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (calendarEl.classList.contains("is-open")) {
+            closeCalendar();
+          } else {
+            openCalendar();
+          }
+        });
+
+        close.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeCalendar();
+        });
+
+        // 入力フィールドをクリックしてもカレンダーを開く
+        input.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (!calendarEl.classList.contains("is-open")) {
+            openCalendar();
+          }
+        });
+
+        // 外部クリックで閉じる
+        document.addEventListener("click", function (e) {
+          if (!picker.contains(e.target)) {
+            closeCalendar();
+          }
+        });
+
+        // ESCキーで閉じる
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && calendarEl.classList.contains("is-open")) {
+            closeCalendar();
+          }
+        });
+      }
+
+      // 範囲選択用の初期化
+      function initRangePicker(pickerId, startInputId, endInputId, calendarId) {
+        const picker = document.getElementById(pickerId);
+        const startInput = document.getElementById(startInputId);
+        const endInput = document.getElementById(endInputId);
+        const calendarEl = document.getElementById(calendarId);
+        const toggle = picker.querySelector(".wf-date-picker__toggle");
+        const close = calendarEl.querySelector(".wf-date-picker__close");
+
+        let calendarInstance = null;
+
+        function openCalendar() {
+          calendarEl.classList.add("is-open");
+          if (!calendarInstance) {
+            setTimeout(() => {
+              const calendarContainer = calendarEl.querySelector(".wf-calendar");
+              calendarInstance = WFUI.calendar(calendarContainer, {
+                allowRange: true,
+                onSelect: function (range) {
+                  if (range && range.end) {
+                    startInput.value = range.start;
+                    endInput.value = range.end;
+                    closeCalendar();
+                    
+                    // 結果表示を更新
+                    const resultEl = document.getElementById("range-result");
+                    if (resultEl) {
+                      resultEl.textContent = `選択範囲: ${range.start} 〜 ${range.end}`;
+                    }
+                  }
+                }
+              });
+              
+              calendarContainer.addEventListener("wf-calendar-select", function (e) {
+                const range = e.detail;
+                if (range && range.end) {
+                  startInput.value = range.start;
+                  endInput.value = range.end;
+                  closeCalendar();
+                  
+                  const resultEl = document.getElementById("range-result");
+                  if (resultEl) {
+                    resultEl.textContent = `選択範囲: ${range.start} 〜 ${range.end}`;
+                  }
+                }
+              });
+            }, 100);
+          }
+        }
+
+        function closeCalendar() {
+          calendarEl.classList.remove("is-open");
+        }
+
+        toggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          if (calendarEl.classList.contains("is-open")) {
+            closeCalendar();
+          } else {
+            openCalendar();
+          }
+        });
+
+        close.addEventListener("click", function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          closeCalendar();
+        });
+
+        startInput.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (!calendarEl.classList.contains("is-open")) {
+            openCalendar();
+          }
+        });
+
+        endInput.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (!calendarEl.classList.contains("is-open")) {
+            openCalendar();
+          }
+        });
+
+        document.addEventListener("click", function (e) {
+          if (!picker.contains(e.target)) {
+            closeCalendar();
+          }
+        });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && calendarEl.classList.contains("is-open")) {
+            closeCalendar();
+          }
+        });
+      }
+
+      // 初期化
+      initDatePicker("date-picker-1", "date-input-1", "calendar-1");
+      initDatePicker("date-picker-2", "date-input-2", "calendar-2", {
+        minDate: "2024-11-01",
+        maxDate: "2024-11-30"
+      });
+      initRangePicker("date-picker-3", "date-input-3-start", "date-input-3-end", "calendar-3");
+    });
+  </script>
+</body>
+
+</html>

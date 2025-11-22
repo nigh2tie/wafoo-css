@@ -15,15 +15,15 @@ notes-private.md
 NOTES-private.md
 *-private.md
 .personal/
-CHANGELOG.md
+
 AGENTS.md
 
 # Development Files (Internal Use Only)
 # --------------------------------------
 CLAUDE.md
-examples/
+
 devserver/
-.github/
+
 test-app/
 
 # AI Assistants & Tools

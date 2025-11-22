@@ -1,3 +1,10 @@
+/*!
+ * @component Data Table
+ * @description Data Table component.
+ * @selector .wf-data-table
+ * @variants .wf-data-table--striped, .wf-data-table--bordered
+ * @variables --wf-surface-base, --wf-space-4, --wf-color-border, --wf-space-2, --wf-space-3
+ */
 @layer components {
   /* Data Table - Enhanced table with sort and filter */
   .wf-data-table {

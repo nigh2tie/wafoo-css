@@ -1,3 +1,10 @@
+/*!
+ * @component Toast
+ * @description Toast component.
+ * @selector .wf-toast
+ * @variants .wf-toast--success, .wf-toast--warning, .wf-toast--danger, .wf-toast-container, .wf-toast-container--top-right
+ * @variables --wf-space-3, --wf-space-4, --wf-surface-base, --wf-color-border, --wf-color-accent
+ */
 @layer components {
   /* Toast - Lightweight notification component */
   .wf-toast {

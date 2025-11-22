@@ -1,3 +1,10 @@
+/*!
+ * @component Autocomplete
+ * @description Autocomplete component.
+ * @selector .wf-autocomplete
+ * @variants 
+ * @variables --wf-space-1, --wf-surface-base, --wf-color-border, --wf-radius-md, --wf-shadow-lg
+ */
 @layer components {
   /* Autocomplete */
   .wf-autocomplete {

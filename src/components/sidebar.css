@@ -1,3 +1,10 @@
+/*!
+ * @component Sidebar
+ * @description Sidebar component.
+ * @selector .wf-sidebar
+ * @variants .wf-sidebar-backdrop
+ * @variables --wf-color-bg, --wf-ink-200, --wf-duration-normal, --wf-space-4, --wf-font-lg
+ */
 /**
  * Sidebar Component
  * サイドバーナビゲーションコンポーネント

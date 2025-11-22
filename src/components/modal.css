@@ -1,4 +1,16 @@
+/*!
+ * @component Modal
+ * @description Modal component.
+ * @selector .wf-modal-overlay
+ * @variants .wf-modal, .wf-modal-sm, .wf-modal-lg, .wf-modal--scroll, .wf-modal-fullscreen
+ * @variables --wf-surface-base, --wf-color-text, --wf-radius-md, --wf-color-border, --wf-space-2
+ */
 @layer components {
+  /* @meta id="modal" description="Modal dialog component with overlay, header, body, and footer sections." */
+/*
+  Modal
+  モーダル
+*/
   /* Modal */
   .wf-modal-overlay {
     position: fixed;

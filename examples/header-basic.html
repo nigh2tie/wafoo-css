@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ヘッダーサンプル - wafoo-css</title>
+  <link rel="stylesheet" href="../dist/wafoo.min.css">
+  <style>
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
+    }
+    .demo-section {
+      padding: 2rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .demo-section h2 {
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--wf-color-accent);
+    }
+    .demo-section p {
+      color: var(--wf-ink-600);
+      line-height: 1.6;
+    }
+    .code-block {
+      background: var(--wf-surface-subtle);
+      padding: 1rem;
+      border-radius: 4px;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    .code-block code {
+      font-family: 'Courier New', monospace;
+      font-size: 0.9rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- メインコンテンツへスキップ -->
+  <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+
+  <!-- 例1: デフォルトの暖簾風ヘッダー -->
+  <header class="wf-header" role="banner">
+    <h1>和風CSS Framework</h1>
+    <p>wafoo-css - 日本の伝統美をWebに</p>
+  </header>
+
+  <main role="main" id="main">
+    <div class="demo-section">
+      <h2>デフォルトヘッダー (.wf-header)</h2>
+      <p>
+        <code>.wf-header</code>クラスを使用すると、自動的に暖簾風デザイン（墨色グラデーション + テーマカラーストライプ）が適用されます。
+      </p>
+
+      <div class="code-block">
+        <code>&lt;header class="wf-header"&gt;
+  &lt;h1&gt;和風CSS Framework&lt;/h1&gt;
+  &lt;p&gt;wafoo-css - 日本の伝統美をWebに&lt;/p&gt;
+&lt;/header&gt;</code>
+      </div>
+
+      <h2>特徴</h2>
+      <ul>
+        <li>墨色グラデーション背景</li>
+        <li>下部にテーマカラーストライプ装飾</li>
+        <li>レスポンシブ対応</li>
+        <li>シンプルな実装（クラス1つだけ）</li>
+      </ul>
+
+      <h2>テーマカラーとの連携</h2>
+      <p>
+        ストライプ装飾は<code>var(--wf-color-accent)</code>を使用しているため、
+        テーマを切り替えると自動的に色が変わります。
+      </p>
+
+      <div class="wf-container" style="margin-top: 2rem;">
+        <label for="theme-select" class="wf-label">テーマ選択:</label>
+        <select id="theme-select" class="wf-select">
+          <option value="">標準（藤紫）</option>
+          <option value="theme-sakura">桜</option>
+          <option value="theme-koubai">紅梅</option>
+          <option value="theme-moe">萌黄</option>
+          <option value="theme-kiku">菊</option>
+          <option value="theme-koori">氷</option>
+          <option value="theme-yanagi">柳</option>
+          <option value="theme-momiji">紅葉</option>
+          <option value="theme-fuji">藤</option>
+          <option value="theme-uguisu">鶯</option>
+          <option value="theme-yuki">雪</option>
+        </select>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    // テーマ切り替え
+    document.getElementById('theme-select').addEventListener('change', function(e) {
+      document.body.className = e.target.value;
+    });
+  </script>
+</body>
+</html>

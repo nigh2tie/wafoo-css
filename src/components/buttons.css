@@ -1,4 +1,16 @@
+/*!
+ * @component Buttons
+ * @description Buttons component.
+ * @selector .wf-btn
+ * @variants .wf-icon, .wf-btn-primary, .wf-btn-gradient, .wf-btn-outline, .wf-btn-subtle
+ * @variables --wf-btn-gap-md, --wf-btn-py-md, --wf-btn-px-md, --wf-color-border-strong, --wf-radius-md
+ */
 @layer components {
+  /* @meta id="buttons" description="Button styles including primary, outline, subtle, and gradient variants." */
+/*
+  Buttons
+  ボタン
+*/
   /* Buttons */
   .wf-btn {
     display: inline-flex;
