@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 # wafoo-css 実装状況チェックスクリプト
-# 改善案_20251119.mdの実装状況を確認します
 
 set -euo pipefail
 

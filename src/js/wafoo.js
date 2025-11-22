@@ -1,6 +1,10 @@
 /* WFUI PATCH BEGIN */
 // Runtime patches and enhancements for WFUI (tooltip/popover placement, safety preventDefault,
 // schedule visibility gating, and minor content sanitization).
+//
+// NOTE: This file contains PATCHES ONLY.
+// The WFUI core library is in src/js/wafoo-core.js
+// Build process (scripts/build.sh) combines: wafoo-core.js + wafoo.js → dist/wafoo.js
 (function () {
   if (typeof window === "undefined" || !window.WFUI) return;
   var WFUI = window.WFUI;

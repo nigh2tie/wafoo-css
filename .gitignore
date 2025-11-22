@@ -24,6 +24,7 @@ CLAUDE.md
 walkthrough.md
 devserver/
 test-app/
+examples/
 
 
 # AI Assistants & Tools
@@ -109,6 +110,7 @@ coverage/
 test-results/
 playwright-report/
 playwright/.cache/
+tests/**/*-snapshots/
 
 # Build artifacts
 # ---------------

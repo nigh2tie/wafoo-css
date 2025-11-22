@@ -70,12 +70,18 @@ npx postcss dist/wafoo.css -o dist/wafoo.min.css
 
 echo "[OK] wafoo.css (full) built successfully"
 
-# 4. JavaScriptもビルド
+# 4. JavaScriptもビルド (WFUI本体 + パッチを結合)
 echo "Building wafoo.js..."
-if [ -f "src/js/wafoo.js" ]; then
+if [ -f "src/js/wafoo-core.js" ] && [ -f "src/js/wafoo.js" ]; then
+  # WFUI本体とパッチを結合
+  cat src/js/wafoo-core.js src/js/wafoo.js > dist/wafoo.js
+  npx terser dist/wafoo.js -o dist/wafoo.min.js --compress --mangle
+  echo "[OK] wafoo.js built successfully (core + patches combined)"
+elif [ -f "src/js/wafoo.js" ]; then
+  # パッチのみの場合（後方互換性のため警告）
   cp src/js/wafoo.js dist/wafoo.js
   npx terser dist/wafoo.js -o dist/wafoo.min.js --compress --mangle
-  echo "[OK] wafoo.js built successfully"
+  echo "[WARN] wafoo-core.js not found, built with patches only"
 else
   echo "[WARN] src/js/wafoo.js not found, skipping JS build"
 fi
