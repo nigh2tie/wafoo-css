@@ -20,6 +20,12 @@
     --wf-shirayuri: #f8f4e6; /* 白百合 - white lily */
     --wf-sumi: #2c2c2c; /* 墨 - ink */
     --wf-hai: #828282; /* 灰 - ash */
+    --wf-ai: #165e83; /* 藍 - indigo */
+    --wf-yamabuki: #f8b500; /* 山吹 - bright yellow */
+    --wf-tsuyukusa: #38a1db; /* 露草 - dayflower blue */
+    --wf-tokiwa: #007b43; /* 常盤 - evergreen */
+    --wf-anzu: #f7b977; /* 杏 - apricot */
+    --wf-akane: #b7282e; /* 茜 - madder red */
 
     /* RGB values for gradients */
     --wf-koubai-rgb: 244, 167, 185;
@@ -50,12 +56,16 @@
     /* Semantic colors */
     --wf-color-text: var(--wf-ink-900);
     --wf-color-muted: var(--wf-ink-700); /* Changed from ink-500 to meet WCAG AA 4.5:1 contrast */
+    --wf-color-secondary: var(--wf-ai);
+    --wf-color-info: var(--wf-tsuyukusa);
     --wf-color-accent: var(--wf-accent-500);
     --wf-link-color: var(--wf-accent-600);
     --wf-link-color-hover: var(--wf-accent-700);
     --wf-primary-bg: var(--wf-accent-700);
+    --wf-secondary: var(--wf-accent-600);
     --wf-primary-bg-hover: var(--wf-accent-800);
     --wf-primary-bg-active: var(--wf-accent-900);
+    --wf-info: var(--wf-link-color-hover);
     --wf-primary-fg: #ffffff;
     --wf-focus: var(--wf-accent-700);
     --wf-outline-color-hover: var(--wf-accent-700);
@@ -64,9 +74,9 @@
     --wf-color-border: var(--wf-color-border-subtle);
 
     /* Status colors */
-    --wf-success: #2e7d32;
-    --wf-warning: #b26a00;
-    --wf-danger: #b00020;
+    --wf-success: var(--wf-tokiwa);
+    --wf-warning: var(--wf-anzu);
+    --wf-danger: var(--wf-akane);
     --wf-success-fg: #ffffff;
     --wf-warning-fg: #ffffff;
     --wf-danger-fg: #ffffff;
@@ -200,8 +210,10 @@
   --wf-link-color: #f4b3c2;
   --wf-link-color-hover: #e09fb0;
   --wf-primary-bg: #f4b3c2;
+  --wf-secondary: #e09fb0;
   --wf-primary-bg-hover: #e09fb0;
   --wf-primary-bg-active: #cc8b9e;
+  --wf-info: #f4b3c2;
   --wf-primary-fg: #2a2a2a;
   --wf-focus: #f4b3c2;
   --wf-outline-color-hover: #f4b3c2;
@@ -221,8 +233,10 @@
   --wf-link-color: #e35c8d;
   --wf-link-color-hover: #c94c75;
   --wf-primary-bg: #e35c8d;
+  --wf-secondary: #c94c75;
   --wf-primary-bg-hover: #c94c75;
   --wf-primary-bg-active: #af3c5d;
+  --wf-info: #e35c8d;
   --wf-primary-fg: #ffffff;
   --wf-focus: #e35c8d;
   --wf-outline-color-hover: #e35c8d;
@@ -242,8 +256,10 @@
   --wf-link-color: #a9d18e;
   --wf-link-color-hover: #8fb876;
   --wf-primary-bg: #a9d18e;
+  --wf-secondary: #8fb876;
   --wf-primary-bg-hover: #8fb876;
   --wf-primary-bg-active: #759f5e;
+  --wf-info: #a9d18e;
   --wf-primary-fg: #1f1f1f;
   --wf-focus: #a9d18e;
   --wf-outline-color-hover: #a9d18e;
@@ -263,8 +279,10 @@
   --wf-link-color: #967bb6;
   --wf-link-color-hover: #7d67a0;
   --wf-primary-bg: #967bb6;
+  --wf-secondary: #7d67a0;
   --wf-primary-bg-hover: #7d67a0;
   --wf-primary-bg-active: #64538a;
+  --wf-info: #967bb6;
   --wf-primary-fg: #ffffff;
   --wf-focus: #967bb6;
   --wf-outline-color-hover: #967bb6;
@@ -284,8 +302,10 @@
   --wf-link-color: #7eb8d4;
   --wf-link-color-hover: #6aa3bf;
   --wf-primary-bg: #7eb8d4;
+  --wf-secondary: #6aa3bf;
   --wf-primary-bg-hover: #6aa3bf;
   --wf-primary-bg-active: #568eaa;
+  --wf-info: #7eb8d4;
   --wf-primary-fg: #1f1f1f;
   --wf-focus: #7eb8d4;
   --wf-outline-color-hover: #6aa3bf;
@@ -326,8 +346,10 @@
   --wf-link-color: #c94c28;
   --wf-link-color-hover: #a73e1f;
   --wf-primary-bg: #c94c28;
+  --wf-secondary: #a73e1f;
   --wf-primary-bg-hover: #a73e1f;
   --wf-primary-bg-active: #853016;
+  --wf-info: #c94c28;
   --wf-primary-fg: #ffffff;
   --wf-focus: #c94c28;
   --wf-outline-color-hover: #c94c28;
@@ -347,8 +369,10 @@
   --wf-link-color: #5e516f; /* darker for contrast */
   --wf-link-color-hover: #4f4560;
   --wf-primary-bg: #bca7e8;
+  --wf-secondary: #a38dd4;
   --wf-primary-bg-hover: #a38dd4;
   --wf-primary-bg-active: #8a73c0;
+  --wf-info: #5e516f;
   --wf-primary-fg: #2a2a2a;
   --wf-focus: #5e516f;
   --wf-outline-color-hover: #5e516f;
@@ -368,8 +392,10 @@
   --wf-link-color: #7c8c4b;
   --wf-link-color-hover: #66733d;
   --wf-primary-bg: #7c8c4b;
+  --wf-secondary: #66733d;
   --wf-primary-bg-hover: #66733d;
   --wf-primary-bg-active: #505a2f;
+  --wf-info: #7c8c4b;
   --wf-primary-fg: #ffffff;
   --wf-focus: #7c8c4b;
   --wf-outline-color-hover: #7c8c4b;
@@ -389,8 +415,10 @@
   --wf-link-color: #5a7a8f;
   --wf-link-color-hover: #4a6678;
   --wf-primary-bg: #5a7a8f;
+  --wf-secondary: #4a6678;
   --wf-primary-bg-hover: #4a6678;
   --wf-primary-bg-active: #3a5261;
+  --wf-info: #5a7a8f;
   --wf-primary-fg: #ffffff;
   --wf-focus: #5a7a8f;
   --wf-outline-color-hover: #4a6678;
@@ -564,6 +592,13 @@
     }
   }
 }
+/*!
+ * @component Buttons
+ * @description Buttons component.
+ * @selector .wf-btn
+ * @variants .wf-icon, .wf-btn-primary, .wf-btn-gradient, .wf-btn-outline, .wf-btn-subtle
+ * @variables --wf-btn-gap-md, --wf-btn-py-md, --wf-btn-px-md, --wf-color-border-strong, --wf-radius-md
+ */
 @layer components {
   /* @meta id="buttons" description="Button styles including primary, outline, subtle, and gradient variants." */
 /*
@@ -759,6 +794,13 @@
     cursor: not-allowed;
   }
 }
+/*!
+ * @component Stamp
+ * @description Stamp component.
+ * @selector .wf-stamp
+ * @variants 
+ * @variables --wf-stamp-py, --wf-stamp-px, --wf-stamp-weight, --wf-stamp-color, --wf-surface-base
+ */
 @layer components {
   /* Stamp (判子) */
   .wf-stamp {
@@ -777,6 +819,13 @@
     filter: saturate(1.1);
   }
 }
+/*!
+ * @component Cards
+ * @description Cards component.
+ * @selector .wf-card
+ * @variants .wf-card-washi
+ * @variables --wf-surface-base, --wf-color-border, --wf-radius-md, --wf-space-4, --wf-overlay-light
+ */
 @layer components {
   /* @meta id="cards" description="Card component with standard and 'washi' (Japanese paper) texture variants." */
 /*
@@ -870,6 +919,13 @@
     border-top: none;
   }
 }
+/*!
+ * @component Forms
+ * @description Forms component.
+ * @selector .wf-label
+ * @variants .wf-input, .wf-textarea, .wf-select, .wf-field, .wf-checkbox
+ * @variables --wf-space-2, --wf-color-accent, --wf-space-3, --wf-color-border-strong, --wf-radius-md
+ */
 @layer components {
   /* @meta id="forms" description="Form controls including inputs, selects, checkboxes, radios, and validation states." */
 /*
@@ -1149,6 +1205,13 @@
     }
   }
 }
+/*!
+ * @component Header
+ * @description Header component.
+ * @selector .wf-header
+ * @variants .wf-header--no-stripe, .wf-header-noren
+ * @variables --wf-sumi, --wf-surface-base, --wf-color-accent, --wf-surface-subtle
+ */
 @layer components {
   /* Header - Default style with noren (暖簾) design */
   /* 墨色グラデーション + ストライプ装飾がデフォルト */
@@ -1228,6 +1291,13 @@
     );
   }
 }
+/*!
+ * @component Steps
+ * @description Steps component.
+ * @selector .wf-steps
+ * @variants .wf-step
+ * @variables --wf-space-4, --wf-space-2, --wf-color-muted, --wf-step-bullet-size, --wf-radius-full
+ */
 @layer components {
   /* Steps */
   .wf-steps {
@@ -1311,6 +1381,13 @@
     }
   }
 }
+/*!
+ * @component Alerts
+ * @description Alerts component.
+ * @selector .wf-alert
+ * @variants .wf-alert-success, .wf-alert-warning, .wf-alert-danger, .wf-icon, .wf-alert-sm
+ * @variables --wf-space-3, --wf-space-4, --wf-color-border, --wf-radius-md, --wf-surface-muted
+ */
 @layer components {
   /* Alerts */
   .wf-alert {
@@ -1375,6 +1452,13 @@
     color: var(--wf-danger-fg);
   }
 }
+/*!
+ * @component Table
+ * @description Table component.
+ * @selector .wf-table-wrap
+ * @variants .wf-table, .wf-sort, .wf-table-striped, .wf-table-hover, .wf-table-bordered
+ * @variables --wf-surface-base, --wf-color-border, --wf-color-muted, --wf-color-accent, --wf-surface-muted
+ */
 @layer components {
   /* @meta id="table" description="Table styles with striped, hover, and responsive variants." */
 /*
@@ -1481,6 +1565,13 @@
     }
   }
 }
+/*!
+ * @component Modal
+ * @description Modal component.
+ * @selector .wf-modal-overlay
+ * @variants .wf-modal, .wf-modal-sm, .wf-modal-lg, .wf-modal--scroll, .wf-modal-fullscreen
+ * @variables --wf-surface-base, --wf-color-text, --wf-radius-md, --wf-color-border, --wf-space-2
+ */
 @layer components {
   /* @meta id="modal" description="Modal dialog component with overlay, header, body, and footer sections." */
 /*
@@ -1653,6 +1744,13 @@
     }
   }
 }
+/*!
+ * @component Tooltip
+ * @description Tooltip component.
+ * @selector .wf-tooltip
+ * @variants 
+ * @variables --wf-color-text, --wf-surface-base, --wf-radius-sm, --wf-font-sm, --wf-arrow-x
+ */
 @layer components {
   /* Tooltip */
   .wf-tooltip {
@@ -1719,6 +1817,13 @@
     transform: translateY(-50%);
   }
 }
+/*!
+ * @component Popover
+ * @description Popover component.
+ * @selector .wf-popover
+ * @variants 
+ * @variables --wf-surface-base, --wf-color-text, --wf-color-border, --wf-radius-md, --wf-space-3
+ */
 @layer components {
   /* Popover */
   .wf-popover {
@@ -1766,6 +1871,13 @@
     transform: translateX(-50%);
   }
 }
+/*!
+ * @component Dropdown
+ * @description Dropdown component.
+ * @selector .wf-dropdown
+ * @variants 
+ * @variables --wf-color-border, --wf-surface-base, --wf-space-2, --wf-space-3, --wf-radius-md
+ */
 @layer components {
   /* Dropdown */
   .wf-dropdown {
@@ -1820,6 +1932,13 @@
     }
   }
 }
+/*!
+ * @component Navbar
+ * @description Navbar component.
+ * @selector .wf-navbar
+ * @variants .wf-navbar-brand, .wf-navbar-nav, .wf-nav-item, .wf-nav-link, .wf-hamburger
+ * @variables --wf-space-2, --wf-surface-base, --wf-color-border, --wf-space-4, --wf-color-text
+ */
 @layer components {
   /* Navbar */
   .wf-navbar {
@@ -2012,6 +2131,13 @@
     }
   }
 }
+/*!
+ * @component Breadcrumb
+ * @description Breadcrumb component.
+ * @selector .wf-breadcrumb
+ * @variants .wf-breadcrumb-item
+ * @variables --wf-space-2, --wf-color-muted, --wf-link-color, --wf-link-color-hover, --wf-space-1
+ */
 @layer components {
   /* Breadcrumb */
   .wf-breadcrumb {
@@ -2040,6 +2166,13 @@
     color: var(--wf-color-muted);
   }
 }
+/*!
+ * @component Pagination
+ * @description Pagination component.
+ * @selector .wf-pagination
+ * @variants .wf-page-link
+ * @variables --wf-space-2, --wf-color-border, --wf-radius-md, --wf-color-text, --wf-surface-muted
+ */
 @layer components {
   /* Pagination */
   .wf-pagination {
@@ -2084,6 +2217,13 @@
     }
   }
 }
+/*!
+ * @component Tabs
+ * @description Tabs component.
+ * @selector .wf-tabs
+ * @variants .wf-tablist, .wf-tab, .wf-tabpanels, .wf-tabpanel
+ * @variables --wf-space-2, --wf-color-border, --wf-space-3, --wf-color-muted, --wf-color-text
+ */
 @layer components {
   /* Tabs */
   .wf-tabs {
@@ -2144,6 +2284,13 @@
     }
   }
 }
+/*!
+ * @component Accordion
+ * @description Accordion component.
+ * @selector .wf-accordion
+ * @variants 
+ * @variables --wf-color-border, --wf-radius-md, --wf-surface-base, --wf-space-3, --wf-space-4
+ */
 @layer components {
   /* Accordion */
   .wf-accordion {
@@ -2187,6 +2334,13 @@
     padding: var(--wf-space-4);
   }
 }
+/*!
+ * @component Offcanvas
+ * @description Offcanvas component.
+ * @selector .wf-offcanvas-overlay
+ * @variants .wf-offcanvas, .wf-offcanvas-start, .wf-offcanvas-end, .wf-offcanvas-top, .wf-offcanvas-bottom
+ * @variables --wf-surface-base, --wf-color-text, --wf-color-border, --wf-space-2, --wf-space-3
+ */
 @layer components {
   /* Offcanvas */
   .wf-offcanvas-overlay {
@@ -2245,6 +2399,13 @@
     padding: var(--wf-space-4);
   }
 }
+/*!
+ * @component Grid
+ * @description Grid component.
+ * @selector .wf-row
+ * @variants .wf-g-0, .wf-g-1, .wf-g-2, .wf-g-3, .wf-g-4
+ * @variables --wf-gx, --wf-gy, --wf-space-1, --wf-space-2, --wf-space-3
+ */
 @layer components {
   /* Grid System (12 columns, flex-based) */
   .wf-row {
@@ -2490,6 +2651,13 @@
     }
   }
 }
+/*!
+ * @component Progress
+ * @description Progress component.
+ * @selector .wf-progress
+ * @variants .wf-progress-sm, .wf-progress-lg, .wf-progress-success, .wf-progress-warning, .wf-progress-danger
+ * @variables --wf-surface-muted, --wf-color-border, --wf-radius-md, --wf-color-accent, --wf-success
+ */
 @layer components {
   /* Progress */
   .wf-progress {
@@ -2522,6 +2690,13 @@
     background: var(--wf-danger);
   }
 }
+/*!
+ * @component Spinner
+ * @description Spinner component.
+ * @selector .wf-spinner
+ * @variants .wf-spinner-sm, .wf-spinner-success, .wf-spinner-warning, .wf-spinner-danger, .wf-spinner-lg
+ * @variables --wf-color-border, --wf-color-accent, --wf-success, --wf-warning, --wf-danger
+ */
 @layer components {
   /* Spinner */
   .wf-spinner {
@@ -2563,6 +2738,13 @@
     }
   }
 }
+/*!
+ * @component List Group
+ * @description List Group component.
+ * @selector .wf-list-group
+ * @variants .wf-list-item, .wf-meta, .wf-icon
+ * @variables --wf-color-border, --wf-radius-md, --wf-surface-base, --wf-space-3, --wf-space-4
+ */
 @layer components {
   /* List Group */
   .wf-list-group {
@@ -2632,6 +2814,13 @@
     flex: 0 0 auto;
   }
 }
+/*!
+ * @component Toast
+ * @description Toast component.
+ * @selector .wf-toast
+ * @variants .wf-toast--success, .wf-toast--warning, .wf-toast--danger, .wf-toast-container, .wf-toast-container--top-right
+ * @variables --wf-space-3, --wf-space-4, --wf-surface-base, --wf-color-border, --wf-color-accent
+ */
 @layer components {
   /* Toast - Lightweight notification component */
   .wf-toast {
@@ -2827,6 +3016,13 @@
     }
   }
 }
+/*!
+ * @component Message
+ * @description Message component.
+ * @selector .wf-message
+ * @variants .wf-message-sent, .wf-message-system, .wf-icon, .wf-message-compact
+ * @variables --wf-space-3, --wf-space-4, --wf-ink-200, --wf-ink-600, --wf-font-sm
+ */
 /**
  * Chat/Message Component
  * チャット風メッセージ表示コンポーネント
@@ -3010,6 +3206,13 @@
     transition: none;
   }
 }
+/*!
+ * @component Calendar
+ * @description Calendar component.
+ * @selector .wf-calendar
+ * @variants .wf-calendar-fluid
+ * @variables --wf-surface-base, --wf-radius-md, --wf-shadow-md, --wf-space-4, --wf-breakpoint-md
+ */
 @layer components {
   /* Calendar Component */
   .wf-calendar {
@@ -3216,6 +3419,13 @@
     background: var(--wf-accent-100);
   }
 }
+/*!
+ * @component Schedule
+ * @description Schedule component.
+ * @selector .wf-schedule
+ * @variants 
+ * @variables --wf-space-2, --wf-space-6, --wf-space-3, --wf-color-border, --wf-radius-md
+ */
 @layer components {
   /* Schedule Component */
   .wf-schedule {
@@ -3683,6 +3893,13 @@
     display: none;
   }
 }
+/*!
+ * @component Avatar
+ * @description Avatar component.
+ * @selector .wf-avatar
+ * @variants .wf-avatar-sm, .wf-avatar-lg, .wf-avatar-img, .wf-avatar-square, .wf-avatar-status
+ * @variables --wf-accent-100, --wf-color-text, --wf-font-sm, --wf-font-lg, --wf-radius-md
+ */
 @layer components {
   /* Avatar */
   .wf-avatar {
@@ -3731,6 +3948,13 @@
     border: 2px solid var(--wf-surface-base);
   }
 }
+/*!
+ * @component Skeleton
+ * @description Skeleton component.
+ * @selector .wf-skeleton
+ * @variants .wf-skeleton-line, .wf-sm, .wf-lg, .wf-skeleton-circle, .wf-skeleton-rect
+ * @variables --wf-surface-muted, --wf-surface-subtle, --wf-skeleton-duration, --wf-radius-sm
+ */
 @layer components {
   /* Skeleton Loader */
   @keyframes wf-shimmer {
@@ -3778,6 +4002,13 @@
     }
   }
 }
+/*!
+ * @component Empty
+ * @description Empty component.
+ * @selector .wf-empty
+ * @variants 
+ * @variables --wf-color-border, --wf-radius-md, --wf-surface-base, --wf-space-6, --wf-color-muted
+ */
 @layer components {
   /* Empty State */
   .wf-empty {
@@ -3807,6 +4038,13 @@
     gap: var(--wf-space-2);
   }
 }
+/*!
+ * @component Divider
+ * @description Divider component.
+ * @selector .wf-divider
+ * @variants .wf-divider--horizontal, .wf-divider--vertical, .wf-divider--strong, .wf-divider--sm, .wf-divider--lg
+ * @variables --wf-color-border, --wf-space-6, --wf-space-3, --wf-color-border-strong, --wf-space-10
+ */
 @layer components {
   /* Divider - Simple visual separator */
   .wf-divider {
@@ -3894,6 +4132,13 @@
     border: none;
   }
 }
+/*!
+ * @component Code
+ * @description Code component.
+ * @selector .wf-code
+ * @variants .wf-kbd, .wf-code-block, .wf-code-block--copy, .wf-code-copy, .wf-code--sm
+ * @variables --wf-space-2, --wf-leading-tight, --wf-color-text, --wf-surface-muted, --wf-color-border
+ */
 @layer components {
   /* Code - Inline code and keyboard elements */
 
@@ -4031,6 +4276,13 @@
     content: none;
   }
 }
+/*!
+ * @component Rating
+ * @description Rating component.
+ * @selector .wf-rating
+ * @variants .wf-rating-sm, .wf-rating-lg
+ * @variables --wf-space-1, --wf-icon-md, --wf-ink-200, --wf-duration-fast, --wf-accent-500
+ */
 /**
  * Rating/Star Component
  * 評価表示・入力コンポーネント
@@ -4143,6 +4395,13 @@
     transform: none;
   }
 }
+/*!
+ * @component Timeline
+ * @description Timeline component.
+ * @selector .wf-timeline
+ * @variants .wf-timeline-horizontal
+ * @variables --wf-space-4, --wf-space-8, --wf-space-6, --wf-ink-200, --wf-accent-500
+ */
 /**
  * Timeline Component
  * 時系列表示コンポーネント
@@ -4312,6 +4571,13 @@
     animation: none;
   }
 }
+/*!
+ * @component Sidebar
+ * @description Sidebar component.
+ * @selector .wf-sidebar
+ * @variants .wf-sidebar-backdrop
+ * @variables --wf-color-bg, --wf-ink-200, --wf-duration-normal, --wf-space-4, --wf-font-lg
+ */
 /**
  * Sidebar Component
  * サイドバーナビゲーションコンポーネント
@@ -4558,6 +4824,13 @@
     transition: none;
   }
 }
+/*!
+ * @component Carousel
+ * @description Carousel component.
+ * @selector .wf-carousel
+ * @variants .wf-carousel-thumbnails, .wf-carousel-multiple, .wf-carousel-fade, .wf-carousel-16-9, .wf-carousel-4-3
+ * @variables --wf-ink-100, --wf-duration-normal, --wf-space-4, --wf-space-2, --wf-font-lg
+ */
 /**
  * Image/Carousel Component
  * 画像スライダーコンポーネント
@@ -4846,6 +5119,13 @@
     transition: none;
   }
 }
+/*!
+ * @component Switch
+ * @description Switch component.
+ * @selector .wf-switch
+ * @variants 
+ * @variables --wf-color-border-strong, --wf-surface-base, --wf-color-accent, --wf-focus, --wf-space-2
+ */
 @layer components {
   /* Switch */
   .wf-switch {
@@ -4895,6 +5175,13 @@
     cursor: pointer;
   }
 }
+/*!
+ * @component Range
+ * @description Range component.
+ * @selector .wf-range
+ * @variants 
+ * @variables --wf-color-border, --wf-radius-full, --wf-color-accent, --wf-surface-base, --wf-focus
+ */
 @layer components {
   /* Range */
   .wf-range {
@@ -4954,6 +5241,13 @@
     background: var(--wf-color-border-strong);
   }
 }
+/*!
+ * @component Input Group
+ * @description Input Group component.
+ * @selector .wf-input-group
+ * @variants .wf-input, .wf-select, .wf-textarea, .wf-btn
+ * @variables --wf-radius-md, --wf-space-3, --wf-color-accent, --wf-surface-subtle, --wf-color-text
+ */
 @layer components {
   /* Input Group */
   .wf-input-group {
@@ -5028,6 +5322,13 @@
     }
   }
 }
+/*!
+ * @component Floating Label
+ * @description Floating Label component.
+ * @selector .wf-form-floating
+ * @variants .wf-input, .wf-textarea
+ * @variables --wf-space-4, --wf-color-muted, --wf-color-accent
+ */
 @layer components {
   /* Floating Label */
   .wf-form-floating {
@@ -5054,6 +5355,13 @@
     color: var(--wf-color-accent);
   }
 }
+/*!
+ * @component File
+ * @description File component.
+ * @selector .wf-file
+ * @variants 
+ * @variables --wf-space-2, --wf-space-3, --wf-color-border-strong, --wf-radius-md, --wf-surface-base
+ */
 @layer components {
   /* File input */
   .wf-file {
@@ -5366,6 +5674,16 @@
 .wf-focus\:text-link:focus-visible { color: var(--wf-link-color); }
 .wf-active\:text-link:active { color: var(--wf-link-color); }
 .wf-disabled\:text-link:disabled { color: var(--wf-link-color); }
+.wf-text-secondary { color: var(--wf-secondary); }
+.wf-hover\:text-secondary:hover { color: var(--wf-secondary); }
+.wf-focus\:text-secondary:focus-visible { color: var(--wf-secondary); }
+.wf-active\:text-secondary:active { color: var(--wf-secondary); }
+.wf-disabled\:text-secondary:disabled { color: var(--wf-secondary); }
+.wf-text-info { color: var(--wf-info); }
+.wf-hover\:text-info:hover { color: var(--wf-info); }
+.wf-focus\:text-info:focus-visible { color: var(--wf-info); }
+.wf-active\:text-info:active { color: var(--wf-info); }
+.wf-disabled\:text-info:disabled { color: var(--wf-info); }
 .wf-text-white { color: #ffffff; }
 .wf-hover\:text-white:hover { color: #ffffff; }
 .wf-focus\:text-white:focus-visible { color: #ffffff; }
@@ -5386,6 +5704,11 @@
 .wf-focus\:bg-primary:focus-visible { background-color: var(--wf-primary-bg); }
 .wf-active\:bg-primary:active { background-color: var(--wf-primary-bg); }
 .wf-disabled\:bg-primary:disabled { background-color: var(--wf-primary-bg); }
+.wf-bg-secondary { background-color: var(--wf-secondary); }
+.wf-hover\:bg-secondary:hover { background-color: var(--wf-secondary); }
+.wf-focus\:bg-secondary:focus-visible { background-color: var(--wf-secondary); }
+.wf-active\:bg-secondary:active { background-color: var(--wf-secondary); }
+.wf-disabled\:bg-secondary:disabled { background-color: var(--wf-secondary); }
 .wf-bg-surface { background-color: var(--wf-surface-base); }
 .wf-hover\:bg-surface:hover { background-color: var(--wf-surface-base); }
 .wf-focus\:bg-surface:focus-visible { background-color: var(--wf-surface-base); }
@@ -5416,6 +5739,11 @@
 .wf-focus\:bg-danger:focus-visible { background-color: var(--wf-danger); }
 .wf-active\:bg-danger:active { background-color: var(--wf-danger); }
 .wf-disabled\:bg-danger:disabled { background-color: var(--wf-danger); }
+.wf-bg-info { background-color: var(--wf-info); }
+.wf-hover\:bg-info:hover { background-color: var(--wf-info); }
+.wf-focus\:bg-info:focus-visible { background-color: var(--wf-info); }
+.wf-active\:bg-info:active { background-color: var(--wf-info); }
+.wf-disabled\:bg-info:disabled { background-color: var(--wf-info); }
 .wf-bg-white { background-color: #ffffff; }
 .wf-hover\:bg-white:hover { background-color: #ffffff; }
 .wf-focus\:bg-white:focus-visible { background-color: #ffffff; }
@@ -5653,6 +5981,30 @@
 }
 @layer utilities {
 /* Extras Utilities */
+
+/* Color utilities (theme-aware, extras) */
+.wf-text-secondary { color: var(--wf-secondary); }
+.wf-hover\:text-secondary:hover { color: var(--wf-secondary); }
+.wf-focus\:text-secondary:focus-visible { color: var(--wf-secondary); }
+.wf-active\:text-secondary:active { color: var(--wf-secondary); }
+.wf-disabled\:text-secondary:disabled { color: var(--wf-secondary); }
+.wf-text-info { color: var(--wf-info); }
+.wf-hover\:text-info:hover { color: var(--wf-info); }
+.wf-focus\:text-info:focus-visible { color: var(--wf-info); }
+.wf-active\:text-info:active { color: var(--wf-info); }
+.wf-disabled\:text-info:disabled { color: var(--wf-info); }
+
+.wf-bg-secondary { background-color: var(--wf-secondary); }
+.wf-hover\:bg-secondary:hover { background-color: var(--wf-secondary); }
+.wf-focus\:bg-secondary:focus-visible { background-color: var(--wf-secondary); }
+.wf-active\:bg-secondary:active { background-color: var(--wf-secondary); }
+.wf-disabled\:bg-secondary:disabled { background-color: var(--wf-secondary); }
+
+.wf-bg-info { background-color: var(--wf-info); }
+.wf-hover\:bg-info:hover { background-color: var(--wf-info); }
+.wf-focus\:bg-info:focus-visible { background-color: var(--wf-info); }
+.wf-active\:bg-info:active { background-color: var(--wf-info); }
+.wf-disabled\:bg-info:disabled { background-color: var(--wf-info); }
 
 /* Border utilities (Extras) */
 .wf-border-t-1 { border-top-width: 1px; border-top-style: solid; }

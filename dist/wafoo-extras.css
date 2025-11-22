@@ -1,3 +1,10 @@
+/*!
+ * @component Modal
+ * @description Modal component.
+ * @selector .wf-modal-overlay
+ * @variants .wf-modal, .wf-modal-sm, .wf-modal-lg, .wf-modal--scroll, .wf-modal-fullscreen
+ * @variables --wf-surface-base, --wf-color-text, --wf-radius-md, --wf-color-border, --wf-space-2
+ */
 @layer components {
   /* @meta id="modal" description="Modal dialog component with overlay, header, body, and footer sections." */
 /*
@@ -170,6 +177,13 @@
     }
   }
 }
+/*!
+ * @component Tooltip
+ * @description Tooltip component.
+ * @selector .wf-tooltip
+ * @variants 
+ * @variables --wf-color-text, --wf-surface-base, --wf-radius-sm, --wf-font-sm, --wf-arrow-x
+ */
 @layer components {
   /* Tooltip */
   .wf-tooltip {
@@ -236,6 +250,13 @@
     transform: translateY(-50%);
   }
 }
+/*!
+ * @component Popover
+ * @description Popover component.
+ * @selector .wf-popover
+ * @variants 
+ * @variables --wf-surface-base, --wf-color-text, --wf-color-border, --wf-radius-md, --wf-space-3
+ */
 @layer components {
   /* Popover */
   .wf-popover {
@@ -283,6 +304,13 @@
     transform: translateX(-50%);
   }
 }
+/*!
+ * @component Dropdown
+ * @description Dropdown component.
+ * @selector .wf-dropdown
+ * @variants 
+ * @variables --wf-color-border, --wf-surface-base, --wf-space-2, --wf-space-3, --wf-radius-md
+ */
 @layer components {
   /* Dropdown */
   .wf-dropdown {
@@ -337,6 +365,13 @@
     }
   }
 }
+/*!
+ * @component Offcanvas
+ * @description Offcanvas component.
+ * @selector .wf-offcanvas-overlay
+ * @variants .wf-offcanvas, .wf-offcanvas-start, .wf-offcanvas-end, .wf-offcanvas-top, .wf-offcanvas-bottom
+ * @variables --wf-surface-base, --wf-color-text, --wf-color-border, --wf-space-2, --wf-space-3
+ */
 @layer components {
   /* Offcanvas */
   .wf-offcanvas-overlay {
@@ -395,6 +430,13 @@
     padding: var(--wf-space-4);
   }
 }
+/*!
+ * @component Tabs
+ * @description Tabs component.
+ * @selector .wf-tabs
+ * @variants .wf-tablist, .wf-tab, .wf-tabpanels, .wf-tabpanel
+ * @variables --wf-space-2, --wf-color-border, --wf-space-3, --wf-color-muted, --wf-color-text
+ */
 @layer components {
   /* Tabs */
   .wf-tabs {
@@ -455,6 +497,13 @@
     }
   }
 }
+/*!
+ * @component Accordion
+ * @description Accordion component.
+ * @selector .wf-accordion
+ * @variants 
+ * @variables --wf-color-border, --wf-radius-md, --wf-surface-base, --wf-space-3, --wf-space-4
+ */
 @layer components {
   /* Accordion */
   .wf-accordion {
@@ -498,6 +547,13 @@
     padding: var(--wf-space-4);
   }
 }
+/*!
+ * @component Calendar
+ * @description Calendar component.
+ * @selector .wf-calendar
+ * @variants .wf-calendar-fluid
+ * @variables --wf-surface-base, --wf-radius-md, --wf-shadow-md, --wf-space-4, --wf-breakpoint-md
+ */
 @layer components {
   /* Calendar Component */
   .wf-calendar {
@@ -704,6 +760,13 @@
     background: var(--wf-accent-100);
   }
 }
+/*!
+ * @component Schedule
+ * @description Schedule component.
+ * @selector .wf-schedule
+ * @variants 
+ * @variables --wf-space-2, --wf-space-6, --wf-space-3, --wf-color-border, --wf-radius-md
+ */
 @layer components {
   /* Schedule Component */
   .wf-schedule {
@@ -1171,6 +1234,13 @@
     display: none;
   }
 }
+/*!
+ * @component Carousel
+ * @description Carousel component.
+ * @selector .wf-carousel
+ * @variants .wf-carousel-thumbnails, .wf-carousel-multiple, .wf-carousel-fade, .wf-carousel-16-9, .wf-carousel-4-3
+ * @variables --wf-ink-100, --wf-duration-normal, --wf-space-4, --wf-space-2, --wf-font-lg
+ */
 /**
  * Image/Carousel Component
  * 画像スライダーコンポーネント
@@ -1459,6 +1529,13 @@
     transition: none;
   }
 }
+/*!
+ * @component Steps
+ * @description Steps component.
+ * @selector .wf-steps
+ * @variants .wf-step
+ * @variables --wf-space-4, --wf-space-2, --wf-color-muted, --wf-step-bullet-size, --wf-radius-full
+ */
 @layer components {
   /* Steps */
   .wf-steps {
@@ -1542,6 +1619,13 @@
     }
   }
 }
+/*!
+ * @component Pagination
+ * @description Pagination component.
+ * @selector .wf-pagination
+ * @variants .wf-page-link
+ * @variables --wf-space-2, --wf-color-border, --wf-radius-md, --wf-color-text, --wf-surface-muted
+ */
 @layer components {
   /* Pagination */
   .wf-pagination {
@@ -1586,6 +1670,13 @@
     }
   }
 }
+/*!
+ * @component Progress
+ * @description Progress component.
+ * @selector .wf-progress
+ * @variants .wf-progress-sm, .wf-progress-lg, .wf-progress-success, .wf-progress-warning, .wf-progress-danger
+ * @variables --wf-surface-muted, --wf-color-border, --wf-radius-md, --wf-color-accent, --wf-success
+ */
 @layer components {
   /* Progress */
   .wf-progress {
@@ -1618,6 +1709,13 @@
     background: var(--wf-danger);
   }
 }
+/*!
+ * @component Spinner
+ * @description Spinner component.
+ * @selector .wf-spinner
+ * @variants .wf-spinner-sm, .wf-spinner-success, .wf-spinner-warning, .wf-spinner-danger, .wf-spinner-lg
+ * @variables --wf-color-border, --wf-color-accent, --wf-success, --wf-warning, --wf-danger
+ */
 @layer components {
   /* Spinner */
   .wf-spinner {
@@ -1659,6 +1757,13 @@
     }
   }
 }
+/*!
+ * @component Toast
+ * @description Toast component.
+ * @selector .wf-toast
+ * @variants .wf-toast--success, .wf-toast--warning, .wf-toast--danger, .wf-toast-container, .wf-toast-container--top-right
+ * @variables --wf-space-3, --wf-space-4, --wf-surface-base, --wf-color-border, --wf-color-accent
+ */
 @layer components {
   /* Toast - Lightweight notification component */
   .wf-toast {
@@ -1854,6 +1959,13 @@
     }
   }
 }
+/*!
+ * @component Message
+ * @description Message component.
+ * @selector .wf-message
+ * @variants .wf-message-sent, .wf-message-system, .wf-icon, .wf-message-compact
+ * @variables --wf-space-3, --wf-space-4, --wf-ink-200, --wf-ink-600, --wf-font-sm
+ */
 /**
  * Chat/Message Component
  * チャット風メッセージ表示コンポーネント
@@ -2037,6 +2149,13 @@
     transition: none;
   }
 }
+/*!
+ * @component List Group
+ * @description List Group component.
+ * @selector .wf-list-group
+ * @variants .wf-list-item, .wf-meta, .wf-icon
+ * @variables --wf-color-border, --wf-radius-md, --wf-surface-base, --wf-space-3, --wf-space-4
+ */
 @layer components {
   /* List Group */
   .wf-list-group {
@@ -2106,6 +2225,13 @@
     flex: 0 0 auto;
   }
 }
+/*!
+ * @component Avatar
+ * @description Avatar component.
+ * @selector .wf-avatar
+ * @variants .wf-avatar-sm, .wf-avatar-lg, .wf-avatar-img, .wf-avatar-square, .wf-avatar-status
+ * @variables --wf-accent-100, --wf-color-text, --wf-font-sm, --wf-font-lg, --wf-radius-md
+ */
 @layer components {
   /* Avatar */
   .wf-avatar {
@@ -2154,6 +2280,13 @@
     border: 2px solid var(--wf-surface-base);
   }
 }
+/*!
+ * @component Skeleton
+ * @description Skeleton component.
+ * @selector .wf-skeleton
+ * @variants .wf-skeleton-line, .wf-sm, .wf-lg, .wf-skeleton-circle, .wf-skeleton-rect
+ * @variables --wf-surface-muted, --wf-surface-subtle, --wf-skeleton-duration, --wf-radius-sm
+ */
 @layer components {
   /* Skeleton Loader */
   @keyframes wf-shimmer {
@@ -2201,6 +2334,13 @@
     }
   }
 }
+/*!
+ * @component Empty
+ * @description Empty component.
+ * @selector .wf-empty
+ * @variants 
+ * @variables --wf-color-border, --wf-radius-md, --wf-surface-base, --wf-space-6, --wf-color-muted
+ */
 @layer components {
   /* Empty State */
   .wf-empty {
@@ -2230,6 +2370,13 @@
     gap: var(--wf-space-2);
   }
 }
+/*!
+ * @component Divider
+ * @description Divider component.
+ * @selector .wf-divider
+ * @variants .wf-divider--horizontal, .wf-divider--vertical, .wf-divider--strong, .wf-divider--sm, .wf-divider--lg
+ * @variables --wf-color-border, --wf-space-6, --wf-space-3, --wf-color-border-strong, --wf-space-10
+ */
 @layer components {
   /* Divider - Simple visual separator */
   .wf-divider {
@@ -2317,6 +2464,13 @@
     border: none;
   }
 }
+/*!
+ * @component Code
+ * @description Code component.
+ * @selector .wf-code
+ * @variants .wf-kbd, .wf-code-block, .wf-code-block--copy, .wf-code-copy, .wf-code--sm
+ * @variables --wf-space-2, --wf-leading-tight, --wf-color-text, --wf-surface-muted, --wf-color-border
+ */
 @layer components {
   /* Code - Inline code and keyboard elements */
 
@@ -2454,6 +2608,13 @@
     content: none;
   }
 }
+/*!
+ * @component Rating
+ * @description Rating component.
+ * @selector .wf-rating
+ * @variants .wf-rating-sm, .wf-rating-lg
+ * @variables --wf-space-1, --wf-icon-md, --wf-ink-200, --wf-duration-fast, --wf-accent-500
+ */
 /**
  * Rating/Star Component
  * 評価表示・入力コンポーネント
@@ -2566,6 +2727,13 @@
     transform: none;
   }
 }
+/*!
+ * @component Timeline
+ * @description Timeline component.
+ * @selector .wf-timeline
+ * @variants .wf-timeline-horizontal
+ * @variables --wf-space-4, --wf-space-8, --wf-space-6, --wf-ink-200, --wf-accent-500
+ */
 /**
  * Timeline Component
  * 時系列表示コンポーネント
@@ -2735,6 +2903,13 @@
     animation: none;
   }
 }
+/*!
+ * @component Sidebar
+ * @description Sidebar component.
+ * @selector .wf-sidebar
+ * @variants .wf-sidebar-backdrop
+ * @variables --wf-color-bg, --wf-ink-200, --wf-duration-normal, --wf-space-4, --wf-font-lg
+ */
 /**
  * Sidebar Component
  * サイドバーナビゲーションコンポーネント
@@ -2981,6 +3156,13 @@
     transition: none;
   }
 }
+/*!
+ * @component Switch
+ * @description Switch component.
+ * @selector .wf-switch
+ * @variants 
+ * @variables --wf-color-border-strong, --wf-surface-base, --wf-color-accent, --wf-focus, --wf-space-2
+ */
 @layer components {
   /* Switch */
   .wf-switch {
@@ -3030,6 +3212,13 @@
     cursor: pointer;
   }
 }
+/*!
+ * @component Range
+ * @description Range component.
+ * @selector .wf-range
+ * @variants 
+ * @variables --wf-color-border, --wf-radius-full, --wf-color-accent, --wf-surface-base, --wf-focus
+ */
 @layer components {
   /* Range */
   .wf-range {
@@ -3089,6 +3278,13 @@
     background: var(--wf-color-border-strong);
   }
 }
+/*!
+ * @component Input Group
+ * @description Input Group component.
+ * @selector .wf-input-group
+ * @variants .wf-input, .wf-select, .wf-textarea, .wf-btn
+ * @variables --wf-radius-md, --wf-space-3, --wf-color-accent, --wf-surface-subtle, --wf-color-text
+ */
 @layer components {
   /* Input Group */
   .wf-input-group {
@@ -3163,6 +3359,13 @@
     }
   }
 }
+/*!
+ * @component Floating Label
+ * @description Floating Label component.
+ * @selector .wf-form-floating
+ * @variants .wf-input, .wf-textarea
+ * @variables --wf-space-4, --wf-color-muted, --wf-color-accent
+ */
 @layer components {
   /* Floating Label */
   .wf-form-floating {
@@ -3189,6 +3392,13 @@
     color: var(--wf-color-accent);
   }
 }
+/*!
+ * @component File
+ * @description File component.
+ * @selector .wf-file
+ * @variants 
+ * @variables --wf-space-2, --wf-space-3, --wf-color-border-strong, --wf-radius-md, --wf-surface-base
+ */
 @layer components {
   /* File input */
   .wf-file {
@@ -3202,6 +3412,30 @@
 }
 @layer utilities {
 /* Extras Utilities */
+
+/* Color utilities (theme-aware, extras) */
+.wf-text-secondary { color: var(--wf-secondary); }
+.wf-hover\:text-secondary:hover { color: var(--wf-secondary); }
+.wf-focus\:text-secondary:focus-visible { color: var(--wf-secondary); }
+.wf-active\:text-secondary:active { color: var(--wf-secondary); }
+.wf-disabled\:text-secondary:disabled { color: var(--wf-secondary); }
+.wf-text-info { color: var(--wf-info); }
+.wf-hover\:text-info:hover { color: var(--wf-info); }
+.wf-focus\:text-info:focus-visible { color: var(--wf-info); }
+.wf-active\:text-info:active { color: var(--wf-info); }
+.wf-disabled\:text-info:disabled { color: var(--wf-info); }
+
+.wf-bg-secondary { background-color: var(--wf-secondary); }
+.wf-hover\:bg-secondary:hover { background-color: var(--wf-secondary); }
+.wf-focus\:bg-secondary:focus-visible { background-color: var(--wf-secondary); }
+.wf-active\:bg-secondary:active { background-color: var(--wf-secondary); }
+.wf-disabled\:bg-secondary:disabled { background-color: var(--wf-secondary); }
+
+.wf-bg-info { background-color: var(--wf-info); }
+.wf-hover\:bg-info:hover { background-color: var(--wf-info); }
+.wf-focus\:bg-info:focus-visible { background-color: var(--wf-info); }
+.wf-active\:bg-info:active { background-color: var(--wf-info); }
+.wf-disabled\:bg-info:disabled { background-color: var(--wf-info); }
 
 /* Border utilities (Extras) */
 .wf-border-t-1 { border-top-width: 1px; border-top-style: solid; }
@@ -3355,6 +3589,13 @@
 .wf-outline-none { outline: 2px solid transparent; outline-offset: 2px; }
 .wf-focus\:outline-none:focus-visible { outline: 2px solid transparent; outline-offset: 2px; }
 }
+/*!
+ * @component Stamp
+ * @description Stamp component.
+ * @selector .wf-stamp
+ * @variants 
+ * @variables --wf-stamp-py, --wf-stamp-px, --wf-stamp-weight, --wf-stamp-color, --wf-surface-base
+ */
 @layer components {
   /* Stamp (判子) */
   .wf-stamp {
@@ -3373,6 +3614,13 @@
     filter: saturate(1.1);
   }
 }
+/*!
+ * @component Header
+ * @description Header component.
+ * @selector .wf-header
+ * @variants .wf-header--no-stripe, .wf-header-noren
+ * @variables --wf-sumi, --wf-surface-base, --wf-color-accent, --wf-surface-subtle
+ */
 @layer components {
   /* Header - Default style with noren (暖簾) design */
   /* 墨色グラデーション + ストライプ装飾がデフォルト */

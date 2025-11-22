@@ -6,8 +6,10 @@
   --wf-link-color: #f4b3c2;
   --wf-link-color-hover: #e09fb0;
   --wf-primary-bg: #f4b3c2;
+  --wf-secondary: #e09fb0;
   --wf-primary-bg-hover: #e09fb0;
   --wf-primary-bg-active: #cc8b9e;
+  --wf-info: #f4b3c2;
   --wf-primary-fg: #2a2a2a;
   --wf-focus: #f4b3c2;
   --wf-outline-color-hover: #f4b3c2;
@@ -27,8 +29,10 @@
   --wf-link-color: #e35c8d;
   --wf-link-color-hover: #c94c75;
   --wf-primary-bg: #e35c8d;
+  --wf-secondary: #c94c75;
   --wf-primary-bg-hover: #c94c75;
   --wf-primary-bg-active: #af3c5d;
+  --wf-info: #e35c8d;
   --wf-primary-fg: #ffffff;
   --wf-focus: #e35c8d;
   --wf-outline-color-hover: #e35c8d;
@@ -48,8 +52,10 @@
   --wf-link-color: #a9d18e;
   --wf-link-color-hover: #8fb876;
   --wf-primary-bg: #a9d18e;
+  --wf-secondary: #8fb876;
   --wf-primary-bg-hover: #8fb876;
   --wf-primary-bg-active: #759f5e;
+  --wf-info: #a9d18e;
   --wf-primary-fg: #1f1f1f;
   --wf-focus: #a9d18e;
   --wf-outline-color-hover: #a9d18e;
@@ -69,8 +75,10 @@
   --wf-link-color: #967bb6;
   --wf-link-color-hover: #7d67a0;
   --wf-primary-bg: #967bb6;
+  --wf-secondary: #7d67a0;
   --wf-primary-bg-hover: #7d67a0;
   --wf-primary-bg-active: #64538a;
+  --wf-info: #967bb6;
   --wf-primary-fg: #ffffff;
   --wf-focus: #967bb6;
   --wf-outline-color-hover: #967bb6;
@@ -90,8 +98,10 @@
   --wf-link-color: #7eb8d4;
   --wf-link-color-hover: #6aa3bf;
   --wf-primary-bg: #7eb8d4;
+  --wf-secondary: #6aa3bf;
   --wf-primary-bg-hover: #6aa3bf;
   --wf-primary-bg-active: #568eaa;
+  --wf-info: #7eb8d4;
   --wf-primary-fg: #1f1f1f;
   --wf-focus: #7eb8d4;
   --wf-outline-color-hover: #6aa3bf;
@@ -132,8 +142,10 @@
   --wf-link-color: #c94c28;
   --wf-link-color-hover: #a73e1f;
   --wf-primary-bg: #c94c28;
+  --wf-secondary: #a73e1f;
   --wf-primary-bg-hover: #a73e1f;
   --wf-primary-bg-active: #853016;
+  --wf-info: #c94c28;
   --wf-primary-fg: #ffffff;
   --wf-focus: #c94c28;
   --wf-outline-color-hover: #c94c28;
@@ -153,8 +165,10 @@
   --wf-link-color: #5e516f; /* darker for contrast */
   --wf-link-color-hover: #4f4560;
   --wf-primary-bg: #bca7e8;
+  --wf-secondary: #a38dd4;
   --wf-primary-bg-hover: #a38dd4;
   --wf-primary-bg-active: #8a73c0;
+  --wf-info: #5e516f;
   --wf-primary-fg: #2a2a2a;
   --wf-focus: #5e516f;
   --wf-outline-color-hover: #5e516f;
@@ -174,8 +188,10 @@
   --wf-link-color: #7c8c4b;
   --wf-link-color-hover: #66733d;
   --wf-primary-bg: #7c8c4b;
+  --wf-secondary: #66733d;
   --wf-primary-bg-hover: #66733d;
   --wf-primary-bg-active: #505a2f;
+  --wf-info: #7c8c4b;
   --wf-primary-fg: #ffffff;
   --wf-focus: #7c8c4b;
   --wf-outline-color-hover: #7c8c4b;
@@ -195,8 +211,10 @@
   --wf-link-color: #5a7a8f;
   --wf-link-color-hover: #4a6678;
   --wf-primary-bg: #5a7a8f;
+  --wf-secondary: #4a6678;
   --wf-primary-bg-hover: #4a6678;
   --wf-primary-bg-active: #3a5261;
+  --wf-info: #5a7a8f;
   --wf-primary-fg: #ffffff;
   --wf-focus: #5a7a8f;
   --wf-outline-color-hover: #4a6678;

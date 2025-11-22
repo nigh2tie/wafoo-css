@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wafoo CSS v1.0.0 総合検証 (Verification)</title>
+  <link rel="stylesheet" href="../dist/wafoo.min.css">
+  <style>
+    /* Demo specific styles */
+    .demo-section {
+      margin-bottom: 4rem;
+      scroll-margin-top: 100px;
+    }
+
+    .demo-section-title {
+      border-bottom: 2px solid var(--wf-color-border);
+      padding-bottom: 0.5rem;
+      margin-bottom: 2rem;
+      font-family: var(--wf-font-serif);
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .color-swatch {
+      height: 100px;
+      border-radius: var(--wf-radius-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      box-shadow: var(--wf-shadow-sm);
+    }
+
+    .theme-switcher {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1000;
+      background: var(--wf-surface-base);
+      border: 1px solid var(--wf-color-border);
+      padding: 1rem;
+      border-radius: var(--wf-radius-lg);
+      box-shadow: var(--wf-shadow-lg);
+      width: 200px;
+    }
+  </style>
+</head>
+
+<body class="theme-sakura wf-text-base">
+
+  <!-- Header -->
+  <header class="wf-header-noren wf-mb-8">
+    <div class="wf-container">
+      <div class="wf-navbar">
+        <a href="#" class="wf-navbar-brand">Wafoo CSS v1.0.0</a>
+        <div class="wf-navbar-nav">
+          <span class="wf-badge wf-badge-success">Production Ready</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="wf-container wf-pb-12">
+
+    <div class="wf-text-center wf-mb-12">
+      <h1 class="wf-text-4xl wf-font-serif wf-mb-4">総合検証ダッシュボード</h1>
+      <p class="wf-text-lg wf-text-muted">v1.0.0 リリースの全コンポーネント・ユーティリティ・テーマの網羅的確認</p>
+    </div>
+
+    <!-- Navigation for Demo -->
+    <nav class="wf-card wf-p-4 wf-mb-8 wf-sticky wf-top-0 wf-z-10">
+      <ul class="wf-flex wf-gap-4 wf-overflow-x-auto wf-whitespace-nowrap wf-text-sm">
+        <li><a href="#typography" class="wf-link">タイポグラフィ・色</a></li>
+        <li><a href="#buttons" class="wf-link">ボタン</a></li>
+        <li><a href="#forms" class="wf-link">フォーム</a></li>
+        <li><a href="#navigation" class="wf-link">ナビゲーション</a></li>
+        <li><a href="#feedback" class="wf-link">フィードバック</a></li>
+        <li><a href="#overlay" class="wf-link">オーバーレイ</a></li>
+        <li><a href="#data" class="wf-link">データ表示</a></li>
+        <li><a href="#utilities" class="wf-link">ユーティリティ</a></li>
+      </ul>
+    </nav>
+
+    <!-- 1. Typography & Colors -->
+    <section id="typography" class="demo-section">
+      <h2 class="wf-text-2xl wf-font-bold demo-section-title">1. タイポグラフィと配色</h2>
+
+      <div class="wf-card wf-mb-6">
+        <h3 class="wf-text-lg wf-font-bold wf-mb-4">伝統色パレット</h3>
+        <div class="wf-grid wf-grid-cols-2 wf-md-grid-cols-5 wf-gap-4">
+          <div class="color-swatch wf-bg-primary">Primary<br><small>紅 (Kurenai)</small></div>
+          <div class="color-swatch wf-bg-secondary">Secondary<br><small>藍 (Ai)</small></div>
+          <div class="color-swatch wf-bg-accent">Accent<br><small>山吹 (Yamabuki)</small></div>
+          <div class="color-swatch wf-bg-success">Success<br><small>常盤 (Tokiwa)</small></div>
+          <div class="color-swatch wf-bg-info">Info<br><small>露草 (Tsuyukusa)</small></div>
+          <div class="color-swatch wf-bg-warning">Warning<br><small>杏 (Anzu)</small></div>
+          <div class="color-swatch wf-bg-danger">Danger<br><small>茜 (Akane)</small></div>
+          <div class="color-swatch wf-bg-surface-base wf-text-body wf-border">Surface Base</div>
+          <div class="color-swatch wf-bg-surface-muted wf-text-muted wf-border">Surface Muted</div>
+          <div class="color-swatch wf-bg-sumi">Sumi<br><small>墨</small></div>
+        </div>
+      </div>
+
+      <div class="wf-card">
+        <h3 class="wf-text-lg wf-font-bold wf-mb-4">フォント</h3>
+        <div class="wf-grid wf-grid-cols-1 wf-md-grid-cols-2 wf-gap-8">
+          <div>
+            <p class="wf-text-sm wf-text-muted wf-mb-2">Sans-Serif (ゴシック体)</p>
+            <p class="wf-text-4xl wf-font-bold">あいうえお</p>
+            <p class="wf-text-2xl">いろはにほへと</p>
+            <p class="wf-text-base">ちりぬるを わかよたれそ つねならむ</p>
+          </div>
+          <div>
+            <p class="wf-text-sm wf-text-muted wf-mb-2">Serif (明朝体)</p>
+            <p class="wf-text-4xl wf-font-serif wf-font-bold">あいうえお</p>
+            <p class="wf-text-2xl wf-font-serif">いろはにほへと</p>
+            <p class="wf-text-base wf-font-serif">ちりぬるを わかよたれそ つねならむ</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Buttons -->
+    <section id="buttons" class="demo-section">
+      <h2 class="wf-text-2xl wf-font-bold demo-section-title">2. ボタン</h2>
+
+      <div class="wf-card wf-mb-6">
+        <h3 class="wf-text-lg wf-font-bold wf-mb-4">バリアント</h3>
+        <div class="wf-flex wf-flex-wrap wf-gap-4">
+          <button class="wf-btn">Default</button>
+          <button class="wf-btn wf-btn-primary">Primary</button>
+          <button class="wf-btn wf-btn-secondary">Secondary</button>
+          <button class="wf-btn wf-btn-success">Success</button>
+          <button class="wf-btn wf-btn-danger">Danger</button>
+          <button class="wf-btn wf-btn-warning">Warning</button>
+          <button class="wf-btn wf-btn-info">Info</button>
+          <button class="wf-btn wf-btn-outline">Outline</button>
+          <button class="wf-btn wf-btn-ghost">Ghost</button>
+          <button class="wf-btn wf-btn-subtle">Subtle</button>
+          <button class="wf-btn wf-btn-gradient">Gradient</button>
+        </div>
+      </div>
+
+      <div class="wf-card">
+        <h3 class="wf-text-lg wf-font-bold wf-mb-4">サイズ・状態</h3>
+        <div class="wf-flex wf-flex-wrap wf-gap-4 wf-items-center">
+          <button class="wf-btn wf-btn-primary wf-btn-sm">Small</button>
+          <button class="wf-btn wf-btn-primary">Medium</button>
+          <button class="wf-btn wf-btn-primary wf-btn-lg">Large</button>
+          <button class="wf-btn wf-btn-primary" disabled>Disabled</button>
+          <button class="wf-btn wf-btn-primary is-loading">Loading</button>
+          <button class="wf-btn wf-btn-icon" aria-label="Menu">
+            <span aria-hidden="true">☰</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Forms -->
+    <section id="forms" class="demo-section">
+      <h2 class="wf-text-2xl wf-font-bold demo-section-title">3. フォーム</h2>
+
+      <div class="demo-grid">
+        <div class="wf-card">
+          <h3 class="wf-text-lg wf-font-bold wf-mb-4">基本入力</h3>
+          <div class="wf-field">
+            <label class="wf-label">テキスト入力</label>
+            <input type="text" class="wf-input" placeholder="入力してください">
+            <div class="wf-help">ヘルプテキストです</div>
+          </div>
+          <div class="wf-field">
+            <label class="wf-label">セレクトボックス</label>
+            <select class="wf-select">
+              <option>選択肢1</option>
+              <option>選択肢2</option>
+              <option>選択肢3</option>
+            </select>
+          </div>
+          <div class="wf-field">
+            <label class="wf-label">テキストエリア</label>
+            <textarea class="wf-textarea" rows="3"></textarea>
+          </div>
+        </div>
+
+        <div class="wf-card">
+          <h3 class="wf-text-lg wf-font-bold wf-mb-4">拡張入力</h3>
+          <div class="wf-field">
+            <div class="wf-floating-label">
+              <input type="text" class="wf-input" placeholder=" ">
+              <label>フローティングラベル</label>
+            </div>
+          </div>
+          <div class="wf-field">
+            <label class="wf-label">ファイルアップロード</label>
+            <input type="file" class="wf-file">
+          </div>
+          <div class="wf-field">
+            <label class="wf-label">レンジスライダー</label>
+            <input type="range" class="wf-range">
+          </div>
+          <div class="wf-field">
+            <label class="wf-label">インプットグループ</label>
+            <div class="wf-input-group">
+              <span class="wf-input-group-text">@</span>
+              <input type="text" class="wf-input" placeholder="ユーザー名">
+            </div>
+          </div>
+        </div>
+
+        <div class="wf-card">
+          <h3 class="wf-text-lg wf-font-bold wf-mb-4">選択・スイッチ</h3>
+          <div class="wf-field">
+            <label class="wf-form-check">
+              <input type="checkbox" class="wf-checkbox" checked>
+              <span class="wf-form-check-label">チェックボックス</span>
+            </label>
+          </div>
+          <div class="wf-field">
+            <label class="wf-form-check">
+              <input type="radio" name="radio" class="wf-radio" checked>
+              <span class="wf-form-check-label">ラジオボタン 1</span>
+            </label>
+            <label class="wf-form-check">
+              <input type="radio" name="radio" class="wf-radio">
+              <span class="wf-form-check-label">ラジオボタン 2</span>
+            </label>
+          </div>
+          <div class="wf-field">
+            <label class="wf-switch-label">
+              <input type="checkbox" class="wf-switch">
+              <span class="wf-switch-text">スイッチ</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Navigation -->
+    <section id="navigation" class="demo-section">
+      <h2 class="wf-text-2xl wf-font-bold demo-section-title">4. ナビゲーション</h2>
+
+      <div class="wf-card wf-mb-6">
+        <h3 class="wf-text-lg wf-font-bold wf-mb-4">パンくずリスト & ページネーション</h3>
+        <nav aria-label="Breadcrumb" class="wf-mb-4">
+          <ol class="wf-breadcrumb">
+            <li class="wf-breadcrumb-item"><a href="#" class="wf-breadcrumb-link">ホーム</a></li>
+            <li class="wf-breadcrumb-item"><a href="#" class="wf-breadcrumb-link">カテゴリ</a></li>
+            <li class="wf-breadcrumb-item is-active" aria-current="page">現在地</li>
+          </ol>
+        </nav>
+        <nav aria-label="Pagination">
+          <ul class="wf-pagination">
+            <li class="wf-page-item is-disabled"><a class="wf-page-link" href="#">前へ</a></li>
+            <li class="wf-page-item is-active"><a class="wf-page-link" href="#">1</a></li>
+            <li class="wf-page-item"><a class="wf-page-link" href="#">2</a></li>
+            <li class="wf-page-item"><a class="wf-page-link" href="#">3</a></li>
+            <li class="wf-page-item"><a class="wf-page-link" href="#">次へ</a></li>
+          </ul>
+        </nav>
+      </div>
+
+      <div class="wf-card wf-mb-6">
+        <h3 class="wf-text-lg wf-font-bold wf-mb-4">ステップ</h3>
+        <ol class="wf-steps">
+          <li class="wf-step is-done">
+            <span class="wf-step-marker">壱</span>
+            <span class="wf-step-text">カート確認</span>
+          </li>
+          <li class="wf-step is-current">
+            <span class="wf-step-marker">弐</span>
+            <span class="wf-step-text">お届け先</span>
+          </li>
+          <li class="wf-step">
+            <span class="wf-step-marker">参</span>
+            <span class="wf-step-text">完了</span>
+          </li>
+        </ol>
+      </div>
+
+      <div class="wf-card">
+        <h3 class="wf-text-lg wf-font-bold wf-mb-4">タブ (JS動作)</h3>
+        <div class="wf-tabs" data-wf-tabs>
+          <div class="wf-tablist" role="tablist">
+            <button class="wf-tab" role="tab" aria-selected="true" aria-controls="panel1">タブ壱</button>
+            <button class="wf-tab" role="tab" aria-selected="false" aria-controls="panel2">タブ弐</button>
+            <button class="wf-tab" role="tab" aria-selected="false" aria-controls="panel3">タブ参</button>
+          </div>
+          <div id="panel1" class="wf-tabpanel" role="tabpanel">
+            <p class="wf-p-4">タブ壱のコンテンツです。和風のタブ切り替え。</p>
+          </div>
+          <div id="panel2" class="wf-tabpanel" role="tabpanel" hidden>
+            <p class="wf-p-4">タブ弐のコンテンツです。内容は隠れています。</p>
+          </div>
+          <div id="panel3" class="wf-tabpanel" role="tabpanel" hidden>
+            <p class="wf-p-4">タブ参のコンテンツです。JSで制御されます。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Feedback -->
+    <section id="feedback" class="demo-section">
+      <h2 class="wf-text-2xl wf-font-bold demo-section-title">5. フィードバック</h2>
+
+      <div class="wf-card wf-mb-6">
+        <h3 class="wf-text-lg wf-font-bold wf-mb-4">アラート</h3>
+        <div class="wf-alert wf-alert-info wf-mb-2">情報アラートです。</div>
+        <div class="wf-alert wf-alert-success wf-mb-2">成功アラートです。</div>
+        <div class="wf-alert wf-alert-warning wf-mb-2">警告アラートです。</div>
+        <div class="wf-alert wf-alert-danger">エラーアラートです。</div>
+      </div>
+
+      <div class="demo-grid">
+        <div class="wf-card">
+          <h3 class="wf-text-lg wf-font-bold wf-mb-4">スピナー & プログレス</h3>
+          <div class="wf-flex wf-gap-4 wf-items-center wf-mb-4">
+            <div class="wf-spinner"></div>
+            <div class="wf-spinner wf-spinner-primary"></div>
+            <div class="wf-spinner wf-spinner-lg"></div>
+          </div>
+          <div class="wf-progress wf-mb-2">
+            <div class="wf-progress-bar" style="width: 40%"></div>
+          </div>
+          <div class="wf-progress">
+            <div class="wf-progress-bar wf-bg-success" style="width: 75%"></div>
+          </div>
+        </div>
+
+        <div class="wf-card">
+          <h3 class="wf-text-lg wf-font-bold wf-mb-4">スケルトン</h3>
+          <div class="wf-skeleton wf-skeleton-circle wf-w-12 wf-h-12 wf-mb-4"></div>
+          <div class="wf-skeleton wf-skeleton-text wf-w-3/4 wf-mb-2"></div>
+          <div class="wf-skeleton wf-skeleton-text wf-w-1/2"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Overlay -->
+    <section id="overlay" class="demo-section">
+      <h2 class="wf-text-2xl wf-font-bold demo-section-title">6. オーバーレイ</h2>
+
+      <div class="wf-card wf-flex wf-gap-4 wf-flex-wrap">
+        <!-- Modal Trigger -->
+        <button class="wf-btn wf-btn-primary" data-wf-modal="modal-demo">モーダル</button>
+
+        <!-- Offcanvas Trigger -->
+        <button class="wf-btn wf-btn-secondary" data-wf-offcanvas="offcanvas-demo">オフキャンバス</button>
+
+        <!-- Dropdown Trigger -->
+        <div class="wf-dropdown">
+          <button class="wf-btn wf-btn-outline" data-wf-dropdown="dropdown-demo">ドロップダウン</button>
+          <div id="dropdown-demo" class="wf-dropdown-menu" hidden>
+            <a href="#" class="wf-dropdown-item">メニュー 1</a>
+            <a href="#" class="wf-dropdown-item">メニュー 2</a>
+            <div class="wf-dropdown-divider"></div>
+            <a href="#" class="wf-dropdown-item wf-text-danger">削除</a>
+          </div>
+        </div>
+
+        <!-- Tooltip Trigger -->
+        <button class="wf-btn wf-btn-ghost" data-wf-tooltip="tooltip-demo"
+          aria-describedby="tooltip-demo">ツールチップ</button>
+        <div id="tooltip-demo" class="wf-tooltip" role="tooltip" hidden>ヒントを表示中</div>
+
+        <!-- Popover Trigger -->
+        <button class="wf-btn wf-btn-ghost" data-wf-popover="popover-demo">ポップオーバー</button>
+        <div id="popover-demo" class="wf-popover" role="tooltip" hidden>
+          <h3 class="wf-popover-header">タイトル</h3>
+          <div class="wf-popover-body">詳細な説明文をここに記述します。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. Data Display -->
+    <section id="data" class="demo-section">
+      <h2 class="wf-text-2xl wf-font-bold demo-section-title">7. データ表示</h2>
+
+      <div class="demo-grid">
+        <div class="wf-card">
+          <h3 class="wf-text-lg wf-font-bold wf-mb-4">リストグループ</h3>
+          <ul class="wf-list-group">
+            <li class="wf-list-group-item">アイテム 1</li>
+            <li class="wf-list-group-item is-active">アイテム 2 (Active)</li>
+            <li class="wf-list-group-item is-disabled">アイテム 3 (Disabled)</li>
+          </ul>
+        </div>
+
+        <div class="wf-card">
+          <h3 class="wf-text-lg wf-font-bold wf-mb-4">アバター & スタンプ</h3>
+          <div class="wf-flex wf-gap-2 wf-mb-4">
+            <div class="wf-avatar">A</div>
+            <div class="wf-avatar wf-bg-primary">B</div>
+            <div class="wf-avatar wf-avatar-circle"><img src="https://via.placeholder.com/40" alt="User"></div>
+          </div>
+          <div class="wf-flex wf-gap-2">
+            <span class="wf-stamp">承認</span>
+            <span class="wf-stamp wf-text-danger">至急</span>
+          </div>
+        </div>
+
+        <div class="wf-card">
+          <h3 class="wf-text-lg wf-font-bold wf-mb-4">カード (和紙)</h3>
+          <div class="wf-card-washi">
+            <div class="wf-card-body">
+              <h4 class="wf-card-title">和紙カード</h4>
+              <p class="wf-card-text">四隅の装飾とテクスチャが特徴です。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="wf-card wf-mt-6">
+        <h3 class="wf-text-lg wf-font-bold wf-mb-4">テーブル</h3>
+        <div class="wf-table-responsive">
+          <table class="wf-table wf-table-striped wf-table-hover">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>氏名</th>
+                <th>役職</th>
+                <th>状態</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>001</td>
+                <td>山田 太郎</td>
+                <td>開発者</td>
+                <td><span class="wf-badge wf-badge-success">有効</span></td>
+              </tr>
+              <tr>
+                <td>002</td>
+                <td>鈴木 花子</td>
+                <td>デザイナー</td>
+                <td><span class="wf-badge wf-badge-warning">休暇中</span></td>
+              </tr>
+              <tr>
+                <td>003</td>
+                <td>佐藤 次郎</td>
+                <td>マネージャー</td>
+                <td><span class="wf-badge wf-badge-danger">無効</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Utilities -->
+    <section id="utilities" class="demo-section">
+      <h2 class="wf-text-2xl wf-font-bold demo-section-title">8. ユーティリティ</h2>
+
+      <div class="wf-card">
+        <div class="wf-grid wf-grid-cols-2 wf-gap-4">
+          <div
+            class="wf-p-4 wf-border wf-rounded-lg wf-text-center hover:wf-bg-primary hover:wf-text-white wf-transition">
+            Hover Effect
+          </div>
+          <div class="wf-p-4 wf-shadow-lg wf-rounded-full wf-text-center">
+            Shadow & Rounded Full
+          </div>
+          <div class="wf-p-4 wf-border-l-4 wf-border-primary wf-bg-surface-muted">
+            Left Border Accent
+          </div>
+          <div class="wf-p-4 wf-text-center wf-opacity-50">
+            Opacity 50%
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="wf-footer wf-text-center wf-py-8 wf-bg-surface-subtle wf-border-t">
+    <p>&copy; 2025 Wafoo CSS. All rights reserved.</p>
+  </footer>
+
+  <!-- Theme Switcher Widget -->
+  <div class="theme-switcher">
+    <h3 class="wf-text-sm wf-font-bold wf-mb-2">テーマ切替 (Theme)</h3>
+    <select id="themeSelect" class="wf-select wf-select-sm wf-w-full">
+      <option value="theme-sakura">桜 (Sakura)</option>
+      <option value="theme-koubai">紅梅 (Koubai)</option>
+      <option value="theme-moe">萌 (Moe)</option>
+      <option value="theme-kiku">菊 (Kiku)</option>
+      <option value="theme-koori">氷 (Koori)</option>
+      <option value="theme-yanagi">柳 (Yanagi)</option>
+      <option value="theme-momiji">紅葉 (Momiji)</option>
+      <option value="theme-fuji">藤 (Fuji)</option>
+      <option value="theme-uguisu">鶯 (Uguisu)</option>
+      <option value="theme-yuki">雪 (Yuki)</option>
+    </select>
+  </div>
+
+  <!-- Modals & Offcanvas -->
+  <div id="modal-demo" class="wf-modal" aria-hidden="true">
+    <div class="wf-modal-overlay" tabindex="-1" data-wf-dismiss="modal-demo"></div>
+    <div class="wf-modal-container" role="dialog" aria-modal="true">
+      <div class="wf-modal-header">
+        <h3 class="wf-modal-title">確認</h3>
+        <button class="wf-btn-icon" aria-label="Close" data-wf-dismiss="modal-demo">&times;</button>
+      </div>
+      <div class="wf-modal-body">
+        <p>モーダルウィンドウの内容です。</p>
+      </div>
+      <div class="wf-modal-footer">
+        <button class="wf-btn wf-btn-ghost" data-wf-dismiss="modal-demo">閉じる</button>
+        <button class="wf-btn wf-btn-primary">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="offcanvas-demo" class="wf-offcanvas wf-offcanvas-start" aria-hidden="true">
+    <div class="wf-offcanvas-header">
+      <h3 class="wf-offcanvas-title">メニュー</h3>
+      <button class="wf-btn-icon" aria-label="Close" data-wf-dismiss="offcanvas-demo">&times;</button>
+    </div>
+    <div class="wf-offcanvas-body">
+      <ul class="wf-list-group">
+        <li class="wf-list-group-item"><a href="#" class="wf-link">ホーム</a></li>
+        <li class="wf-list-group-item"><a href="#" class="wf-link">設定</a></li>
+        <li class="wf-list-group-item"><a href="#" class="wf-link">ログアウト</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <script src="../dist/wafoo.min.js"></script>
+  <script>
+    // Theme Switcher Logic
+    const themeSelect = document.getElementById('themeSelect');
+    const body = document.body;
+
+    themeSelect.addEventListener('change', (e) => {
+      const newTheme = e.target.value;
+      body.classList.forEach(cls => {
+        if (cls.startsWith('theme-')) {
+          body.classList.remove(cls);
+        }
+      });
+      body.classList.add(newTheme);
+    });
+  </script>
+</body>
+
+</html>

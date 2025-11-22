@@ -20,6 +20,12 @@
     --wf-shirayuri: #f8f4e6; /* 白百合 - white lily */
     --wf-sumi: #2c2c2c; /* 墨 - ink */
     --wf-hai: #828282; /* 灰 - ash */
+    --wf-ai: #165e83; /* 藍 - indigo */
+    --wf-yamabuki: #f8b500; /* 山吹 - bright yellow */
+    --wf-tsuyukusa: #38a1db; /* 露草 - dayflower blue */
+    --wf-tokiwa: #007b43; /* 常盤 - evergreen */
+    --wf-anzu: #f7b977; /* 杏 - apricot */
+    --wf-akane: #b7282e; /* 茜 - madder red */
 
     /* RGB values for gradients */
     --wf-koubai-rgb: 244, 167, 185;
@@ -50,12 +56,16 @@
     /* Semantic colors */
     --wf-color-text: var(--wf-ink-900);
     --wf-color-muted: var(--wf-ink-700); /* Changed from ink-500 to meet WCAG AA 4.5:1 contrast */
+    --wf-color-secondary: var(--wf-ai);
+    --wf-color-info: var(--wf-tsuyukusa);
     --wf-color-accent: var(--wf-accent-500);
     --wf-link-color: var(--wf-accent-600);
     --wf-link-color-hover: var(--wf-accent-700);
     --wf-primary-bg: var(--wf-accent-700);
+    --wf-secondary: var(--wf-accent-600);
     --wf-primary-bg-hover: var(--wf-accent-800);
     --wf-primary-bg-active: var(--wf-accent-900);
+    --wf-info: #7eb8d4;
     --wf-primary-fg: #ffffff;
     --wf-focus: var(--wf-accent-700);
     --wf-outline-color-hover: var(--wf-accent-700);
@@ -64,9 +74,9 @@
     --wf-color-border: var(--wf-color-border-subtle);
 
     /* Status colors */
-    --wf-success: #2e7d32;
-    --wf-warning: #b26a00;
-    --wf-danger: #b00020;
+    --wf-success: var(--wf-tokiwa);
+    --wf-warning: var(--wf-anzu);
+    --wf-danger: var(--wf-akane);
     --wf-success-fg: #ffffff;
     --wf-warning-fg: #ffffff;
     --wf-danger-fg: #ffffff;

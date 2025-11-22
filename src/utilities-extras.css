@@ -1,6 +1,30 @@
 @layer utilities {
 /* Extras Utilities */
 
+/* Color utilities (theme-aware, extras) */
+.wf-text-secondary { color: var(--wf-secondary); }
+.wf-hover\:text-secondary:hover { color: var(--wf-secondary); }
+.wf-focus\:text-secondary:focus-visible { color: var(--wf-secondary); }
+.wf-active\:text-secondary:active { color: var(--wf-secondary); }
+.wf-disabled\:text-secondary:disabled { color: var(--wf-secondary); }
+.wf-text-info { color: var(--wf-info); }
+.wf-hover\:text-info:hover { color: var(--wf-info); }
+.wf-focus\:text-info:focus-visible { color: var(--wf-info); }
+.wf-active\:text-info:active { color: var(--wf-info); }
+.wf-disabled\:text-info:disabled { color: var(--wf-info); }
+
+.wf-bg-secondary { background-color: var(--wf-secondary); }
+.wf-hover\:bg-secondary:hover { background-color: var(--wf-secondary); }
+.wf-focus\:bg-secondary:focus-visible { background-color: var(--wf-secondary); }
+.wf-active\:bg-secondary:active { background-color: var(--wf-secondary); }
+.wf-disabled\:bg-secondary:disabled { background-color: var(--wf-secondary); }
+
+.wf-bg-info { background-color: var(--wf-info); }
+.wf-hover\:bg-info:hover { background-color: var(--wf-info); }
+.wf-focus\:bg-info:focus-visible { background-color: var(--wf-info); }
+.wf-active\:bg-info:active { background-color: var(--wf-info); }
+.wf-disabled\:bg-info:disabled { background-color: var(--wf-info); }
+
 /* Border utilities (Extras) */
 .wf-border-t-1 { border-top-width: 1px; border-top-style: solid; }
 .wf-border-r-1 { border-right-width: 1px; border-right-style: solid; }
