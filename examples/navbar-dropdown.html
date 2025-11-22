@@ -21,14 +21,14 @@
   </head>
   <body>
     <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
-    <nav class="wf-navbar" role="navigation" aria-label="Primary">
+    <nav class="wf-navbar" aria-label="Primary">
       <a class="wf-navbar-brand" href="#">wafoo</a>
       <ul class="wf-navbar-nav">
         <li class="wf-nav-item"><a class="wf-nav-link is-active" href="#">Home</a></li>
         <li class="wf-nav-item"><a class="wf-nav-link" href="#">Docs</a></li>
         <li class="wf-nav-item">
           <div class="wf-dropdown">
-            <button
+            <button type="button"
               id="ddbtn"
               class="wf-dropdown__toggle"
               aria-expanded="false"
@@ -48,7 +48,7 @@
         </li>
         <li class="wf-nav-item">
           <div class="wf-dropdown">
-            <button class="wf-dropdown__toggle" aria-expanded="false" aria-controls="user-menu">ユーザー ▾</button>
+            <button type="button" class="wf-dropdown__toggle" aria-expanded="false" aria-controls="user-menu">ユーザー ▾</button>
             <ul id="user-menu" class="wf-dropdown__menu" role="menu" hidden>
               <li><a class="wf-dropdown__item" role="menuitem" href="#">プロフィール</a></li>
               <li><a class="wf-dropdown__item" role="menuitem" href="#">設定</a></li>
@@ -59,7 +59,7 @@
       </ul>
     </nav>
 
-    <main class="wf-container" role="main" id="main">
+    <main class="wf-container" id="main">
       <p>NavbarとDropdownの最小デモです。</p>
       <p class="wf-text-sm wf-text-muted">
         <a class="wf-link" href="./showcase-wafu.html">ショーケースへ戻る</a>

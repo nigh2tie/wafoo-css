@@ -96,9 +96,9 @@
       <div class="wf-card wf-mb-6">
         <h3 class="wf-text-lg wf-font-bold wf-mb-4">伝統色パレット</h3>
         <div class="wf-grid wf-grid-cols-2 wf-md-grid-cols-5 wf-gap-4">
-          <div class="color-swatch wf-bg-primary">Primary<br><small>紅 (Kurenai)</small></div>
-          <div class="color-swatch wf-bg-secondary">Secondary<br><small>藍 (Ai)</small></div>
-          <div class="color-swatch wf-bg-accent">Accent<br><small>山吹 (Yamabuki)</small></div>
+          <div class="color-swatch wf-bg-primary">Primary<br><small>Theme Main</small></div>
+          <div class="color-swatch wf-bg-secondary">Secondary<br><small>Theme Sub</small></div>
+          <div class="color-swatch wf-bg-accent">Accent<br><small>Theme Accent</small></div>
           <div class="color-swatch wf-bg-success">Success<br><small>常盤 (Tokiwa)</small></div>
           <div class="color-swatch wf-bg-info">Info<br><small>露草 (Tsuyukusa)</small></div>
           <div class="color-swatch wf-bg-warning">Warning<br><small>杏 (Anzu)</small></div>
@@ -135,29 +135,29 @@
       <div class="wf-card wf-mb-6">
         <h3 class="wf-text-lg wf-font-bold wf-mb-4">バリアント</h3>
         <div class="wf-flex wf-flex-wrap wf-gap-4">
-          <button class="wf-btn">Default</button>
-          <button class="wf-btn wf-btn-primary">Primary</button>
-          <button class="wf-btn wf-btn-secondary">Secondary</button>
-          <button class="wf-btn wf-btn-success">Success</button>
-          <button class="wf-btn wf-btn-danger">Danger</button>
-          <button class="wf-btn wf-btn-warning">Warning</button>
-          <button class="wf-btn wf-btn-info">Info</button>
-          <button class="wf-btn wf-btn-outline">Outline</button>
-          <button class="wf-btn wf-btn-ghost">Ghost</button>
-          <button class="wf-btn wf-btn-subtle">Subtle</button>
-          <button class="wf-btn wf-btn-gradient">Gradient</button>
+          <button type="button" class="wf-btn">Default</button>
+          <button type="button" class="wf-btn wf-btn-primary">Primary</button>
+          <button type="button" class="wf-btn wf-btn-secondary">Secondary</button>
+          <button type="button" class="wf-btn wf-btn-success">Success</button>
+          <button type="button" class="wf-btn wf-btn-danger">Danger</button>
+          <button type="button" class="wf-btn wf-btn-warning">Warning</button>
+          <button type="button" class="wf-btn wf-btn-info">Info</button>
+          <button type="button" class="wf-btn wf-btn-outline">Outline</button>
+          <button type="button" class="wf-btn wf-btn-ghost">Ghost</button>
+          <button type="button" class="wf-btn wf-btn-subtle">Subtle</button>
+          <button type="button" class="wf-btn wf-btn-gradient">Gradient</button>
         </div>
       </div>
 
       <div class="wf-card">
         <h3 class="wf-text-lg wf-font-bold wf-mb-4">サイズ・状態</h3>
         <div class="wf-flex wf-flex-wrap wf-gap-4 wf-items-center">
-          <button class="wf-btn wf-btn-primary wf-btn-sm">Small</button>
-          <button class="wf-btn wf-btn-primary">Medium</button>
-          <button class="wf-btn wf-btn-primary wf-btn-lg">Large</button>
-          <button class="wf-btn wf-btn-primary" disabled>Disabled</button>
-          <button class="wf-btn wf-btn-primary is-loading">Loading</button>
-          <button class="wf-btn wf-btn-icon" aria-label="Menu">
+          <button type="button" class="wf-btn wf-btn-primary wf-btn-sm">Small</button>
+          <button type="button" class="wf-btn wf-btn-primary">Medium</button>
+          <button type="button" class="wf-btn wf-btn-primary wf-btn-lg">Large</button>
+          <button type="button" class="wf-btn wf-btn-primary" disabled>Disabled</button>
+          <button type="button" class="wf-btn wf-btn-primary is-loading">Loading</button>
+          <button type="button" class="wf-btn wf-btn-icon" aria-label="Menu">
             <span aria-hidden="true">☰</span>
           </button>
         </div>
@@ -289,9 +289,9 @@
         <h3 class="wf-text-lg wf-font-bold wf-mb-4">タブ (JS動作)</h3>
         <div class="wf-tabs" data-wf-tabs>
           <div class="wf-tablist" role="tablist">
-            <button class="wf-tab" role="tab" aria-selected="true" aria-controls="panel1">タブ壱</button>
-            <button class="wf-tab" role="tab" aria-selected="false" aria-controls="panel2">タブ弐</button>
-            <button class="wf-tab" role="tab" aria-selected="false" aria-controls="panel3">タブ参</button>
+            <button type="button" class="wf-tab" role="tab" aria-selected="true" aria-controls="panel1">タブ壱</button>
+            <button type="button" class="wf-tab" role="tab" aria-selected="false" aria-controls="panel2">タブ弐</button>
+            <button type="button" class="wf-tab" role="tab" aria-selected="false" aria-controls="panel3">タブ参</button>
           </div>
           <div id="panel1" class="wf-tabpanel" role="tabpanel">
             <p class="wf-p-4">タブ壱のコンテンツです。和風のタブ切り替え。</p>
@@ -349,14 +349,14 @@
 
       <div class="wf-card wf-flex wf-gap-4 wf-flex-wrap">
         <!-- Modal Trigger -->
-        <button class="wf-btn wf-btn-primary" data-wf-modal="modal-demo">モーダル</button>
+        <button type="button" class="wf-btn wf-btn-primary" data-wf-modal="modal-demo">モーダル</button>
 
         <!-- Offcanvas Trigger -->
-        <button class="wf-btn wf-btn-secondary" data-wf-offcanvas="offcanvas-demo">オフキャンバス</button>
+        <button type="button" class="wf-btn wf-btn-secondary" data-wf-offcanvas="offcanvas-demo">オフキャンバス</button>
 
         <!-- Dropdown Trigger -->
         <div class="wf-dropdown">
-          <button class="wf-btn wf-btn-outline" data-wf-dropdown="dropdown-demo">ドロップダウン</button>
+          <button type="button" class="wf-btn wf-btn-outline" data-wf-dropdown="dropdown-demo">ドロップダウン</button>
           <div id="dropdown-demo" class="wf-dropdown-menu" hidden>
             <a href="#" class="wf-dropdown-item">メニュー 1</a>
             <a href="#" class="wf-dropdown-item">メニュー 2</a>
@@ -366,12 +366,12 @@
         </div>
 
         <!-- Tooltip Trigger -->
-        <button class="wf-btn wf-btn-ghost" data-wf-tooltip="tooltip-demo"
+        <button type="button" class="wf-btn wf-btn-ghost" data-wf-tooltip="tooltip-demo"
           aria-describedby="tooltip-demo">ツールチップ</button>
         <div id="tooltip-demo" class="wf-tooltip" role="tooltip" hidden>ヒントを表示中</div>
 
         <!-- Popover Trigger -->
-        <button class="wf-btn wf-btn-ghost" data-wf-popover="popover-demo">ポップオーバー</button>
+        <button type="button" class="wf-btn wf-btn-ghost" data-wf-popover="popover-demo">ポップオーバー</button>
         <div id="popover-demo" class="wf-popover" role="tooltip" hidden>
           <h3 class="wf-popover-header">タイトル</h3>
           <div class="wf-popover-body">詳細な説明文をここに記述します。</div>
@@ -507,14 +507,14 @@
     <div class="wf-modal-container" role="dialog" aria-modal="true">
       <div class="wf-modal-header">
         <h3 class="wf-modal-title">確認</h3>
-        <button class="wf-btn-icon" aria-label="Close" data-wf-dismiss="modal-demo">&times;</button>
+        <button type="button" class="wf-btn-icon" aria-label="Close" data-wf-dismiss="modal-demo">&times;</button>
       </div>
       <div class="wf-modal-body">
         <p>モーダルウィンドウの内容です。</p>
       </div>
       <div class="wf-modal-footer">
-        <button class="wf-btn wf-btn-ghost" data-wf-dismiss="modal-demo">閉じる</button>
-        <button class="wf-btn wf-btn-primary">OK</button>
+        <button type="button" class="wf-btn wf-btn-ghost" data-wf-dismiss="modal-demo">閉じる</button>
+        <button type="button" class="wf-btn wf-btn-primary">OK</button>
       </div>
     </div>
   </div>
@@ -522,7 +522,7 @@
   <div id="offcanvas-demo" class="wf-offcanvas wf-offcanvas-start" aria-hidden="true">
     <div class="wf-offcanvas-header">
       <h3 class="wf-offcanvas-title">メニュー</h3>
-      <button class="wf-btn-icon" aria-label="Close" data-wf-dismiss="offcanvas-demo">&times;</button>
+      <button type="button" class="wf-btn-icon" aria-label="Close" data-wf-dismiss="offcanvas-demo">&times;</button>
     </div>
     <div class="wf-offcanvas-body">
       <ul class="wf-list-group">

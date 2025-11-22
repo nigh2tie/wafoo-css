@@ -31,10 +31,10 @@
   </head>
   <body>
     <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
-    <header class="wf-header-noren" role="banner">
+    <header class="wf-header-noren">
       <div class="wf-container" style="padding: 0"><h1>データ表示（テーブル）</h1></div>
     </header>
-    <main class="wf-container" role="main" id="main">
+    <main class="wf-container" id="main">
       <div class="wf-field" style="max-width: 420px">
         <label class="wf-label" for="q">検索</label>
         <input id="q" class="wf-input" placeholder="ID/氏名/状態でフィルタ">
@@ -48,12 +48,12 @@
           <thead>
             <tr>
               <th scope="col" aria-sort="ascending">
-                <button class="wf-sort" aria-label="ID でソート" aria-controls="tbl" data-index="0">
+                <button type="button" class="wf-sort" aria-label="ID でソート" aria-controls="tbl" data-index="0">
                   ID
                 </button>
               </th>
               <th scope="col" aria-sort="none">
-                <button
+                <button type="button"
                   class="wf-sort"
                   aria-label="氏名でソート"
                   aria-controls="tbl"
@@ -63,7 +63,7 @@
                 </button>
               </th>
               <th scope="col" class="wf-nowrap" aria-sort="none">
-                <button
+                <button type="button"
                   class="wf-sort"
                   aria-label="状態でソート"
                   aria-controls="tbl"

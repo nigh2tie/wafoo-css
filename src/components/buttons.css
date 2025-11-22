@@ -109,16 +109,37 @@
     color: var(--wf-warning-fg);
     border-color: transparent;
   }
+  .wf-btn-secondary {
+    background: var(--wf-color-secondary);
+    color: #ffffff;
+    border-color: transparent;
+  }
+  .wf-btn-info {
+    background: var(--wf-color-info);
+    color: #ffffff;
+    border-color: transparent;
+  }
+
   .wf-btn-danger {
     background: var(--wf-danger);
     color: var(--wf-danger-fg);
     border-color: transparent;
   }
   /* Outline status buttons */
+  .wf-btn-outline-secondary,
+  .wf-btn-outline-info,
   .wf-btn-outline-success,
   .wf-btn-outline-warning,
   .wf-btn-outline-danger {
     background: var(--wf-surface-base);
+  }
+  .wf-btn-outline-secondary {
+    color: var(--wf-color-secondary);
+    border-color: var(--wf-color-secondary);
+  }
+  .wf-btn-outline-info {
+    color: var(--wf-color-info);
+    border-color: var(--wf-color-info);
   }
   .wf-btn-outline-success {
     color: var(--wf-success);

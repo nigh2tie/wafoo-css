@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wafoo CSS Real-world Theme Comparison</title>
+  <link rel="stylesheet" href="../dist/wafoo.css">
+  <style>
+    body {
+      padding: 2rem;
+      background: #f5f5f5;
+    }
+
+    .preview-container {
+      margin-bottom: 3rem;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .preview-header {
+      padding: 1rem;
+      background: #eee;
+      font-weight: bold;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+
+<body>
+  <h1 class="wf-text-2xl wf-font-bold wf-mb-6">Real-world Theme Comparison</h1>
+
+  <!-- Template Function (simulated by repeating HTML) -->
+
+  <!-- Sakura Theme -->
+  <div class="preview-container theme-sakura">
+    <div class="preview-header">Theme: Sakura (桜)</div>
+    <div class="wf-bg-surface wf-p-6">
+      <header class="wf-flex wf-justify-between wf-items-center wf-mb-8">
+        <div class="wf-text-xl wf-font-bold wf-text-primary">和風カフェ</div>
+        <nav class="wf-flex wf-gap-4">
+          <a href="#" class="wf-link">メニュー</a>
+          <a href="#" class="wf-link">アクセス</a>
+          <button type="button" class="wf-btn wf-btn-primary">予約する</button>
+        </nav>
+      </header>
+      <div class="wf-grid wf-grid-cols-1 wf-md-grid-cols-2 wf-gap-8">
+        <div>
+          <h2 class="wf-text-3xl wf-font-bold wf-mb-4">春の特別メニュー</h2>
+          <p class="wf-text-muted wf-mb-6">桜の季節にぴったりの、見た目も華やかな和スイーツをご用意しました。</p>
+          <div class="wf-flex wf-gap-4">
+            <button type="button" class="wf-btn wf-btn-primary">詳しく見る</button>
+            <button type="button" class="wf-btn wf-btn-secondary">ギャラリー</button>
+          </div>
+        </div>
+        <div class="wf-card wf-p-6 wf-bg-surface-subtle">
+          <h3 class="wf-text-lg wf-font-bold wf-mb-2 wf-text-accent">本日のおすすめ</h3>
+          <ul class="wf-list-disc wf-pl-5">
+            <li>桜餅セット</li>
+            <li>抹茶パフェ</li>
+            <li>甘酒ラテ</li>
+          </ul>
+          <div class="wf-mt-4 wf-alert wf-alert-info">
+            <span class="wf-font-bold">Info:</span> 14:00以降は混雑が予想されます。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Fuji Theme -->
+  <div class="preview-container theme-fuji">
+    <div class="preview-header">Theme: Fuji (藤)</div>
+    <div class="wf-bg-surface wf-p-6">
+      <header class="wf-flex wf-justify-between wf-items-center wf-mb-8">
+        <div class="wf-text-xl wf-font-bold wf-text-primary">藤の間</div>
+        <nav class="wf-flex wf-gap-4">
+          <a href="#" class="wf-link">ご案内</a>
+          <a href="#" class="wf-link">宿泊プラン</a>
+          <button type="button" class="wf-btn wf-btn-primary">予約する</button>
+        </nav>
+      </header>
+      <div class="wf-grid wf-grid-cols-1 wf-md-grid-cols-2 wf-gap-8">
+        <div>
+          <h2 class="wf-text-3xl wf-font-bold wf-mb-4">静寂のひととき</h2>
+          <p class="wf-text-muted wf-mb-6">藤の花が咲き誇る庭園で、心安らぐ時間をお過ごしください。</p>
+          <div class="wf-flex wf-gap-4">
+            <button type="button" class="wf-btn wf-btn-primary">プラン一覧</button>
+            <button type="button" class="wf-btn wf-btn-secondary">施設案内</button>
+          </div>
+        </div>
+        <div class="wf-card wf-p-6 wf-bg-surface-subtle">
+          <h3 class="wf-text-lg wf-font-bold wf-mb-2 wf-text-accent">お知らせ</h3>
+          <ul class="wf-list-disc wf-pl-5">
+            <li>藤まつり開催中</li>
+            <li>特別懐石のご案内</li>
+          </ul>
+          <div class="wf-mt-4 wf-alert wf-alert-info">
+            <span class="wf-font-bold">Info:</span> 送迎バスは予約制です。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

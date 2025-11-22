@@ -16,13 +16,13 @@
   </head>
   <body class="theme-sakura">
     <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
-    <header class="wf-header-noren" role="banner">
+    <header class="wf-header-noren">
       <div class="wf-container" style="padding: 0">
         <h1>データテーブル（ソート・フィルタ機能付き）</h1>
         <p class="wf-text-sm wf-text-muted" style="margin: 4px 0 0">WFUI.dataTable APIの使用例</p>
       </div>
     </header>
-    <main class="wf-container" role="main" id="main" style="margin-top: var(--wf-space-6)">
+    <main class="wf-container" id="main" style="margin-top: var(--wf-space-6)">
       <div class="wf-card">
         <h2>ユーザー一覧</h2>
         <div class="wf-data-table" id="user-table">
@@ -31,7 +31,7 @@
               <input type="text" class="wf-input" placeholder="検索...">
             </div>
             <div class="wf-data-table__actions">
-              <button class="wf-btn wf-btn-primary wf-btn-sm" id="refresh-btn">更新</button>
+              <button type="button" class="wf-btn wf-btn-primary wf-btn-sm" id="refresh-btn">更新</button>
             </div>
           </div>
           <div class="wf-data-table__wrapper">
@@ -53,9 +53,9 @@
           <div class="wf-data-table__footer">
             <div class="wf-data-table__info">1-10 / 50件</div>
             <div class="wf-data-table__pagination">
-              <button class="wf-btn wf-btn-outline wf-btn-sm" id="prev-btn" disabled>前へ</button>
+              <button type="button" class="wf-btn wf-btn-outline wf-btn-sm" id="prev-btn" disabled>前へ</button>
               <span class="wf-mx-2" id="page-info">1 / 5</span>
-              <button class="wf-btn wf-btn-outline wf-btn-sm" id="next-btn">次へ</button>
+              <button type="button" class="wf-btn wf-btn-outline wf-btn-sm" id="next-btn">次へ</button>
             </div>
           </div>
         </div>

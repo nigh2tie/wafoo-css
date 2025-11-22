@@ -20,20 +20,20 @@
 
     <section>
       <h2>Modal (Extras)</h2>
-      <button class="wf-btn wf-btn-primary" data-wf-modal="demo-modal">Open Modal</button>
+      <button type="button" class="wf-btn wf-btn-primary" data-wf-modal="demo-modal">Open Modal</button>
       
       <div id="demo-modal" class="wf-modal-overlay" aria-hidden="true" data-wf-dismiss="demo-modal">
         <div class="wf-modal" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
           <div class="wf-modal__header">
             <h3 class="wf-modal__title">Modal Title</h3>
-            <button class="wf-btn-close" aria-label="Close" data-wf-dismiss="demo-modal">×</button>
+            <button type="button" class="wf-btn-close" aria-label="Close" data-wf-dismiss="demo-modal">×</button>
           </div>
           <div class="wf-modal__body">
             <p>This is a modal from wafoo-extras.css.</p>
           </div>
           <div class="wf-modal__footer">
-            <button class="wf-btn wf-btn-subtle" data-wf-dismiss="demo-modal">Close</button>
-            <button class="wf-btn wf-btn-primary">Save</button>
+            <button type="button" class="wf-btn wf-btn-subtle" data-wf-dismiss="demo-modal">Close</button>
+            <button type="button" class="wf-btn wf-btn-primary">Save</button>
           </div>
         </div>
       </div>
@@ -43,9 +43,9 @@
       <h2>Tabs (Extras)</h2>
       <div data-wf-tabs>
         <div class="wf-tablist" role="tablist">
-          <button class="wf-tab is-active" role="tab" aria-selected="true" aria-controls="tab1" id="tab-1">Tab 1</button>
-          <button class="wf-tab" role="tab" aria-selected="false" aria-controls="tab2" id="tab-2">Tab 2</button>
-          <button class="wf-tab" role="tab" aria-selected="false" aria-controls="tab3" id="tab-3">Tab 3</button>
+          <button type="button" class="wf-tab is-active" role="tab" aria-selected="true" aria-controls="tab1" id="tab-1">Tab 1</button>
+          <button type="button" class="wf-tab" role="tab" aria-selected="false" aria-controls="tab2" id="tab-2">Tab 2</button>
+          <button type="button" class="wf-tab" role="tab" aria-selected="false" aria-controls="tab3" id="tab-3">Tab 3</button>
         </div>
         <div class="wf-tabpanel" role="tabpanel" id="tab1" aria-labelledby="tab-1">
           <p class="wf-p-4">Content for Tab 1</p>
@@ -63,7 +63,7 @@
       <h2>Accordion (Extras)</h2>
       <div class="wf-accordion">
         <div class="wf-accordion__item">
-          <button class="wf-accordion__header" aria-expanded="true">
+          <button type="button" class="wf-accordion__header" aria-expanded="true">
             Accordion Item 1
           </button>
           <div class="wf-accordion__content">
@@ -71,7 +71,7 @@
           </div>
         </div>
         <div class="wf-accordion__item">
-          <button class="wf-accordion__header" aria-expanded="false">
+          <button type="button" class="wf-accordion__header" aria-expanded="false">
             Accordion Item 2
           </button>
           <div class="wf-accordion__content is-hidden">
