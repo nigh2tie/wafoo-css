@@ -153,6 +153,12 @@ The "Integrated Master Improvement Plan" (Latter Part) is now complete. Wafoo CS
 ### Final Fixes (Latter Part Review)
 - **Master Plan**: Updated size values, removed emojis, and updated checklists in `private_docs/統合マスター改善計画_後編.md` to match the implementation status and project standards.
 
+### Release (v1.0.0)
+- **Version**: Bumped `package.json` to `1.0.0`.
+- **Changelog**: Created `CHANGELOG.md` documenting all major changes.
+- **Git**: Committed all changes and created `v1.0.0` tag.
+
+
 
 
 
