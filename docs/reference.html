@@ -737,7 +737,7 @@ hamburger.addEventListener('click', () =&gt; {
       </div>
     </section>
 
-    <main>
+    <div>
       <!-- Search Box -->
       <div class="wf-container" style="padding-top: 32px; padding-bottom: 16px;">
         <input type="search" class="wf-input" placeholder="Search components... (e.g. Button, Grid, Colors)"
@@ -1831,7 +1831,7 @@ WFUI.schedule(containerElement, { mode: 'daily', timeInterval: 60 });</code></pr
 &lt;script&gt;
 // 日付選択時に表示制御
 function updateScheduleVisibility() {
-  const hasDate = dateInput && dateInput.value;
+  const hasDate = dateInput &amp;&amp; dateInput.value;
   const wrapper = document.getElementById('schedule-time-interval-wrapper');
   if (wrapper) {
     wrapper.style.display = hasDate ? 'block' : 'none';
@@ -1910,7 +1910,8 @@ function updateScheduleVisibility() {
           Q_Q. All rights reserved.
         </p>
       </footer>
-    </main>
+    </div>
+  </main>
 
     <script>
       // 著作権年の設定

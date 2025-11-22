@@ -910,12 +910,12 @@
               </label>
               <div class="wf-schedule__mode-grid">
                 <button class="wf-schedule__mode-button is-active" id="schedule-daily-mode">
-                  <div class="wf-schedule__mode-title">1日単位指定</div>
-                  <div class="wf-schedule__mode-desc">日付を選択してタイムテーブルで指定</div>
+                  <span class="wf-schedule__mode-title">1日単位指定</span>
+                  <span class="wf-schedule__mode-desc">日付を選択してタイムテーブルで指定</span>
                 </button>
                 <button class="wf-schedule__mode-button" id="schedule-weekly-mode">
-                  <div class="wf-schedule__mode-title">1週間単位指定</div>
-                  <div class="wf-schedule__mode-desc">週表示で複数日を一度に指定</div>
+                  <span class="wf-schedule__mode-title">1週間単位指定</span>
+                  <span class="wf-schedule__mode-desc">週表示で複数日を一度に指定</span>
                 </button>
               </div>
             </div>
@@ -1005,6 +1005,58 @@
           </div>
         </div>
 
+        <style>
+          /* デモ用：PCサイズでもハンバーガーメニューを動作させる */
+          #demo-nav-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100vh;
+            background: var(--wf-surface-base);
+            flex-direction: column;
+            align-items: flex-start;
+            padding: var(--wf-space-6);
+            box-shadow: var(--wf-shadow-lg);
+            transition: left 0.3s ease;
+            z-index: 9998;
+          }
+
+          #demo-nav-menu.is-open {
+            left: 0;
+          }
+
+          #demo-nav-menu .wf-nav-item {
+            width: 100%;
+          }
+
+          .wf-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 9997;
+          }
+
+          .wf-overlay.is-open {
+            display: block;
+          }
+
+          #demo-nav-menu .wf-nav-link {
+            display: block;
+            width: 100%;
+            padding: var(--wf-space-3) var(--wf-space-4);
+          }
+
+          .wf-hamburger {
+            width: 100%;
+            padding: var(--wf-space-3) var(--wf-space-4);
+          }
+        </style>
+
         <div class="wf-card">
           <h3 style="margin-top: 0">ナビゲーション</h3>
           <nav aria-label="Breadcrumb" style="margin-bottom: 32px">
@@ -1032,37 +1084,6 @@
           </nav>
 
           <h4 style="margin-top: 0; margin-bottom: 16px">ハンバーガーメニュー</h4>
-          <style>
-            /* デモ用：PCサイズでもハンバーガーメニューを動作させる */
-            #demo-nav-menu {
-              position: fixed;
-              top: 0;
-              left: -100%;
-              width: 280px;
-              height: 100vh;
-              background: var(--wf-surface-base);
-              flex-direction: column;
-              align-items: flex-start;
-              padding: var(--wf-space-6);
-              box-shadow: var(--wf-shadow-lg);
-              transition: left 0.3s ease;
-              z-index: 9998;
-            }
-
-            #demo-nav-menu.is-open {
-              left: 0;
-            }
-
-            #demo-nav-menu .wf-nav-item {
-              width: 100%;
-            }
-
-            #demo-nav-menu .wf-nav-link {
-              display: block;
-              width: 100%;
-              padding: var(--wf-space-3) var(--wf-space-4);
-            }
-          </style>
           <nav class="wf-navbar" role="navigation" style="position: relative; margin-bottom: 32px">
             <a class="wf-navbar-brand" href="#" onclick="return false;">wafoo-css</a>
 
@@ -1140,7 +1161,7 @@ const products = [
   { name: '筆ペン', price: 450 }
 ];
 
-const total = products.reduce((sum, item) => sum + item.price, 0);
+const total = products.reduce((sum, item) =&gt; sum + item.price, 0);
 console.log(`合計: ${total}円`);
 
 console.log(greet('世界'));</code></pre>
@@ -1172,19 +1193,19 @@ console.log(greet('世界'));</code></pre>
         <div class="wf-card">
           <h3 style="margin-top: 0">リストグループ</h3>
           <ul class="wf-list-group">
-            <a href="javascript:void(0)" class="wf-list-item is-active">
+            <li><a href="javascript:void(0)" class="wf-list-item is-active">
               <span>アクティブな項目</span>
               <span class="wf-meta">3</span>
-            </a>
-            <a href="javascript:void(0)" class="wf-list-item">
+            </a></li>
+            <li><a href="javascript:void(0)" class="wf-list-item">
               <span>通常の項目</span>
               <span class="wf-meta">12</span>
-            </a>
-            <a href="javascript:void(0)" class="wf-list-item">
+            </a></li>
+            <li><a href="javascript:void(0)" class="wf-list-item">
               <span>別の項目</span>
               <span class="wf-meta">5</span>
-            </a>
-            <button class="wf-list-item" disabled>無効な項目</button>
+            </a></li>
+            <li><button class="wf-list-item" disabled>無効な項目</button></li>
           </ul>
         </div>
 

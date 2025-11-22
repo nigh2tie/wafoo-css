@@ -699,7 +699,6 @@
     background: var(--wf-success);
     color: var(--wf-success-fg);
     border-color: transparent;
-    border-color: transparent;
   }
   .wf-btn-warning {
     background: var(--wf-warning);

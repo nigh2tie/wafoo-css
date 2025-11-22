@@ -6,7 +6,10 @@
   "ignoreFiles": [
     "dist/**",
     "old/**",
-    "**/node_modules/**"
+    "**/node_modules/**",
+    "src/utilities-core.css",
+    "src/utilities.css",
+    "src/utilities-extras.css"
   ],
   "rules": {
     "no-descending-specificity": null,
