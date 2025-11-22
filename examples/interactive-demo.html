@@ -68,14 +68,14 @@
   <div class="toast-container" id="toast-container"></div>
 
   <!-- Header -->
-  <header class="wf-header-noren" role="banner">
+  <header class="wf-header-noren">
     <div class="wf-container" style="padding: 0">
       <h1>インタラクティブデモ</h1>
       <p style="margin: 8px 0 0; opacity: 0.9;">Toast / Divider / Code のデモンストレーション</p>
     </div>
   </header>
 
-  <main id="main" class="wf-container" role="main" style="padding-top: 48px;">
+  <main id="main" class="wf-container" style="padding-top: 48px;">
 
     <!-- Toast Demos -->
     <section class="demo-section">
@@ -87,16 +87,16 @@
           ボタンをクリックすると、右上に通知が表示されます。「×」ボタンまたは自動的に5秒後に消えます。
         </p>
         <div style="display: flex; gap: 12px; flex-wrap: wrap;">
-          <button class="wf-btn wf-btn-primary" onclick="showToast('info')">
+          <button type="button" class="wf-btn wf-btn-primary" onclick="showToast('info')">
             基本通知
           </button>
-          <button class="wf-btn wf-btn-success" onclick="showToast('success')">
+          <button type="button" class="wf-btn wf-btn-success" onclick="showToast('success')">
             成功通知
           </button>
-          <button class="wf-btn wf-btn-warning" onclick="showToast('warning')">
+          <button type="button" class="wf-btn wf-btn-warning" onclick="showToast('warning')">
             警告通知
           </button>
-          <button class="wf-btn wf-btn-danger" onclick="showToast('danger')">
+          <button type="button" class="wf-btn wf-btn-danger" onclick="showToast('danger')">
             エラー通知
           </button>
         </div>
@@ -131,19 +131,19 @@
         <div class="wf-divider wf-divider--text">または</div>
 
         <div style="display: flex; gap: 12px;">
-          <button class="wf-btn wf-btn-outline" style="flex: 1;">Google</button>
-          <button class="wf-btn wf-btn-outline" style="flex: 1;">GitHub</button>
+          <button type="button" class="wf-btn wf-btn-outline" style="flex: 1;">Google</button>
+          <button type="button" class="wf-btn wf-btn-outline" style="flex: 1;">GitHub</button>
         </div>
       </div>
 
       <div class="wf-card">
         <h3>垂直線</h3>
         <div style="display: flex; align-items: center; justify-content: center; gap: 24px; padding: 24px; background: var(--wf-surface-subtle); border-radius: var(--wf-radius-md);">
-          <button class="wf-btn wf-btn-subtle">保存</button>
+          <button type="button" class="wf-btn wf-btn-subtle">保存</button>
           <div class="wf-divider wf-divider--vertical"></div>
-          <button class="wf-btn wf-btn-subtle">キャンセル</button>
+          <button type="button" class="wf-btn wf-btn-subtle">キャンセル</button>
           <div class="wf-divider wf-divider--vertical"></div>
-          <button class="wf-btn wf-btn-danger">削除</button>
+          <button type="button" class="wf-btn wf-btn-danger">削除</button>
         </div>
       </div>
     </section>
@@ -264,7 +264,7 @@ document.body.classList.add('theme-koori');</code></pre>
         <hr class="wf-divider">
 
         <p style="text-align: center; margin: 24px 0;">
-          <button class="wf-btn wf-btn-gradient wf-btn-lg" onclick="showToast('success')">
+          <button type="button" class="wf-btn wf-btn-gradient wf-btn-lg" onclick="showToast('success')">
             実際に試してみる
           </button>
         </p>
@@ -314,7 +314,7 @@ document.body.classList.add('theme-koori');</code></pre>
           <div class="wf-toast__title">${msg.title}</div>
           ${msg.text}
         </div>
-        <button class="wf-toast__close" aria-label="閉じる">×</button>
+        <button type="button" class="wf-toast__close" aria-label="閉じる">×</button>
       `;
 
       // アニメーション

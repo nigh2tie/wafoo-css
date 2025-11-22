@@ -16,20 +16,20 @@
   </head>
   <body class="theme-sakura">
     <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
-    <header class="wf-header-noren" role="banner">
+    <header class="wf-header-noren">
       <div class="wf-container" style="padding: 0">
         <h1>スナックバー（スタック管理）</h1>
         <p class="wf-text-sm wf-text-muted" style="margin: 4px 0 0">WFUI.snackbar APIの使用例</p>
       </div>
     </header>
-    <main class="wf-container" role="main" id="main" style="margin-top: var(--wf-space-6); max-width: 800px">
+    <main class="wf-container" id="main" style="margin-top: var(--wf-space-6); max-width: 800px">
       <div class="wf-card">
         <h2>基本的な使用例</h2>
         <div class="wf-flex wf-flex-wrap wf-gap-3">
-          <button class="wf-btn wf-btn-success" id="success-btn">成功メッセージ</button>
-          <button class="wf-btn wf-btn-warning" id="warning-btn">警告メッセージ</button>
-          <button class="wf-btn wf-btn-danger" id="danger-btn">エラーメッセージ</button>
-          <button class="wf-btn wf-btn-primary" id="info-btn">情報メッセージ</button>
+          <button type="button" class="wf-btn wf-btn-success" id="success-btn">成功メッセージ</button>
+          <button type="button" class="wf-btn wf-btn-warning" id="warning-btn">警告メッセージ</button>
+          <button type="button" class="wf-btn wf-btn-danger" id="danger-btn">エラーメッセージ</button>
+          <button type="button" class="wf-btn wf-btn-primary" id="info-btn">情報メッセージ</button>
         </div>
       </div>
 
@@ -37,33 +37,33 @@
         <h2>位置指定</h2>
         <p class="wf-text-muted">スナックバーを表示する位置を選択できます。</p>
         <div class="wf-grid wf-grid-cols-2 wf-gap-3 wf-mt-4">
-          <button class="wf-btn wf-btn-outline" data-position="top-left">左上</button>
-          <button class="wf-btn wf-btn-outline" data-position="top-right">右上</button>
-          <button class="wf-btn wf-btn-outline" data-position="top-center">上中央</button>
-          <button class="wf-btn wf-btn-outline" data-position="bottom-left">左下</button>
-          <button class="wf-btn wf-btn-outline" data-position="bottom-right">右下</button>
-          <button class="wf-btn wf-btn-outline" data-position="bottom-center">下中央</button>
+          <button type="button" class="wf-btn wf-btn-outline" data-position="top-left">左上</button>
+          <button type="button" class="wf-btn wf-btn-outline" data-position="top-right">右上</button>
+          <button type="button" class="wf-btn wf-btn-outline" data-position="top-center">上中央</button>
+          <button type="button" class="wf-btn wf-btn-outline" data-position="bottom-left">左下</button>
+          <button type="button" class="wf-btn wf-btn-outline" data-position="bottom-right">右下</button>
+          <button type="button" class="wf-btn wf-btn-outline" data-position="bottom-center">下中央</button>
         </div>
       </div>
 
       <div class="wf-card wf-mt-4">
         <h2>スタック表示</h2>
         <p class="wf-text-muted">複数のスナックバーを連続して表示すると、スタック表示されます。</p>
-        <button class="wf-btn wf-btn-primary" id="stack-btn">3つ連続表示</button>
+        <button type="button" class="wf-btn wf-btn-primary" id="stack-btn">3つ連続表示</button>
       </div>
 
       <div class="wf-card wf-mt-4">
         <h2>自動削除の設定</h2>
         <p class="wf-text-muted">durationを0に設定すると、自動削除されません。</p>
-        <button class="wf-btn wf-btn-outline" id="persistent-btn">永続表示（手動で閉じる）</button>
+        <button type="button" class="wf-btn wf-btn-outline" id="persistent-btn">永続表示（手動で閉じる）</button>
       </div>
 
       <div class="wf-card wf-mt-4">
         <h2>すべて削除</h2>
         <p class="wf-text-muted">すべてのスナックバーを一度に削除できます。</p>
         <div class="wf-flex wf-gap-3">
-          <button class="wf-btn wf-btn-danger" id="clear-all-btn">すべて削除</button>
-          <button class="wf-btn wf-btn-danger wf-btn-outline" id="clear-bottom-right-btn">右下のみ削除</button>
+          <button type="button" class="wf-btn wf-btn-danger" id="clear-all-btn">すべて削除</button>
+          <button type="button" class="wf-btn wf-btn-danger wf-btn-outline" id="clear-bottom-right-btn">右下のみ削除</button>
         </div>
       </div>
     </main>

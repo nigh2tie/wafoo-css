@@ -17,6 +17,16 @@
     margin: 0 0 var(--wf-space-2);
     font-size: 1rem;
   }
+  .wf-alert-secondary {
+    border-color: var(--wf-color-secondary);
+    background: rgba(22, 94, 131, 0.1); /* wf-ai with opacity */
+    color: var(--wf-color-secondary);
+  }
+  .wf-alert-info {
+    border-color: var(--wf-color-info);
+    background: rgba(56, 161, 219, 0.1); /* wf-tsuyukusa with opacity */
+    color: var(--wf-color-info);
+  }
   .wf-alert-success {
     border-color: var(--wf-success);
     background: var(--wf-success-veil);
@@ -55,6 +65,14 @@
     border-radius: var(--wf-radius-full);
     font-size: var(--wf-font-sm);
     line-height: 1.2;
+  }
+  .wf-badge-secondary {
+    background: var(--wf-color-secondary);
+    color: #ffffff;
+  }
+  .wf-badge-info {
+    background: var(--wf-color-info);
+    color: #ffffff;
   }
   .wf-badge-success {
     background: var(--wf-success);
