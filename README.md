@@ -1,9 +1,4 @@
 # wafoo-css
-
-[![npm version](https://badge.fury.io/js/wafoo-css.svg)](https://www.npmjs.com/package/wafoo-css)
-[![npm downloads](https://img.shields.io/npm/dm/wafoo-css.svg)](https://www.npmjs.com/package/wafoo-css)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-
 和風CSSフレームワーク - 伝統的な日本の美学を取り入れた、レスポンシブでモダンなウェブプロジェクト開発のためのCSSフレームワーク。
 
 ## 目次
@@ -212,6 +207,9 @@ wafoo-cssの詳細なリファレンスドキュメントを用意していま�
 ### 開発者向けドキュメント
 
 - **[COMPONENTS.md](./COMPONENTS.md)** - AI/開発者向けの詳細なコンポーネントAPIリファレンス
+- **[AI_PROMPTS.md](./AI_PROMPTS.md)** - AI生成用プロンプトテンプレート集
+- **[ACCESSIBILITY.md](./ACCESSIBILITY.md)** - アクセシビリティガイド（WCAG 2.1 AA準拠）
+- **[NAMING_CONVENTIONS.md](./NAMING_CONVENTIONS.md)** - クラス名の命名規則
 - **[TAILWIND_INTEGRATION.md](./TAILWIND_INTEGRATION.md)** - Tailwind CSSとの併用ガイド
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** - プロジェクトへの貢献方法
 
