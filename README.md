@@ -203,10 +203,17 @@ bash scripts/build.sh
 
 wafoo-cssの詳細なリファレンスドキュメントを用意しています：
 
-- **[完全リファレンス (REFERENCE.md)](./REFERENCE.md)** -
-  GitHub上で閲覧できるMarkdown形式の完全なリファレンス
+### ユーザー向けドキュメント
+
+- **[完全リファレンス (REFERENCE.md)](./REFERENCE.md)** - GitHub上で閲覧できるMarkdown形式の完全なリファレンス
 - **[コンポーネントリファレンス (docs/reference.html)](https://nigh2tie.github.io/wafoo-css/reference.html)** - ブラウザで見やすいHTML形式のコンポーネントリファレンス
 - **[CSS変数リファレンス (docs/css-variables.html)](https://nigh2tie.github.io/wafoo-css/css-variables.html)** - 全87個のCSS変数を視覚的なプレビュー付きで確認
+
+### 開発者向けドキュメント
+
+- **[COMPONENTS.md](./COMPONENTS.md)** - AI/開発者向けの詳細なコンポーネントAPIリファレンス
+- **[TAILWIND_INTEGRATION.md](./TAILWIND_INTEGRATION.md)** - Tailwind CSSとの併用ガイド
+- **[CONTRIBUTING.md](./CONTRIBUTING.md)** - プロジェクトへの貢献方法
 
 リファレンスには以下が含まれています：
 
