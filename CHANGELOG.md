@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [1.0.0] - 2025-11-22
 
+### Changed
+- **Core JS**: Modernized `wafoo-core.js` to ES2025 standards (Arrow functions, spread syntax) for better maintainability.
+- **Documentation**: Added functional "Demo Modal" to Reference page to improve testing coverage.
+
+### Fixed
+- **Linting**: Resolved various CSS and HTML linting errors.
+- **Tests**: Fixed functional tests by ensuring required demo elements exist in documentation.
+
 ### Added
 - **Core/Extras Split**: Separated core styles (`wafoo-core.css`) from extra components (`wafoo-extras.css`) for better performance.
 - **Utility Expansion**: Added comprehensive utility classes for spacing, sizing, borders, and state variants (hover/focus).

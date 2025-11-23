@@ -9,11 +9,11 @@
 // NOTE: This is the CORE library. Runtime patches are in src/js/wafoo.js
 // Build process (scripts/build.sh) combines: wafoo-core.js + wafoo.js → dist/wafoo.js
 // ============================================================================
-(function () {
-  function on(el, evt, handler, opts) {
-    el && el.addEventListener(evt, handler, opts);
-  }
-  function measureBox(el) {
+(() => {
+  const on = (el, evt, handler, opts) => {
+    el?.addEventListener(evt, handler, opts);
+  };
+  const measureBox = (el) => {
     const prevHidden = el.hidden;
     const prevVis = el.style.visibility;
     const hadOpen = el.classList.contains("is-open");
@@ -27,13 +27,13 @@
     el.style.visibility = prevVis || "";
     return { w, h };
   }
-  function clamp(val, min, max) {
+  const clamp = (val, min, max) => {
     return Math.max(min, Math.min(max, val));
   }
 
-  function tooltip(trigger, tip, opts) {
-    const cfg = Object.assign({ margin: 8 }, opts || {});
-    function position() {
+  const tooltip = (trigger, tip, opts) => {
+    const cfg = { margin: 8, ...(opts || {}) };
+    const position = () => {
       const r = trigger.getBoundingClientRect();
       const { w, h } = measureBox(tip);
       const centerXRaw = r.left + r.width / 2;
@@ -54,7 +54,7 @@
       const arrowX = clamp(centerXRaw - centerX, -maxArrow, maxArrow);
       tip.style.setProperty("--wf-arrow-x", arrowX + "px");
     }
-    function show(v) {
+    const show = (v) => {
       if (v) position();
       tip.hidden = !v;
       tip.classList.toggle("is-open", v);
@@ -79,7 +79,7 @@
     });
   }
 
-  function focusablesIn(root) {
+  const focusablesIn = (root) => {
     return Array.from(
       root.querySelectorAll(
         'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -87,14 +87,14 @@
     ).filter(el => !el.hasAttribute("disabled"));
   }
 
-  function ensureId(el, pref) {
+  const ensureId = (el, pref) => {
     if (!el) return null;
     if (!el.id) el.id = (pref || "wf") + "-" + Math.random().toString(36).slice(2, 7);
     return el.id;
   }
 
-  function popover(trigger, panel, opts) {
-    const cfg = Object.assign({ margin: 8 }, opts || {});
+  const popover = (trigger, panel, opts) => {
+    const cfg = { margin: 8, ...(opts || {}) };
     let lastFocus = null;
     // ARIA defaults
     if (!panel.hasAttribute("role")) panel.setAttribute("role", "dialog");
@@ -102,7 +102,7 @@
     if (headerEl && !panel.hasAttribute("aria-labelledby"))
       panel.setAttribute("aria-labelledby", ensureId(headerEl, "pv-title"));
     let lastPlacementAbove = false;
-    function position() {
+    const position = () => {
       const r = trigger.getBoundingClientRect();
       const { w, h } = measureBox(panel);
       const centerXRaw = r.left + r.width / 2;
@@ -126,7 +126,7 @@
       panel.style.setProperty("--wf-arrow-x", arrowX + "px");
     }
     let ignoreDocClickUntil = 0;
-    function open(v) {
+    const open = (v) => {
       if (v) {
         lastFocus = document.activeElement;
         panel.hidden = false;
@@ -197,7 +197,7 @@
     });
   }
 
-  function dropdown(root) {
+  const dropdown = (root) => {
     if (!root) return;
     const btn = root.querySelector(".wf-dropdown__toggle");
     const menu = root.querySelector(".wf-dropdown__menu");
@@ -207,10 +207,10 @@
       if (!it.hasAttribute("role")) it.setAttribute("role", "menuitem");
     });
     let lastFocus = null;
-    function items() {
+    const items = () => {
       return Array.from(menu.querySelectorAll(".wf-dropdown__item"));
     }
-    function open(v) {
+    const open = (v) => {
       root.classList.toggle("is-open", v);
       btn.setAttribute("aria-expanded", String(v));
       menu.hidden = !v;
@@ -270,8 +270,8 @@
     });
   }
 
-  function focusTrap(container) {
-    function trap(e) {
+  const focusTrap = (container) => {
+    const trap = (e) => {
       if (e.key !== "Tab") return;
       const f = focusablesIn(container);
       if (!f.length) return;
@@ -288,28 +288,28 @@
     return () => container.removeEventListener("keydown", trap);
   }
 
-  function getBackgroundElements(excludeEl) {
+  const getBackgroundElements = (excludeEl) => {
     return Array.from(document.body.children).filter(
       el => el !== excludeEl && el.tagName !== "SCRIPT"
     );
   }
 
-  function modal(trigger, overlay, opts) {
-    const cfg = Object.assign({ closeSelectors: [".wf-modal__close", "[data-close]"] }, opts || {});
+  const modal = (trigger, overlay, opts) => {
+    const cfg = { closeSelectors: [".wf-modal__close", "[data-close]"], ...(opts || {}) };
     const closeBtns = () =>
       cfg.closeSelectors.flatMap(sel => Array.from(overlay.querySelectorAll(sel)));
     let lastFocus = null;
     let untrap = null;
     // Portal overlay to body to avoid aria-hidden conflicts with ancestors
     let placeholder = null;
-    function portalToBody() {
+    const portalToBody = () => {
       if (overlay.parentElement !== document.body) {
         placeholder = document.createComment("wfui-modal-placeholder");
         overlay.parentNode.insertBefore(placeholder, overlay.nextSibling);
         document.body.appendChild(overlay);
       }
     }
-    function restoreFromPortal() {
+    const restoreFromPortal = () => {
       if (placeholder && placeholder.parentNode) {
         placeholder.parentNode.insertBefore(overlay, placeholder.nextSibling);
         placeholder.remove();
@@ -327,7 +327,7 @@
         dlg.setAttribute("aria-labelledby", ensureId(title, "modal-title"));
     }
     let docTrap = null;
-    function attachDocTrap() {
+    const attachDocTrap = () => {
       docTrap = function (e) {
         if (e.key !== "Tab") return;
         if (!overlay.classList.contains("is-open")) return;
@@ -344,13 +344,13 @@
       };
       document.addEventListener("keydown", docTrap, true);
     }
-    function detachDocTrap() {
+    const detachDocTrap = () => {
       if (docTrap) {
         document.removeEventListener("keydown", docTrap, true);
         docTrap = null;
       }
     }
-    function show(v) {
+    const show = (v) => {
       if (v) portalToBody();
       overlay.classList.toggle("is-open", v);
       overlay.setAttribute("aria-hidden", String(!v));
@@ -395,13 +395,13 @@
     return { open: () => show(true), close: () => show(false) };
   }
 
-  function offcanvas(openBtn, panel, overlay) {
+  const offcanvas = (openBtn, panel, overlay) => {
     let lastFocus = null;
     let untrap = null;
     // Portal to body to avoid aria-hidden on ancestors
     let panelPh = null,
       overlayPh = null;
-    function portalOC() {
+    const portalOC = () => {
       if (panel.parentElement !== document.body) {
         panelPh = document.createComment("wfui-oc-panel");
         panel.parentNode.insertBefore(panelPh, panel.nextSibling);
@@ -413,7 +413,7 @@
         document.body.appendChild(overlay);
       }
     }
-    function restoreOC() {
+    const restoreOC = () => {
       if (panelPh && panelPh.parentNode) {
         panelPh.parentNode.insertBefore(panel, panelPh.nextSibling);
         panelPh.remove();
@@ -426,7 +426,7 @@
       }
     }
     let hiddenBg = [];
-    function setOpen(v) {
+    const setOpen = (v) => {
       if (v) portalOC();
       panel.hidden = !v;
       overlay.hidden = !v;
@@ -466,7 +466,7 @@
     return { open: () => setOpen(true), close: () => setOpen(false) };
   }
 
-  function tabs(container) {
+  const tabs = (container) => {
     if (!container) return;
     const tablist = container.querySelector('[role="tablist"], .wf-tablist');
     const tabs = Array.from(container.querySelectorAll('[role="tab"], .wf-tab'));
@@ -484,7 +484,7 @@
       if (!panels[i].hasAttribute("role")) panels[i].setAttribute("role", "tabpanel");
     });
 
-    function activate(index) {
+    const activate = (index) => {
       tabs.forEach((t, i) => {
         const isActive = i === index;
         t.setAttribute("aria-selected", String(isActive));
@@ -523,7 +523,7 @@
     activate(activeIndex >= 0 ? activeIndex : 0);
   }
 
-  function sortableTable(table) {
+  const sortableTable = (table) => {
     if (!table) return;
     // Create or find live region for announcements
     let liveRegion = document.getElementById("wf-table-status");
@@ -580,25 +580,23 @@
     });
   }
 
-  function schedule(root, opts) {
+  const schedule = (root, opts) => {
     if (!root) return;
-    const cfg = Object.assign(
-      {
-        mode: "daily", // 'daily' or 'weekly'
-        timeInterval: 60, // minutes: 15, 30, or 60
-        timeRange: "all-day", // 'all-day' or custom object
-        selectedDate: null, // ISO date string (YYYY-MM-DD)
-        onSelect: null, // callback when selection changes
-        onGenerate: null // callback to generate text
-      },
-      opts || {}
-    );
+    const cfg = {
+      mode: "daily", // 'daily' or 'weekly'
+      timeInterval: 60, // minutes: 15, 30, or 60
+      timeRange: "all-day", // 'all-day' or custom object
+      selectedDate: null, // ISO date string (YYYY-MM-DD)
+      onSelect: null, // callback when selection changes
+      onGenerate: null, // callback to generate text
+      ...(opts || {})
+    };
 
     const timeRangePatterns = {
       "all-day": { label: "24時間表示", start: 0, end: 23 }
     };
 
-    function getInitialWeekStart() {
+    const getInitialWeekStart = () => {
       const today = new Date();
       const monday = new Date(today);
       monday.setDate(today.getDate() - today.getDay() + 1);
@@ -622,7 +620,7 @@
       isRangeSelecting: false
     };
 
-    function generateTimeSlots() {
+    const generateTimeSlots = () => {
       const pattern = timeRangePatterns[state.timeRangePattern];
       const slots = [];
       for (let hour = pattern.start; hour <= pattern.end; hour++) {
@@ -635,7 +633,7 @@
       return slots;
     }
 
-    function getWeekDates() {
+    const getWeekDates = () => {
       const dates = [];
       for (let i = 0; i < 7; i++) {
         const date = new Date(state.currentWeekStart);
@@ -645,7 +643,7 @@
       return dates;
     }
 
-    function getSlotKey(date, time) {
+    const getSlotKey = (date, time) => {
       let dateStr;
       if (date instanceof Date) {
         dateStr = date.toISOString().split("T")[0];
@@ -655,16 +653,16 @@
       return `${dateStr}-${time}`;
     }
 
-    function getWeekdayLabel(date) {
+    const getWeekdayLabel = (date) => {
       const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
       return weekdays[date.getDay()];
     }
 
-    function isSlotSelected(date, time) {
+    const isSlotSelected = (date, time) => {
       return state.selectedSlots.has(getSlotKey(date, time));
     }
 
-    function toggleSlot(date, time, forceSelect = false) {
+    const toggleSlot = (date, time, forceSelect = false) => {
       const key = getSlotKey(date, time);
       if (forceSelect || !state.selectedSlots.has(key)) {
         state.selectedSlots.add(key);
@@ -675,7 +673,7 @@
       if (cfg.onSelect) cfg.onSelect(Array.from(state.selectedSlots));
     }
 
-    function handleTimeSlotMouseDown(date, time) {
+    const handleTimeSlotMouseDown = (date, time) => {
       if (!state.isMobile) {
         state.isSelecting = true;
         toggleSlot(date, time);
@@ -684,7 +682,7 @@
       }
     }
 
-    function handleTimeSlotMouseEnter(date, time) {
+    const handleTimeSlotMouseEnter = (date, time) => {
       if (!state.isMobile && state.isSelecting) {
         const currentSlot = getSlotKey(date, time);
         if (currentSlot !== state.lastSelectedSlot) {
@@ -694,13 +692,13 @@
       }
     }
 
-    function handleGlobalMouseUp() {
+    const handleGlobalMouseUp = () => {
       state.isSelecting = false;
       state.lastSelectedSlot = null;
       document.removeEventListener("mouseup", handleGlobalMouseUp);
     }
 
-    function handleTimeSlotClick(date, time) {
+    const handleTimeSlotClick = (date, time) => {
       if (state.isMobile) {
         handleMobileTimeSlotClick(date, time);
       } else {
@@ -708,7 +706,7 @@
       }
     }
 
-    function handleMobileTimeSlotClick(date, time) {
+    const handleMobileTimeSlotClick = (date, time) => {
       const key = getSlotKey(date, time);
       if (!state.isRangeSelecting) {
         if (state.selectedSlots.has(key)) {
@@ -733,7 +731,7 @@
       }
     }
 
-    function selectTimeRange(startDate, startTime, endDate, endTime) {
+    const selectTimeRange = (startDate, startTime, endDate, endTime) => {
       const timeSlots = generateTimeSlots();
       const startKey = getSlotKey(startDate, startTime);
       const endKey = getSlotKey(endDate, endTime);
@@ -753,7 +751,7 @@
       }
     }
 
-    function updateDisplay() {
+    const updateDisplay = () => {
       const dailyGrid = root.querySelector(".wf-schedule__time-grid");
       const weeklyGrid = root.querySelector(".wf-schedule__calendar-grid");
       const weeklyHeader = root.querySelector(".wf-schedule__calendar-header");
@@ -971,26 +969,24 @@
     };
   }
 
-  function calendar(root, opts) {
+  const calendar = (root, opts) => {
     if (!root) return;
     // 既に初期化されている場合は再初期化しない
     if (root._wfCalendarInstance) {
       return root._wfCalendarInstance;
     }
-    const cfg = Object.assign(
-      {
-        selectedDate: null, // ISO date string (YYYY-MM-DD)
-        selectedDates: [], // Array of ISO date strings for multiple selection
-        minDate: null, // ISO date string
-        maxDate: null, // ISO date string
-        weekStart: 1, // 0 = Sunday, 1 = Monday
-        allowMultiple: false, // Allow multiple date selection
-        allowRange: false, // Allow date range selection
-        onSelect: null, // callback when date is selected
-        onNavigate: null // callback when month changes
-      },
-      opts || {}
-    );
+    const cfg = {
+      selectedDate: null, // ISO date string (YYYY-MM-DD)
+      selectedDates: [], // Array of ISO date strings for multiple selection
+      minDate: null, // ISO date string
+      maxDate: null, // ISO date string
+      weekStart: 1, // 0 = Sunday, 1 = Monday
+      allowMultiple: false, // Allow multiple date selection
+      allowRange: false, // Allow date range selection
+      onSelect: null, // callback when date is selected
+      onNavigate: null, // callback when month changes
+      ...(opts || {})
+    };
 
     const weekdays = cfg.weekStart === 0 ? ["日", "月", "火", "水", "木", "金", "土"] : ["月", "火", "水", "木", "金", "土", "日"];
 
@@ -1026,17 +1022,17 @@
       allowRange: cfg.allowRange
     };
 
-    function getMonthStart(date) {
+    const getMonthStart = (date) => {
       const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
       return monthStart;
     }
 
-    function getMonthEnd(date) {
+    const getMonthEnd = (date) => {
       const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
       return monthEnd;
     }
 
-    function getFirstDayOfWeek(date) {
+    const getFirstDayOfWeek = (date) => {
       const firstDay = getMonthStart(date);
       let day = firstDay.getDay();
       if (cfg.weekStart === 1) {
@@ -1047,19 +1043,19 @@
       return day;
     }
 
-    function getDaysInMonth(date) {
+    const getDaysInMonth = (date) => {
       return getMonthEnd(date).getDate();
     }
 
     // ローカルタイムゾーンで日付文字列（YYYY-MM-DD）を取得
-    function formatDateLocal(date) {
+    const formatDateLocal = (date) => {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, "0");
       const day = String(date.getDate()).padStart(2, "0");
       return `${year}-${month}-${day}`;
     }
 
-    function isToday(date) {
+    const isToday = (date) => {
       const today = new Date();
       return (
         date.getFullYear() === today.getFullYear() &&
@@ -1068,13 +1064,13 @@
       );
     }
 
-    function isSelected(date) {
+    const isSelected = (date) => {
       const dateStr = formatDateLocal(date);
       const selectedDateStr = state.selectedDate ? formatDateLocal(state.selectedDate) : null;
       return state.selectedDates.has(dateStr) || (selectedDateStr && dateStr === selectedDateStr);
     }
 
-    function isDisabled(date) {
+    const isDisabled = (date) => {
       const dateStr = formatDateLocal(date);
       if (cfg.minDate) {
         const minDateStr = cfg.minDate.includes("T") ? cfg.minDate.split("T")[0] : cfg.minDate;
@@ -1087,7 +1083,7 @@
       return false;
     }
 
-    function isInRange(date) {
+    const isInRange = (date) => {
       if (!state.rangeStart || !state.rangeEnd) return false;
       const dateStr = formatDateLocal(date);
       const startStr = formatDateLocal(state.rangeStart);
@@ -1095,21 +1091,21 @@
       return dateStr >= startStr && dateStr <= endStr;
     }
 
-    function isRangeStart(date) {
+    const isRangeStart = (date) => {
       if (!state.rangeStart) return false;
       const dateStr = formatDateLocal(date);
       const startStr = formatDateLocal(state.rangeStart);
       return dateStr === startStr;
     }
 
-    function isRangeEnd(date) {
+    const isRangeEnd = (date) => {
       if (!state.rangeEnd) return false;
       const dateStr = formatDateLocal(date);
       const endStr = formatDateLocal(state.rangeEnd);
       return dateStr === endStr;
     }
 
-    function handleDateClick(date) {
+    const handleDateClick = (date) => {
       const dateStr = formatDateLocal(date);
       if (isDisabled(date)) {
         return;
@@ -1181,7 +1177,7 @@
       );
     }
 
-    function updateDisplay() {
+    const updateDisplay = () => {
       const header = root.querySelector(".wf-calendar__header");
       const title = root.querySelector(".wf-calendar__title");
       const grid = root.querySelector(".wf-calendar__grid");
@@ -1265,7 +1261,7 @@
       }
     }
 
-    function navigateMonth(direction) {
+    const navigateMonth = (direction) => {
       const newDate = new Date(state.currentDate);
       newDate.setMonth(state.currentDate.getMonth() + direction);
       state.currentDate = newDate;
@@ -1419,7 +1415,7 @@
     });
   });
 
-  function codeblock(pre) {
+  const codeblock = (pre) => {
     if (!pre) return;
 
     // Add copy button if not already present

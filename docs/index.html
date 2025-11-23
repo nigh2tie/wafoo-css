@@ -252,7 +252,7 @@
 
   <!-- テーマ切り替え - 折りたたみ対応 -->
   <div class="theme-selector">
-    <button class="theme-selector__toggle" aria-expanded="false" aria-controls="theme-selector-content"
+    <button type="button" class="theme-selector__toggle" aria-expanded="false" aria-controls="theme-selector-content"
       aria-label="テーマ選択パネルを開く">
       <span class="theme-selector__indicator">◆</span>
       <span class="theme-selector__label">テーマ選択</span>
@@ -471,18 +471,18 @@
         <div class="wf-card">
           <h3 style="margin-top: 0">基本ボタン</h3>
           <div style="display: flex; gap: 12px; flex-wrap: wrap">
-            <button class="wf-btn">標準</button>
-            <button class="wf-btn wf-btn-primary">プライマリ</button>
-            <button class="wf-btn wf-btn-outline">アウトライン</button>
-            <button class="wf-btn wf-btn-subtle">サブトル</button>
+            <button type="button" class="wf-btn">標準</button>
+            <button type="button" class="wf-btn wf-btn-primary">プライマリ</button>
+            <button type="button" class="wf-btn wf-btn-outline">アウトライン</button>
+            <button type="button" class="wf-btn wf-btn-subtle">サブトル</button>
           </div>
         </div>
 
         <div class="wf-card">
           <h3 style="margin-top: 0">和風グラデーション</h3>
           <div style="display: flex; gap: 12px; flex-wrap: wrap">
-            <button class="wf-btn wf-btn-gradient">グラデーション</button>
-            <button class="wf-btn wf-btn-gradient wf-btn-lg">大サイズ</button>
+            <button type="button" class="wf-btn wf-btn-gradient">グラデーション</button>
+            <button type="button" class="wf-btn wf-btn-gradient wf-btn-lg">大サイズ</button>
           </div>
           <p style="color: var(--wf-color-muted); font-size: 0.9rem; margin: 16px 0 0 0">
             ホバーすると光が流れるエフェクトがあります
@@ -492,9 +492,9 @@
         <div class="wf-card">
           <h3 style="margin-top: 0">ステータスボタン</h3>
           <div style="display: flex; gap: 12px; flex-wrap: wrap">
-            <button class="wf-btn wf-btn-success">成功</button>
-            <button class="wf-btn wf-btn-warning">警告</button>
-            <button class="wf-btn wf-btn-danger">エラー</button>
+            <button type="button" class="wf-btn wf-btn-success">成功</button>
+            <button type="button" class="wf-btn wf-btn-warning">警告</button>
+            <button type="button" class="wf-btn wf-btn-danger">エラー</button>
           </div>
         </div>
       </div>
@@ -544,28 +544,28 @@
               <div class="wf-toast__title">お知らせ</div>
               新しいメッセージが届きました
             </div>
-            <button class="wf-toast__close" aria-label="閉じる">×</button>
+            <button type="button" class="wf-toast__close" aria-label="閉じる">×</button>
           </div>
           <div class="wf-toast wf-toast--success">
             <div class="wf-toast__content">
               <div class="wf-toast__title">保存完了</div>
               データが正常に保存されました
             </div>
-            <button class="wf-toast__close" aria-label="閉じる">×</button>
+            <button type="button" class="wf-toast__close" aria-label="閉じる">×</button>
           </div>
           <div class="wf-toast wf-toast--warning">
             <div class="wf-toast__content">
               <div class="wf-toast__title">注意</div>
               一部の項目が未入力です
             </div>
-            <button class="wf-toast__close" aria-label="閉じる">×</button>
+            <button type="button" class="wf-toast__close" aria-label="閉じる">×</button>
           </div>
           <div class="wf-toast wf-toast--danger">
             <div class="wf-toast__content">
               <div class="wf-toast__title">エラー</div>
               接続に失敗しました
             </div>
-            <button class="wf-toast__close" aria-label="閉じる">×</button>
+            <button type="button" class="wf-toast__close" aria-label="閉じる">×</button>
           </div>
         </div>
       </div>
@@ -723,9 +723,9 @@
           <h3 style="margin-top: 0">タブ</h3>
           <div class="wf-tabs" data-wf-tabs>
             <div class="wf-tablist" role="tablist">
-              <button class="wf-tab" role="tab" aria-selected="true">タブ1</button>
-              <button class="wf-tab" role="tab">タブ2</button>
-              <button class="wf-tab" role="tab">タブ3</button>
+              <button type="button" class="wf-tab" role="tab" aria-selected="true">タブ1</button>
+              <button type="button" class="wf-tab" role="tab">タブ2</button>
+              <button type="button" class="wf-tab" role="tab">タブ3</button>
             </div>
             <div class="wf-tabpanel" role="tabpanel">
               <div class="wf-card-washi" style="margin-top: 16px">
@@ -751,17 +751,17 @@
         <div class="wf-card">
           <h3 style="margin-top: 0">モーダル</h3>
           <div style="display: flex; flex-direction: column; gap: 12px">
-            <button class="wf-btn wf-btn-primary" data-wf-modal="demo-modal">標準モーダル</button>
-            <button class="wf-btn wf-btn-outline" data-wf-modal="demo-modal-sm">
+            <button type="button" class="wf-btn wf-btn-primary" data-wf-modal="demo-modal">標準モーダル</button>
+            <button type="button" class="wf-btn wf-btn-outline" data-wf-modal="demo-modal-sm">
               小さいモーダル
             </button>
-            <button class="wf-btn wf-btn-warning" data-wf-modal="demo-modal-warning">
+            <button type="button" class="wf-btn wf-btn-warning" data-wf-modal="demo-modal-warning">
               警告モーダル
             </button>
-            <button class="wf-btn wf-btn-success" data-wf-modal="demo-modal-success">
+            <button type="button" class="wf-btn wf-btn-success" data-wf-modal="demo-modal-success">
               成功モーダル
             </button>
-            <button class="wf-btn wf-btn-danger" data-wf-modal="demo-modal-danger">
+            <button type="button" class="wf-btn wf-btn-danger" data-wf-modal="demo-modal-danger">
               エラーモーダル
             </button>
           </div>
@@ -771,14 +771,14 @@
             <div class="wf-modal" role="dialog" aria-modal="true">
               <div class="wf-modal__header">
                 <h4 class="wf-modal__title" style="margin: 0">モーダルダイアログ</h4>
-                <button class="wf-modal__close" aria-label="閉じる">×</button>
+                <button type="button" class="wf-modal__close" aria-label="閉じる">×</button>
               </div>
               <div class="wf-modal__body">
                 <p>これはモーダルダイアログのデモです。</p>
                 <p>Escキーまたは背景をクリックして閉じることができます。</p>
               </div>
               <div class="wf-modal__footer">
-                <button class="wf-btn wf-btn-gradient" data-close>閉じる</button>
+                <button type="button" class="wf-btn wf-btn-gradient" data-close>閉じる</button>
               </div>
             </div>
           </div>
@@ -788,14 +788,14 @@
             <div class="wf-modal wf-modal-sm" role="dialog" aria-modal="true">
               <div class="wf-modal__header">
                 <h4 class="wf-modal__title" style="margin: 0">確認</h4>
-                <button class="wf-modal__close" aria-label="閉じる">×</button>
+                <button type="button" class="wf-modal__close" aria-label="閉じる">×</button>
               </div>
               <div class="wf-modal__body">
                 <p>この操作を実行してもよろしいですか？</p>
               </div>
               <div class="wf-modal__footer">
-                <button class="wf-btn wf-btn-subtle" data-close>キャンセル</button>
-                <button class="wf-btn wf-btn-primary" data-close>実行</button>
+                <button type="button" class="wf-btn wf-btn-subtle" data-close>キャンセル</button>
+                <button type="button" class="wf-btn wf-btn-primary" data-close>実行</button>
               </div>
             </div>
           </div>
@@ -805,14 +805,14 @@
             <div class="wf-modal wf-modal--warning" role="dialog" aria-modal="true">
               <div class="wf-modal__header">
                 <h4 class="wf-modal__title" style="margin: 0">警告</h4>
-                <button class="wf-modal__close" aria-label="閉じる">×</button>
+                <button type="button" class="wf-modal__close" aria-label="閉じる">×</button>
               </div>
               <div class="wf-modal__body">
                 <p>この操作は取り消せません。続行しますか？</p>
               </div>
               <div class="wf-modal__footer">
-                <button class="wf-btn wf-btn-subtle" data-close>キャンセル</button>
-                <button class="wf-btn wf-btn-warning" data-close>続行</button>
+                <button type="button" class="wf-btn wf-btn-subtle" data-close>キャンセル</button>
+                <button type="button" class="wf-btn wf-btn-warning" data-close>続行</button>
               </div>
             </div>
           </div>
@@ -822,13 +822,13 @@
             <div class="wf-modal wf-modal--success" role="dialog" aria-modal="true">
               <div class="wf-modal__header">
                 <h4 class="wf-modal__title" style="margin: 0">成功</h4>
-                <button class="wf-modal__close" aria-label="閉じる">×</button>
+                <button type="button" class="wf-modal__close" aria-label="閉じる">×</button>
               </div>
               <div class="wf-modal__body">
                 <p>操作が正常に完了しました。</p>
               </div>
               <div class="wf-modal__footer">
-                <button class="wf-btn wf-btn-success" data-close>OK</button>
+                <button type="button" class="wf-btn wf-btn-success" data-close>OK</button>
               </div>
             </div>
           </div>
@@ -838,13 +838,13 @@
             <div class="wf-modal wf-modal--danger" role="dialog" aria-modal="true">
               <div class="wf-modal__header">
                 <h4 class="wf-modal__title" style="margin: 0">エラー</h4>
-                <button class="wf-modal__close" aria-label="閉じる">×</button>
+                <button type="button" class="wf-modal__close" aria-label="閉じる">×</button>
               </div>
               <div class="wf-modal__body">
                 <p>エラーが発生しました。もう一度お試しください。</p>
               </div>
               <div class="wf-modal__footer">
-                <button class="wf-btn wf-btn-danger" data-close>閉じる</button>
+                <button type="button" class="wf-btn wf-btn-danger" data-close>閉じる</button>
               </div>
             </div>
           </div>
@@ -863,11 +863,11 @@
               </h4>
               <div class="wf-calendar wf-calendar-fluid" data-wf-calendar>
                 <div class="wf-calendar__header">
-                  <button class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">
+                  <button type="button" class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">
                     ‹
                   </button>
                   <div class="wf-calendar__title"></div>
-                  <button class="wf-calendar__nav-btn" data-action="next" aria-label="次月">
+                  <button type="button" class="wf-calendar__nav-btn" data-action="next" aria-label="次月">
                     ›
                   </button>
                 </div>
@@ -881,11 +881,11 @@
               </h4>
               <div class="wf-calendar wf-calendar-fluid" data-wf-calendar data-wf-calendar-range="true">
                 <div class="wf-calendar__header">
-                  <button class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">
+                  <button type="button" class="wf-calendar__nav-btn" data-action="prev" aria-label="前月">
                     ‹
                   </button>
                   <div class="wf-calendar__title"></div>
-                  <button class="wf-calendar__nav-btn" data-action="next" aria-label="次月">
+                  <button type="button" class="wf-calendar__nav-btn" data-action="next" aria-label="次月">
                     ›
                   </button>
                 </div>
@@ -909,11 +909,11 @@
                 表示モード
               </label>
               <div class="wf-schedule__mode-grid">
-                <button class="wf-schedule__mode-button is-active" id="schedule-daily-mode">
+                <button type="button" class="wf-schedule__mode-button is-active" id="schedule-daily-mode">
                   <span class="wf-schedule__mode-title">1日単位指定</span>
                   <span class="wf-schedule__mode-desc">日付を選択してタイムテーブルで指定</span>
                 </button>
-                <button class="wf-schedule__mode-button" id="schedule-weekly-mode">
+                <button type="button" class="wf-schedule__mode-button" id="schedule-weekly-mode">
                   <span class="wf-schedule__mode-title">1週間単位指定</span>
                   <span class="wf-schedule__mode-desc">週表示で複数日を一度に指定</span>
                 </button>
@@ -954,7 +954,7 @@
           <h3 style="margin-top: 0">アコーディオン</h3>
           <div class="wf-accordion" id="demo-accordion">
             <div class="wf-accordion__item">
-              <button class="wf-accordion__header" id="acc-header-1" aria-controls="acc-panel-1" aria-expanded="false">
+              <button type="button" class="wf-accordion__header" id="acc-header-1" aria-controls="acc-panel-1" aria-expanded="false">
                 項目1
               </button>
               <div class="wf-accordion__panel" id="acc-panel-1" role="region" aria-labelledby="acc-header-1" hidden>
@@ -962,7 +962,7 @@
               </div>
             </div>
             <div class="wf-accordion__item">
-              <button class="wf-accordion__header" id="acc-header-2" aria-controls="acc-panel-2" aria-expanded="false">
+              <button type="button" class="wf-accordion__header" id="acc-header-2" aria-controls="acc-panel-2" aria-expanded="false">
                 項目2
               </button>
               <div class="wf-accordion__panel" id="acc-panel-2" role="region" aria-labelledby="acc-header-2" hidden>
@@ -970,7 +970,7 @@
               </div>
             </div>
             <div class="wf-accordion__item">
-              <button class="wf-accordion__header" id="acc-header-3" aria-controls="acc-panel-3" aria-expanded="false">
+              <button type="button" class="wf-accordion__header" id="acc-header-3" aria-controls="acc-panel-3" aria-expanded="false">
                 項目3
               </button>
               <div class="wf-accordion__panel" id="acc-panel-3" role="region" aria-labelledby="acc-header-3" hidden>
@@ -984,7 +984,7 @@
           <h3 style="margin-top: 0">ツールチップ・ポップオーバー</h3>
           <div style="display: flex; flex-direction: column; gap: 12px">
             <div style="position: relative">
-              <button id="demo-tooltip-btn" class="wf-btn wf-btn-primary" aria-describedby="demo-tooltip">
+              <button type="button" id="demo-tooltip-btn" class="wf-btn wf-btn-primary" aria-describedby="demo-tooltip">
                 ツールチップ
               </button>
               <div id="demo-tooltip" class="wf-tooltip is-right" role="tooltip" hidden>
@@ -993,7 +993,7 @@
             </div>
 
             <div style="position: relative">
-              <button id="demo-popover-btn" class="wf-btn wf-btn-outline" aria-controls="demo-popover"
+              <button type="button" id="demo-popover-btn" class="wf-btn wf-btn-outline" aria-controls="demo-popover"
                 aria-expanded="false" aria-haspopup="dialog" type="button">
                 ポップオーバー
               </button>
@@ -1083,7 +1083,7 @@
           <nav class="wf-navbar" role="navigation" style="position: relative; margin-bottom: 32px">
             <a class="wf-navbar-brand" href="#" onclick="return false;">wafoo-css</a>
 
-            <button class="wf-hamburger" aria-label="メニュー" aria-expanded="false" id="demo-hamburger"
+            <button type="button" class="wf-hamburger" aria-label="メニュー" aria-expanded="false" id="demo-hamburger"
               style="display: flex">
               <span class="wf-hamburger__line"></span>
               <span class="wf-hamburger__line"></span>
@@ -1181,7 +1181,7 @@ console.log(greet('世界'));</code></pre>
             <h4 class="wf-empty__title">データがありません</h4>
             <p class="wf-empty__desc">表示するデータが存在しません。</p>
             <div class="wf-empty__actions">
-              <button class="wf-btn wf-btn-primary">新規作成</button>
+              <button type="button" class="wf-btn wf-btn-primary">新規作成</button>
             </div>
           </div>
         </div>
@@ -1201,7 +1201,7 @@ console.log(greet('世界'));</code></pre>
               <span>別の項目</span>
               <span class="wf-meta">5</span>
             </a></li>
-            <li><button class="wf-list-item" disabled>無効な項目</button></li>
+            <li><button type="button" class="wf-list-item" disabled>無効な項目</button></li>
           </ul>
         </div>
 

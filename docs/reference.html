@@ -410,28 +410,28 @@
             <div class="wf-toast__title">お知らせ</div>
             新しいメッセージが届きました
           </div>
-          <button class="wf-toast__close" aria-label="閉じる">×</button>
+          <button type="button" class="wf-toast__close" aria-label="閉じる">×</button>
         </div>
         <div class="wf-toast wf-toast--success">
           <div class="wf-toast__content">
             <div class="wf-toast__title">保存完了</div>
             データが正常に保存されました
           </div>
-          <button class="wf-toast__close" aria-label="閉じる">×</button>
+          <button type="button" class="wf-toast__close" aria-label="閉じる">×</button>
         </div>
         <div class="wf-toast wf-toast--warning">
           <div class="wf-toast__content">
             <div class="wf-toast__title">注意</div>
             一部の項目が未入力です
           </div>
-          <button class="wf-toast__close" aria-label="閉じる">×</button>
+          <button type="button" class="wf-toast__close" aria-label="閉じる">×</button>
         </div>
         <div class="wf-toast wf-toast--danger">
           <div class="wf-toast__content">
             <div class="wf-toast__title">エラー</div>
             接続に失敗しました
           </div>
-          <button class="wf-toast__close" aria-label="閉じる">×</button>
+          <button type="button" class="wf-toast__close" aria-label="閉じる">×</button>
         </div>
       </div>
       <pre><code>&lt;div class="wf-toast wf-toast--success"&gt;
@@ -695,6 +695,25 @@ hamburger.addEventListener('click', () =&gt; {
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <h4>動作デモ</h4>
+      <p>以下のボタンをクリックすると、デモ用のモーダルが開きます（テスト用）。</p>
+      <button type="button" class="wf-btn wf-btn-primary" data-wf-modal="demo-modal">デモモーダルを開く</button>
+
+      <div id="demo-modal" class="wf-modal-overlay" hidden>
+        <div class="wf-modal" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+          <div class="wf-modal__header">
+            <h2 id="demo-modal-title" class="wf-modal__title">デモモーダル</h2>
+            <button type="button" class="wf-modal__close" aria-label="閉じる">×</button>
+          </div>
+          <div class="wf-modal__body">
+            <p>これはテスト用のモーダルです。正常に動作しています。</p>
+          </div>
+          <div class="wf-modal__footer">
+            <button type="button" class="wf-modal__close wf-btn wf-btn-primary">閉じる</button>
+          </div>
+        </div>
       </div>
 
       <h3>テーブル</h3>
@@ -1913,48 +1932,48 @@ function updateScheduleVisibility() {
     </div>
   </main>
 
-    <script>
-      // 著作権年の設定
-      const yearSpan = document.getElementById("copyright-year");
-      if (yearSpan) {
-        yearSpan.textContent = new Date().getFullYear();
-      }
-    </script>
-    <script>
-      // Simple Client-side Search
-      const searchInput = document.getElementById('doc-search');
-      const searchResults = document.getElementById('search-results');
-      const sections = document.querySelectorAll('main > section');
-      let searchTimeout;
+  <script>
+    // 著作権年の設定
+    const yearSpan = document.getElementById("copyright-year");
+    if (yearSpan) {
+      yearSpan.textContent = new Date().getFullYear();
+    }
+  </script>
+  <script>
+    // Simple Client-side Search
+    const searchInput = document.getElementById('doc-search');
+    const searchResults = document.getElementById('search-results');
+    const sections = document.querySelectorAll('main > section');
+    let searchTimeout;
 
-      searchInput.addEventListener('input', (e) => {
-        clearTimeout(searchTimeout);
-        searchTimeout = setTimeout(() => {
-          const query = e.target.value.toLowerCase().trim();
+    searchInput.addEventListener('input', (e) => {
+      clearTimeout(searchTimeout);
+      searchTimeout = setTimeout(() => {
+        const query = e.target.value.toLowerCase().trim();
 
-          if (!query) {
-            sections.forEach(s => s.style.display = '');
-            searchResults.textContent = '';
-            return;
+        if (!query) {
+          sections.forEach(s => s.style.display = '');
+          searchResults.textContent = '';
+          return;
+        }
+
+        let count = 0;
+        sections.forEach(section => {
+          const text = section.textContent.toLowerCase();
+          const title = section.querySelector('h2')?.textContent.toLowerCase() || '';
+
+          if (text.includes(query) || title.includes(query)) {
+            section.style.display = '';
+            count++;
+          } else {
+            section.style.display = 'none';
           }
+        });
 
-          let count = 0;
-          sections.forEach(section => {
-            const text = section.textContent.toLowerCase();
-            const title = section.querySelector('h2')?.textContent.toLowerCase() || '';
-
-            if (text.includes(query) || title.includes(query)) {
-              section.style.display = '';
-              count++;
-            } else {
-              section.style.display = 'none';
-            }
-          });
-
-          searchResults.textContent = count === 0 ? 'No results found.' : `${count} section(s) found.`;
-        }, 300);
-      });
-    </script>
+        searchResults.textContent = count === 0 ? 'No results found.' : `${count} section(s) found.`;
+      }, 300);
+    });
+  </script>
 </body>
 
 </html>
