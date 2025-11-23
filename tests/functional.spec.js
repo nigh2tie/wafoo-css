@@ -21,8 +21,8 @@ test.describe('Functional Tests', () => {
   test('Tabs should switch content', async ({ page }) => {
     const tab1 = page.getByRole('tab', { name: 'タブ1' });
     const tab2 = page.getByRole('tab', { name: 'タブ2' });
-    const panel1 = page.getByRole('tabpanel').first();
-    const panel2 = page.getByRole('tabpanel').nth(1);
+    const panel1 = page.locator('#demo-panel-1');
+    const panel2 = page.locator('#demo-panel-2');
 
     // Initial state
     await expect(tab1).toHaveAttribute('aria-selected', 'true');

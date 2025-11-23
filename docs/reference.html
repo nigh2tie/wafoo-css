@@ -42,6 +42,7 @@
     rel="stylesheet">
 
   <link rel="stylesheet" href="./wafoo.min.css">
+  <script src="./wafoo.min.js"></script>
   <style>
     :root {
       scroll-behavior: smooth;
@@ -1814,6 +1815,24 @@ document.querySelectorAll('#half-rating .wf-rating__star').forEach(star =&gt; {
 &lt;/div&gt;
 &lt;div id="panel-1" class="wf-tabpanel" role="tabpanel"&gt;内容1&lt;/div&gt;
 &lt;div id="panel-2" class="wf-tabpanel" role="tabpanel" hidden&gt;内容2&lt;/div&gt;</code></pre>
+
+        <h4>動作デモ</h4>
+        <p>以下のタブをクリックして切り替えてください（テスト用）。</p>
+        <div style="margin-bottom: 2rem;">
+          <div class="wf-tablist" role="tablist" data-wf-tabs>
+            <button class="wf-tab" role="tab" aria-selected="true" aria-controls="demo-panel-1" id="demo-tab-1">タブ1</button>
+            <button class="wf-tab" role="tab" aria-selected="false" aria-controls="demo-panel-2" id="demo-tab-2">タブ2</button>
+          </div>
+
+          <div class="wf-tabpanels">
+            <div class="wf-tabpanel" role="tabpanel" id="demo-panel-1" aria-labelledby="demo-tab-1">
+              <p>タブ1の内容です。これはテスト用のタブパネルです。</p>
+            </div>
+            <div class="wf-tabpanel" role="tabpanel" id="demo-panel-2" aria-labelledby="demo-tab-2" hidden>
+              <p>タブ2の内容です。正常に切り替わっています。</p>
+            </div>
+          </div>
+        </div>
 
         <h3>手動初期化（高度な使用）</h3>
         <p>動的に生成された要素には、WFUIオブジェクトを直接使用できます：</p>

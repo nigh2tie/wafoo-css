@@ -17,6 +17,7 @@
   - [コンポーネント固有](#コンポーネント固有)
 - [ユーティリティクラス](#ユーティリティクラス)
 - [命名規則](#命名規則)
+- [アイコン](#アイコン)
 - [全コンポーネント一覧](#全コンポーネント一覧)
 - [アクセシビリティ](#アクセシビリティ)
 
@@ -774,6 +775,23 @@ wafoo-cssは、Tailwind CSSの命名規則を採用していますが、`wf-` �
 ### 詳細な命名規則
 
 完全な命名規則のリファレンスは、[docs/naming-conventions.md](./docs/naming-conventions.md)を参照してください。
+
+---
+
+## アイコン
+
+- 配置: `src/icons/` に24pxグリッドのSVGを配置。`fill="currentColor"` なので親要素の文字色に追従します。`width`/`height` は付いたままでも動作しますが、CSS側でサイズ統一したい場合は削除して `viewBox` のみにします。
+- 使い方（インライン例）:
+  ```html
+  <span class="wf-icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="currentColor">
+      <!-- 例: src/icons/add.svg のパス -->
+      <path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/>
+    </svg>
+  </span>
+  ```
+  `.wf-icon` などで `width`/`height` を指定すると各サイズを統一できます。
+- 注意点: セマンティックな意味を持つ場合は `aria-label` を付与。装飾のみなら `aria-hidden="true"` にします。よく使うアイコンに絞るとファイルサイズ増を抑えられます。必要に応じて `npx svgo src/icons/*.svg` で最適化してください。
 
 ---
 
