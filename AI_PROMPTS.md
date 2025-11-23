@@ -2,12 +2,23 @@
 
 このドキュメントは、ChatGPT、GitHub Copilot、その他のAI生成ツールでwafoo-cssのコードを生成するためのプロンプトテンプレートです。
 
+## プロジェクト概要（AI向け）
+
+- **バージョン**: v1.0.0
+- **コンポーネント数**: 43種類
+- **テーマ**: 10種類の伝統色テーマ（sakura, momiji, fuji等）
+- **JavaScriptライブラリ**: WFUI（インタラクティブコンポーネント用）
+- **ターゲットブラウザ**: 最新2バージョンのモダンブラウザ（Chrome, Safari, Edge, Firefox）
+- **CSS変数**: 87個のデザイントークン
+- **命名規則**: `wf-`プレフィックス + Tailwind風の命名
+
 ## 目次
 
 - [基本テンプレート](#基本テンプレート)
 - [コンポーネント別テンプレート](#コンポーネント別テンプレート)
 - [レイアウトテンプレート](#レイアウトテンプレート)
 - [フォームテンプレート](#フォームテンプレート)
+- [インタラクティブコンポーネント](#インタラクティブコンポーネント)
 - [ベストプラクティス](#ベストプラクティス)
 
 ---
@@ -399,14 +410,83 @@ wafoo-cssでデータテーブルを作成してください。
 
 ---
 
-## 参考資料
+## インタラクティブコンポーネント
 
-- [wafoo-css リファレンス](../REFERENCE.md)
-- [wafoo-css 命名規則](./naming-conventions.md)
-- [wafoo-css アクセシビリティガイド](./accessibility.md)
-- [wafoo-css コンポーネントスキーマ](./components-schema.json)
+wafoo-cssのインタラクティブコンポーネントは`dist/wafoo.js`が必要です。`data-wf-*`属性による自動初期化をサポートしています。
+
+### タブ (Tabs)
+
+```
+wafoo-cssでタブナビゲーションを作成してください。
+
+要件:
+- タブ数: {number}
+- 自動初期化: `data-wf-tabs`属性を使用
+- キーボードナビゲーション対応（矢印キー、Home/End）
+- ARIA属性を含む
+
+クラス名:
+- コンテナ: `wf-tabs`
+- タブリスト: `wf-tablist`（`role="tablist"`, `data-wf-tabs`）
+- タブ: `wf-tab`（`role="tab"`）
+- パネル: `wf-tabpanel`（`role="tabpanel"`）
+
+例:
+<div class="wf-tabs" data-wf-tabs>
+  <div class="wf-tablist" role="tablist">
+    <button class="wf-tab" role="tab" aria-selected="true">タブ1</button>
+  </div>
+  <div class="wf-tabpanel" role="tabpanel">コンテンツ1</div>
+</div>
+```
+
+### モーダル (Modal)
+
+```
+wafoo-cssでモーダルダイアログを作成してください。
+
+要件:
+- 自動初期化: `data-wf-modal="{id}"`属性を使用
+- フォーカストラップ機能
+- Escキーで閉じる
+- 背景クリックで閉じる
+
+クラス名:
+- トリガー: `data-wf-modal="modal-id"`
+- オーバーレイ: `wf-modal-overlay`（`id="modal-id"`）
+- モーダル: `wf-modal`
+- ヘッダー: `wf-modal__header`
+- 本文: `wf-modal__body`
+- 閉じるボタン: `wf-modal__close`
+```
+
+### カレンダー (Calendar)
+
+```
+wafoo-cssでカレンダーを作成してください。
+
+要件:
+- 自動初期化: `data-wf-calendar`属性を使用
+- 単一選択/複数選択/範囲選択モード
+- 月次ナビゲーション
+
+クラス名:
+- コンテナ: `wf-calendar`（`data-wf-calendar`）
+- ヘッダー: `wf-calendar__header`
+- グリッド: `wf-calendar__grid`
+- 日付セル: `wf-calendar__day`
+```
 
 ---
 
-**最終更新**: 2025-11-19
+## 参考資料
+
+- [wafoo-css リファレンス](./REFERENCE.md)
+- [wafoo-css コンポーネントAPI](./COMPONENTS.md)
+- [wafoo-css 命名規則](./NAMING_CONVENTIONS.md)
+- [wafoo-css アクセシビリティガイド](./ACCESSIBILITY.md)
+
+---
+
+**最終更新**: 2025-11-23
 
