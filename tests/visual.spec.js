@@ -2,6 +2,8 @@ const { test, expect } = require('@playwright/test');
 const path = require('path');
 
 test.describe('Visual Regression', () => {
+  test.skip(!!process.env.CI, 'Visual regression tests are skipped in CI (requires platform-specific snapshots)');
+
   test('Landing Page should match snapshot', async ({ page }) => {
     // In a real scenario, we would start a local server.
     // For this example, we'll try to load the file directly if possible,
