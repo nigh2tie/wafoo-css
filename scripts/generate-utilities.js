@@ -59,7 +59,25 @@ const config = {
     widths: ["1/2", "1/3", "2/3", "1/4", "2/4", "3/4", "full", "screen", "auto"],
     heights: ["1/2", "1/3", "2/3", "1/4", "2/4", "3/4", "full", "screen", "auto"],
     fixed: [0, 1, 2, 4, 8, 12, 16, 24, 32, 48, 64, 96], // Added 96 (384px)
-    minMax: ["0", "full", "screen", "min", "max", "fit", "xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl"]
+    minMax: [
+      "0",
+      "full",
+      "screen",
+      "min",
+      "max",
+      "fit",
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "2xl",
+      "3xl",
+      "4xl",
+      "5xl",
+      "6xl",
+      "7xl"
+    ]
   },
   effects: {
     opacity: [0, 50, 100],
@@ -154,11 +172,11 @@ function generateText() {
     // Simple mapping for now, ideally should be in tokens
     let val;
     if (["xs", "sm", "md", "lg", "xl"].includes(size)) {
-       val = size === "xs" ? "calc(var(--wf-font-sm) - 2px)" : `var(--wf-font-${size})`;
+      val = size === "xs" ? "calc(var(--wf-font-sm) - 2px)" : `var(--wf-font-${size})`;
     } else {
-       // Fallback for larger sizes if not in tokens
-       const map = { "2xl": "1.5rem", "3xl": "1.875rem", "4xl": "2.25rem" };
-       val = map[size];
+      // Fallback for larger sizes if not in tokens
+      const map = { "2xl": "1.5rem", "3xl": "1.875rem", "4xl": "2.25rem" };
+      val = map[size];
     }
     if (val) css += `.wf-text-${size} { font-size: ${val}; }\n`;
   }
@@ -240,11 +258,11 @@ function generateColorUtilities() {
     css += `.wf-active\\:${className}:active { border-color: ${value}; }\n`;
     css += `.wf-disabled\\:${className}:disabled { border-color: ${value}; }\n`;
   }
-  
+
   // Ring/Outline Colors (reusing border colors for simplicity)
   for (const [name, value] of Object.entries(borderColors)) {
-     css += `.wf-ring-${name} { --wf-ring-color: ${value}; }\n`;
-     css += `.wf-outline-${name} { outline-color: ${value}; }\n`;
+    css += `.wf-ring-${name} { --wf-ring-color: ${value}; }\n`;
+    css += `.wf-outline-${name} { outline-color: ${value}; }\n`;
   }
 
   return css;
@@ -258,9 +276,9 @@ function generateBorderUtilities() {
     const className = width === 1 ? "border" : `border-${width}`;
     const value = width === 0 ? "0" : `${width}px`;
     const style = width === 0 ? "none" : "solid";
-    
+
     css += `.wf-${className} { border-width: ${value}; border-style: ${style}; }\n`;
-    
+
     // Side specific borders
     if (width > 0) {
       css += `.wf-border-t-${width} { border-top-width: ${value}; border-top-style: ${style}; }\n`;
@@ -274,7 +292,7 @@ function generateBorderUtilities() {
   for (const radius of config.border.radius) {
     const varName = radius === "none" ? "0" : `var(--wf-radius-${radius})`;
     css += `.wf-rounded-${radius} { border-radius: ${varName}; }\n`;
-    
+
     // Side specific radius
     if (radius !== "none") {
       css += `.wf-rounded-t-${radius} { border-top-left-radius: ${varName}; border-top-right-radius: ${varName}; }\n`;
@@ -329,22 +347,37 @@ function generateSizingUtilities() {
 
   // Min/Max Width/Height
   const sizeMap = {
-      "0": "0px", "full": "100%", "screen": "100vh", "min": "min-content", "max": "max-content", "fit": "fit-content",
-      "xs": "20rem", "sm": "24rem", "md": "28rem", "lg": "32rem", "xl": "36rem", "2xl": "42rem", "3xl": "48rem", "4xl": "56rem", "5xl": "64rem", "6xl": "72rem", "7xl": "80rem"
+    0: "0px",
+    full: "100%",
+    screen: "100vh",
+    min: "min-content",
+    max: "max-content",
+    fit: "fit-content",
+    xs: "20rem",
+    sm: "24rem",
+    md: "28rem",
+    lg: "32rem",
+    xl: "36rem",
+    "2xl": "42rem",
+    "3xl": "48rem",
+    "4xl": "56rem",
+    "5xl": "64rem",
+    "6xl": "72rem",
+    "7xl": "80rem"
   };
 
   for (const val of config.sizing.minMax) {
     let value = sizeMap[val] || val;
     if (val === "screen") {
-        css += `.wf-min-w-screen { min-width: 100vw; }\n`;
-        css += `.wf-min-h-screen { min-height: 100vh; }\n`;
-        css += `.wf-max-w-screen { max-width: 100vw; }\n`;
-        css += `.wf-max-h-screen { max-height: 100vh; }\n`;
+      css += `.wf-min-w-screen { min-width: 100vw; }\n`;
+      css += `.wf-min-h-screen { min-height: 100vh; }\n`;
+      css += `.wf-max-w-screen { max-width: 100vw; }\n`;
+      css += `.wf-max-h-screen { max-height: 100vh; }\n`;
     } else {
-        css += `.wf-min-w-${val} { min-width: ${value}; }\n`;
-        css += `.wf-min-h-${val} { min-height: ${value}; }\n`;
-        css += `.wf-max-w-${val} { max-width: ${value}; }\n`;
-        css += `.wf-max-h-${val} { max-height: ${value}; }\n`;
+      css += `.wf-min-w-${val} { min-width: ${value}; }\n`;
+      css += `.wf-min-h-${val} { min-height: ${value}; }\n`;
+      css += `.wf-max-w-${val} { max-width: ${value}; }\n`;
+      css += `.wf-max-h-${val} { max-height: ${value}; }\n`;
     }
   }
 
@@ -352,42 +385,42 @@ function generateSizingUtilities() {
 }
 
 function generateEffectUtilities() {
-    let css = "\n/* Effect utilities (Opacity, Scale, Ring, Outline) */\n";
-    
-    // Opacity
-    for (const val of config.effects.opacity) {
-        css += `.wf-opacity-${val} { opacity: ${val / 100}; }\n`;
-        css += `.wf-hover\\:opacity-${val}:hover { opacity: ${val / 100}; }\n`;
-        css += `.wf-focus\\:opacity-${val}:focus-visible { opacity: ${val / 100}; }\n`;
-        css += `.wf-disabled\\:opacity-${val}:disabled { opacity: ${val / 100}; }\n`;
-    }
+  let css = "\n/* Effect utilities (Opacity, Scale, Ring, Outline) */\n";
 
-    // Scale
-    for (const val of config.effects.scale) {
-        css += `.wf-scale-${val} { transform: scale(${val / 100}); }\n`;
-        css += `.wf-hover\\:scale-${val}:hover { transform: scale(${val / 100}); }\n`;
-    }
+  // Opacity
+  for (const val of config.effects.opacity) {
+    css += `.wf-opacity-${val} { opacity: ${val / 100}; }\n`;
+    css += `.wf-hover\\:opacity-${val}:hover { opacity: ${val / 100}; }\n`;
+    css += `.wf-focus\\:opacity-${val}:focus-visible { opacity: ${val / 100}; }\n`;
+    css += `.wf-disabled\\:opacity-${val}:disabled { opacity: ${val / 100}; }\n`;
+  }
 
-    // Ring
-    css += `.wf-ring { box-shadow: 0 0 0 var(--wf-ring-width, 3px) var(--wf-ring-color, rgba(59, 130, 246, 0.5)); }\n`;
-    css += `.wf-focus\\:ring:focus-visible { box-shadow: 0 0 0 var(--wf-ring-width, 3px) var(--wf-ring-color, rgba(59, 130, 246, 0.5)); outline: none; }\n`;
-    css += `.wf-active\\:ring:active { box-shadow: 0 0 0 var(--wf-ring-width, 3px) var(--wf-ring-color, rgba(59, 130, 246, 0.5)); outline: none; }\n`;
-    css += `.wf-disabled\\:ring:disabled { box-shadow: none; }\n`;
-    
-    for (const width of config.effects.ringWidths) {
-        const val = width + "px";
-        css += `.wf-ring-${width} { --wf-ring-width: ${val}; }\n`;
-    }
+  // Scale
+  for (const val of config.effects.scale) {
+    css += `.wf-scale-${val} { transform: scale(${val / 100}); }\n`;
+    css += `.wf-hover\\:scale-${val}:hover { transform: scale(${val / 100}); }\n`;
+  }
 
-    // Outline
-    css += `.wf-outline { outline-style: solid; }\n`;
-    for (const width of config.effects.outlineWidths) {
-        css += `.wf-outline-${width} { outline-width: ${width}px; }\n`;
-    }
-    css += `.wf-outline-none { outline: 2px solid transparent; outline-offset: 2px; }\n`;
-    css += `.wf-focus\\:outline-none:focus-visible { outline: 2px solid transparent; outline-offset: 2px; }\n`;
+  // Ring
+  css += `.wf-ring { box-shadow: 0 0 0 var(--wf-ring-width, 3px) var(--wf-ring-color, rgba(59, 130, 246, 0.5)); }\n`;
+  css += `.wf-focus\\:ring:focus-visible { box-shadow: 0 0 0 var(--wf-ring-width, 3px) var(--wf-ring-color, rgba(59, 130, 246, 0.5)); outline: none; }\n`;
+  css += `.wf-active\\:ring:active { box-shadow: 0 0 0 var(--wf-ring-width, 3px) var(--wf-ring-color, rgba(59, 130, 246, 0.5)); outline: none; }\n`;
+  css += `.wf-disabled\\:ring:disabled { box-shadow: none; }\n`;
 
-    return css;
+  for (const width of config.effects.ringWidths) {
+    const val = width + "px";
+    css += `.wf-ring-${width} { --wf-ring-width: ${val}; }\n`;
+  }
+
+  // Outline
+  css += `.wf-outline { outline-style: solid; }\n`;
+  for (const width of config.effects.outlineWidths) {
+    css += `.wf-outline-${width} { outline-width: ${width}px; }\n`;
+  }
+  css += `.wf-outline-none { outline: 2px solid transparent; outline-offset: 2px; }\n`;
+  css += `.wf-focus\\:outline-none:focus-visible { outline: 2px solid transparent; outline-offset: 2px; }\n`;
+
+  return css;
 }
 
 function generateShadowUtilities() {
@@ -399,12 +432,21 @@ function generateShadowUtilities() {
   css += `.wf-shadow-xl { box-shadow: var(--wf-shadow-xl); }\n`;
   css += `.wf-shadow-none { box-shadow: none; }\n`;
 
+  // States
+  const shadows = ["sm", "md", "lg", "xl", "none"];
+  for (const shadow of shadows) {
+    const varName = shadow === "none" ? "none" : `var(--wf-shadow-${shadow})`;
+    css += `.wf-hover\\:shadow-${shadow}:hover { box-shadow: ${varName}; }\n`;
+    css += `.wf-focus\\:shadow-${shadow}:focus-visible { box-shadow: ${varName}; }\n`;
+    css += `.wf-active\\:shadow-${shadow}:active { box-shadow: ${varName}; }\n`;
+  }
+
   return css;
 }
 
 function generateResponsive() {
   let css = "\n/* Responsive (min-width) */\n";
-  const breakpoints = ["sm", "md", "lg"]; // extend to lg
+  const breakpoints = ["sm", "md", "lg", "xl"]; // Added xl
 
   for (const bp of breakpoints) {
     css += `@media (min-width: var(--wf-breakpoint-${bp})) {\n`;
@@ -438,17 +480,17 @@ function generateResponsive() {
     for (const align of ["left", "center", "right", "justify"]) {
       css += `  .wf-${bp}-text-${align} { text-align: ${align}; }\n`;
     }
-    
+
     // Widths (responsive)
     for (const width of ["full", "1/2", "1/3", "2/3", "1/4"]) {
-       let value;
-       if (width === "full") value = "100%";
-       else {
-         const [num, den] = width.split("/");
-         value = `${(parseInt(num) / parseInt(den)) * 100}%`;
-       }
-       const className = width.replace("/", "\\/");
-       css += `  .wf-${bp}-w-${className} { width: ${value}; }\n`;
+      let value;
+      if (width === "full") value = "100%";
+      else {
+        const [num, den] = width.split("/");
+        value = `${(parseInt(num) / parseInt(den)) * 100}%`;
+      }
+      const className = width.replace("/", "\\/");
+      css += `  .wf-${bp}-w-${className} { width: ${value}; }\n`;
     }
 
     css += `}\n`;
@@ -518,8 +560,6 @@ function generateCoreStaticUtilities() {
 }
 `;
 }
-
-
 
 function generate() {
   // Core Utilities
@@ -601,13 +641,13 @@ function generateExtendedBorderUtilities() {
       css += `.wf-rounded-l-${radius} { border-bottom-left-radius: ${varName}; border-top-left-radius: ${varName}; }\n`;
     }
   }
-  
+
   // Add state variants to borders (missing in previous implementation)
   // Note: Adding states to all border utilities might be too heavy, sticking to requested scope.
   // User asked for "disabled:border-*".
   // Let's add generic disabled border utility
   css += `.wf-disabled\\:border-transparent:disabled { border-color: transparent; }\n`;
-  
+
   return css;
 }
 
@@ -626,7 +666,7 @@ function generateCoreSizingUtilities() {
     const className = width.replace("/", "\\/");
     css += `.wf-w-${className} { width: ${value}; }\n`;
   }
-  
+
   // Fixed Sizing (Small set)
   const coreFixed = [0, 1, 2, 4, 8, 16, 32];
   for (const size of coreFixed) {
@@ -634,18 +674,18 @@ function generateCoreSizingUtilities() {
     css += `.wf-w-${size} { width: ${value}; }\n`;
     css += `.wf-h-${size} { height: ${value}; }\n`;
   }
-  
+
   return css;
 }
 
 function generateExtendedSizingUtilities() {
   let css = "\n/* Sizing utilities (Extras) */\n";
-  
+
   // Remaining Percentage Widths
   const allWidths = config.sizing.widths;
   const commonWidths = ["full", "screen", "1/2", "1/3", "2/3", "1/4"];
   const extraWidths = allWidths.filter(w => !commonWidths.includes(w));
-  
+
   for (const width of extraWidths) {
     let value;
     if (width === "auto") value = "auto";
@@ -682,27 +722,54 @@ function generateExtendedSizingUtilities() {
 
   // Min/Max Width/Height
   const sizeMap = {
-      "0": "0px", "full": "100%", "screen": "100vh", "min": "min-content", "max": "max-content", "fit": "fit-content",
-      "xs": "20rem", "sm": "24rem", "md": "28rem", "lg": "32rem", "xl": "36rem", "2xl": "42rem", "3xl": "48rem", "4xl": "56rem", "5xl": "64rem", "6xl": "72rem", "7xl": "80rem"
+    0: "0px",
+    full: "100%",
+    screen: "100vh",
+    min: "min-content",
+    max: "max-content",
+    fit: "fit-content",
+    xs: "20rem",
+    sm: "24rem",
+    md: "28rem",
+    lg: "32rem",
+    xl: "36rem",
+    "2xl": "42rem",
+    "3xl": "48rem",
+    "4xl": "56rem",
+    "5xl": "64rem",
+    "6xl": "72rem",
+    "7xl": "80rem"
   };
 
   for (const val of config.sizing.minMax) {
     let value = sizeMap[val] || val;
-    const isScale = ["xs", "sm", "md", "lg", "xl", "2xl", "3xl", "4xl", "5xl", "6xl", "7xl"].includes(val);
+    const isScale = [
+      "xs",
+      "sm",
+      "md",
+      "lg",
+      "xl",
+      "2xl",
+      "3xl",
+      "4xl",
+      "5xl",
+      "6xl",
+      "7xl"
+    ].includes(val);
 
     if (val === "screen") {
-        css += `.wf-min-w-screen { min-width: 100vw; }\n`;
-        css += `.wf-min-h-screen { min-height: 100vh; }\n`;
-        css += `.wf-max-w-screen { max-width: 100vw; }\n`;
-        css += `.wf-max-h-screen { max-height: 100vh; }\n`;
+      css += `.wf-min-w-screen { min-width: 100vw; }\n`;
+      css += `.wf-min-h-screen { min-height: 100vh; }\n`;
+      css += `.wf-max-w-screen { max-width: 100vw; }\n`;
+      css += `.wf-max-h-screen { max-height: 100vh; }\n`;
     } else {
-        css += `.wf-min-w-${val} { min-width: ${value}; }\n`;
-        css += `.wf-max-w-${val} { max-width: ${value}; }\n`;
-        
-        if (!isScale) {
-            css += `.wf-min-h-${val} { min-height: ${value}; }\n`;
-            css += `.wf-max-h-${val} { max-height: ${value}; }\n`;
-        }
+      css += `.wf-min-w-${val} { min-width: ${value}; }\n`;
+      css += `.wf-max-w-${val} { max-width: ${value}; }\n`;
+
+      if (!isScale) {
+        css += `.wf-min-h-${val} { min-height: ${value}; }\n`;
+        css += `.wf-max-h-${val} { max-height: ${value}; }\n`;
+      }
     }
   }
 

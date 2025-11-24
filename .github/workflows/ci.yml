@@ -28,6 +28,9 @@ jobs:
     - name: Build
       run: npm run build
 
+    - name: Check Bundle Size
+      run: npm run check-size
+
     - name: Install Playwright Browsers
       run: npx playwright install --with-deps
 

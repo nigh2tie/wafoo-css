@@ -64,7 +64,9 @@
     min-width: 280px;
     max-width: 400px;
     pointer-events: auto;
-    animation: wf-slide-up var(--wf-duration-base) var(--wf-ease-out);
+    animation-name: wf-slide-up;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-duration-base));
+    animation-timing-function: var(--wf-ease-out);
   }
 
   .wf-snackbar__content {
@@ -139,7 +141,10 @@
 
   /* Animation */
   .wf-snackbar.is-removing {
-    animation: wf-slide-up-reverse var(--wf-duration-base) var(--wf-ease-in) forwards;
+    animation-name: wf-slide-up-reverse;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-duration-base));
+    animation-timing-function: var(--wf-ease-in);
+    animation-fill-mode: forwards;
   }
 
   @keyframes wf-slide-up-reverse {
@@ -187,4 +192,3 @@
     }
   }
 }
-

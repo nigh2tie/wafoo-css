@@ -13,7 +13,7 @@
   const on = (el, evt, handler, opts) => {
     el?.addEventListener(evt, handler, opts);
   };
-  const measureBox = (el) => {
+  const measureBox = el => {
     const prevHidden = el.hidden;
     const prevVis = el.style.visibility;
     const hadOpen = el.classList.contains("is-open");
@@ -26,39 +26,86 @@
     el.hidden = prevHidden;
     el.style.visibility = prevVis || "";
     return { w, h };
-  }
+  };
   const clamp = (val, min, max) => {
     return Math.max(min, Math.min(max, val));
-  }
+  };
+  const throttle = func => {
+    let ticking = false;
+    return (...args) => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          func(...args);
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+  };
 
   const tooltip = (trigger, tip, opts) => {
-    const cfg = { margin: 8, ...(opts || {}) };
+    const cfg = { margin: 8, placement: "auto", ...(opts || {}) };
+
+    // ARIA attributes for accessibility
+    const tipId = tip.id || `wf-tooltip-${Math.random().toString(36).substr(2, 9)}`;
+    if (!tip.id) tip.id = tipId;
+    if (!trigger.getAttribute("aria-describedby")) {
+      trigger.setAttribute("aria-describedby", tipId);
+    }
+    if (!tip.getAttribute("role")) {
+      tip.setAttribute("role", "tooltip");
+    }
+    // Initial state: hidden
+    if (!tip.hasAttribute("aria-hidden")) {
+      tip.setAttribute("aria-hidden", "true");
+    }
+
     const position = () => {
       const r = trigger.getBoundingClientRect();
       const { w, h } = measureBox(tip);
-      const centerXRaw = r.left + r.width / 2;
-      let centerX = centerXRaw;
-      const minC = cfg.margin + w / 2,
-        maxC = window.innerWidth - cfg.margin - w / 2;
-      centerX = clamp(centerX, minC, maxC);
-      const spaceAbove = r.top;
-      const placeBelow = spaceAbove < h + cfg.margin + 10;
-
-      tip.classList.toggle("is-top", !placeBelow);
-      tip.classList.toggle("is-bottom", placeBelow);
+      let chosen = cfg.placement;
+      if (chosen === "auto") {
+        const spaceAbove = r.top;
+        chosen = spaceAbove < h + cfg.margin + 10 ? "bottom" : "top";
+      }
       tip.style.position = "fixed";
-      tip.style.left = Math.round(centerX) + "px";
-      tip.style.top = Math.round(placeBelow ? r.bottom + cfg.margin : r.top) + "px";
-      // arrow offset so arrow points to trigger center even if clamped
-      const maxArrow = Math.max(0, w / 2 - 8);
-      const arrowX = clamp(centerXRaw - centerX, -maxArrow, maxArrow);
-      tip.style.setProperty("--wf-arrow-x", arrowX + "px");
-    }
-    const show = (v) => {
+      tip.classList.remove("is-top", "is-bottom", "is-left", "is-right");
+      if (chosen === "left" || chosen === "right") {
+        let top = r.top + r.height / 2;
+        let left = chosen === "right" ? r.right + cfg.margin : r.left - w - cfg.margin;
+        const minL = 4;
+        const maxL = window.innerWidth - w - 4;
+        left = clamp(left, minL, maxL);
+        const minT = 4 + h / 2;
+        const maxT = window.innerHeight - 4 - h / 2;
+        top = clamp(top, minT, maxT);
+        tip.style.left = `${Math.round(left)}px`;
+        tip.style.top = `${Math.round(top)}px`;
+        tip.style.transform = "translateY(-50%)";
+        tip.classList.add(chosen === "right" ? "is-right" : "is-left");
+      } else {
+        const centerXRaw = r.left + r.width / 2;
+        let centerX = centerXRaw;
+        const minC = cfg.margin + w / 2;
+        const maxC = window.innerWidth - cfg.margin - w / 2;
+        centerX = clamp(centerX, minC, maxC);
+        const top2 = chosen === "bottom" ? r.bottom + cfg.margin : r.top - h - cfg.margin;
+        tip.style.left = `${Math.round(centerX)}px`;
+        tip.style.top = `${Math.round(top2)}px`;
+        tip.style.transform = "translateX(-50%)";
+        tip.classList.add(chosen === "bottom" ? "is-bottom" : "is-top");
+        const maxArrow = Math.max(0, w / 2 - 8);
+        const arrowX = clamp(centerXRaw - centerX, -maxArrow, maxArrow);
+        tip.style.setProperty("--wf-arrow-x", `${arrowX}px`);
+      }
+    };
+
+    const show = v => {
       if (v) position();
       tip.hidden = !v;
       tip.classList.toggle("is-open", v);
-    }
+      tip.setAttribute("aria-hidden", v ? "false" : "true");
+    };
     on(trigger, "mouseenter", () => show(true));
     on(trigger, "mouseleave", () => show(false));
     on(trigger, "focus", () => show(true));
@@ -69,135 +116,154 @@
     on(
       window,
       "scroll",
-      () => {
+      throttle(() => {
         if (!tip.hidden) position();
-      },
+      }),
       { passive: true }
     );
-    on(window, "resize", () => {
-      if (!tip.hidden) position();
-    });
-  }
+    on(
+      window,
+      "resize",
+      throttle(() => {
+        if (!tip.hidden) position();
+      })
+    );
+  };
 
-  const focusablesIn = (root) => {
+  const focusablesIn = root => {
     return Array.from(
       root.querySelectorAll(
         'a[href], button, input, select, textarea, [tabindex]:not([tabindex="-1"])'
       )
     ).filter(el => !el.hasAttribute("disabled"));
-  }
+  };
 
   const ensureId = (el, pref) => {
     if (!el) return null;
     if (!el.id) el.id = (pref || "wf") + "-" + Math.random().toString(36).slice(2, 7);
     return el.id;
-  }
+  };
 
   const popover = (trigger, panel, opts) => {
-    const cfg = { margin: 8, ...(opts || {}) };
-    let lastFocus = null;
-    // ARIA defaults
-    if (!panel.hasAttribute("role")) panel.setAttribute("role", "dialog");
-    const headerEl = panel.querySelector(".wf-popover__header, [data-popover-title]");
-    if (headerEl && !panel.hasAttribute("aria-labelledby"))
-      panel.setAttribute("aria-labelledby", ensureId(headerEl, "pv-title"));
-    let lastPlacementAbove = false;
+    const cfg = { margin: 8, placement: "auto", preventDefault: true, ...(opts || {}) };
+
+    const shouldPrevent = (trigger, e) => {
+      const tag = (trigger.tagName || "").toUpperCase();
+      if (tag === "BUTTON") return true;
+      if (tag === "INPUT") {
+        const t = (trigger.type || "").toLowerCase();
+        return t === "submit" || t === "button";
+      }
+      if (tag === "A") {
+        const href = trigger.getAttribute("href");
+        return !href || href === "#";
+      }
+      if (trigger.closest?.("form")) return true;
+      return false;
+    };
+
+    let lastPlacement = null;
     const position = () => {
       const r = trigger.getBoundingClientRect();
       const { w, h } = measureBox(panel);
-      const centerXRaw = r.left + r.width / 2;
-      let centerX = centerXRaw;
-      const minC = cfg.margin + w / 2,
-        maxC = window.innerWidth - cfg.margin - w / 2;
-      centerX = clamp(centerX, minC, maxC);
-      const spaceBelow = window.innerHeight - r.bottom;
-      const placeAbove = spaceBelow < h + cfg.margin + 10;
-
-      lastPlacementAbove = placeAbove;
-      const top = placeAbove ? r.top - h - cfg.margin : r.bottom + cfg.margin;
+      let chosen = cfg.placement;
+      if (chosen === "auto") {
+        const spaceBelow = window.innerHeight - r.bottom;
+        chosen = spaceBelow < h + cfg.margin + 10 ? "top" : "bottom";
+      }
+      lastPlacement = chosen;
       panel.style.position = "fixed";
-      panel.style.left = Math.round(centerX) + "px";
-      panel.style.top = Math.round(top) + "px";
-      panel.style.transform = "translateX(-50%)";
-      panel.classList.toggle("is-arrow-top", placeAbove);
-      panel.classList.toggle("is-arrow-bottom", !placeAbove);
-      const maxArrow = Math.max(0, w / 2 - 10);
-      const arrowX = clamp(centerXRaw - centerX, -maxArrow, maxArrow);
-      panel.style.setProperty("--wf-arrow-x", arrowX + "px");
-    }
-    let ignoreDocClickUntil = 0;
-    const open = (v) => {
+      panel.classList.remove("is-top", "is-bottom", "is-left", "is-right");
+      if (chosen === "left" || chosen === "right") {
+        let top = r.top + r.height / 2;
+        let left = chosen === "right" ? r.right + cfg.margin : r.left - w - cfg.margin;
+        const minL = 4;
+        const maxL = window.innerWidth - w - 4;
+        left = clamp(left, minL, maxL);
+        const minT = 4 + h / 2;
+        const maxT = window.innerHeight - 4 - h / 2;
+        top = clamp(top, minT, maxT);
+        panel.style.left = `${Math.round(left)}px`;
+        panel.style.top = `${Math.round(top)}px`;
+        panel.style.transform = "translateY(-50%)";
+        panel.classList.add(chosen === "right" ? "is-right" : "is-left");
+      } else {
+        const centerXRaw = r.left + r.width / 2;
+        let centerX = centerXRaw;
+        const minC = cfg.margin + w / 2;
+        const maxC = window.innerWidth - cfg.margin - w / 2;
+        centerX = clamp(centerX, minC, maxC);
+        const top2 = chosen === "bottom" ? r.bottom + cfg.margin : r.top - h - cfg.margin;
+        panel.style.left = `${Math.round(centerX)}px`;
+        panel.style.top = `${Math.round(top2)}px`;
+        panel.style.transform = "translateX(-50%)";
+        panel.classList.add(chosen === "bottom" ? "is-bottom" : "is-top");
+        const maxArrow = Math.max(0, w / 2 - 10);
+        const arrowX = clamp(centerXRaw - centerX, -maxArrow, maxArrow);
+        panel.style.setProperty("--wf-arrow-x", `${arrowX}px`);
+      }
+    };
+
+    let lastFocus = null;
+    const open = v => {
+      panel.hidden = !v;
+      panel.classList.toggle("is-open", v);
       if (v) {
         lastFocus = document.activeElement;
-        panel.hidden = false;
-        panel.classList.add("is-open");
-        trigger.setAttribute("aria-expanded", "true");
         position();
-        const f = focusablesIn(panel);
-        if (f.length) {
-          requestAnimationFrame(() => requestAnimationFrame(() => f[0].focus()));
-        } else {
-          panel.setAttribute("tabindex", "-1");
-          requestAnimationFrame(() => panel.focus());
-        }
-        // guard: ignore outside-clicks from the same gesture that triggered open
-        ignoreDocClickUntil = performance.now() + 150;
+        setTimeout(() => {
+          const f = panel.querySelector(
+            'a,button,input,select,textarea,[tabindex]:not([tabindex="-1"])'
+          );
+          if (f) f.focus();
+          else {
+            panel.setAttribute("tabindex", "-1");
+            panel.focus();
+          }
+        }, 0);
       } else {
-        panel.hidden = true;
-        panel.classList.remove("is-open");
-        trigger.setAttribute("aria-expanded", "false");
-        if (lastFocus && typeof lastFocus.focus === "function") {
-          setTimeout(() => lastFocus.focus(), 0);
-        }
+        if (lastFocus?.focus)
+          setTimeout(() => {
+            lastFocus.focus();
+          }, 0);
       }
-    }
-    on(trigger, "click", () => open(panel.hidden));
-    on(document, "click", e => {
-      if (performance.now() < ignoreDocClickUntil) return;
-      if (!panel.contains(e.target) && e.target !== trigger) {
-        open(false);
-      }
+    };
+
+    on(trigger, "click", e => {
+      if (cfg.preventDefault && shouldPrevent(trigger, e)) e.preventDefault();
+      open(panel.hidden);
     });
-    on(window, "resize", () => {
-      if (!panel.hidden) position();
+    on(document, "click", e => {
+      if (!panel.contains(e.target) && e.target !== trigger) open(false);
     });
     on(
       window,
-      "scroll",
-      () => {
+      "resize",
+      throttle(() => {
         if (!panel.hidden) position();
-      },
+      })
+    );
+    on(
+      window,
+      "scroll",
+      throttle(() => {
+        if (!panel.hidden) position();
+      }),
       { passive: true }
     );
     on(trigger, "keydown", e => {
-      if (e.key === "Escape") {
-        open(false);
-      }
+      if (e.key === "Escape") open(false);
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         open(panel.hidden);
       }
     });
     on(panel, "keydown", e => {
-      if (e.key === "Escape") {
-        open(false);
-      }
-      if (e.key === "Tab") {
-        const f = focusablesIn(panel);
-        if (!f.length) return;
-        const i = f.indexOf(document.activeElement);
-        if (e.shiftKey && i <= 0) {
-          e.preventDefault();
-          f[f.length - 1].focus();
-        } else if (!e.shiftKey && i === f.length - 1) {
-          e.preventDefault();
-          f[0].focus();
-        }
-      }
+      if (e.key === "Escape") open(false);
     });
-  }
+  };
 
-  const dropdown = (root) => {
+  const dropdown = root => {
     if (!root) return;
     const btn = root.querySelector(".wf-dropdown__toggle");
     const menu = root.querySelector(".wf-dropdown__menu");
@@ -209,8 +275,8 @@
     let lastFocus = null;
     const items = () => {
       return Array.from(menu.querySelectorAll(".wf-dropdown__item"));
-    }
-    const open = (v) => {
+    };
+    const open = v => {
       root.classList.toggle("is-open", v);
       btn.setAttribute("aria-expanded", String(v));
       menu.hidden = !v;
@@ -223,7 +289,7 @@
         if (lastFocus && typeof lastFocus.focus === "function")
           setTimeout(() => lastFocus.focus(), 0);
       }
-    }
+    };
     on(btn, "click", () => open(!root.classList.contains("is-open")));
     on(document, "click", e => {
       if (!root.contains(e.target)) open(false);
@@ -257,21 +323,25 @@
       }
       if (e.key === "Enter" || e.key === " ") {
         const current = document.activeElement;
-        if (current && current.classList.contains('wf-dropdown__item')) {
+        if (current && current.classList.contains("wf-dropdown__item")) {
           e.preventDefault();
           open(false);
           btn.focus();
         }
       }
     });
-    on(menu, 'click', (e)=>{
-      const item = e.target.closest('.wf-dropdown__item');
-      if (item) { e.preventDefault(); open(false); btn.focus(); }
+    on(menu, "click", e => {
+      const item = e.target.closest(".wf-dropdown__item");
+      if (item) {
+        e.preventDefault();
+        open(false);
+        btn.focus();
+      }
     });
-  }
+  };
 
-  const focusTrap = (container) => {
-    const trap = (e) => {
+  const focusTrap = container => {
+    const trap = e => {
       if (e.key !== "Tab") return;
       const f = focusablesIn(container);
       if (!f.length) return;
@@ -283,16 +353,16 @@
         e.preventDefault();
         f[0].focus();
       }
-    }
+    };
     container.addEventListener("keydown", trap);
     return () => container.removeEventListener("keydown", trap);
-  }
+  };
 
-  const getBackgroundElements = (excludeEl) => {
+  const getBackgroundElements = excludeEl => {
     return Array.from(document.body.children).filter(
       el => el !== excludeEl && el.tagName !== "SCRIPT"
     );
-  }
+  };
 
   const modal = (trigger, overlay, opts) => {
     const cfg = { closeSelectors: [".wf-modal__close", "[data-close]"], ...(opts || {}) };
@@ -308,14 +378,14 @@
         overlay.parentNode.insertBefore(placeholder, overlay.nextSibling);
         document.body.appendChild(overlay);
       }
-    }
+    };
     const restoreFromPortal = () => {
       if (placeholder && placeholder.parentNode) {
         placeholder.parentNode.insertBefore(overlay, placeholder.nextSibling);
         placeholder.remove();
         placeholder = null;
       }
-    }
+    };
     let hiddenBg = [];
     // Enforce dialog semantics on inner .wf-modal if present
     const dlg = overlay.querySelector(".wf-modal");
@@ -343,14 +413,14 @@
         }
       };
       document.addEventListener("keydown", docTrap, true);
-    }
+    };
     const detachDocTrap = () => {
       if (docTrap) {
         document.removeEventListener("keydown", docTrap, true);
         docTrap = null;
       }
-    }
-    const show = (v) => {
+    };
+    const show = v => {
       if (v) portalToBody();
       overlay.classList.toggle("is-open", v);
       overlay.setAttribute("aria-hidden", String(!v));
@@ -381,7 +451,7 @@
           setTimeout(() => lastFocus.focus(), 0);
         }
       }
-    }
+    };
     on(trigger, "click", () => show(true));
     closeBtns().forEach(btn => on(btn, "click", () => show(false)));
     on(overlay, "click", e => {
@@ -393,7 +463,7 @@
       if (e.key === "Escape") show(false);
     });
     return { open: () => show(true), close: () => show(false) };
-  }
+  };
 
   const offcanvas = (openBtn, panel, overlay) => {
     let lastFocus = null;
@@ -412,7 +482,7 @@
         overlay.parentNode.insertBefore(overlayPh, overlay.nextSibling);
         document.body.appendChild(overlay);
       }
-    }
+    };
     const restoreOC = () => {
       if (panelPh && panelPh.parentNode) {
         panelPh.parentNode.insertBefore(panel, panelPh.nextSibling);
@@ -424,9 +494,9 @@
         overlayPh.remove();
         overlayPh = null;
       }
-    }
+    };
     let hiddenBg = [];
-    const setOpen = (v) => {
+    const setOpen = v => {
       if (v) portalOC();
       panel.hidden = !v;
       overlay.hidden = !v;
@@ -455,7 +525,7 @@
         if (untrap) untrap();
         if (lastFocus) setTimeout(() => lastFocus.focus(), 0);
       }
-    }
+    };
     on(openBtn, "click", () => setOpen(true));
     const closeBtn = panel.querySelector('[id$="close"], .wf-btn, [data-close]');
     if (closeBtn) on(closeBtn, "click", () => setOpen(false));
@@ -464,9 +534,9 @@
       if (e.key === "Escape") setOpen(false);
     });
     return { open: () => setOpen(true), close: () => setOpen(false) };
-  }
+  };
 
-  const tabs = (container) => {
+  const tabs = container => {
     if (!container) return;
     const tablist = container.querySelector('[role="tablist"], .wf-tablist');
     const tabs = Array.from(container.querySelectorAll('[role="tab"], .wf-tab'));
@@ -484,7 +554,7 @@
       if (!panels[i].hasAttribute("role")) panels[i].setAttribute("role", "tabpanel");
     });
 
-    const activate = (index) => {
+    const activate = index => {
       tabs.forEach((t, i) => {
         const isActive = i === index;
         t.setAttribute("aria-selected", String(isActive));
@@ -500,7 +570,7 @@
         }
       });
       tabs[index].focus();
-    }
+    };
 
     tabs.forEach((tab, i) => {
       on(tab, "click", () => activate(i));
@@ -521,9 +591,9 @@
       t => t.classList.contains("is-active") || t.getAttribute("aria-selected") === "true"
     );
     activate(activeIndex >= 0 ? activeIndex : 0);
-  }
+  };
 
-  const sortableTable = (table) => {
+  const sortableTable = table => {
     if (!table) return;
     // Create or find live region for announcements
     let liveRegion = document.getElementById("wf-table-status");
@@ -578,9 +648,9 @@
         liveRegion.textContent = announcement;
       });
     });
-  }
+  };
 
-  const schedule = (root, opts) => {
+  const createScheduleInstance = (root, opts) => {
     if (!root) return;
     const cfg = {
       mode: "daily", // 'daily' or 'weekly'
@@ -602,7 +672,7 @@
       monday.setDate(today.getDate() - today.getDay() + 1);
       if (monday.getDay() === 0) monday.setDate(monday.getDate() - 7); // Sunday -> previous Monday
       return monday;
-    }
+    };
 
     const state = {
       selectedSlots: new Set(),
@@ -631,7 +701,7 @@
         }
       }
       return slots;
-    }
+    };
 
     const getWeekDates = () => {
       const dates = [];
@@ -641,7 +711,7 @@
         dates.push(date);
       }
       return dates;
-    }
+    };
 
     const getSlotKey = (date, time) => {
       let dateStr;
@@ -651,16 +721,16 @@
         dateStr = date;
       }
       return `${dateStr}-${time}`;
-    }
+    };
 
-    const getWeekdayLabel = (date) => {
+    const getWeekdayLabel = date => {
       const weekdays = ["日", "月", "火", "水", "木", "金", "土"];
       return weekdays[date.getDay()];
-    }
+    };
 
     const isSlotSelected = (date, time) => {
       return state.selectedSlots.has(getSlotKey(date, time));
-    }
+    };
 
     const toggleSlot = (date, time, forceSelect = false) => {
       const key = getSlotKey(date, time);
@@ -671,7 +741,7 @@
       }
       updateDisplay();
       if (cfg.onSelect) cfg.onSelect(Array.from(state.selectedSlots));
-    }
+    };
 
     const handleTimeSlotMouseDown = (date, time) => {
       if (!state.isMobile) {
@@ -680,7 +750,7 @@
         state.lastSelectedSlot = getSlotKey(date, time);
         document.addEventListener("mouseup", handleGlobalMouseUp);
       }
-    }
+    };
 
     const handleTimeSlotMouseEnter = (date, time) => {
       if (!state.isMobile && state.isSelecting) {
@@ -690,13 +760,13 @@
           state.lastSelectedSlot = currentSlot;
         }
       }
-    }
+    };
 
     const handleGlobalMouseUp = () => {
       state.isSelecting = false;
       state.lastSelectedSlot = null;
       document.removeEventListener("mouseup", handleGlobalMouseUp);
-    }
+    };
 
     const handleTimeSlotClick = (date, time) => {
       if (state.isMobile) {
@@ -704,7 +774,7 @@
       } else {
         handleTimeSlotMouseDown(date, time);
       }
-    }
+    };
 
     const handleMobileTimeSlotClick = (date, time) => {
       const key = getSlotKey(date, time);
@@ -729,7 +799,7 @@
         state.isRangeSelecting = false;
         updateDisplay();
       }
-    }
+    };
 
     const selectTimeRange = (startDate, startTime, endDate, endTime) => {
       const timeSlots = generateTimeSlots();
@@ -749,7 +819,7 @@
       } else {
         toggleSlot(endDate, endTime);
       }
-    }
+    };
 
     const updateDisplay = () => {
       const dailyGrid = root.querySelector(".wf-schedule__time-grid");
@@ -785,7 +855,8 @@
               state.isRangeSelecting &&
               state.rangeSelectionStart &&
               state.rangeSelectionStart.time === time &&
-              getSlotKey(state.rangeSelectionStart.date, time) === getSlotKey(state.selectedDate, time);
+              getSlotKey(state.rangeSelectionStart.date, time) ===
+                getSlotKey(state.selectedDate, time);
             let className = `wf-schedule__time-slot ${selected ? "is-selected" : ""}`;
             if (isRangeStart) className += " is-range-start";
             const eventHandlers = state.isMobile
@@ -862,7 +933,7 @@
         const pattern = timeRangePatterns[state.timeRangePattern];
         helpText.innerHTML = `クリックまたはドラッグして時間帯を選択してください（${pattern.label}: ${pattern.start}:00-${pattern.end}:00、${state.timeInterval}分刻み）${state.isMobile ? '<div style="font-size: 0.75rem; color: var(--wf-color-muted); margin-top: 0.25rem;">スマホ：1回目のタップで開始、2回目のタップで終了時間を選択</div>' : ""}`;
       }
-    }
+    };
 
     // Expose handlers globally for inline handlers
     window.handleTimeSlotMouseDown = handleTimeSlotMouseDown;
@@ -967,7 +1038,7 @@
         return results.join("\n");
       }
     };
-  }
+  };
 
   const calendar = (root, opts) => {
     if (!root) return;
@@ -988,7 +1059,10 @@
       ...(opts || {})
     };
 
-    const weekdays = cfg.weekStart === 0 ? ["日", "月", "火", "水", "木", "金", "土"] : ["月", "火", "水", "木", "金", "土", "日"];
+    const weekdays =
+      cfg.weekStart === 0
+        ? ["日", "月", "火", "水", "木", "金", "土"]
+        : ["月", "火", "水", "木", "金", "土", "日"];
 
     // 初期表示日付を決定: 日付制限がある場合は制限範囲内に設定
     let initialDate = new Date();
@@ -1022,17 +1096,17 @@
       allowRange: cfg.allowRange
     };
 
-    const getMonthStart = (date) => {
+    const getMonthStart = date => {
       const monthStart = new Date(date.getFullYear(), date.getMonth(), 1);
       return monthStart;
-    }
+    };
 
-    const getMonthEnd = (date) => {
+    const getMonthEnd = date => {
       const monthEnd = new Date(date.getFullYear(), date.getMonth() + 1, 0);
       return monthEnd;
-    }
+    };
 
-    const getFirstDayOfWeek = (date) => {
+    const getFirstDayOfWeek = date => {
       const firstDay = getMonthStart(date);
       let day = firstDay.getDay();
       if (cfg.weekStart === 1) {
@@ -1041,36 +1115,36 @@
       }
       // Sunday start: use day as-is (0-6)
       return day;
-    }
+    };
 
-    const getDaysInMonth = (date) => {
+    const getDaysInMonth = date => {
       return getMonthEnd(date).getDate();
-    }
+    };
 
     // ローカルタイムゾーンで日付文字列（YYYY-MM-DD）を取得
-    const formatDateLocal = (date) => {
+    const formatDateLocal = date => {
       const year = date.getFullYear();
       const month = String(date.getMonth() + 1).padStart(2, "0");
       const day = String(date.getDate()).padStart(2, "0");
       return `${year}-${month}-${day}`;
-    }
+    };
 
-    const isToday = (date) => {
+    const isToday = date => {
       const today = new Date();
       return (
         date.getFullYear() === today.getFullYear() &&
         date.getMonth() === today.getMonth() &&
         date.getDate() === today.getDate()
       );
-    }
+    };
 
-    const isSelected = (date) => {
+    const isSelected = date => {
       const dateStr = formatDateLocal(date);
       const selectedDateStr = state.selectedDate ? formatDateLocal(state.selectedDate) : null;
       return state.selectedDates.has(dateStr) || (selectedDateStr && dateStr === selectedDateStr);
-    }
+    };
 
-    const isDisabled = (date) => {
+    const isDisabled = date => {
       const dateStr = formatDateLocal(date);
       if (cfg.minDate) {
         const minDateStr = cfg.minDate.includes("T") ? cfg.minDate.split("T")[0] : cfg.minDate;
@@ -1081,31 +1155,31 @@
         if (dateStr > maxDateStr) return true;
       }
       return false;
-    }
+    };
 
-    const isInRange = (date) => {
+    const isInRange = date => {
       if (!state.rangeStart || !state.rangeEnd) return false;
       const dateStr = formatDateLocal(date);
       const startStr = formatDateLocal(state.rangeStart);
       const endStr = formatDateLocal(state.rangeEnd);
       return dateStr >= startStr && dateStr <= endStr;
-    }
+    };
 
-    const isRangeStart = (date) => {
+    const isRangeStart = date => {
       if (!state.rangeStart) return false;
       const dateStr = formatDateLocal(date);
       const startStr = formatDateLocal(state.rangeStart);
       return dateStr === startStr;
-    }
+    };
 
-    const isRangeEnd = (date) => {
+    const isRangeEnd = date => {
       if (!state.rangeEnd) return false;
       const dateStr = formatDateLocal(date);
       const endStr = formatDateLocal(state.rangeEnd);
       return dateStr === endStr;
-    }
+    };
 
-    const handleDateClick = (date) => {
+    const handleDateClick = date => {
       const dateStr = formatDateLocal(date);
       if (isDisabled(date)) {
         return;
@@ -1175,7 +1249,7 @@
               : dateStr
         })
       );
-    }
+    };
 
     const updateDisplay = () => {
       const header = root.querySelector(".wf-calendar__header");
@@ -1208,11 +1282,19 @@
 
         // Previous month days
         if (firstDay > 0) {
-          const prevMonth = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth() - 1, 0);
+          const prevMonth = new Date(
+            state.currentDate.getFullYear(),
+            state.currentDate.getMonth() - 1,
+            0
+          );
           const prevMonthDays = prevMonth.getDate();
           for (let i = firstDay - 1; i >= 0; i--) {
             const day = prevMonthDays - i;
-            const date = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth() - 1, day);
+            const date = new Date(
+              state.currentDate.getFullYear(),
+              state.currentDate.getMonth() - 1,
+              day
+            );
             days.push({ date, isOtherMonth: true });
           }
         }
@@ -1226,7 +1308,11 @@
         // Next month days (fill remaining cells)
         const remainingCells = 42 - days.length; // 6 rows × 7 days = 42
         for (let i = 1; i <= remainingCells; i++) {
-          const date = new Date(state.currentDate.getFullYear(), state.currentDate.getMonth() + 1, i);
+          const date = new Date(
+            state.currentDate.getFullYear(),
+            state.currentDate.getMonth() + 1,
+            i
+          );
           days.push({ date, isOtherMonth: true });
         }
 
@@ -1241,7 +1327,8 @@
             if (state.allowRange) {
               if (isRangeStart(date)) className += " is-range-start";
               if (isRangeEnd(date)) className += " is-range-end";
-              if (isInRange(date) && !isRangeStart(date) && !isRangeEnd(date)) className += " is-in-range";
+              if (isInRange(date) && !isRangeStart(date) && !isRangeEnd(date))
+                className += " is-in-range";
             }
 
             return `<button type="button" class="${className}" data-date="${dateStr}" tabindex="${isDisabled(date) || isOtherMonth ? "-1" : "0"}">${date.getDate()}</button>`;
@@ -1259,9 +1346,9 @@
           });
         });
       }
-    }
+    };
 
-    const navigateMonth = (direction) => {
+    const navigateMonth = direction => {
       const newDate = new Date(state.currentDate);
       newDate.setMonth(state.currentDate.getMonth() + direction);
       state.currentDate = newDate;
@@ -1269,7 +1356,7 @@
       if (cfg.onNavigate) {
         cfg.onNavigate(state.currentDate.getFullYear(), state.currentDate.getMonth() + 1);
       }
-    }
+    };
 
     // Initialize event listeners
     const prevBtn = root.querySelector('[data-action="prev"]');
@@ -1334,88 +1421,185 @@
     root._wfCalendarInstance = instance;
     root._wfCalendarConfig = cfg;
     return instance;
-  }
+  };
 
-  // Auto-initialization
-  document.addEventListener("DOMContentLoaded", () => {
+  // ============================================================================
+  // Auto-initialization System (Zero-Config)
+  // ============================================================================
+  // Uses MutationObserver to automatically initialize components when added to DOM
+  // Supports both initial page load and dynamic content injection
+
+  const initComponent = (el, componentType) => {
+    // Mark as initialized to prevent duplicate initialization
+    const initKey = `_wfui_${componentType}_initialized`;
+    if (el[initKey]) return;
+    el[initKey] = true;
+
+    try {
+      switch (componentType) {
+        case "tooltip":
+          const tipId = el.getAttribute("data-wf-tooltip");
+          const tip = document.getElementById(tipId);
+          if (tip) tooltip(el, tip);
+          break;
+
+        case "popover":
+          const panelId = el.getAttribute("data-wf-popover");
+          const panel = document.getElementById(panelId);
+          if (panel) popover(el, panel);
+          break;
+
+        case "dropdown":
+          dropdown(el);
+          break;
+
+        case "modal":
+          const overlayId = el.getAttribute("data-wf-modal");
+          const overlay = document.getElementById(overlayId);
+          if (overlay) modal(el, overlay);
+          break;
+
+        case "offcanvas":
+          const panelId2 = el.getAttribute("data-wf-offcanvas");
+          const panel2 = document.getElementById(panelId2);
+          const overlayId2 = el.getAttribute("data-wf-offcanvas-overlay") || panelId2 + "-overlay";
+          const overlay2 = document.getElementById(overlayId2);
+          if (panel2 && overlay2) offcanvas(el, panel2, overlay2);
+          break;
+
+        case "tabs":
+          // Check if data-wf-tabs is on tablist (use parent) or container itself
+          if (el.hasAttribute("data-wf-tabs") && el.parentElement) {
+            tabs(el.parentElement);
+          } else {
+            tabs(el);
+          }
+          break;
+
+        case "sortable-table":
+          if (el.querySelector(".wf-sort")) sortableTable(el);
+          break;
+
+        case "codeblock":
+          codeblock(el);
+          break;
+
+        case "schedule":
+          const mode = el.getAttribute("data-wf-schedule-mode") || "daily";
+          const timeInterval = parseInt(el.getAttribute("data-wf-schedule-interval")) || 60;
+          const timeRange = el.getAttribute("data-wf-schedule-range") || "all-day";
+          const selectedDate = el.getAttribute("data-wf-schedule-date");
+          schedule(el, { mode, timeInterval, timeRange, selectedDate });
+          break;
+
+        case "calendar":
+          const selectedDate2 = el.getAttribute("data-wf-calendar-date");
+          const allowMultiple = el.getAttribute("data-wf-calendar-multiple") === "true";
+          const allowRange = el.getAttribute("data-wf-calendar-range") === "true";
+          const weekStartAttr = el.getAttribute("data-wf-calendar-week-start");
+          const weekStart = weekStartAttr !== null ? parseInt(weekStartAttr) : 1;
+          const minDate = el.getAttribute("data-wf-calendar-min-date");
+          const maxDate = el.getAttribute("data-wf-calendar-max-date");
+          calendar(el, {
+            selectedDate: selectedDate2,
+            allowMultiple,
+            allowRange,
+            weekStart,
+            minDate,
+            maxDate
+          });
+          break;
+      }
+    } catch (error) {
+      console.error(`[WFUI] Failed to initialize ${componentType}:`, error);
+    }
+  };
+
+  const initAllComponents = (root = document) => {
     // Tooltip: data-wf-tooltip="tooltip-id"
-    document.querySelectorAll("[data-wf-tooltip]").forEach(trigger => {
-      const tipId = trigger.getAttribute("data-wf-tooltip");
-      const tip = document.getElementById(tipId);
-      if (tip) tooltip(trigger, tip);
+    root.querySelectorAll("[data-wf-tooltip]").forEach(el => {
+      initComponent(el, "tooltip");
     });
 
     // Popover: data-wf-popover="popover-id"
-    document.querySelectorAll("[data-wf-popover]").forEach(trigger => {
-      const panelId = trigger.getAttribute("data-wf-popover");
-      const panel = document.getElementById(panelId);
-      if (panel) popover(trigger, panel);
+    root.querySelectorAll("[data-wf-popover]").forEach(el => {
+      initComponent(el, "popover");
     });
 
     // Dropdown: auto-detect .wf-dropdown
-    document.querySelectorAll(".wf-dropdown").forEach(root => dropdown(root));
-
-    // Modal: data-wf-modal="overlay-id" on trigger
-    document.querySelectorAll("[data-wf-modal]").forEach(trigger => {
-      const overlayId = trigger.getAttribute("data-wf-modal");
-      const overlay = document.getElementById(overlayId);
-      if (overlay) modal(trigger, overlay);
+    root.querySelectorAll(".wf-dropdown").forEach(el => {
+      initComponent(el, "dropdown");
     });
 
-    // Offcanvas: data-wf-offcanvas="panel-id" on trigger
-    document.querySelectorAll("[data-wf-offcanvas]").forEach(openBtn => {
-      const panelId = openBtn.getAttribute("data-wf-offcanvas");
-      const panel = document.getElementById(panelId);
-      const overlayId = openBtn.getAttribute("data-wf-offcanvas-overlay") || panelId + "-overlay";
-      const overlay = document.getElementById(overlayId);
-      if (panel && overlay) offcanvas(openBtn, panel, overlay);
+    // Modal: data-wf-modal="overlay-id"
+    root.querySelectorAll("[data-wf-modal]").forEach(el => {
+      initComponent(el, "modal");
     });
 
-    // Tabs: auto-detect [data-wf-tabs] or .wf-tabs
-    document.querySelectorAll("[data-wf-tabs]").forEach(tablist => {
-      // data-wf-tabs is on the tablist itself, use parent as container
-      tabs(tablist.parentElement);
-    });
-    document.querySelectorAll(".wf-tabs").forEach(container => tabs(container));
-
-    // Sortable tables: auto-detect .wf-table with .wf-sort
-    document.querySelectorAll(".wf-table").forEach(table => {
-      if (table.querySelector(".wf-sort")) sortableTable(table);
+    // Offcanvas: data-wf-offcanvas="panel-id"
+    root.querySelectorAll("[data-wf-offcanvas]").forEach(el => {
+      initComponent(el, "offcanvas");
     });
 
-    // Code blocks with copy button: auto-detect [data-wf-codeblock]
-    document.querySelectorAll("[data-wf-codeblock]").forEach(pre => codeblock(pre));
-
-    // Schedule: auto-detect [data-wf-schedule] or .wf-schedule
-    document.querySelectorAll("[data-wf-schedule], .wf-schedule").forEach(root => {
-      const mode = root.getAttribute("data-wf-schedule-mode") || "daily";
-      const timeInterval = parseInt(root.getAttribute("data-wf-schedule-interval")) || 60;
-      const timeRange = root.getAttribute("data-wf-schedule-range") || "all-day";
-      const selectedDate = root.getAttribute("data-wf-schedule-date");
-      schedule(root, { mode, timeInterval, timeRange, selectedDate });
+    // Tabs: [data-wf-tabs] or .wf-tabs
+    root.querySelectorAll("[data-wf-tabs]").forEach(el => {
+      initComponent(el, "tabs");
+    });
+    root.querySelectorAll(".wf-tabs").forEach(el => {
+      initComponent(el, "tabs");
     });
 
-    // Calendar: auto-detect [data-wf-calendar] or .wf-calendar
-    document.querySelectorAll("[data-wf-calendar], .wf-calendar").forEach(root => {
-      const selectedDate = root.getAttribute("data-wf-calendar-date");
-      const allowMultiple = root.getAttribute("data-wf-calendar-multiple") === "true";
-      const allowRange = root.getAttribute("data-wf-calendar-range") === "true";
-      const weekStartAttr = root.getAttribute("data-wf-calendar-week-start");
-      const weekStart = weekStartAttr !== null ? parseInt(weekStartAttr) : 1;
-      const minDate = root.getAttribute("data-wf-calendar-min-date");
-      const maxDate = root.getAttribute("data-wf-calendar-max-date");
-      calendar(root, {
-        selectedDate,
-        allowMultiple,
-        allowRange,
-        weekStart,
-        minDate,
-        maxDate
+    // Sortable tables: .wf-table with .wf-sort
+    root.querySelectorAll(".wf-table").forEach(el => {
+      initComponent(el, "sortable-table");
+    });
+
+    // Code blocks: [data-wf-codeblock]
+    root.querySelectorAll("[data-wf-codeblock]").forEach(el => {
+      initComponent(el, "codeblock");
+    });
+
+    // Schedule: [data-wf-schedule] or .wf-schedule
+    root.querySelectorAll("[data-wf-schedule], .wf-schedule").forEach(el => {
+      initComponent(el, "schedule");
+    });
+
+    // Calendar: [data-wf-calendar] or .wf-calendar
+    root.querySelectorAll("[data-wf-calendar], .wf-calendar").forEach(el => {
+      initComponent(el, "calendar");
+    });
+  };
+
+  // Initialize on DOMContentLoaded
+  document.addEventListener("DOMContentLoaded", () => {
+    initAllComponents(document);
+
+    // Setup MutationObserver for dynamic content
+    const observer = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        // Check added nodes
+        mutation.addedNodes.forEach(node => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            // Initialize components in the added node
+            initAllComponents(node);
+          }
+        });
       });
     });
+
+    // Start observing
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+
+    // Expose observer for debugging
+    if (window.WFUI) {
+      window.WFUI._observer = observer;
+    }
   });
 
-  const codeblock = (pre) => {
+  const codeblock = pre => {
     if (!pre) return;
 
     // Add copy button if not already present
@@ -1466,9 +1650,609 @@
         }, 2000);
       }
     });
-  }
+  };
+
+  // --- Schedule Wrapper ---
+  const normalizeRange = range => {
+    if (!range || range === "all-day") return null; // OFF
+    if (range === "daytime") return { start: 8, end: 18, label: "標準" };
+    if (range === "extended") return { start: 10, end: 20, label: "拡張" };
+    if (typeof range === "function") {
+      const r = range(new Date());
+      return normalizeRange(r);
+    }
+    if (typeof range === "object") {
+      const s = Number(range.start);
+      const e = Number(range.end);
+      if (!(isFinite(s) && isFinite(e) && s >= 0 && e <= 24 && s < e)) {
+        throw new Error(
+          "WFUI.schedule: invalid custom timeRange. Expect { start:number(0-23), end:number(1-24), label?:string } with start < end"
+        );
+      }
+      return { start: Math.floor(s), end: Math.floor(e), label: range.label || "カスタム" };
+    }
+    throw new Error("WFUI.schedule: unsupported timeRange value");
+  };
+
+  const inRange = (h, m, r) => {
+    if (!r) return true;
+    if (h < r.start) return false;
+    if (h > r.end) return false;
+    if (h === r.end && m > 0) return false;
+    return true;
+  };
+
+  const applyCustomRange = (root, customRange) => {
+    // Daily grid
+    const daily = root.querySelector(".wf-schedule__time-grid");
+    if (daily) {
+      daily.querySelectorAll(".wf-schedule__time-slot").forEach(el => {
+        const t = (el.getAttribute("data-time") || "").split(":");
+        const h = Number(t[0] || 0);
+        const m = Number(t[1] || 0);
+        if (!customRange) {
+          el.style.removeProperty("display");
+        } else {
+          el.style.display = inRange(h, m, customRange) ? "" : "none";
+        }
+      });
+    }
+    // Weekly grid: time labels and slots
+    const weekly = root.querySelector(".wf-schedule__calendar-grid");
+    if (weekly) {
+      // labels are rendered in separate header container; hide per time in grid rows
+      weekly.querySelectorAll(".wf-schedule__week-time-slot").forEach(el => {
+        const t = (el.getAttribute("data-time") || "").split(":");
+        const h = Number(t[0] || 0);
+        const m = Number(t[1] || 0);
+        if (!customRange) {
+          el.style.removeProperty("display");
+        } else {
+          el.style.display = inRange(h, m, customRange) ? "" : "none";
+        }
+      });
+      weekly.querySelectorAll(".wf-schedule__week-time-label").forEach(el => {
+        const txt = (el.textContent || "").trim();
+        const t = txt.split(":");
+        const h = Number(t[0] || 0);
+        const m = Number(t[1] || 0);
+        if (!customRange) {
+          el.style.removeProperty("display");
+        } else {
+          el.style.display = inRange(h, m, customRange) ? "" : "none";
+        }
+      });
+    }
+  };
+
+  const schedule = (root, opts) => {
+    const o = { ...(opts || {}) };
+    let customRange = null;
+    let lastInterval = Number(o.timeInterval || 60);
+    if (o.timeRange) customRange = normalizeRange(o.timeRange);
+
+    // Always pass all-day to the original to get full slots; we'll gate display ourselves
+    o.timeRange = "all-day";
+    const inst = createScheduleInstance(root, o);
+    const dailySection = root.querySelector(".wf-schedule__daily");
+    const settings = root.querySelector(".wf-schedule__settings");
+    const dateInput = root.querySelector('input[type="date"]');
+    let hasDate = !!(opts && opts.selectedDate) || (dateInput && !!dateInput.value);
+
+    const applyGate = () => {
+      if (dailySection) dailySection.classList.toggle("is-hidden", !hasDate);
+      if (settings) settings.classList.toggle("is-hidden", !hasDate);
+    };
+    applyGate();
+
+    if (dateInput)
+      on(dateInput, "change", () => {
+        hasDate = !!dateInput.value;
+        applyGate();
+        if (inst.setSelectedDate) inst.setSelectedDate(dateInput.value || null);
+        setTimeout(() => {
+          applyCustomRange(root, customRange);
+        }, 0);
+      });
+    if (inst.setSelectedDate) {
+      const origSet = inst.setSelectedDate;
+      inst.setSelectedDate = d => {
+        hasDate = !!d;
+        applyGate();
+        const r = origSet.call(inst, d);
+        setTimeout(() => {
+          applyCustomRange(root, customRange);
+        }, 0);
+        return r;
+      };
+    }
+    if (inst.setMode) {
+      const origMode = inst.setMode;
+      inst.setMode = m => {
+        const r = origMode.call(inst, m);
+        setTimeout(() => {
+          applyCustomRange(root, customRange);
+        }, 0);
+        return r;
+      };
+    }
+    if (inst.navigateWeek) {
+      const origNav = inst.navigateWeek;
+      inst.navigateWeek = dir => {
+        const r = origNav.call(inst, dir);
+        setTimeout(() => {
+          applyCustomRange(root, customRange);
+        }, 0);
+        return r;
+      };
+    }
+    if (inst.setTimeInterval) {
+      const origTI = inst.setTimeInterval;
+      inst.setTimeInterval = iv => {
+        lastInterval = Number(iv || lastInterval);
+        const r = origTI.call(inst, iv);
+        setTimeout(() => {
+          applyCustomRange(root, customRange);
+        }, 0);
+        return r;
+      };
+    }
+    if (inst.clearSelection) {
+      const origClr = inst.clearSelection;
+      inst.clearSelection = () => {
+        const r = origClr.call(inst);
+        setTimeout(() => {
+          applyCustomRange(root, customRange);
+        }, 0);
+        return r;
+      };
+    }
+    if (inst.setTimeRange) {
+      const origTR = inst.setTimeRange;
+      inst.setTimeRange = range => {
+        customRange = normalizeRange(range);
+        const r = origTR.call(inst, "all-day");
+        setTimeout(() => {
+          applyCustomRange(root, customRange);
+        }, 0);
+        return r;
+      };
+    }
+
+    // help text sanitize
+    const mo = new MutationObserver(() => {
+      const help = root.querySelector(".wf-schedule__help");
+      if (!help) return;
+
+      const walk = node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          let txt = node.nodeValue;
+          let changed = false;
+          if (txt.includes("勤怠：ノーマル")) {
+            txt = txt.replace(/勤怠：ノーマル/g, "標準");
+            changed = true;
+          }
+          if (txt.includes("勤怠：モダン")) {
+            txt = txt.replace(/勤怠：モダン/g, "拡張");
+            changed = true;
+          }
+          if (customRange && /（.*?）/.test(txt)) {
+            const label = customRange.label || "時間帯";
+            const paren = `（${label}: ${String(customRange.start).padStart(2, "0")}:00-${String(customRange.end).padStart(2, "0")}:00、${lastInterval}分刻み）`;
+            // Only replace if it's different to avoid infinite loop/unnecessary updates
+            if (!txt.includes(paren)) {
+              txt = txt.replace(/（.*?）/, paren);
+              changed = true;
+            }
+          }
+          if (changed) node.nodeValue = txt;
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          node.childNodes.forEach(walk);
+        }
+      };
+
+      walk(help);
+    });
+    mo.observe(root, { subtree: true, childList: true, characterData: true });
+
+    // Run sanitization once immediately to handle existing text
+    const help = root.querySelector(".wf-schedule__help");
+    if (help) {
+      const walk = node => {
+        if (node.nodeType === Node.TEXT_NODE) {
+          let txt = node.nodeValue;
+          let changed = false;
+          if (txt.includes("勤怠：ノーマル")) {
+            txt = txt.replace(/勤怠：ノーマル/g, "標準");
+            changed = true;
+          }
+          if (txt.includes("勤怠：モダン")) {
+            txt = txt.replace(/勤怠：モダン/g, "拡張");
+            changed = true;
+          }
+          if (customRange && /（.*?）/.test(txt)) {
+            const label = customRange.label || "時間帯";
+            const paren = `（${label}: ${String(customRange.start).padStart(2, "0")}:00-${String(customRange.end).padStart(2, "0")}:00、${lastInterval}分刻み）`;
+            if (!txt.includes(paren)) {
+              txt = txt.replace(/（.*?）/, paren);
+              changed = true;
+            }
+          }
+          if (changed) node.nodeValue = txt;
+        } else if (node.nodeType === Node.ELEMENT_NODE) {
+          node.childNodes.forEach(walk);
+        }
+      };
+      walk(help);
+    }
+
+    // Apply once after initial render
+    setTimeout(() => {
+      applyCustomRange(root, customRange);
+    }, 0);
+    return inst;
+  };
+
+  // --- Data Table ---
+  const dataTable = (element, options) => {
+    const opts = {
+      columns: [],
+      data: [],
+      sortable: true,
+      filterable: true,
+      pagination: true,
+      pageSize: 10,
+      selectable: false,
+      ...(options || {})
+    };
+
+    const currentSort = { column: null, direction: null };
+    let currentFilter = "";
+    let currentPage = 1;
+    const selectedRows = new Set();
+
+    const render = () => {
+      const filtered = opts.data.filter(row => {
+        if (!currentFilter) return true;
+        return opts.columns.some(col => {
+          const val = String(row[col.key] || "").toLowerCase();
+          return val.indexOf(currentFilter.toLowerCase()) >= 0;
+        });
+      });
+
+      const sorted = [...filtered];
+      if (currentSort.column !== null) {
+        sorted.sort((a, b) => {
+          const aVal = a[currentSort.column];
+          const bVal = b[currentSort.column];
+          if (aVal < bVal) return currentSort.direction === "asc" ? -1 : 1;
+          if (aVal > bVal) return currentSort.direction === "asc" ? 1 : -1;
+          return 0;
+        });
+      }
+
+      const start = (currentPage - 1) * opts.pageSize;
+      const end = start + opts.pageSize;
+      const paged = sorted.slice(start, end);
+
+      const tbody = element.querySelector("tbody");
+      if (!tbody) return;
+
+      tbody.innerHTML = "";
+      paged.forEach((row, idx) => {
+        const tr = document.createElement("tr");
+        if (selectedRows.has(start + idx)) {
+          tr.classList.add("is-selected");
+        }
+
+        if (opts.selectable) {
+          const td = document.createElement("td");
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkbox.className = "wf-data-table__checkbox";
+          checkbox.checked = selectedRows.has(start + idx);
+          checkbox.addEventListener("change", () => {
+            if (checkbox.checked) {
+              selectedRows.add(start + idx);
+            } else {
+              selectedRows.delete(start + idx);
+            }
+            render();
+          });
+          td.appendChild(checkbox);
+          tr.appendChild(td);
+        }
+
+        opts.columns.forEach(col => {
+          const td = document.createElement("td");
+          td.textContent = row[col.key] || "";
+          tr.appendChild(td);
+        });
+
+        tbody.appendChild(tr);
+      });
+
+      const info = element.querySelector(".wf-data-table__info");
+      if (info) {
+        info.textContent = `${start + 1}-${Math.min(end, sorted.length)} / ${sorted.length}件`;
+      }
+    };
+
+    const init = () => {
+      const searchInput = element.querySelector(".wf-data-table__search input");
+      if (searchInput && opts.filterable) {
+        let timeout;
+        searchInput.addEventListener("input", () => {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => {
+            currentFilter = searchInput.value;
+            currentPage = 1;
+            render();
+          }, 300);
+        });
+      }
+
+      const thead = element.querySelector("thead");
+      if (thead && opts.sortable) {
+        thead.querySelectorAll("th").forEach((th, idx) => {
+          if (idx === 0 && opts.selectable) return;
+          const col = opts.columns[idx - (opts.selectable ? 1 : 0)];
+          if (!col || !col.sortable) return;
+
+          const button = document.createElement("button");
+          button.className = "wf-data-table__sort";
+          button.innerHTML = `${th.textContent || ""}<span class="wf-data-table__sort-icon"></span>`;
+          button.setAttribute("aria-label", `ソート: ${th.textContent || ""}`);
+          th.innerHTML = "";
+          th.appendChild(button);
+
+          button.addEventListener("click", () => {
+            if (currentSort.column === col.key) {
+              currentSort.direction = currentSort.direction === "asc" ? "desc" : "asc";
+            } else {
+              currentSort.column = col.key;
+              currentSort.direction = "asc";
+            }
+            th.setAttribute(
+              "aria-sort",
+              currentSort.direction === "asc" ? "ascending" : "descending"
+            );
+            thead.querySelectorAll("th").forEach(otherTh => {
+              if (otherTh !== th) {
+                otherTh.removeAttribute("aria-sort");
+              }
+            });
+            render();
+          });
+        });
+      }
+
+      render();
+    };
+
+    init();
+
+    return {
+      sort: (column, direction) => {
+        currentSort.column = column;
+        currentSort.direction = direction || "asc";
+        render();
+      },
+      filter: query => {
+        currentFilter = query;
+        currentPage = 1;
+        render();
+      },
+      setPage: page => {
+        currentPage = page;
+        render();
+      },
+      getSelectedRows: () => Array.from(selectedRows)
+    };
+  };
+
+  // --- Autocomplete ---
+  const autocomplete = (inputElement, options) => {
+    const opts = {
+      source: (query, callback) => {
+        callback([]);
+      },
+      minLength: 2,
+      delay: 300,
+      ...(options || {})
+    };
+
+    const menu = document.createElement("div");
+    menu.className = "wf-autocomplete__menu";
+    menu.setAttribute("role", "listbox");
+    menu.hidden = true;
+    inputElement.parentNode.appendChild(menu);
+
+    let highlightedIndex = -1;
+    let items = [];
+    let timeout;
+
+    const showMenu = () => {
+      menu.classList.add("is-open");
+      menu.hidden = false;
+      menu.setAttribute("aria-expanded", "true");
+    };
+
+    const hideMenu = () => {
+      menu.classList.remove("is-open");
+      menu.hidden = true;
+      menu.setAttribute("aria-expanded", "false");
+      highlightedIndex = -1;
+    };
+
+    const renderItems = data => {
+      items = data;
+      menu.innerHTML = "";
+      if (data.length === 0) {
+        const empty = document.createElement("div");
+        empty.className = "wf-autocomplete__empty";
+        empty.textContent = "候補が見つかりません";
+        menu.appendChild(empty);
+      } else {
+        data.forEach((item, idx) => {
+          const div = document.createElement("div");
+          div.className = "wf-autocomplete__item";
+          div.setAttribute("role", "option");
+          div.setAttribute("data-index", idx);
+          div.textContent = typeof item === "string" ? item : item.label || item.value || "";
+          div.addEventListener("click", () => {
+            selectItem(item);
+          });
+          menu.appendChild(div);
+        });
+      }
+      showMenu();
+    };
+
+    const selectItem = item => {
+      inputElement.value = typeof item === "string" ? item : item.value || item.label || "";
+      hideMenu();
+      if (opts.onSelect) opts.onSelect(item);
+    };
+
+    inputElement.addEventListener("input", () => {
+      const query = inputElement.value.trim();
+      clearTimeout(timeout);
+      if (query.length < opts.minLength) {
+        hideMenu();
+        return;
+      }
+      timeout = setTimeout(() => {
+        opts.source(query, renderItems);
+      }, opts.delay);
+    });
+
+    inputElement.addEventListener("keydown", e => {
+      if (!menu.hidden && items.length > 0) {
+        if (e.key === "ArrowDown") {
+          e.preventDefault();
+          highlightedIndex = Math.min(highlightedIndex + 1, items.length - 1);
+          updateHighlight();
+        } else if (e.key === "ArrowUp") {
+          e.preventDefault();
+          highlightedIndex = Math.max(highlightedIndex - 1, -1);
+          updateHighlight();
+        } else if (e.key === "Enter" && highlightedIndex >= 0) {
+          e.preventDefault();
+          selectItem(items[highlightedIndex]);
+        } else if (e.key === "Escape") {
+          hideMenu();
+        }
+      }
+    });
+
+    const updateHighlight = () => {
+      menu.querySelectorAll(".wf-autocomplete__item").forEach((el, idx) => {
+        el.classList.toggle("is-highlighted", idx === highlightedIndex);
+      });
+    };
+
+    document.addEventListener("click", e => {
+      if (!menu.contains(e.target) && e.target !== inputElement) {
+        hideMenu();
+      }
+    });
+
+    return {
+      destroy: () => {
+        menu.remove();
+      }
+    };
+  };
+
+  // --- Snackbar ---
+  const snackbar = (() => {
+    const containers = {};
+
+    const getContainer = position => {
+      if (!containers[position]) {
+        const container = document.createElement("div");
+        container.className = `wf-snackbar-container wf-snackbar-container--${position}`;
+        document.body.appendChild(container);
+        containers[position] = container;
+      }
+      return containers[position];
+    };
+
+    const removeSnackbar = snackbar => {
+      snackbar.classList.add("is-removing");
+      setTimeout(() => {
+        snackbar.remove();
+      }, 200);
+    };
+
+    return {
+      show: options => {
+        const opts = {
+          message: "",
+          type: "info",
+          duration: 3000,
+          position: "bottom-right",
+          ...(options || {})
+        };
+
+        const container = getContainer(opts.position);
+        const snackbar = document.createElement("div");
+        snackbar.className = `wf-snackbar wf-snackbar--${opts.type}`;
+        snackbar.setAttribute("role", "alert");
+
+        const content = document.createElement("div");
+        content.className = "wf-snackbar__content";
+        const message = document.createElement("p");
+        message.className = "wf-snackbar__message";
+        message.textContent = opts.message;
+        content.appendChild(message);
+        snackbar.appendChild(content);
+
+        const close = document.createElement("button");
+        close.className = "wf-snackbar__close";
+        close.setAttribute("aria-label", "閉じる");
+        close.innerHTML = "×";
+        close.addEventListener("click", () => {
+          removeSnackbar(snackbar);
+        });
+        snackbar.appendChild(close);
+
+        container.appendChild(snackbar);
+
+        if (opts.duration > 0) {
+          setTimeout(() => {
+            removeSnackbar(snackbar);
+          }, opts.duration);
+        }
+
+        return {
+          close: () => {
+            removeSnackbar(snackbar);
+          }
+        };
+      },
+      clear: position => {
+        if (position) {
+          const container = containers[position];
+          if (container) {
+            container.querySelectorAll(".wf-snackbar").forEach(removeSnackbar);
+          }
+        } else {
+          Object.keys(containers).forEach(pos => {
+            containers[pos].querySelectorAll(".wf-snackbar").forEach(removeSnackbar);
+          });
+        }
+      }
+    };
+  })();
+
+  // ============================================================================
+  // WFUI Public API
+  // ============================================================================
 
   window.WFUI = {
+    // Component initializers (for manual initialization if needed)
     tooltip,
     popover,
     dropdown,
@@ -1478,6 +2262,69 @@
     sortableTable,
     codeblock,
     schedule,
-    calendar
+    calendar,
+    dataTable,
+    autocomplete,
+    snackbar,
+
+    // Utility methods
+    init: initAllComponents, // Manually initialize components in a given root
+    version: "1.0.0",
+
+    // Debug utilities
+    debug: {
+      // List all initialized components
+      listInitialized: () => {
+        const components = [];
+        const walk = node => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            Object.keys(node).forEach(key => {
+              if (key.startsWith("_wfui_") && key.endsWith("_initialized")) {
+                components.push({
+                  element: node,
+                  type: key.replace("_wfui_", "").replace("_initialized", ""),
+                  classes: Array.from(node.classList),
+                  id: node.id
+                });
+              }
+            });
+            Array.from(node.children).forEach(walk);
+          }
+        };
+        walk(document.body);
+        return components;
+      },
+
+      // Check if element is initialized
+      isInitialized: (el, componentType) => {
+        if (!el || !componentType) return false;
+        return !!el[`_wfui_${componentType}_initialized`];
+      },
+
+      // Get observer status
+      getObserver: () => {
+        return window.WFUI._observer || null;
+      },
+
+      // Reinitialize all components (useful for debugging)
+      reinitAll: () => {
+        console.warn(
+          "[WFUI] Reinitializing all components. This may cause issues with existing instances."
+        );
+        // Clear all initialization flags
+        const walk = node => {
+          if (node.nodeType === Node.ELEMENT_NODE) {
+            Object.keys(node).forEach(key => {
+              if (key.startsWith("_wfui_") && key.endsWith("_initialized")) {
+                delete node[key];
+              }
+            });
+            Array.from(node.children).forEach(walk);
+          }
+        };
+        walk(document.body);
+        initAllComponents(document);
+      }
+    }
   };
 })();

@@ -102,7 +102,9 @@
 
   .wf-toast-container .wf-toast {
     pointer-events: auto;
-    animation: wf-toast-in var(--wf-duration-base) var(--wf-ease-out);
+    animation-name: wf-toast-in;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-duration-base));
+    animation-timing-function: var(--wf-ease-out);
   }
 
   /* Container positions */
@@ -152,7 +154,10 @@
   }
 
   .wf-toast.is-removing {
-    animation: wf-toast-out var(--wf-duration-base) var(--wf-ease-in) forwards;
+    animation-name: wf-toast-out;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-duration-base));
+    animation-timing-function: var(--wf-ease-in);
+    animation-fill-mode: forwards;
   }
 
   @keyframes wf-toast-out {

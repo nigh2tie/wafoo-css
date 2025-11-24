@@ -479,14 +479,380 @@ wafoo-cssでカレンダーを作成してください。
 
 ---
 
+## 実践プロンプト例（完全版）
+
+以下は、実際のユースケースに基づいた完全なプロンプト例です。
+
+### 例4: ログインページ（完全版）
+
+```
+wafoo-cssを使用してログインページを作成してください。
+
+## 要件
+
+### レイアウト
+- 中央配置のログインカード（最大幅: 400px）
+- 和紙テクスチャカード（`wf-card-washi`）を使用
+- ページ背景は淡い色
+- テーマ: theme-sakura
+
+### フォーム要素
+1. タイトル: "ログイン"
+2. メールアドレス入力
+   - ラベル: "メールアドレス"
+   - 必須マーク付き（◆）
+   - プレースホルダー: "name@example.com"
+3. パスワード入力
+   - ラベル: "パスワード"
+   - 必須マーク付き（◆）
+   - type="password"
+4. チェックボックス: "ログイン状態を保持"
+5. ボタン:
+   - プライマリボタン: "ログイン"（全幅）
+   - リンク: "パスワードをお忘れですか？"（小さい文字、右寄せ）
+
+### アクセシビリティ
+- Skip Link: "メインコンテンツへスキップ"
+- ARIA Landmarks（header, main, footer）
+- すべての入力にラベル関連付け（`for`と`id`）
+- ARIA属性（`aria-required`等）
+
+### レスポンシブ
+- モバイル: カード幅100%（左右にpadding）
+- タブレット以上: カード幅400px、中央配置
+
+## 使用するクラス
+- レイアウト: `wf-flex`, `wf-items-center`, `wf-justify-center`, `wf-h-screen`
+- カード: `wf-card`, `wf-card-washi`, `wf-max-w-md`, `wf-mx-auto`
+- フォーム: `wf-field`, `wf-label`, `wf-input`, `wf-checkbox`, `wf-btn`, `wf-btn-primary`
+- スペーシング: `wf-mt-*`, `wf-mb-*`, `wf-p-*`
+- テキスト: `wf-text-center`, `wf-text-sm`, `wf-text-muted`
+```
+
+**期待される出力例:**
+
+```html
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ログイン - wafoo-css</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="dist/wafoo.min.css">
+</head>
+<body class="theme-sakura wf-bg-surface">
+  <a href="#main" class="wf-sr-only">メインコンテンツへスキップ</a>
+
+  <main role="main" id="main" class="wf-flex wf-items-center wf-justify-center wf-h-screen wf-p-4">
+    <div class="wf-card wf-card-washi wf-max-w-md wf-w-full">
+      <h1 class="wf-text-center wf-mb-6">ログイン</h1>
+
+      <form>
+        <div class="wf-field">
+          <label class="wf-label" for="email">
+            メールアドレス
+            <span aria-label="必須項目">◆</span>
+          </label>
+          <input
+            type="email"
+            id="email"
+            class="wf-input"
+            placeholder="name@example.com"
+            required
+            aria-required="true"
+          >
+        </div>
+
+        <div class="wf-field">
+          <label class="wf-label" for="password">
+            パスワード
+            <span aria-label="必須項目">◆</span>
+          </label>
+          <input
+            type="password"
+            id="password"
+            class="wf-input"
+            required
+            aria-required="true"
+          >
+        </div>
+
+        <div class="wf-flex wf-items-center wf-justify-between wf-mt-4 wf-mb-6">
+          <label class="wf-checkbox">
+            <input type="checkbox">
+            <span>ログイン状態を保持</span>
+          </label>
+          <a href="#" class="wf-text-sm wf-text-accent">パスワードをお忘れですか？</a>
+        </div>
+
+        <button type="submit" class="wf-btn wf-btn-primary wf-w-full">
+          ログイン
+        </button>
+      </form>
+
+      <div class="wf-text-center wf-mt-6">
+        <p class="wf-text-sm wf-text-muted">
+          アカウントをお持ちでないですか？
+          <a href="#" class="wf-text-accent">新規登録</a>
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <script src="dist/wafoo.min.js"></script>
+</body>
+</html>
+```
+
+---
+
+### 例5: ダッシュボード（完全版）
+
+```
+wafoo-cssを使用してダッシュボード画面を作成してください。
+
+## 要件
+
+### レイアウト構造
+1. ヘッダー（固定）
+   - ロゴ/サイト名（左）
+   - ナビゲーションリンク（右）: ダッシュボード、設定、ログアウト
+2. サイドバー（左）
+   - デスクトップ: 固定表示（幅: 250px）
+   - モバイル: オフキャンバス（ハンバーガーメニューで開閉）
+   - メニュー項目: ホーム、レポート、ユーザー、設定
+3. メインコンテンツエリア
+   - 統計カードグリッド（3列、モバイルでは1列）
+   - 各カード: タイトル、数値、アイコン、前月比表示
+4. フッター
+
+### 統計カード
+1. 総売上
+   - 数値: "¥1,234,567"
+   - 前月比: "+12%"（成功色）
+   - アイコン: "¥"
+2. 新規ユーザー
+   - 数値: "1,234"
+   - 前月比: "+8%"（成功色）
+   - アイコン: "●"
+3. アクティブユーザー
+   - 数値: "987"
+   - 前月比: "-3%"（警告色）
+   - アイコン: "→"
+
+### テーマとスタイル
+- テーマ: theme-momiji
+- カード: 和紙テクスチャ（`wf-card-washi`）
+- スペーシング: 統一的な余白（16px, 24px）
+
+### アクセシビリティ
+- Skip Link
+- ARIA Landmarks
+- サイドバーメニューにARIA属性（`aria-current="page"`）
+- オフキャンバスにフォーカストラップ
+
+### レスポンシブ
+- モバイル（<600px）: サイドバー非表示、ハンバーガーメニュー、カード1列
+- タブレット（600-900px）: サイドバー表示、カード2列
+- デスクトップ（≥900px）: フルレイアウト、カード3列
+
+## 使用するコンポーネント
+- `wf-navbar` (ヘッダー)
+- `wf-sidebar` (サイドバー)
+- `wf-offcanvas` (モバイルメニュー)
+- `wf-card`, `wf-card-washi` (統計カード)
+- `wf-grid`, `wf-grid-cols-*` (カードグリッド)
+- `wf-text-success`, `wf-text-warning` (前月比色)
+```
+
+---
+
+### 例6: お問い合わせフォーム（完全版）
+
+```
+wafoo-cssを使用してお問い合わせフォームページを作成してください。
+
+## 要件
+
+### レイアウト
+- 2カラムレイアウト（デスクトップ）
+  - 左: フォーム
+  - 右: 連絡先情報カード
+- モバイル: 1カラム（フォームが上、連絡先情報が下）
+- 最大幅: 1200px、中央配置
+- テーマ: theme-fuji
+
+### フォーム要素
+1. 氏名（必須）
+   - type="text"
+   - プレースホルダー: "山田 太郎"
+2. メールアドレス（必須）
+   - type="email"
+   - プレースホルダー: "name@example.com"
+   - ヘルプテキスト: "返信先として使用します"
+3. お問い合わせ種別（必須）
+   - select要素
+   - オプション: "製品について", "サポート", "その他"
+4. メッセージ（必須）
+   - textarea（5行）
+   - プレースホルダー: "お問い合わせ内容をご記入ください"
+5. 個人情報の取り扱い
+   - チェックボックス（必須）
+   - ラベル: "個人情報保護方針に同意する"
+6. 送信ボタン
+   - プライマリボタン
+   - テキスト: "送信する"
+
+### 連絡先情報カード
+- タイトル: "その他のお問い合わせ方法"
+- 電話番号: "0120-XXX-XXX"
+- 営業時間: "平日 9:00-18:00"
+- メールアドレス: "support@example.com"
+- カードスタイル: 和紙テクスチャ（`wf-card-washi`）
+
+### バリデーション
+- 必須項目に◆マークを表示
+- エラー状態のスタイル（`is-invalid`）を含む例を追加
+- エラーメッセージ例: "このフィールドは必須です"
+
+### アクセシビリティ
+- すべての入力にラベル関連付け
+- `aria-required="true"`
+- `aria-describedby` でヘルプテキストを関連付け
+- エラーメッセージに `role="alert"`
+
+## 使用するクラス
+- レイアウト: `wf-grid`, `wf-grid-cols-2`, `wf-gap-8`
+- フォーム: `wf-field`, `wf-label`, `wf-input`, `wf-textarea`, `wf-select`, `wf-checkbox`
+- カード: `wf-card`, `wf-card-washi`
+- ボタン: `wf-btn`, `wf-btn-primary`
+- テキスト: `wf-help`, `wf-error`
+- レスポンシブ: `wf-md-grid-cols-2`（600px以上で2列）
+```
+
+---
+
+### 例7: データテーブル with 検索・フィルタ（完全版）
+
+```
+wafoo-cssを使用してユーザー管理テーブルページを作成してください。
+
+## 要件
+
+### 機能
+1. 検索バー
+   - 入力フィールド: "名前、メールで検索..."
+   - 検索ボタン（プライマリ）
+2. フィルタ（ドロップダウン）
+   - ラベル: "ステータス"
+   - オプション: "すべて", "アクティブ", "非アクティブ"
+3. テーブル
+   - 列: ID, 名前, メール, ステータス, アクション
+   - ソート機能付き（`data-wf-sortable-table`）
+   - ストライプ行（`wf-table-striped`）
+   - ホバー効果（`wf-table-hover`）
+4. ページネーション
+   - 前へ/次へボタン
+   - ページ番号表示（1, 2, 3...）
+5. アクションボタン
+   - 編集ボタン（アイコン: ✎）
+   - 削除ボタン（アイコン: ×）
+
+### テーブルデータ例（3行）
+1. ID: 001, 名前: 山田太郎, メール: yamada@example.com, ステータス: アクティブ
+2. ID: 002, 名前: 鈴木花子, メール: suzuki@example.com, ステータス: アクティブ
+3. ID: 003, 名前: 佐藤次郎, メール: sato@example.com, ステータス: 非アクティブ
+
+### スタイル
+- テーマ: theme-kiku
+- ステータスバッジ:
+  - アクティブ: 成功色（`wf-bg-success`, `wf-text-success`）
+  - 非アクティブ: ミュート色（`wf-bg-muted`, `wf-text-muted`）
+
+### アクセシビリティ
+- テーブルに `<caption>` 追加: "ユーザー一覧"
+- ソートボタンに `aria-describedby` でソート説明を関連付け
+- ステータスバッジに `role="status"`
+- ページネーションに `aria-label="ページネーション"`
+
+### レスポンシブ
+- モバイル: テーブルに最小幅を設定し、横スクロール可能に
+- 検索バーとフィルタ: モバイルで縦並び、デスクトップで横並び
+
+## 使用するコンポーネント
+- `wf-input` (検索)
+- `wf-select` (フィルタ)
+- `wf-btn`, `wf-btn-primary`, `wf-btn-outline`, `wf-btn-icon`
+- `wf-table`, `wf-table-striped`, `wf-table-hover`
+- `wf-sort` (ソートボタン)
+- `wf-pagination` (ページネーション)
+- `wf-badge` (ステータスバッジ)
+```
+
+---
+
+### 例8: モーダルダイアログ（削除確認）
+
+```
+wafoo-cssを使用して削除確認モーダルダイアログを作成してください。
+
+## 要件
+
+### トリガー
+- ボタン: "ユーザーを削除"
+- スタイル: 危険色（`wf-btn-danger`）
+- `data-wf-modal="delete-confirm"` 属性
+
+### モーダル内容
+1. ヘッダー
+   - タイトル: "ユーザー削除の確認"
+   - 閉じるボタン（×）
+2. 本文
+   - 警告アイコン（▲）
+   - テキスト: "このユーザーを削除してもよろしいですか？この操作は取り消せません。"
+   - ユーザー情報表示（カード内）:
+     - 名前: "山田太郎"
+     - メール: "yamada@example.com"
+3. フッター
+   - キャンセルボタン（アウトライン）
+   - 削除ボタン（危険色、プライマリ）
+
+### アクセシビリティ
+- `role="dialog"`
+- `aria-modal="true"`
+- `aria-labelledby="modal-title"`
+- フォーカストラップ（自動）
+- Escキーで閉じる（自動）
+- 背景クリックで閉じる（自動）
+
+### スタイル
+- テーマ: theme-sakura
+- モーダルサイズ: 小（`wf-modal-sm`）
+- 警告色を使用（`wf-alert-warning`）
+
+## 使用するクラス
+- モーダル: `wf-modal-overlay`, `wf-modal`, `wf-modal-sm`
+- セクション: `wf-modal__header`, `wf-modal__body`, `wf-modal__footer`
+- ボタン: `wf-btn-danger`, `wf-btn-outline`, `wf-modal__close`
+- アラート: `wf-alert`, `wf-alert-warning`
+- カード: `wf-card`（ユーザー情報表示）
+```
+
+---
+
 ## 参考資料
 
 - [wafoo-css リファレンス](./REFERENCE.md)
 - [wafoo-css コンポーネントAPI](./COMPONENTS.md)
 - [wafoo-css 命名規則](./NAMING_CONVENTIONS.md)
 - [wafoo-css アクセシビリティガイド](./ACCESSIBILITY.md)
+- [llms.txt](./llms.txt) - LLM向け圧縮コンテキスト
+- [.cursorrules](./.cursorrules) - AI エージェント向けルール
 
 ---
 
-**最終更新**: 2025-11-23
+**最終更新**: 2025-11-24
 

@@ -250,7 +250,9 @@
     background: linear-gradient(135deg, var(--wf-warning), var(--wf-warning));
     color: var(--wf-surface-base);
     border-color: var(--wf-warning);
-    animation: pulse var(--wf-pulse-duration, 4s) infinite;
+    animation-name: pulse;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-pulse-duration, 4s));
+    animation-iteration-count: infinite;
     box-shadow: var(--wf-shadow-md);
   }
 
@@ -382,7 +384,9 @@
     background: linear-gradient(135deg, var(--wf-warning), var(--wf-warning));
     color: var(--wf-surface-base);
     border-color: var(--wf-warning);
-    animation: pulse var(--wf-pulse-duration, 4s) infinite;
+    animation-name: pulse;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-pulse-duration, 4s));
+    animation-iteration-count: infinite;
     box-shadow: var(--wf-shadow-md);
   }
 

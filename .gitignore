@@ -31,6 +31,7 @@ examples/
 # ----------------------
 .claude/
 .cursor/
+.cursorrules
 .aider*
 .copilot/
 .codeium/
@@ -38,6 +39,7 @@ ai-*.md
 *-ai.md
 prompts/
 .prompts/
+llms.txt
 
 # Environment & Secrets
 # ---------------------

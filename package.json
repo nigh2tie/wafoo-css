@@ -1,6 +1,6 @@
 {
   "name": "wafoo-css",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Japanese-inspired CSS framework with traditional aesthetics",
   "main": "dist/wafoo.css",
   "style": "dist/wafoo.css",
@@ -10,7 +10,10 @@
     "./extras": "./dist/wafoo-extras.css",
     "./wafoo.css": "./dist/wafoo.css",
     "./wafoo-core.css": "./dist/wafoo-core.css",
-    "./wafoo-extras.css": "./dist/wafoo-extras.css"
+    "./wafoo-extras.css": "./dist/wafoo-extras.css",
+    "./tokens": "./dist/tokens.light.json",
+    "./tokens/light": "./dist/tokens.light.json",
+    "./tokens/dark": "./dist/tokens.dark.json"
   },
   "author": "Q_Q",
   "license": "MIT",
@@ -48,6 +51,7 @@
     "size": "gzip -c dist/wafoo.min.css | wc -c",
     "size:core": "gzip -c dist/wafoo-core.min.css | wc -c",
     "size:extras": "gzip -c dist/wafoo-extras.min.css | wc -c",
+    "check-size": "node scripts/check-size.js",
     "format": "prettier --write \"{src,docs,examples,devserver,scripts}/**/*.{css,html,js,md}\"",
     "format:check": "prettier -c \"{src,docs,examples,devserver,scripts}/**/*.{css,html,js,md}\"",
     "lint:css": "stylelint \"src/**/*.css\"",

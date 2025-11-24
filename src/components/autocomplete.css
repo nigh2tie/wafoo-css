@@ -35,7 +35,9 @@
 
   .wf-autocomplete__menu.is-open {
     display: block;
-    animation: wf-fade-in var(--wf-duration-fast) var(--wf-ease-out);
+    animation-name: wf-fade-in;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-duration-fast));
+    animation-timing-function: var(--wf-ease-out);
   }
 
   .wf-autocomplete__item {
@@ -79,4 +81,3 @@
     }
   }
 }
-

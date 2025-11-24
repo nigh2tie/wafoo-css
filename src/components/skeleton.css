@@ -23,7 +23,10 @@
       var(--wf-surface-muted) 63%
     );
     background-size: 200% 100%;
-    animation: wf-shimmer var(--wf-skeleton-duration, 2s) linear infinite;
+    animation-name: wf-shimmer;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-skeleton-duration, 8s));
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
     border-radius: var(--wf-radius-sm);
   }
   .wf-skeleton-line {

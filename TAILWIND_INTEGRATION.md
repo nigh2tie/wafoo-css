@@ -13,9 +13,9 @@ npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init
 ```
 
-### 2. Wafoo CSSのインポート
+### 2. Wafoo CSSのインポート（推奨順序）
 
-メインのCSSファイルで、Tailwindのユーティリティよりも**前**にWafoo CSSをインポートします。これにより、必要に応じてTailwindのユーティリティがWafooのスタイルを上書きできるようになります（カスケードレイヤーを使用する場合、順序はそれほど重要ではありませんが、良い習慣です）。
+メインのCSSファイルで、Tailwindのユーティリティよりも**前**にWafoo CSSをインポートします。これにより、必要に応じてTailwindのユーティリティがWafooのスタイルを上書きできるようになります。
 
 ```css
 /* main.css */
@@ -33,54 +33,68 @@ npx tailwindcss init
 <link rel="stylesheet" href="path/to/tailwind-output.css">
 ```
 
-## 設定
+## 競合回避戦略
 
-### プレフィックス（推奨）
+### 1. プレフィックスの活用
 
-クラス名の衝突を避けるために、Tailwindクラスにプレフィックスを付けることを強く推奨します。Wafooはユーティリティに `.wf-` プレフィックスを使用していますが、一般的な名前（`.btn`, `.card` など）は、同様のコンポーネントを生成するTailwindプラグインを使用する場合に競合する可能性があります。
+Wafoo CSSは全てのクラスに `wf-` プレフィックスを使用しています（例: `.wf-btn`, `.wf-p-4`）。
+一方、Tailwind CSSはデフォルトではプレフィックスがありません。
 
-`tailwind.config.js` にて：
-
-```javascript
-module.exports = {
-  prefix: 'tw-', // 例: flex の代わりに tw-flex を使用
-  // ...
-}
-```
-
-ただし、Wafooのユーティリティには `.wf-` プレフィックスが付いているため（例：`.wf-flex`, `.wf-p-4`）、標準のTailwindユーティリティ（例：`.flex`, `.p-4`）はWafooユーティリティと直接**競合しません**。これらは併用可能です。
-
-### テーマの拡張
-
-Tailwindのテーマを拡張して、Wafooのデザイン・トークンに合わせることができます。
+通常、この違いにより競合は発生しませんが、もしTailwindプラグインなどで競合が発生する場合は、`tailwind.config.js` でTailwind側にプレフィックスを付けることを検討してください。
 
 ```javascript
 // tailwind.config.js
 module.exports = {
-  theme: {
-    extend: {
-      colors: {
-        'wafoo-primary': 'var(--wf-primary-bg)',
-        'wafoo-accent': 'var(--wf-color-accent)',
-        'wafoo-surface': 'var(--wf-surface-base)',
-      },
-      spacing: {
-        'wafoo-4': 'var(--wf-space-4)',
-      }
-    }
-  }
+  prefix: 'tw-', // 例: flex の代わりに tw-flex を使用
 }
 ```
 
-## 役割分担の例
+### 2. 詳細度と上書き
+
+WafooのコンポーネントスタイルをTailwindのユーティリティで上書きしたい場合、読み込み順序が正しければ通常は機能します。
+もし上書きできない場合は、Tailwindの `!` 修飾子（Important）を使用してください。
+
+```html
+<!-- WafooのパディングをTailwindで強制的に上書き -->
+<button class="wf-btn wf-btn-primary !p-8">
+  大きなパディング
+</button>
+```
+
+## Tailwind -> Wafoo マッピング表
+
+Tailwindのクラス名に慣れている方向けの、Wafoo CSS対応表です。
+Wafooは基本的にTailwindの命名規則に `wf-` を付けた形を採用しています。
+
+| カテゴリ | Tailwind CSS | Wafoo CSS | 備考 |
+| :--- | :--- | :--- | :--- |
+| **Flexbox** | `flex` | `wf-flex` | |
+| | `flex-col` | `wf-flex-col` | |
+| | `items-center` | `wf-items-center` | |
+| | `justify-between` | `wf-justify-between` | |
+| **Grid** | `grid` | `wf-grid` | |
+| | `grid-cols-3` | `wf-grid-cols-3` | |
+| | `gap-4` | `wf-gap-4` | |
+| **Spacing** | `m-4` | `wf-m-4` | |
+| | `p-4` | `wf-p-4` | |
+| | `mx-auto` | `wf-mx-auto` | |
+| **Sizing** | `w-full` | `wf-w-full` | |
+| | `h-screen` | `wf-h-screen` | |
+| **Typography** | `text-lg` | `wf-text-lg` | |
+| | `font-bold` | `wf-font-bold` | |
+| | `text-center` | `wf-text-center` | |
+| **Colors** | `text-red-500` | `wf-text-danger` | セマンティック名を使用 |
+| | `bg-blue-500` | `wf-bg-info` | セマンティック名を使用 |
+
+## 役割分担の推奨
 
 コードベースをきれいに保つために、以下の役割分担を推奨します：
 
 | カテゴリ | Wafoo CSS | Tailwind CSS |
-|----------|-----------|--------------|
-| **コンポーネント** | ボタン、カード、モーダル、フォーム | 単発のウィジェット、複雑なインタラクティブ状態 |
+| :--- | :--- | :--- |
+| **コンポーネント** | ボタン、カード、モーダル、フォームなどの**和風UI部品** | 単発のウィジェット、複雑なインタラクティブ状態 |
 | **レイアウト** | 基本コンテナ、グリッドシステム | 複雑なFlexbox/Gridレイアウト、レスポンシブ調整 |
-| **スペーシング** | 標準スペーシング (`.wf-m-4`) | 微調整 (`.mt-[3px]`) |
+| **スペーシング** | コンポーネント内部の余白 | コンポーネント間の余白、微調整 |
 | **色** | テーマカラー (`.wf-text-primary`) | テーマにない特定の色合い |
 
 ## 実践例：和風ランディングページ
@@ -98,23 +112,3 @@ module.exports = {
   </div>
 </section>
 ```
-
-## FAQ
-
-**Q: Tailwind内でWafooの色を使用できますか？**
-A: はい、「設定」セクションで示したように、Tailwindのテーマ設定を拡張すれば可能です。
-
-**Q: Wafooのクラス名がTailwindプラグインと競合した場合はどうすればよいですか？**
-A: `tailwind.config.js` の `prefix` オプションを使用して、すべてのTailwindクラスを名前空間化してください（例：`tw-btn`）。
-
-**Q: WafooはTailwindの `@apply` をサポートしていますか？**
-A: Wafooは標準CSSです。WafooのソースファイルをPostCSSで処理しない限り、Wafooクラスを直接 `@apply` することはできません。一般的には、HTML内でWafooクラスを使用することを推奨します。
-
-## トラブルシューティング
-
-- **スタイルが適用されない**: 読み込み順序を確認してください。上書きを可能にするため、通常はTailwindユーティリティを最後に読み込む必要があります。
-- **特定のスタイルが上書きできない**: どうしてもWafooのスタイルを上書きする必要がある場合は、Tailwindの任意の値（Arbitrary values）や `!important` 修飾子（例：`!p-0`）を使用してください。
-
-## まとめ
-
-Wafoo CSSの事前にデザインされた和風コンポーネントと、Tailwind CSSのユーティリティファーストの力を組み合わせることで、伝統的な美学を犠牲にすることなく、ユニークで高品質なインターフェースを迅速に構築できます。

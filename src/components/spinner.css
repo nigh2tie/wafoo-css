@@ -14,7 +14,10 @@
     /* Track uses theme border color; indicator uses accent */
     border: 2px solid var(--wf-color-border);
     border-top-color: var(--wf-color-accent);
-    animation: wf-spin 0.8s linear infinite;
+    animation-name: wf-spin;
+    animation-duration: calc(var(--wf-enable-motion, 1) * 0.8s);
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
     display: inline-block;
   }
   .wf-spinner-sm {
