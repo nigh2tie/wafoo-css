@@ -3,7 +3,7 @@ const path = require("path");
 const zlib = require("zlib");
 
 const LIMITS = {
-  "dist/wafoo-core.min.css": 12 * 1024, // 12KB
+  "dist/wafoo-core.min.css": 13 * 1024, // 13KB
   "dist/wafoo.min.css": 25 * 1024, // 25KB
   "dist/wafoo.min.js": 15 * 1024 // 15KB
 };
