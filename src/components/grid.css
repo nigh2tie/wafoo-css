@@ -92,6 +92,15 @@
     }
   }
 
+  /* Row alignment variants */
+  .wf-row-stretch { align-items: stretch; }
+  .wf-row-start   { align-items: flex-start; }
+  .wf-row-center  { align-items: center; }
+  .wf-row-end     { align-items: flex-end; }
+
+  /* Full-height column */
+  .wf-col-fill { align-self: stretch; min-height: 0; }
+
   /* Auto layout (equal flexible columns) */
   .wf-col-auto {
     flex: 1 1 0;

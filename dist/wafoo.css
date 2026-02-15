@@ -813,6 +813,30 @@
       padding: var(--wf-space-3);
     }
   }
+
+  /* Container width variants */
+  .wf-container-narrow {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--wf-space-4);
+  }
+  .wf-container-wide {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--wf-space-4);
+  }
+  .wf-container-xl {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: var(--wf-space-4);
+  }
+  @media (max-width: 600px) {
+    .wf-container-narrow,
+    .wf-container-wide,
+    .wf-container-xl {
+      padding: var(--wf-space-3);
+    }
+  }
 }
 /*!
  * @component Buttons
@@ -2757,6 +2781,15 @@
     }
   }
 
+  /* Row alignment variants */
+  .wf-row-stretch { align-items: stretch; }
+  .wf-row-start   { align-items: flex-start; }
+  .wf-row-center  { align-items: center; }
+  .wf-row-end     { align-items: flex-end; }
+
+  /* Full-height column */
+  .wf-col-fill { align-self: stretch; min-height: 0; }
+
   /* Auto layout (equal flexible columns) */
   .wf-col-auto {
     flex: 1 1 0;
@@ -4516,9 +4549,25 @@
   pre code,
   .wf-code-block code {
     padding: 0;
+    color: inherit;
     background: transparent;
     border: none;
     font-size: inherit;
+  }
+
+  /* External syntax highlighter compatibility (Shiki, Prism, etc.) */
+  pre[class*="shiki"],
+  pre[data-theme],
+  pre[class*="astro-code"] {
+    color: unset;
+    background: unset;
+    border: none;
+  }
+  pre[class*="shiki"] code,
+  pre[data-theme] code,
+  pre[class*="astro-code"] code {
+    color: inherit;
+    background: transparent;
   }
 
   /* Small variant */

@@ -4,12 +4,12 @@
 
 ## プロジェクト概要（AI向け）
 
-- **バージョン**: v1.0.0
+- **バージョン**: v1.1.0
 - **コンポーネント数**: 43種類
 - **テーマ**: 10種類の伝統色テーマ（sakura, momiji, fuji等）
 - **JavaScriptライブラリ**: WFUI（インタラクティブコンポーネント用）
 - **ターゲットブラウザ**: 最新2バージョンのモダンブラウザ（Chrome, Safari, Edge, Firefox）
-- **CSS変数**: 87個のデザイントークン
+- **CSS変数**: 250以上のデザイントークン（色階調50-900、タイポグラフィ拡充含む）
 - **命名規則**: `wf-`プレフィックス + Tailwind風の命名
 
 ## 目次
@@ -309,10 +309,10 @@ wafoo-cssで完全なフォームを作成してください。
 ### 2. セマンティックなカラーの使用
 
 ```html
-<!-- ✅ 良い例（テーマ変数ベース） -->
+<!-- [良い例] テーマ変数ベース -->
 <div class="wf-text-accent wf-bg-primary">
 
-<!-- ❌ 悪い例（具体的な色名は使用しない） -->
+<!-- [悪い例] 具体的な色名は使用しない -->
 <div class="wf-text-red-500 wf-bg-blue-300">
 ```
 
@@ -847,12 +847,11 @@ wafoo-cssを使用して削除確認モーダルダイアログを作成して�
 
 - [wafoo-css リファレンス](./REFERENCE.md)
 - [wafoo-css コンポーネントAPI](./COMPONENTS.md)
-- [wafoo-css 命名規則](./NAMING_CONVENTIONS.md)
 - [wafoo-css アクセシビリティガイド](./ACCESSIBILITY.md)
-- [llms.txt](./llms.txt) - LLM向け圧縮コンテキスト
-- [.cursorrules](./.cursorrules) - AI エージェント向けルール
+- [wafoo-css Tailwind統合ガイド](./TAILWIND_INTEGRATION.md)
+- [wafoo-css マイグレーションガイド](./MIGRATION.md)
 
 ---
 
-**最終更新**: 2025-11-24
+**最終更新**: 2026-02-16
 

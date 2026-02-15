@@ -25,7 +25,8 @@ walkthrough.md
 devserver/
 test-app/
 examples/
-
+feedback/
+scripts/check-implementation.sh
 
 # AI Assistants & Tools
 # ----------------------

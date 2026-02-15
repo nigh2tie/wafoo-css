@@ -101,9 +101,25 @@
   pre code,
   .wf-code-block code {
     padding: 0;
+    color: inherit;
     background: transparent;
     border: none;
     font-size: inherit;
+  }
+
+  /* External syntax highlighter compatibility (Shiki, Prism, etc.) */
+  pre[class*="shiki"],
+  pre[data-theme],
+  pre[class*="astro-code"] {
+    color: unset;
+    background: unset;
+    border: none;
+  }
+  pre[class*="shiki"] code,
+  pre[data-theme] code,
+  pre[class*="astro-code"] code {
+    color: inherit;
+    background: transparent;
   }
 
   /* Small variant */
