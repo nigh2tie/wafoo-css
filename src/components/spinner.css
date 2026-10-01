@@ -11,8 +11,8 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    /* Track uses theme border color; indicator uses accent */
-    border: 2px solid var(--wf-color-border);
+    /* トラックは文字色を薄めた色（装飾用の枠線色は背景とほぼ同色で見えないため）。インジケーターはアクセント色 */
+    border: 2px solid color-mix(in srgb, var(--wf-color-text) 18%, transparent);
     border-top-color: var(--wf-color-accent);
     animation-name: wf-spin;
     animation-duration: calc(var(--wf-enable-motion, 1) * 0.8s);
@@ -26,13 +26,13 @@
   }
   /* Status variants */
   .wf-spinner-success {
-    border-top-color: var(--wf-success);
+    border-top-color: var(--wf-success-text);
   }
   .wf-spinner-warning {
-    border-top-color: var(--wf-warning);
+    border-top-color: var(--wf-warning-text);
   }
   .wf-spinner-danger {
-    border-top-color: var(--wf-danger);
+    border-top-color: var(--wf-danger-text);
   }
   .wf-spinner-lg {
     width: 28px;

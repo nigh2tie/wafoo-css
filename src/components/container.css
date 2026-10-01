@@ -1,0 +1,43 @@
+/*!
+ * @component Container
+ * @description Page width container.
+ * @selector .wf-container
+ * @variants .wf-container-narrow, .wf-container-wide, .wf-container-xl
+ * @variables --wf-space-3, --wf-space-4
+ */
+@layer components {
+  .wf-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: var(--wf-space-4);
+  }
+  @media (max-width: 600px) {
+    .wf-container {
+      padding: var(--wf-space-3);
+    }
+  }
+
+  /* Container width variants */
+  .wf-container-narrow {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: var(--wf-space-4);
+  }
+  .wf-container-wide {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: var(--wf-space-4);
+  }
+  .wf-container-xl {
+    max-width: 1440px;
+    margin: 0 auto;
+    padding: var(--wf-space-4);
+  }
+  @media (max-width: 600px) {
+    .wf-container-narrow,
+    .wf-container-wide,
+    .wf-container-xl {
+      padding: var(--wf-space-3);
+    }
+  }
+}

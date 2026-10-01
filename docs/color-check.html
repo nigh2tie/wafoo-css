@@ -1,0 +1,1092 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>配色チェック | wafoo-css</title>
+    <meta
+      name="description"
+      content="wafoo-css の全コンポーネントを、テーマとライト／ダークを切り替えながら実際の描画色でコントラスト検証するページ"
+    />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="wafoo.css" />
+    <style>
+      .cc-toolbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: end;
+        gap: var(--wf-space-4);
+        padding: var(--wf-space-3) var(--wf-space-4);
+        background: var(--wf-surface-base);
+        color: var(--wf-color-text);
+        border-bottom: 1px solid var(--wf-color-border-strong);
+        box-shadow: var(--wf-shadow-md);
+      }
+      .cc-toolbar .wf-label {
+        margin-bottom: var(--wf-space-1);
+      }
+      .cc-toolbar .wf-select {
+        min-width: 11rem;
+      }
+      /* 狭い画面では追従させない（画面の多くを覆って内容が読めなくなるため） */
+      @media (max-width: 600px) {
+        .cc-toolbar {
+          position: static;
+          gap: var(--wf-space-2);
+          padding: var(--wf-space-2) var(--wf-space-3);
+        }
+        .cc-toolbar > div {
+          flex: 1 1 140px;
+        }
+        .cc-toolbar .wf-select {
+          min-width: 0;
+        }
+        .cc-status {
+          margin-left: 0;
+          font-size: var(--wf-font-sm);
+        }
+      }
+      .cc-status {
+        margin-left: auto;
+        font-weight: 700;
+      }
+      .cc-status.is-pass {
+        color: var(--wf-success-text);
+      }
+      .cc-status.is-fail {
+        color: var(--wf-danger-text);
+      }
+      .cc-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: var(--wf-space-4);
+      }
+      .cc-section {
+        margin-bottom: var(--wf-space-8);
+      }
+      .cc-section > h2 {
+        font-size: var(--wf-font-xl);
+        margin-bottom: var(--wf-space-4);
+      }
+      .cc-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--wf-space-2);
+        align-items: center;
+        margin-bottom: var(--wf-space-3);
+      }
+      .cc-stack > * + * {
+        margin-top: var(--wf-space-3);
+      }
+      .cc-ring {
+        display: inline-block;
+        padding: var(--wf-space-1) var(--wf-space-3);
+        border-radius: var(--wf-radius-sm);
+        outline: 2px solid var(--wf-focus);
+        outline-offset: 2px;
+      }
+      .cc-fail-mark {
+        box-shadow:
+          0 0 0 2px #ffffff,
+          0 0 0 5px #d1001f !important;
+      }
+      /* 検証中は transition を止め、切り替え途中の中間色を測らないようにする */
+      .cc-auditing *,
+      .cc-auditing *::before,
+      .cc-auditing *::after {
+        transition: none !important;
+      }
+      .cc-report table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: var(--wf-font-sm);
+      }
+      .cc-report th,
+      .cc-report td {
+        text-align: left;
+        padding: var(--wf-space-1) var(--wf-space-2);
+        border-bottom: 1px solid var(--wf-color-border);
+        vertical-align: top;
+      }
+      .cc-swatch {
+        display: inline-block;
+        width: 0.9em;
+        height: 0.9em;
+        border: 1px solid var(--wf-color-border-strong);
+        vertical-align: middle;
+        margin-right: 4px;
+      }
+      .cc-matrix td,
+      .cc-matrix th {
+        text-align: center;
+      }
+      .cc-matrix button {
+        font: inherit;
+        min-width: 4.5rem;
+      }
+      .cc-static-sidebar.wf-sidebar {
+        position: static;
+        transform: none;
+        width: 100%;
+        height: auto;
+      }
+      .cc-static-modal.wf-modal {
+        position: static;
+        transform: none;
+        max-width: none;
+        width: 100%;
+        margin: 0;
+        opacity: 1;
+        visibility: visible;
+      }
+    </style>
+  </head>
+
+  <body>
+    <section class="cc-toolbar" aria-label="表示条件">
+      <div>
+        <label class="wf-label" for="cc-theme">テーマ</label>
+        <select id="cc-theme" class="wf-select">
+          <option value="">既定（藤紫・灰桜）</option>
+          <option value="theme-sakura">桜（sakura）</option>
+          <option value="theme-koubai">紅梅（koubai）</option>
+          <option value="theme-moe">萌黄（moe）</option>
+          <option value="theme-kiku">菊（kiku）</option>
+          <option value="theme-koori">氷（koori）</option>
+          <option value="theme-yanagi">柳（yanagi）</option>
+          <option value="theme-momiji">紅葉（momiji）</option>
+          <option value="theme-fuji">藤（fuji）</option>
+          <option value="theme-uguisu">鶯（uguisu）</option>
+          <option value="theme-yuki">雪（yuki）</option>
+        </select>
+      </div>
+      <div>
+        <label class="wf-label" for="cc-mode">モード</label>
+        <select id="cc-mode" class="wf-select">
+          <option value="">OS の設定に従う</option>
+          <option value="light">ライト</option>
+          <option value="dark">ダーク</option>
+        </select>
+      </div>
+      <div class="cc-row" style="margin: 0">
+        <button type="button" class="wf-btn wf-btn-primary" id="cc-run">この表示を検証</button>
+        <button type="button" class="wf-btn wf-btn-outline" id="cc-run-all">
+          全テーマ × 両モードを検証
+        </button>
+      </div>
+      <p class="cc-status" id="cc-status" aria-live="polite">未検証</p>
+    </section>
+
+    <header class="wf-header">
+      <h1>配色チェック</h1>
+      <p style="margin: var(--wf-space-2) 0 0">wafoo-css の全コンポーネント</p>
+    </header>
+
+    <main class="wf-container-wide" id="cc-main">
+      <section class="cc-section cc-report" aria-labelledby="cc-report-title">
+        <h2 id="cc-report-title">検証結果</h2>
+        <p class="wf-help">
+          ブラウザが実際に描画した色（computed
+          style）から、各要素の文字色と実効背景色のコントラスト比を計算します。 文字は
+          4.5:1（大きな文字は 3:1）、フォーム部品の枠線・フォーカスリング・図形は 3:1 が基準です。
+          無効状態の要素は WCAG の対象外のため除外しています。基準を下回った要素は赤い枠で示します。
+        </p>
+        <div id="cc-matrix"></div>
+        <div id="cc-results"></div>
+      </section>
+
+      <div id="cc-samples">
+        <section class="cc-section" aria-labelledby="s-text">
+          <h2 id="s-text">テキスト・リンク</h2>
+          <div class="cc-grid">
+            <div class="cc-stack">
+              <p>
+                本文テキストです。
+                <a href="#s-text">リンク</a>
+                と
+                <strong>強調</strong>
+                、
+                <mark>マーカー</mark>
+                を含みます。
+              </p>
+              <p class="wf-text-muted">補助テキスト（muted）</p>
+              <p>
+                <span class="wf-text-accent">accent</span>
+                /
+                <span class="wf-text-primary">primary</span>
+                /
+                <span class="wf-text-success">success</span>
+                /
+                <span class="wf-text-warning">warning</span>
+                /
+                <span class="wf-text-danger">danger</span>
+                /
+                <span class="wf-text-info">info</span>
+                /
+                <span class="wf-text-secondary">secondary</span>
+              </p>
+              <blockquote>引用文。灰色の補助テキストで表示されます。</blockquote>
+              <p>
+                インライン
+                <code>code</code>
+                とキー
+                <kbd class="wf-kbd">Ctrl</kbd>
+              </p>
+            </div>
+            <div class="wf-card cc-stack" style="padding: var(--wf-space-4)">
+              <p>
+                カード上の本文と
+                <a href="#s-text">リンク</a>
+              </p>
+              <p class="wf-text-muted">カード上の補助テキスト</p>
+              <figure>
+                <figcaption>図のキャプション</figcaption>
+              </figure>
+              <div style="background: var(--wf-surface-muted); padding: var(--wf-space-2)">
+                surface-muted 上の
+                <a href="#s-text">リンク</a>
+                と
+                <span class="wf-text-muted">補助テキスト</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cc-section" aria-labelledby="s-buttons">
+          <h2 id="s-buttons">ボタン</h2>
+          <div class="cc-row">
+            <button type="button" class="wf-btn">標準</button>
+            <button type="button" class="wf-btn wf-btn-primary">プライマリー</button>
+            <button type="button" class="wf-btn wf-btn-outline">アウトライン</button>
+            <button type="button" class="wf-btn wf-btn-subtle">サブトル</button>
+            <button type="button" class="wf-btn wf-btn-gradient">グラデーション</button>
+          </div>
+          <div class="cc-row">
+            <span class="wf-help">
+              読み込み中（
+              <code>.is-loading</code>
+              ）: 文字を隠してスピナーを表示
+            </span>
+            <button type="button" class="wf-btn is-loading" aria-label="送信中">
+              <span>送信</span>
+            </button>
+            <button type="button" class="wf-btn wf-btn-primary is-loading" aria-label="送信中">
+              <span>送信</span>
+            </button>
+          </div>
+          <div class="cc-row" id="cc-spinners">
+            <span class="wf-help">
+              スピナー（
+              <code>.wf-spinner</code>
+              ）
+            </span>
+            <span class="wf-spinner wf-spinner-sm" role="status" aria-label="読み込み中"></span>
+            <span class="wf-spinner" role="status" aria-label="読み込み中"></span>
+            <span class="wf-spinner wf-spinner-lg" role="status" aria-label="読み込み中"></span>
+            <span
+              class="wf-spinner wf-spinner-success"
+              role="status"
+              aria-label="読み込み中"
+            ></span>
+            <span
+              class="wf-spinner wf-spinner-warning"
+              role="status"
+              aria-label="読み込み中"
+            ></span>
+            <span class="wf-spinner wf-spinner-danger" role="status" aria-label="読み込み中"></span>
+          </div>
+          <div class="cc-row">
+            <button type="button" class="wf-btn wf-btn-success">成功</button>
+            <button type="button" class="wf-btn wf-btn-warning">警告</button>
+            <button type="button" class="wf-btn wf-btn-danger">危険</button>
+            <button type="button" class="wf-btn wf-btn-info">情報</button>
+            <button type="button" class="wf-btn wf-btn-secondary">セカンダリー</button>
+          </div>
+          <div class="cc-row">
+            <button type="button" class="wf-btn wf-btn-outline-success">成功</button>
+            <button type="button" class="wf-btn wf-btn-outline-warning">警告</button>
+            <button type="button" class="wf-btn wf-btn-outline-danger">危険</button>
+            <button type="button" class="wf-btn wf-btn-outline-info">情報</button>
+            <button type="button" class="wf-btn wf-btn-outline-secondary">セカンダリー</button>
+          </div>
+          <div class="cc-row">
+            <span class="wf-badge wf-badge-success">成功</span>
+            <span class="wf-badge wf-badge-warning">警告</span>
+            <span class="wf-badge wf-badge-danger">危険</span>
+            <span class="wf-badge wf-badge-info">情報</span>
+            <span class="wf-badge wf-badge-secondary">セカンダリー</span>
+            <span class="wf-stamp">判子</span>
+            <span class="cc-ring" data-ui="outline" data-name="フォーカスリング">
+              フォーカスリング
+            </span>
+          </div>
+        </section>
+
+        <section class="cc-section" aria-labelledby="s-alerts">
+          <h2 id="s-alerts">アラート・通知</h2>
+          <div class="cc-grid">
+            <div class="cc-stack">
+              <div class="wf-alert">標準のアラート</div>
+              <div class="wf-alert wf-alert-success">成功しました</div>
+              <div class="wf-alert wf-alert-warning">注意してください</div>
+              <div class="wf-alert wf-alert-danger">エラーが発生しました</div>
+              <div class="wf-alert wf-alert-info">お知らせです</div>
+              <div class="wf-alert wf-alert-secondary">補足情報です</div>
+            </div>
+            <div class="cc-stack">
+              <div class="wf-toast wf-toast--success">
+                <div class="wf-toast__content">
+                  <div class="wf-toast__title">保存しました</div>
+                  変更内容を保存しました。
+                </div>
+                <button type="button" class="wf-toast__close" aria-label="閉じる">×</button>
+              </div>
+              <div class="wf-toast wf-toast--warning">
+                <div class="wf-toast__content">
+                  <div class="wf-toast__title">確認が必要です</div>
+                  未入力の項目があります。
+                </div>
+              </div>
+              <div class="wf-toast wf-toast--danger">
+                <div class="wf-toast__content">
+                  <div class="wf-toast__title">送信に失敗しました</div>
+                  時間をおいて再度お試しください。
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cc-section" aria-labelledby="s-forms">
+          <h2 id="s-forms">フォーム</h2>
+          <div class="cc-grid">
+            <div class="wf-field cc-stack">
+              <div>
+                <label class="wf-label" for="f-name">
+                  氏名
+                  <span class="wf-required">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="f-name"
+                  class="wf-input"
+                  data-ui="border"
+                  value="和風 太郎"
+                />
+                <p class="wf-help">補助説明のテキスト</p>
+              </div>
+              <div>
+                <label class="wf-label" for="f-mail">メール</label>
+                <input
+                  type="text"
+                  id="f-mail"
+                  class="wf-input is-invalid"
+                  data-ui="border"
+                  value="taro@"
+                />
+                <p class="wf-error">メールアドレスの形式が正しくありません</p>
+              </div>
+              <div>
+                <label class="wf-label" for="f-ok">ユーザー名</label>
+                <input
+                  type="text"
+                  id="f-ok"
+                  class="wf-input is-success"
+                  data-ui="border"
+                  value="wafoo"
+                />
+                <p class="wf-success">使用できます</p>
+              </div>
+              <div>
+                <label class="wf-label" for="f-warn">パスワード</label>
+                <input
+                  id="f-warn"
+                  class="wf-input is-warning"
+                  data-ui="border"
+                  type="password"
+                  value="12345678"
+                />
+                <p class="wf-warning">推測されやすいパスワードです</p>
+              </div>
+            </div>
+            <div class="cc-stack">
+              <div>
+                <label class="wf-label" for="f-select">都道府県</label>
+                <select id="f-select" class="wf-select" data-ui="border">
+                  <option>京都府</option>
+                  <option>奈良県</option>
+                </select>
+              </div>
+              <div>
+                <label class="wf-label" for="f-text">備考</label>
+                <textarea id="f-text" class="wf-textarea" data-ui="border">複数行の入力</textarea>
+              </div>
+              <div class="cc-row">
+                <label class="wf-check">
+                  <input type="checkbox" class="wf-checkbox" data-ui="border" />
+                  未選択
+                </label>
+                <label class="wf-check">
+                  <input type="checkbox" class="wf-checkbox" data-ui="bg" checked />
+                  選択済み
+                </label>
+                <label class="wf-check">
+                  <input type="radio" name="r" class="wf-radio" data-ui="border" />
+                  未選択
+                </label>
+                <label class="wf-check">
+                  <input type="radio" name="r" class="wf-radio" data-ui="border" checked />
+                  選択済み
+                </label>
+              </div>
+              <div class="cc-row">
+                <label class="wf-switch__label">
+                  <input type="checkbox" class="wf-switch" data-ui="border" />
+                  オフ
+                </label>
+                <label class="wf-switch__label">
+                  <input type="checkbox" class="wf-switch" data-ui="bg" checked />
+                  オン
+                </label>
+              </div>
+              <div>
+                <label class="wf-label" for="f-range">音量</label>
+                <input id="f-range" type="range" class="wf-range" value="60" />
+              </div>
+              <div class="wf-form-floating">
+                <input type="text" id="f-float" class="wf-input" placeholder=" " data-ui="border" />
+                <label for="f-float">フローティングラベル</label>
+              </div>
+              <div class="wf-input-group">
+                <span class="wf-input-group__text">¥</span>
+                <input type="text" class="wf-input" aria-label="金額" value="1,000" />
+                <button type="button" class="wf-btn">適用</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cc-section" aria-labelledby="s-nav">
+          <h2 id="s-nav">ナビゲーション</h2>
+          <div class="cc-stack">
+            <nav class="wf-navbar" aria-label="標準ナビバー">
+              <a class="wf-navbar-brand" href="#s-nav">和風</a>
+              <ul class="wf-navbar-nav">
+                <li class="wf-nav-item">
+                  <a class="wf-nav-link is-active" href="#s-nav">ホーム</a>
+                </li>
+                <li class="wf-nav-item"><a class="wf-nav-link" href="#s-nav">概要</a></li>
+              </ul>
+            </nav>
+            <nav class="wf-navbar wf-navbar-primary" aria-label="プライマリーナビバー">
+              <a class="wf-navbar-brand" href="#s-nav">和風</a>
+              <ul class="wf-navbar-nav">
+                <li class="wf-nav-item">
+                  <a class="wf-nav-link is-active" href="#s-nav">ホーム</a>
+                </li>
+                <li class="wf-nav-item"><a class="wf-nav-link" href="#s-nav">概要</a></li>
+              </ul>
+            </nav>
+            <nav aria-label="パンくず">
+              <ol class="wf-breadcrumb">
+                <li class="wf-breadcrumb-item"><a href="#s-nav">ホーム</a></li>
+                <li class="wf-breadcrumb-item"><a href="#s-nav">製品</a></li>
+                <li class="wf-breadcrumb-item" aria-current="page">詳細</li>
+              </ol>
+            </nav>
+            <div class="wf-tabs">
+              <div class="wf-tablist" role="tablist" aria-label="タブ">
+                <button type="button" class="wf-tab is-active" role="tab" aria-selected="true">
+                  選択中
+                </button>
+                <button type="button" class="wf-tab" role="tab" aria-selected="false">
+                  未選択
+                </button>
+              </div>
+            </div>
+            <nav class="wf-pagination" aria-label="ページ送り">
+              <a class="wf-page-link" href="#s-nav">前へ</a>
+              <a class="wf-page-link" href="#s-nav">1</a>
+              <a class="wf-page-link is-active" href="#s-nav" aria-current="page" data-ui="border">
+                2
+              </a>
+              <a class="wf-page-link" href="#s-nav">3</a>
+            </nav>
+            <ol class="wf-steps">
+              <li class="wf-step is-done">
+                <span class="wf-step__bullet">1</span>
+                入力
+              </li>
+              <li class="wf-step is-current">
+                <span class="wf-step__bullet" data-ui="border">2</span>
+                確認
+              </li>
+              <li class="wf-step">
+                <span class="wf-step__bullet" data-ui="border">3</span>
+                完了
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="cc-section" aria-labelledby="s-data">
+          <h2 id="s-data">データ表示</h2>
+          <div class="cc-grid">
+            <ul class="wf-list-group">
+              <li class="wf-list-item is-active">選択中の項目</li>
+              <li class="wf-list-item">
+                通常の項目
+                <span class="wf-meta">補足</span>
+              </li>
+            </ul>
+            <div class="wf-table-wrap" style="grid-column: 1 / -1">
+              <table class="wf-table">
+                <thead>
+                  <tr>
+                    <th scope="col">項目</th>
+                    <th scope="col">値</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>件数</td>
+                    <td>12</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="cc-stack">
+              <div class="wf-progress">
+                <div class="wf-progress__bar" style="width: 60%" data-ui="bg"></div>
+              </div>
+              <div class="wf-progress wf-progress-success">
+                <div class="wf-progress__bar" style="width: 70%" data-ui="bg"></div>
+              </div>
+              <div class="wf-progress wf-progress-warning">
+                <div class="wf-progress__bar" style="width: 40%" data-ui="bg"></div>
+              </div>
+              <div class="wf-progress wf-progress-danger">
+                <div class="wf-progress__bar" style="width: 20%" data-ui="bg"></div>
+              </div>
+              <div class="cc-row">
+                <span class="wf-rating" role="img" aria-label="5 段階中 3">
+                  <span class="wf-rating__star is-filled" data-ui="color">◆</span>
+                  <span class="wf-rating__star is-filled" data-ui="color">◆</span>
+                  <span class="wf-rating__star is-filled" data-ui="color">◆</span>
+                  <span class="wf-rating__star" data-ui="color">◆</span>
+                  <span class="wf-rating__star" data-ui="color">◆</span>
+                  <span class="wf-rating__value">3.0</span>
+                </span>
+                <span class="wf-avatar">和</span>
+                <span class="wf-avatar wf-avatar-status">風</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="cc-section" aria-labelledby="s-cal">
+          <h2 id="s-cal">カレンダー</h2>
+          <div class="wf-calendar" style="max-width: 360px">
+            <div class="wf-calendar__header">
+              <button type="button" class="wf-calendar__nav-btn" aria-label="前の月">‹</button>
+              <div class="wf-calendar__title">2026年10月</div>
+              <button type="button" class="wf-calendar__nav-btn" aria-label="次の月">›</button>
+            </div>
+            <div class="wf-calendar__weekdays">
+              <div class="wf-calendar__weekday wf-calendar__weekday--weekend">日</div>
+              <div class="wf-calendar__weekday">月</div>
+              <div class="wf-calendar__weekday">火</div>
+              <div class="wf-calendar__weekday">水</div>
+              <div class="wf-calendar__weekday">木</div>
+              <div class="wf-calendar__weekday">金</div>
+              <div class="wf-calendar__weekday wf-calendar__weekday--weekend">土</div>
+            </div>
+            <div class="wf-calendar__grid">
+              <button type="button" class="wf-calendar__day is-other-month">30</button>
+              <button type="button" class="wf-calendar__day">1</button>
+              <button type="button" class="wf-calendar__day is-today">2</button>
+              <button type="button" class="wf-calendar__day is-selected" data-ui="border">3</button>
+              <button type="button" class="wf-calendar__day is-range-start">4</button>
+              <button type="button" class="wf-calendar__day is-in-range">5</button>
+              <button type="button" class="wf-calendar__day is-range-end">6</button>
+              <button type="button" class="wf-calendar__day is-disabled" disabled>7</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="cc-section" aria-labelledby="s-msg">
+          <h2 id="s-msg">メッセージ・タイムライン</h2>
+          <div class="cc-grid">
+            <div>
+              <div class="wf-message">
+                <div class="wf-message__avatar">山</div>
+                <div class="wf-message__content">
+                  <div class="wf-message__header">
+                    <span class="wf-message__name">山田</span>
+                    <span class="wf-message__time">10:24</span>
+                  </div>
+                  <div class="wf-message__bubble">
+                    <div class="wf-message__body">こんにちは。</div>
+                  </div>
+                </div>
+              </div>
+              <div class="wf-message wf-message-sent is-read">
+                <div class="wf-message__avatar">私</div>
+                <div class="wf-message__content">
+                  <div class="wf-message__bubble">
+                    <div class="wf-message__body">よろしくお願いします。</div>
+                  </div>
+                  <div class="wf-message__status">既読</div>
+                </div>
+              </div>
+              <div class="wf-message wf-message-system">
+                <div class="wf-message__content">
+                  <div class="wf-message__bubble">山田さんが参加しました</div>
+                </div>
+              </div>
+            </div>
+            <ol class="wf-timeline">
+              <li class="wf-timeline__item is-done">
+                <div class="wf-timeline__marker">✓</div>
+                <div class="wf-timeline__content">
+                  <div class="wf-timeline__header">
+                    <h3 class="wf-timeline__title">受付</h3>
+                    <span class="wf-timeline__date">10/1</span>
+                  </div>
+                  <div class="wf-timeline__body">注文を受け付けました。</div>
+                </div>
+              </li>
+              <li class="wf-timeline__item is-current">
+                <div class="wf-timeline__marker">2</div>
+                <div class="wf-timeline__content">
+                  <h3 class="wf-timeline__title">発送準備</h3>
+                </div>
+              </li>
+              <li class="wf-timeline__item is-pending">
+                <div class="wf-timeline__marker">3</div>
+                <div class="wf-timeline__content">
+                  <h3 class="wf-timeline__title">お届け</h3>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+
+        <section class="cc-section" aria-labelledby="s-timeline-h">
+          <h2 id="s-timeline-h">タイムライン（横並び）</h2>
+          <ol class="wf-timeline wf-timeline-horizontal" id="cc-timeline-h">
+            <li class="wf-timeline__item is-done">
+              <div class="wf-timeline__marker">✓</div>
+              <div class="wf-timeline__content"><h3 class="wf-timeline__title">受付</h3></div>
+            </li>
+            <li class="wf-timeline__item is-current">
+              <div class="wf-timeline__marker">2</div>
+              <div class="wf-timeline__content"><h3 class="wf-timeline__title">発送準備</h3></div>
+            </li>
+            <li class="wf-timeline__item is-pending">
+              <div class="wf-timeline__marker">3</div>
+              <div class="wf-timeline__content"><h3 class="wf-timeline__title">お届け</h3></div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="cc-section" aria-labelledby="s-overlay">
+          <h2 id="s-overlay">モーダル・サイドバー・その他</h2>
+          <div class="cc-grid">
+            <div class="cc-stack">
+              <div
+                class="wf-modal cc-static-modal wf-modal--danger"
+                role="group"
+                aria-label="危険モーダル"
+              >
+                <div class="wf-modal__header"><h3 class="wf-modal__title">削除の確認</h3></div>
+                <div class="wf-modal__body">この操作は取り消せません。</div>
+              </div>
+              <div
+                class="wf-modal cc-static-modal wf-modal--warning"
+                role="group"
+                aria-label="警告モーダル"
+              >
+                <div class="wf-modal__header"><h3 class="wf-modal__title">警告</h3></div>
+              </div>
+              <div
+                class="wf-modal cc-static-modal wf-modal--success"
+                role="group"
+                aria-label="成功モーダル"
+              >
+                <div class="wf-modal__header"><h3 class="wf-modal__title">完了</h3></div>
+              </div>
+              <div
+                class="wf-modal cc-static-modal wf-modal--info"
+                role="group"
+                aria-label="情報モーダル"
+              >
+                <div class="wf-modal__header"><h3 class="wf-modal__title">お知らせ</h3></div>
+              </div>
+            </div>
+            <aside class="wf-sidebar cc-static-sidebar" aria-label="サイドバー">
+              <div class="wf-sidebar__header"><h3 class="wf-sidebar__title">メニュー</h3></div>
+              <div class="wf-sidebar__body">
+                <ul class="wf-sidebar__nav">
+                  <li class="wf-sidebar__item">
+                    <a class="wf-sidebar__link is-active" href="#s-overlay">ダッシュボード</a>
+                  </li>
+                  <li class="wf-sidebar__item">
+                    <a class="wf-sidebar__link" href="#s-overlay">
+                      受信箱
+                      <span class="wf-sidebar__badge">3</span>
+                    </a>
+                  </li>
+                </ul>
+                <div class="wf-sidebar__group">
+                  <div class="wf-sidebar__group-title">設定</div>
+                </div>
+              </div>
+            </aside>
+            <div class="cc-stack">
+              <div class="wf-empty">
+                <div class="wf-empty__title">データがありません</div>
+                <div class="wf-empty__desc">条件を変えて検索してください。</div>
+              </div>
+              <pre class="wf-code-block"><code>const wafoo = "和風";</code></pre>
+              <div class="wf-schedule__time-slot is-selected" style="display: inline-flex">
+                10:00
+              </div>
+              <div class="wf-schedule__time-slot is-range-start" style="display: inline-flex">
+                11:00
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <script>
+      (function () {
+        const THEMES = Array.from(document.querySelectorAll("#cc-theme option")).map(o => o.value);
+        const MODES = ["light", "dark"];
+        const themeSel = document.getElementById("cc-theme");
+        const modeSel = document.getElementById("cc-mode");
+        const statusEl = document.getElementById("cc-status");
+        const resultsEl = document.getElementById("cc-results");
+        const matrixEl = document.getElementById("cc-matrix");
+        const samples = document.getElementById("cc-samples");
+
+        function store(key, value) {
+          try {
+            localStorage.setItem(key, value);
+          } catch (e) {
+            /* ストレージが使えない環境では保存しない */
+          }
+        }
+        function load(key) {
+          try {
+            return localStorage.getItem(key) || "";
+          } catch (e) {
+            return "";
+          }
+        }
+
+        function apply(theme, mode) {
+          document.documentElement.classList.add("cc-auditing");
+          Array.from(document.body.classList)
+            .filter(c => c.startsWith("theme-"))
+            .forEach(c => document.body.classList.remove(c));
+          if (theme) document.body.classList.add(theme);
+          if (mode) document.documentElement.setAttribute("data-theme", mode);
+          else document.documentElement.removeAttribute("data-theme");
+        }
+
+        /* ---- 色の解析とコントラスト計算 ---- */
+        function parseColor(str) {
+          let m = str.match(/^rgba?\(([^)]+)\)$/);
+          if (m) {
+            const p = m[1]
+              .split(/[\s,/]+/)
+              .filter(Boolean)
+              .map(Number);
+            return [p[0], p[1], p[2], p[3] === undefined ? 1 : p[3]];
+          }
+          m = str.match(/^color\(srgb ([^)]+)\)$/);
+          if (m) {
+            const p = m[1]
+              .split(/[\s/]+/)
+              .filter(Boolean)
+              .map(Number);
+            return [p[0] * 255, p[1] * 255, p[2] * 255, p[3] === undefined ? 1 : p[3]];
+          }
+          return null;
+        }
+        function over(top, bottom) {
+          const a = top[3];
+          return [0, 1, 2].map(i => top[i] * a + bottom[i] * (1 - a)).concat(1);
+        }
+        function lum(c) {
+          const [r, g, b] = c.slice(0, 3).map(v => {
+            v /= 255;
+            return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+          });
+          return 0.2126 * r + 0.7152 * g + 0.0722 * b;
+        }
+        function ratio(a, b) {
+          const x = lum(a);
+          const y = lum(b);
+          return (Math.max(x, y) + 0.05) / (Math.min(x, y) + 0.05);
+        }
+        function hex(c) {
+          return (
+            "#" +
+            c
+              .slice(0, 3)
+              .map(v => Math.round(v).toString(16).padStart(2, "0"))
+              .join("")
+          );
+        }
+
+        /* 要素の背後にある実効背景色の候補（グラデーションは各色を候補にする） */
+        function backgrounds(el) {
+          const layers = [];
+          let node = el;
+          let base = null;
+          while (node && node.nodeType === 1) {
+            const cs = getComputedStyle(node);
+            const img = cs.backgroundImage;
+            if (img && img !== "none" && /gradient/.test(img) && !node.matches("body")) {
+              const stops = (img.match(/rgba?\([^)]+\)|color\(srgb[^)]+\)/g) || [])
+                .map(parseColor)
+                .filter(c => c && c[3] > 0.5);
+              if (stops.length) {
+                layers.push({ stops });
+                base = true;
+                break;
+              }
+            }
+            const bg = parseColor(cs.backgroundColor);
+            if (bg && bg[3] > 0) {
+              layers.push({ color: bg });
+              if (bg[3] >= 1) {
+                base = true;
+                break;
+              }
+            }
+            node = node.parentElement;
+          }
+          let candidates = [[255, 255, 255, 1]];
+          if (!base) {
+            const rootBg = parseColor(getComputedStyle(document.body).backgroundColor);
+            candidates = [rootBg && rootBg[3] > 0 ? rootBg : [255, 255, 255, 1]];
+          }
+          for (let i = layers.length - 1; i >= 0; i--) {
+            const layer = layers[i];
+            if (layer.stops) candidates = layer.stops.map(s => s.slice(0, 3).concat(1));
+            else candidates = candidates.map(c => over(layer.color, c));
+          }
+          return candidates;
+        }
+
+        function isHidden(el) {
+          if (!el.getClientRects().length) return true;
+          let node = el;
+          while (node && node.nodeType === 1) {
+            const cs = getComputedStyle(node);
+            if (cs.visibility === "hidden" || cs.display === "none") return true;
+            node = node.parentElement;
+          }
+          return opacityOf(el) === 0;
+        }
+        /* 祖先を含めた実効不透明度（opacity を下げた要素は前景が背景に溶けて見える） */
+        function opacityOf(el) {
+          let o = 1;
+          for (let node = el; node && node.nodeType === 1; node = node.parentElement) {
+            o *= parseFloat(getComputedStyle(node).opacity);
+          }
+          return o;
+        }
+        function isExempt(el) {
+          return !!el.closest(":disabled, .is-disabled, [aria-disabled='true'], .is-loading");
+        }
+        function label(el) {
+          const named = el.closest("[data-name]");
+          if (named) return named.getAttribute("data-name");
+          const cls = Array.from(el.classList).slice(0, 2).join(".");
+          const text = (el.textContent || "").trim().replace(/\s+/g, " ").slice(0, 18);
+          return `${el.tagName.toLowerCase()}${cls ? "." + cls : ""}「${text}」`;
+        }
+
+        function audit(mark) {
+          document.documentElement.classList.add("cc-auditing");
+          try {
+            return auditNow(mark);
+          } finally {
+            document.documentElement.classList.remove("cc-auditing");
+          }
+        }
+
+        function auditNow(mark) {
+          samples
+            .querySelectorAll(".cc-fail-mark")
+            .forEach(e => e.classList.remove("cc-fail-mark"));
+          document
+            .querySelectorAll(".wf-header .cc-fail-mark")
+            .forEach(e => e.classList.remove("cc-fail-mark"));
+          const scope = [document.querySelector(".wf-header"), samples];
+          const failures = [];
+          let count = 0;
+
+          const textEls = new Set();
+          for (const root of scope) {
+            const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT);
+            while (walker.nextNode()) {
+              if (walker.currentNode.nodeValue.trim())
+                textEls.add(walker.currentNode.parentElement);
+            }
+          }
+
+          const check = (el, fg, kind, need) => {
+            const o = opacityOf(el);
+            for (const bg of backgrounds(kind === "self-bg" ? el.parentElement : el)) {
+              const r = ratio(o < 1 ? over(fg.slice(0, 3).concat(o), bg) : fg, bg);
+              count++;
+              if (r < need) {
+                failures.push({ el, kind, fg, bg, r, need });
+                if (mark) el.classList.add("cc-fail-mark");
+                break;
+              }
+            }
+          };
+
+          for (const el of textEls) {
+            if (isHidden(el) || isExempt(el) || el.closest("option, select, textarea, [data-ui]"))
+              continue;
+            const cs = getComputedStyle(el);
+            const fg = parseColor(cs.color);
+            if (!fg) continue;
+            const size = parseFloat(cs.fontSize);
+            const bold = parseInt(cs.fontWeight, 10) >= 700;
+            const large = size >= 24 || (size >= 18.66 && bold);
+            const bgs = backgrounds(el);
+            check(el, fg[3] < 1 ? over(fg, bgs[0]) : fg, "文字", large ? 3 : 4.5);
+          }
+
+          for (const el of samples.querySelectorAll("[data-ui]")) {
+            if (isHidden(el) || isExempt(el)) continue;
+            const cs = getComputedStyle(el);
+            const kind = el.getAttribute("data-ui");
+            if (kind === "border") check(el, parseColor(cs.borderTopColor), "self-bg", 3);
+            if (kind === "bg") check(el, parseColor(cs.backgroundColor), "self-bg", 3);
+            if (kind === "outline") check(el, parseColor(cs.outlineColor), "self-bg", 3);
+            if (kind === "color") check(el, parseColor(cs.color), "図形", 3);
+            if (kind === "color") {
+              /* 文字ではないので本文の判定から外したぶん、ここで検証済み */
+            }
+          }
+          return { failures, count };
+        }
+
+        function render(result, title) {
+          const { failures, count } = result;
+          statusEl.textContent = failures.length
+            ? `${title}: ${failures.length} 件が基準未満（${count} 組を検証）`
+            : `${title}: すべて合格（${count} 組を検証）`;
+          statusEl.className = "cc-status " + (failures.length ? "is-fail" : "is-pass");
+          if (!failures.length) {
+            resultsEl.innerHTML = "";
+            return;
+          }
+          const rows = failures
+            .map(
+              f =>
+                `<tr><td>${label(f.el).replace(/</g, "&lt;")}</td><td>${f.kind === "self-bg" ? "UI 部品" : f.kind}</td>` +
+                `<td><span class="cc-swatch" style="background:${hex(f.fg)}"></span>${hex(f.fg)}</td>` +
+                `<td><span class="cc-swatch" style="background:${hex(f.bg)}"></span>${hex(f.bg)}</td>` +
+                `<td>${f.r.toFixed(2)} &lt; ${f.need}</td></tr>`
+            )
+            .join("");
+          resultsEl.innerHTML = `<table><thead><tr><th scope="col">要素</th><th scope="col">種別</th><th scope="col">前景</th><th scope="col">背景</th><th scope="col">比</th></tr></thead><tbody>${rows}</tbody></table>`;
+        }
+
+        function currentTitle() {
+          const t = themeSel.options[themeSel.selectedIndex].text;
+          const m = modeSel.options[modeSel.selectedIndex].text;
+          return `${t} / ${m}`;
+        }
+
+        function runCurrent() {
+          apply(themeSel.value, modeSel.value);
+          const result = audit(true);
+          render(result, currentTitle());
+          return result;
+        }
+
+        function runAll() {
+          const saved = [themeSel.value, modeSel.value];
+          const summary = [];
+          for (const theme of THEMES) {
+            for (const mode of MODES) {
+              apply(theme, mode);
+              const { failures, count } = audit(false);
+              summary.push({
+                theme,
+                mode,
+                failures: failures.length,
+                count,
+                detail: failures.map(f => label(f.el))
+              });
+            }
+          }
+          apply(saved[0], saved[1]);
+          document.documentElement.classList.remove("cc-auditing");
+          const total = summary.reduce((n, s) => n + s.failures, 0);
+          const checked = summary.reduce((n, s) => n + s.count, 0);
+          const cell = s =>
+            `<td><button type="button" class="wf-btn wf-btn-sm ${s.failures ? "wf-btn-danger" : "wf-btn-subtle"}" data-theme-pick="${s.theme}" data-mode-pick="${s.mode}">${s.failures ? s.failures + " 件" : "合格"}</button></td>`;
+          const rows = THEMES.map(theme => {
+            const name = themeSel.querySelector(`option[value="${theme}"]`).text;
+            const [l, d] = MODES.map(mode =>
+              summary.find(s => s.theme === theme && s.mode === mode)
+            );
+            return `<tr><th scope="row">${name}</th>${cell(l)}${cell(d)}</tr>`;
+          }).join("");
+          matrixEl.innerHTML = `<table class="cc-matrix"><thead><tr><th scope="col">テーマ</th><th scope="col">ライト</th><th scope="col">ダーク</th></tr></thead><tbody>${rows}</tbody></table>`;
+          statusEl.textContent = total
+            ? `全 ${THEMES.length * 2} 通り: ${total} 件が基準未満（${checked} 組を検証）`
+            : `全 ${THEMES.length * 2} 通り: すべて合格（${checked} 組を検証）`;
+          statusEl.className = "cc-status " + (total ? "is-fail" : "is-pass");
+          resultsEl.innerHTML = "";
+          return { total, checked, summary };
+        }
+
+        matrixEl.addEventListener("click", e => {
+          const btn = e.target.closest("[data-theme-pick]");
+          if (!btn) return;
+          themeSel.value = btn.getAttribute("data-theme-pick");
+          modeSel.value = btn.getAttribute("data-mode-pick");
+          store("cc-theme", themeSel.value);
+          store("cc-mode", modeSel.value);
+          runCurrent();
+        });
+        themeSel.addEventListener("change", () => {
+          store("cc-theme", themeSel.value);
+          runCurrent();
+        });
+        modeSel.addEventListener("change", () => {
+          store("cc-mode", modeSel.value);
+          runCurrent();
+        });
+        document.getElementById("cc-run").addEventListener("click", runCurrent);
+        document.getElementById("cc-run-all").addEventListener("click", runAll);
+
+        themeSel.value = load("cc-theme");
+        modeSel.value = load("cc-mode");
+        window.wafooColorCheck = { runAll, runCurrent, apply, audit };
+        window.addEventListener("load", () => {
+          runAll();
+          runCurrent();
+        });
+      })();
+    </script>
+  </body>
+</html>

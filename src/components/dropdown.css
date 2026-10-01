@@ -30,7 +30,7 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
     padding: var(--wf-space-2) 0;
     display: none;
-    z-index: 1000;
+    z-index: var(--wf-z-dropdown);
   }
   .wf-dropdown.is-open .wf-dropdown__menu {
     display: block;

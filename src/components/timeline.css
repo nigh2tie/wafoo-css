@@ -3,7 +3,7 @@
  * @description Timeline component.
  * @selector .wf-timeline
  * @variants .wf-timeline-horizontal
- * @variables --wf-space-4, --wf-space-8, --wf-space-6, --wf-ink-200, --wf-accent-500
+ * @variables --wf-space-4, --wf-space-8, --wf-space-6, --wf-color-border, --wf-color-accent
  */
 /**
  * Timeline Component
@@ -37,7 +37,7 @@
     top: 28px;
     bottom: 0;
     width: 2px;
-    background-color: var(--wf-ink-200);
+    background-color: var(--wf-color-border-strong);
   }
 
   .wf-timeline__item:last-child::before {
@@ -52,20 +52,20 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background-color: var(--wf-accent-500);
+    background-color: var(--wf-color-accent);
     border: 3px solid var(--wf-color-bg);
-    box-shadow: 0 0 0 2px var(--wf-accent-500);
+    box-shadow: 0 0 0 2px var(--wf-color-accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--wf-color-accent-fg);
     font-size: var(--wf-font-sm);
   }
 
   /* Timeline Content */
   .wf-timeline__content {
-    background-color: var(--wf-color-bg);
-    border: 1px solid var(--wf-ink-200);
+    background-color: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border);
     border-radius: 8px;
     padding: var(--wf-space-4);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -81,41 +81,53 @@
 
   .wf-timeline__title {
     font-weight: 600;
-    color: var(--wf-ink-900);
+    color: var(--wf-color-text);
     margin: 0;
     font-size: var(--wf-font-md);
   }
 
   .wf-timeline__date {
     font-size: var(--wf-font-sm);
-    color: var(--wf-ink-600);
+    color: var(--wf-color-muted);
   }
 
   /* Timeline Body */
   .wf-timeline__body {
-    color: var(--wf-ink-700);
+    color: var(--wf-color-text);
     line-height: 1.6;
   }
 
   /* Timeline State Variants */
   .wf-timeline__item.is-current .wf-timeline__marker {
-    background-color: var(--wf-accent-600);
+    background-color: var(--wf-color-accent);
     box-shadow:
-      0 0 0 2px var(--wf-accent-600),
-      0 0 0 4px var(--wf-accent-200);
-    animation-name: wf-pulse;
+      0 0 0 2px var(--wf-color-accent),
+      0 0 0 4px var(--wf-color-accent-muted);
+    animation-name: wf-timeline-pulse;
     animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-pulse-duration, 4s));
     animation-iteration-count: infinite;
   }
 
   .wf-timeline__item.is-done .wf-timeline__marker {
-    background-color: var(--wf-success);
-    box-shadow: 0 0 0 2px var(--wf-success);
+    background-color: var(--wf-success-text);
+    box-shadow: 0 0 0 2px var(--wf-success-text);
   }
 
   .wf-timeline__item.is-pending .wf-timeline__marker {
-    background-color: var(--wf-ink-300);
-    box-shadow: 0 0 0 2px var(--wf-ink-300);
+    background-color: var(--wf-surface-muted);
+    box-shadow: 0 0 0 2px var(--wf-color-border-strong);
+    color: var(--wf-color-muted);
+  }
+
+  /* transform ではなく scale を使う（横並びではマーカーを transform で中央寄せしているため） */
+  @keyframes wf-timeline-pulse {
+    0%,
+    100% {
+      scale: 1;
+    }
+    50% {
+      scale: 1.05;
+    }
   }
 
   /* Horizontal Timeline */
@@ -125,21 +137,28 @@
     padding: var(--wf-space-6) 0;
   }
 
+  /* 左右の余白をそろえ、マーカー（項目の中央）がカードの中央に来るようにする */
   .wf-timeline-horizontal .wf-timeline__item {
     flex: 0 0 auto;
     min-width: 200px;
-    padding: var(--wf-space-8) var(--wf-space-6) 0 0;
+    padding: var(--wf-space-10) var(--wf-space-3) 0;
   }
 
+  /* 線はマーカーの中心の高さ（28px / 2 - 線の太さ / 2）に引く */
   .wf-timeline-horizontal .wf-timeline__item::before {
-    inset: 12px 0 auto;
+    inset: 13px 0 auto;
     width: auto;
     height: 2px;
   }
 
+  /* 線は最初のマーカーの中心から最後のマーカーの中心まで */
+  .wf-timeline-horizontal .wf-timeline__item:first-child::before {
+    left: 50%;
+  }
+
   .wf-timeline-horizontal .wf-timeline__item:last-child::before {
     display: block;
-    right: var(--wf-space-6);
+    right: 50%;
   }
 
   .wf-timeline-horizontal .wf-timeline__marker {

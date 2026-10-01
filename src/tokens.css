@@ -7,8 +7,22 @@
    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
 */
 
+/*
+  配色トークンの規約
+  - 意味を持つ配色トークン（--wf-color-* / --wf-surface-* / --wf-primary-* / 状態色）は
+    light-dark(ライト, ダーク) で定義する。モードの切り替えは color-scheme だけで行う。
+  - 文字に使う色は、その色が置かれうる背景すべてに対して 4.5:1 以上、
+    枠線・フォーカスリングなどの UI 部品は 3:1 以上を満たす（npm run check:contrast で検証）。
+  - 背景色には対になる前景色を用意する（--wf-primary-bg / --wf-primary-fg、--wf-success / --wf-success-fg など）。
+    背景用のトークン（--wf-surface-base など）を文字色として流用しない。
+  - コンポーネントは階調トークン（--wf-ink-* / --wf-accent-* など）を直接参照しない。
+    階調はモードによって変化しないため、ダークモードで破綻する。
+*/
+
 @layer tokens {
   :root {
+    color-scheme: light dark;
+
     /* Typography - Japanese serif for wa-fu aesthetics */
     --wf-font-family: "Noto Serif JP", serif;
     --wf-font-family-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -32,104 +46,71 @@
     --wf-fuji-rgb: 178, 143, 206;
     --wf-sakura-rgb: 253, 222, 222;
 
-    /* Fujimurasaki (accent) and Haizakura (bg) */
+    /* Fujimurasaki (accent) scale */
     --wf-accent-50: #f0ecf3;
     --wf-accent-100: #e2dcef;
     --wf-accent-200: #cfc7e3;
     --wf-accent-300: #b9afd2;
-    --wf-accent-400: #9f93bd;
+    --wf-accent-400: #8f82a8;
     --wf-accent-500: #6a5c7c; /* base */
     --wf-accent-600: #5e516f;
     --wf-accent-700: #4f4560;
     --wf-accent-800: #413a50;
     --wf-accent-900: #332f41;
 
-    --wf-color-bg: #e7ddd4; /* haizakura */
+    /* Status color scales - 500 is the named traditional color */
+    /* Success (常盤 tokiwa #007b43) */
+    --wf-success-50: #e6f4ec;
+    --wf-success-100: #c2e4d0;
+    --wf-success-200: #8fcdaa;
+    --wf-success-300: #5bb585;
+    --wf-success-400: #2a9a62;
+    --wf-success-500: #007b43;
+    --wf-success-600: #006b3a;
+    --wf-success-700: #005a31;
+    --wf-success-800: #004a28;
+    --wf-success-900: #00391f;
 
-    /* Semantic colors */
-    --wf-color-text: var(--wf-ink-900);
-    --wf-color-muted: var(--wf-ink-700); /* Changed from ink-500 to meet WCAG AA 4.5:1 contrast */
-    --wf-color-secondary: var(--wf-ai);
-    --wf-color-info: var(--wf-tsuyukusa);
-    --wf-color-accent: var(--wf-accent-500);
-    --wf-link-color: var(--wf-accent-600);
-    --wf-link-color-hover: var(--wf-accent-700);
-    --wf-primary-bg: var(--wf-accent-700);
-    --wf-secondary: var(--wf-accent-600);
-    --wf-primary-bg-hover: var(--wf-accent-800);
-    --wf-primary-bg-active: var(--wf-accent-900);
-    --wf-info: #7eb8d4;
-    --wf-primary-fg: #ffffff;
-    --wf-focus: var(--wf-accent-700);
-    --wf-outline-color-hover: var(--wf-accent-700);
-    --wf-color-border-subtle: var(--wf-ink-100);
-    --wf-color-border-strong: #8a8a8a; /* >=3:1 vs bg */
-    --wf-color-border: var(--wf-color-border-subtle);
-
-    /* Status colors */
-    --wf-success: var(--wf-tokiwa);
-    --wf-warning: var(--wf-anzu);
-    --wf-danger: var(--wf-akane);
-    --wf-success-fg: #ffffff;
-    --wf-warning-fg: #ffffff;
-    --wf-danger-fg: #ffffff;
-    --wf-success-veil: rgba(46, 125, 50, 0.1);
-    --wf-warning-veil: rgba(178, 106, 0, 0.1);
-    --wf-danger-veil: rgba(176, 0, 32, 0.1);
-
-    /* Status color scales (v2.0.0) - 50-900 gradation */
-    /* Success (tokiwa #007b43 base) */
-    --wf-success-50: #e8f5f0;
-    --wf-success-100: #c7e7da;
-    --wf-success-200: #a2d9c3;
-    --wf-success-300: #7dcbab;
-    --wf-success-400: #60bf99;
-    --wf-success-500: #43b387;
-    --wf-success-600: #3ca67f;
-    --wf-success-700: #339774;
-    --wf-success-800: #2b886a;
-    --wf-success-900: #1d6c57;
-
-    /* Warning (anzu #f7b977 base) */
+    /* Warning (杏 anzu #f7b977) */
     --wf-warning-50: #fef7ef;
     --wf-warning-100: #fdead6;
     --wf-warning-200: #fbdcbc;
     --wf-warning-300: #f9cda1;
     --wf-warning-400: #f8c38c;
     --wf-warning-500: #f7b977;
-    --wf-warning-600: #f6b26f;
-    --wf-warning-700: #f4a964;
-    --wf-warning-800: #f3a15a;
-    --wf-warning-900: #f09247;
+    --wf-warning-600: #d98f3f;
+    --wf-warning-700: #b06a1f;
+    --wf-warning-800: #8a5012;
+    --wf-warning-900: #5f370b;
 
-    /* Danger (akane #b7282e base) */
+    /* Danger (茜 akane #b7282e) */
     --wf-danger-50: #f8e6e7;
-    --wf-danger-100: #edc0c2;
-    --wf-danger-200: #e19699;
-    --wf-danger-300: #d56c70;
-    --wf-danger-400: #cc4d52;
-    --wf-danger-500: #c32e34;
-    --wf-danger-600: #bd292f;
-    --wf-danger-700: #b52328;
-    --wf-danger-800: #ad1d22;
-    --wf-danger-900: #9f1217;
+    --wf-danger-100: #f0c4c6;
+    --wf-danger-200: #e39599;
+    --wf-danger-300: #d6666b;
+    --wf-danger-400: #c84047;
+    --wf-danger-500: #b7282e;
+    --wf-danger-600: #9e2227;
+    --wf-danger-700: #851c21;
+    --wf-danger-800: #6c171a;
+    --wf-danger-900: #521114;
 
-    /* Ink color scales (v2.0.0) - Expanded from existing primitives */
+    /* Ink (neutral) scale */
     --wf-ink-50: #fafafa;
-    --wf-ink-100: #e5e5e5; /* existing */
+    --wf-ink-100: #e5e5e5;
     --wf-ink-200: #cccccc;
-    --wf-ink-300: #999999; /* existing */
+    --wf-ink-300: #999999;
     --wf-ink-400: #808080;
-    --wf-ink-500: #666666; /* existing */
+    --wf-ink-500: #666666;
     --wf-ink-600: #555555;
-    --wf-ink-700: #444444; /* existing */
+    --wf-ink-700: #444444;
     --wf-ink-800: #333333;
-    --wf-ink-900: #1f1f1f; /* existing */
+    --wf-ink-900: #1f1f1f;
 
     /* RGB values for status colors (for opacity/gradients) */
-    --wf-success-500-rgb: 67, 179, 135;
+    --wf-success-500-rgb: 0, 123, 67;
     --wf-warning-500-rgb: 247, 185, 119;
-    --wf-danger-500-rgb: 195, 46, 52;
+    --wf-danger-500-rgb: 183, 40, 46;
 
     /* RGB values for ink scales */
     --wf-ink-50-rgb: 250, 250, 250;
@@ -148,31 +129,119 @@
     --wf-accent-100-rgb: 226, 220, 239;
     --wf-accent-200-rgb: 207, 199, 227;
     --wf-accent-300-rgb: 185, 175, 210;
-    --wf-accent-400-rgb: 159, 147, 189;
+    --wf-accent-400-rgb: 143, 130, 168;
     --wf-accent-500-rgb: 106, 92, 124;
     --wf-accent-600-rgb: 94, 81, 111;
     --wf-accent-700-rgb: 79, 69, 96;
     --wf-accent-800-rgb: 65, 58, 80;
     --wf-accent-900-rgb: 51, 47, 65;
 
+    /* ===== Semantic colors (light-dark) ===== */
+
+    /* Page & surfaces */
+    --wf-color-bg: light-dark(#e7ddd4, #121212); /* haizakura */
+    --wf-surface-base: light-dark(#ffffff, #1f1f1f);
+    --wf-surface-subtle: light-dark(#faf7f5, #2a2a2a);
+    --wf-surface-muted: light-dark(#f5f2ef, #333333);
+
+    /* Text */
+    --wf-color-text: light-dark(var(--wf-ink-900), #e5e5e5);
+    --wf-color-muted: light-dark(var(--wf-ink-700), #b8b8b8);
+
+    /* Borders (subtle/default are decorative; strong is for form controls: >=3:1) */
+    --wf-color-border-subtle: light-dark(#ddd5cd, #333333);
+    --wf-color-border-strong: light-dark(#767676, #929292);
+
+    /* Accent: text-safe on every page surface and accent tint */
+    --wf-color-accent: light-dark(var(--wf-accent-500), var(--wf-accent-300));
+    --wf-color-accent-subtle: light-dark(var(--wf-accent-50), #29252f);
+    --wf-color-accent-muted: light-dark(var(--wf-accent-100), #373043);
+    /* Foreground on an accent fill (checkbox mark, switch thumb, range thumb border) */
+    --wf-color-accent-fg: light-dark(#ffffff, #1f1f1f);
+
+    /* Links */
+    --wf-link-color: light-dark(var(--wf-accent-600), var(--wf-accent-300));
+    --wf-link-color-hover: light-dark(var(--wf-accent-700), var(--wf-accent-200));
+
+    /* Primary fill (buttons, selected states) */
+    --wf-primary-bg: light-dark(var(--wf-accent-700), var(--wf-accent-300));
+    --wf-primary-bg-hover: light-dark(var(--wf-accent-800), var(--wf-accent-200));
+    --wf-primary-bg-active: light-dark(var(--wf-accent-900), var(--wf-accent-100));
+    --wf-primary-fg: light-dark(#ffffff, #1f1f1f);
+
+    /* Focus ring (>=3:1 against page and surfaces) */
+    --wf-focus: light-dark(var(--wf-accent-700), var(--wf-accent-300));
+
+    /* Gradient button */
+    --wf-gradient-end: light-dark(var(--wf-accent-500), var(--wf-accent-200));
+
+    /* Status: fill / fg on fill / text on page / translucent background */
+    --wf-success: var(--wf-tokiwa);
+    --wf-success-fg: #ffffff;
+    --wf-success-text: light-dark(#006436, #3fcf8e);
+    --wf-success-veil: light-dark(rgba(0, 123, 67, 0.1), rgba(0, 123, 67, 0.2));
+
+    --wf-warning: var(--wf-anzu);
+    --wf-warning-fg: #1f1f1f;
+    --wf-warning-text: light-dark(#8f4e08, #f8bf83);
+    --wf-warning-veil: light-dark(rgba(247, 185, 119, 0.25), rgba(247, 185, 119, 0.16));
+
+    --wf-danger: var(--wf-akane);
+    --wf-danger-fg: #ffffff;
+    --wf-danger-text: light-dark(#a22329, #ec9599);
+    --wf-danger-veil: light-dark(rgba(183, 40, 46, 0.1), rgba(183, 40, 46, 0.2));
+
+    --wf-color-info: var(--wf-tsuyukusa);
+    --wf-info-fg: #1f1f1f;
+    --wf-info-text: light-dark(#196088, #81c4e8);
+    --wf-info-veil: light-dark(rgba(56, 161, 219, 0.1), rgba(56, 161, 219, 0.2));
+
+    --wf-color-secondary: var(--wf-ai);
+    --wf-secondary-fg: #ffffff;
+    --wf-secondary-text: light-dark(#145a7e, #7fc0e6);
+    --wf-secondary-veil: light-dark(rgba(22, 94, 131, 0.1), rgba(22, 94, 131, 0.25));
+
+    /* Fixed-color components (same in both modes) */
+    --wf-header-bg: var(--wf-sumi);
+    --wf-header-fg: var(--wf-shirayuri);
+
+    /* Disabled state (exempt from contrast requirements, but kept legible) */
+    --wf-disabled-bg: light-dark(#f0f0f0, #333333);
+    --wf-disabled-fg: light-dark(#858585, #8a8a8a);
+
+    /* Shadows - layered depth system */
+    --wf-shadow-sm: 0 1px 2px 0 light-dark(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.3));
+    --wf-shadow-md:
+      0 4px 6px -1px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)),
+      0 2px 4px -1px light-dark(rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0.2));
+    --wf-shadow-lg:
+      0 10px 15px -3px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)),
+      0 4px 6px -2px light-dark(rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.2));
+    --wf-shadow-xl:
+      0 20px 25px -5px light-dark(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.4)),
+      0 10px 10px -5px light-dark(rgba(0, 0, 0, 0.04), rgba(0, 0, 0, 0.2));
+
+    /* Legacy shadow (keep for compatibility) */
+    --wf-shadow-subtle: rgba(0, 0, 0, 0.08);
+    --wf-overlay-light: rgba(255, 255, 255, 0.06);
+
     /* Typography sizes */
     --wf-font-sm: 0.875rem;
     --wf-font-md: 1rem;
     --wf-font-lg: 1.125rem;
     --wf-font-xl: 1.25rem;
-    /* Extended sizes (v2.0.0) */
     --wf-font-2xl: 1.5rem;
     --wf-font-3xl: 1.875rem;
     --wf-font-4xl: 2.25rem;
 
-    /* Font weights (v2.0.0) */
+    /* Font weights */
     --wf-font-weight-light: 300;
     --wf-font-weight-normal: 400;
     --wf-font-weight-medium: 500;
     --wf-font-weight-bold: 700;
     --wf-font-weight-black: 900;
 
-    /* Letter spacing (tracking) (v2.0.0) */
+    /* Letter spacing (tracking) */
     --wf-tracking-tighter: -0.05em;
     --wf-tracking-tight: -0.025em;
     --wf-tracking-normal: 0;
@@ -185,7 +254,6 @@
     --wf-leading-tight: 1.25;
     --wf-leading-normal: 1.5;
     --wf-leading-relaxed: 1.75;
-    /* Extended line heights (v2.0.0) */
     --wf-leading-loose: 2;
 
     /* Radius scale */
@@ -210,7 +278,17 @@
     --wf-space-16: 64px; /* 16x = 8 * 8px */
     --wf-space-20: 80px; /* 20x = 10 * 8px */
 
-    /* Breakpoints */
+    /* Z-index（重なり順）。上の段ほど手前に表示される */
+    --wf-z-dropdown: 1000; /* ドロップダウン・オートコンプリート */
+    --wf-z-sticky: 1100; /* 追従ヘッダー */
+    --wf-z-drawer-backdrop: 1190;
+    --wf-z-drawer: 1200; /* サイドバー・モバイルのナビドロワー */
+    --wf-z-modal: 1300; /* モーダル（オーバーレイ含む） */
+    --wf-z-popover: 1400; /* モーダル内から開いても前面に出る */
+    --wf-z-tooltip: 1500;
+    --wf-z-toast: 1600; /* トースト・スナックバーは常に最前面 */
+
+    /* Breakpoints（参照用。@media には var() を書けないため、各 CSS では同じ px 値を直接書く） */
     --wf-breakpoint-sm: 600px;
     --wf-breakpoint-md: 900px;
     /* Extended breakpoints for larger layouts */
@@ -233,12 +311,7 @@
     --wf-btn-gap-md: var(--wf-space-2);
     --wf-btn-gap-lg: var(--wf-space-3);
 
-    /* Gradient button colors (theme-aware) */
-    --wf-gradient-start: var(--wf-primary-bg);
-    --wf-gradient-end: var(--wf-color-accent);
-
     /* Stamp */
-    --wf-stamp-color: var(--wf-primary-bg);
     --wf-stamp-weight: 3px;
     --wf-stamp-py: 6px;
     --wf-stamp-px: 12px;
@@ -260,25 +333,6 @@
     --wf-step-line-width: 32px;
     --wf-step-line-height: 2px;
 
-    /* Surface & overlay tokens */
-    --wf-surface-base: #ffffff;
-    --wf-surface-subtle: #faf7f5;
-    --wf-surface-muted: #f5f2ef;
-
-    /* Shadows - layered depth system */
-    --wf-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-    --wf-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-    --wf-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    --wf-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-
-    /* Legacy shadow (keep for compatibility) */
-    --wf-shadow-subtle: rgba(0, 0, 0, 0.08);
-    --wf-overlay-light: rgba(255, 255, 255, 0.06);
-
-    /* Disabled state */
-    --wf-disabled-bg: #f0f0f0;
-    --wf-disabled-fg: #999999;
-
     /* Animation & Transition durations */
     --wf-duration-fast: 150ms;
     --wf-duration-base: 250ms;
@@ -293,78 +347,43 @@
     --wf-ease-out: cubic-bezier(0, 0, 0.2, 1);
     --wf-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
 
-    /* Motion control (v2.0.0) */
+    /* Motion control */
     --wf-enable-motion: 1; /* デフォルトで有効 */
   }
 
-  /* Reduced motion preference (v2.0.0) */
+  /*
+    他のトークンから導出するトークン
+    カスタムプロパティ内の var() は宣言した要素で確定するため、:root だけで宣言すると
+    テーマを付けた要素でも :root の値のままになる。テーマ要素でも再計算されるよう両方に宣言する。
+  */
+  :root,
+  [class*="theme-"] {
+    --wf-color-border: var(--wf-color-border-subtle);
+    --wf-outline-color-hover: var(--wf-link-color-hover);
+    --wf-gradient-start: var(--wf-primary-bg);
+    --wf-gradient-fg: var(--wf-primary-fg);
+    --wf-stamp-color: var(--wf-color-accent);
+  }
+
+  /* Reduced motion preference */
   @media (prefers-reduced-motion: reduce) {
     :root {
       --wf-enable-motion: 0; /* アニメーションを無効化 */
     }
   }
 
-  /* Dark Mode Overrides */
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --wf-color-bg: #121212;
-      --wf-color-text: #e5e5e5;
-      --wf-color-muted: #a3a3a3;
-
-      --wf-surface-base: #1f1f1f;
-      --wf-surface-subtle: #2a2a2a;
-      --wf-surface-muted: #333333;
-
-      --wf-color-border: #404040;
-      --wf-color-border-subtle: #333333;
-      --wf-color-border-strong: #525252;
-
-      --wf-primary-bg: var(--wf-accent-300);
-      --wf-primary-fg: #1f1f1f;
-      --wf-primary-bg-hover: var(--wf-accent-200);
-      --wf-primary-bg-active: var(--wf-accent-100);
-
-      --wf-link-color: var(--wf-accent-300);
-      --wf-link-color-hover: var(--wf-accent-200);
-
-      --wf-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-      --wf-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-      --wf-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-      --wf-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-
-      --wf-disabled-bg: #333333;
-      --wf-disabled-fg: #666666;
-    }
+  /*
+    Color mode
+    - 既定は OS の設定に従う（:root の color-scheme: light dark）
+    - data-theme / クラスで固定できる。任意の要素に付けると、その要素以下だけ切り替わる
+  */
+  .theme-light,
+  [data-theme="light"] {
+    color-scheme: light;
   }
 
   .theme-dark,
   [data-theme="dark"] {
-    --wf-color-bg: #121212;
-    --wf-color-text: #e5e5e5;
-    --wf-color-muted: #a3a3a3;
-
-    --wf-surface-base: #1f1f1f;
-    --wf-surface-subtle: #2a2a2a;
-    --wf-surface-muted: #333333;
-
-    --wf-color-border: #404040;
-    --wf-color-border-subtle: #333333;
-    --wf-color-border-strong: #525252;
-
-    --wf-primary-bg: var(--wf-accent-300);
-    --wf-primary-fg: #1f1f1f;
-    --wf-primary-bg-hover: var(--wf-accent-200);
-    --wf-primary-bg-active: var(--wf-accent-100);
-
-    --wf-link-color: var(--wf-accent-300);
-    --wf-link-color-hover: var(--wf-accent-200);
-
-    --wf-shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    --wf-shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-    --wf-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -2px rgba(0, 0, 0, 0.2);
-    --wf-shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.4), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-
-    --wf-disabled-bg: #333333;
-    --wf-disabled-fg: #666666;
+    color-scheme: dark;
   }
 }

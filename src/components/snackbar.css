@@ -9,7 +9,7 @@
   /* Snackbar - Stack-managed notifications */
   .wf-snackbar-container {
     position: fixed;
-    z-index: 9999;
+    z-index: var(--wf-z-toast);
     display: flex;
     flex-direction: column;
     gap: var(--wf-space-2);
@@ -64,7 +64,7 @@
     min-width: 280px;
     max-width: 400px;
     pointer-events: auto;
-    animation-name: wf-slide-up;
+    animation-name: wf-snackbar-in;
     animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-duration-base));
     animation-timing-function: var(--wf-ease-out);
   }
@@ -108,27 +108,27 @@
 
   /* Variants */
   .wf-snackbar--success {
-    border-left-color: var(--wf-success);
+    border-left-color: var(--wf-success-text);
   }
 
   .wf-snackbar--success .wf-snackbar__message {
-    color: var(--wf-success);
+    color: var(--wf-success-text);
   }
 
   .wf-snackbar--warning {
-    border-left-color: var(--wf-warning);
+    border-left-color: var(--wf-warning-text);
   }
 
   .wf-snackbar--warning .wf-snackbar__message {
-    color: var(--wf-warning);
+    color: var(--wf-warning-text);
   }
 
   .wf-snackbar--danger {
-    border-left-color: var(--wf-danger);
+    border-left-color: var(--wf-danger-text);
   }
 
   .wf-snackbar--danger .wf-snackbar__message {
-    color: var(--wf-danger);
+    color: var(--wf-danger-text);
   }
 
   .wf-snackbar--info {
@@ -145,6 +145,17 @@
     animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-duration-base));
     animation-timing-function: var(--wf-ease-in);
     animation-fill-mode: forwards;
+  }
+
+  @keyframes wf-snackbar-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   @keyframes wf-slide-up-reverse {

@@ -229,31 +229,21 @@
       function applyTheme(theme) {
         // themeが明示的に渡された場合はその値を使い、undefinedの場合はlocalStorageから取得
         const t = theme !== undefined ? theme : localStorage.getItem("wf-theme") || "";
-        console.log("[applyTheme] 適用するテーマ:", t);
 
         // classList操作で安全にテーマクラスを管理
-        const removedThemes = [];
         Array.from(document.body.classList).forEach(c => {
           if (c.startsWith("theme-")) {
             document.body.classList.remove(c);
-            removedThemes.push(c);
           }
         });
-        if (removedThemes.length > 0) {
-          console.log("[applyTheme] 削除したテーマ:", removedThemes);
-        }
 
         if (t) {
           document.body.classList.add(t);
-          console.log("[applyTheme] 追加したテーマ:", t);
         }
 
         localStorage.setItem("wf-theme", t);
         const sel = document.getElementById("theme");
         if (sel) sel.value = t;
-
-        console.log("[applyTheme] body.classList:", Array.from(document.body.classList));
-        console.log("[applyTheme] 背景色:", getComputedStyle(document.body).backgroundColor);
       }
     </script>
   </head>
@@ -360,14 +350,14 @@
           >
             桜
             <br />
-            <small style="opacity: 0.8; font-size: 0.75rem">#f4b3c2</small>
+            <small style="font-size: 0.75rem">#f4b3c2</small>
           </div>
           <div
             style="
               background: #e35c8d;
               padding: 32px;
               text-align: center;
-              color: white;
+              color: #1f1f1f;
               font-weight: 700;
               border-radius: 8px;
               box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -375,7 +365,7 @@
           >
             紅梅
             <br />
-            <small style="opacity: 0.9; font-size: 0.75rem">#e35c8d</small>
+            <small style="font-size: 0.75rem">#e35c8d</small>
           </div>
           <div
             style="
@@ -390,14 +380,14 @@
           >
             萌黄
             <br />
-            <small style="opacity: 0.8; font-size: 0.75rem">#a9d18e</small>
+            <small style="font-size: 0.75rem">#a9d18e</small>
           </div>
           <div
             style="
               background: #967bb6;
               padding: 32px;
               text-align: center;
-              color: white;
+              color: #1f1f1f;
               font-weight: 700;
               border-radius: 8px;
               box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -405,7 +395,7 @@
           >
             菊
             <br />
-            <small style="opacity: 0.9; font-size: 0.75rem">#967bb6</small>
+            <small style="font-size: 0.75rem">#967bb6</small>
           </div>
           <div
             style="
@@ -420,7 +410,7 @@
           >
             氷
             <br />
-            <small style="opacity: 0.8; font-size: 0.75rem">#7eb8d4</small>
+            <small style="font-size: 0.75rem">#7eb8d4</small>
           </div>
           <div
             style="
@@ -435,7 +425,7 @@
           >
             柳
             <br />
-            <small style="opacity: 0.8; font-size: 0.75rem">#93c572</small>
+            <small style="font-size: 0.75rem">#93c572</small>
           </div>
           <div
             style="
@@ -450,7 +440,7 @@
           >
             紅葉
             <br />
-            <small style="opacity: 0.9; font-size: 0.75rem">#c94c28</small>
+            <small style="font-size: 0.75rem">#c94c28</small>
           </div>
           <div
             style="
@@ -465,14 +455,14 @@
           >
             藤
             <br />
-            <small style="opacity: 0.8; font-size: 0.75rem">#bca7e8</small>
+            <small style="font-size: 0.75rem">#bca7e8</small>
           </div>
           <div
             style="
               background: #7c8c4b;
               padding: 32px;
               text-align: center;
-              color: white;
+              color: #000000;
               font-weight: 700;
               border-radius: 8px;
               box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -480,7 +470,7 @@
           >
             鶯
             <br />
-            <small style="opacity: 0.9; font-size: 0.75rem">#7c8c4b</small>
+            <small style="font-size: 0.75rem">#7c8c4b</small>
           </div>
           <div
             style="
@@ -495,7 +485,7 @@
           >
             雪
             <br />
-            <small style="opacity: 0.9; font-size: 0.75rem">#5a7a8f</small>
+            <small style="font-size: 0.75rem">#5a7a8f</small>
           </div>
         </div>
       </section>
@@ -1329,9 +1319,7 @@ const products = [
 ];
 
 const total = products.reduce((sum, item) =&gt; sum + item.price, 0);
-console.log(`合計: ${total}円`);
-
-console.log(greet('世界'));</code></pre>
+</code></pre>
           </div>
 
           <div class="wf-card">

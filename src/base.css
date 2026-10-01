@@ -10,7 +10,6 @@
   html {
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
-    color-scheme: light dark; /* v2.0.0: フォーム要素のダークモード対応 */
   }
   body {
     margin: 0;
@@ -19,10 +18,13 @@
     background: var(--wf-color-bg);
     position: relative;
     min-height: 100vh;
+    min-height: 100dvh;
   }
 
   /* Washi paper texture overlay (和紙のテクスチャー) */
+  /* ダークでは白い縞が格子模様として浮き、細い文字の可読性を下げるため薄くする */
   body::before {
+    --wf-texture-color: light-dark(rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.02));
     content: "";
     position: fixed;
     top: 0;
@@ -34,19 +36,28 @@
         90deg,
         transparent,
         transparent 2px,
-        rgba(255, 255, 255, 0.1) 2px,
-        rgba(255, 255, 255, 0.1) 4px
+        var(--wf-texture-color) 2px,
+        var(--wf-texture-color) 4px
       ),
       repeating-linear-gradient(
         0deg,
         transparent,
         transparent 2px,
-        rgba(255, 255, 255, 0.1) 2px,
-        rgba(255, 255, 255, 0.1) 4px
+        var(--wf-texture-color) 2px,
+        var(--wf-texture-color) 4px
       );
     pointer-events: none;
     opacity: 0.3;
     z-index: -1;
+  }
+
+  /* Form controls: ブラウザ既定（約 13px のゴシック体・等幅）ではなく本文のフォントを継承する */
+  button,
+  input,
+  select,
+  textarea {
+    font: inherit;
+    letter-spacing: inherit;
   }
 
   /* Typography */
@@ -199,41 +210,5 @@
     color: var(--wf-color-muted);
     text-align: center;
     margin-top: var(--wf-space-2);
-  }
-
-  /* Layout */
-  .wf-container {
-    max-width: 960px;
-    margin: 0 auto;
-    padding: var(--wf-space-4);
-  }
-  @media (max-width: 600px) {
-    .wf-container {
-      padding: var(--wf-space-3);
-    }
-  }
-
-  /* Container width variants */
-  .wf-container-narrow {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: var(--wf-space-4);
-  }
-  .wf-container-wide {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: var(--wf-space-4);
-  }
-  .wf-container-xl {
-    max-width: 1440px;
-    margin: 0 auto;
-    padding: var(--wf-space-4);
-  }
-  @media (max-width: 600px) {
-    .wf-container-narrow,
-    .wf-container-wide,
-    .wf-container-xl {
-      padding: var(--wf-space-3);
-    }
   }
 }

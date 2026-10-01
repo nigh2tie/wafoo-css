@@ -1,6 +1,6 @@
 {
   "name": "wafoo-css",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Japanese-inspired CSS framework with traditional aesthetics",
   "main": "dist/wafoo.css",
   "style": "dist/wafoo.css",
@@ -41,7 +41,7 @@
     "src/",
     "LICENSE",
     "README.md",
-    "REFERENCE.md"
+    "guides/reference.md"
   ],
   "scripts": {
     "build": "bash scripts/build.sh",
@@ -52,22 +52,25 @@
     "size:core": "gzip -c dist/wafoo-core.min.css | wc -c",
     "size:extras": "gzip -c dist/wafoo-extras.min.css | wc -c",
     "check-size": "node scripts/check-size.js",
+    "check:contrast": "node scripts/check-contrast.js",
+    "tokens": "node scripts/generate-tokens-json.js && node scripts/validate-tokens.js",
     "format": "prettier --write \"{src,docs,examples,devserver,scripts}/**/*.{css,html,js,md}\"",
     "format:check": "prettier -c \"{src,docs,examples,devserver,scripts}/**/*.{css,html,js,md}\"",
     "lint:css": "stylelint \"src/**/*.css\"",
     "lint:css:fix": "stylelint \"src/**/*.css\" --fix",
     "lint:html": "html-validate \"docs/**/*.html\" \"examples/**/*.html\"",
-    "lint": "npm run lint:css",
+    "lint": "npm run lint:css && npm run check:contrast",
     "test": "playwright test",
     "test:e2e": "playwright test tests/e2e",
     "test:a11y": "playwright test tests/a11y",
+    "test:visual:update": "playwright test tests/visual.spec.js --update-snapshots=all",
     "test:ui": "playwright test --ui",
     "test:headed": "playwright test --headed",
     "test:debug": "playwright test --debug"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.11.0",
-    "@playwright/test": "^1.56.1",
+    "@playwright/test": "~1.58.0",
     "autoprefixer": "^10.4.21",
     "cssnano": "^7.1.2",
     "html-validate": "^8.24.1",
@@ -78,5 +81,78 @@
     "stylelint": "^15.11.0",
     "stylelint-config-standard": "^34.0.0",
     "terser": "^5.44.1"
+  },
+  "browserslist": [
+    "last 2 Chrome versions",
+    "last 2 Safari versions",
+    "last 2 Edge versions",
+    "last 2 Firefox versions",
+    "not dead",
+    "not IE 11",
+    "> 0.2%"
+  ],
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "useTabs": false,
+    "singleQuote": false,
+    "trailingComma": "none",
+    "semi": true,
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "htmlWhitespaceSensitivity": "ignore",
+    "endOfLine": "lf",
+    "overrides": [
+      {
+        "files": "*.md",
+        "options": {
+          "proseWrap": "always"
+        }
+      }
+    ]
+  },
+  "stylelint": {
+    "extends": [
+      "stylelint-config-standard"
+    ],
+    "ignoreFiles": [
+      "dist/**",
+      "old/**",
+      "**/node_modules/**",
+      "src/utilities-core.css",
+      "src/utilities.css",
+      "src/utilities-extras.css"
+    ],
+    "rules": {
+      "no-descending-specificity": null,
+      "declaration-block-single-line-max-declarations": null,
+      "property-no-vendor-prefix": null,
+      "value-keyword-case": [
+        "lower",
+        {
+          "ignoreKeywords": [
+            "currentColor",
+            "BlinkMacSystemFont"
+          ]
+        }
+      ],
+      "custom-property-pattern": null,
+      "color-hex-length": null,
+      "color-function-notation": null,
+      "alpha-value-notation": null,
+      "custom-property-empty-line-before": null,
+      "declaration-empty-line-before": null,
+      "comment-empty-line-before": null,
+      "at-rule-empty-line-before": null,
+      "media-feature-range-notation": null,
+      "number-max-precision": 6,
+      "selector-class-pattern": [
+        "^(wf-[a-z0-9-]+(?:__(?:[a-z0-9-]+))?(?:--[a-z0-9-]+)?|is-[a-z0-9-]+|has-[a-z0-9-]+|theme-[a-z0-9-]+)$",
+        {
+          "message": "Expected class selector to follow wf-/is-/has-/theme- pattern"
+        }
+      ],
+      "rule-empty-line-before": null
+    }
   }
 }

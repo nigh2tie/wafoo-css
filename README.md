@@ -205,17 +205,18 @@ wafoo-cssの詳細なリファレンスドキュメントを用意していま�
 
 ### ユーザー向けドキュメント
 
-- **[完全リファレンス (REFERENCE.md)](./REFERENCE.md)** - GitHub上で閲覧できるMarkdown形式の完全なリファレンス
+- **[完全リファレンス (guides/reference.md)](./guides/reference.md)** - GitHub上で閲覧できるMarkdown形式の完全なリファレンス
 - **[コンポーネントリファレンス (docs/reference.html)](https://nigh2tie.github.io/wafoo-css/reference.html)** - ブラウザで見やすいHTML形式のコンポーネントリファレンス
 - **[CSS変数リファレンス (docs/css-variables.html)](https://nigh2tie.github.io/wafoo-css/css-variables.html)** - 全87個のCSS変数を視覚的なプレビュー付きで確認
+- **[配色チェック (docs/color-check.html)](https://nigh2tie.github.io/wafoo-css/color-check.html)** - 全コンポーネントをテーマ × ライト／ダークで表示し、コントラスト比をその場で検証
 
 ### 開発者向けドキュメント
 
-- **[COMPONENTS.md](./COMPONENTS.md)** - AI/開発者向けの詳細なコンポーネントAPIリファレンス
-- **[AI_PROMPTS.md](./AI_PROMPTS.md)** - AI生成用プロンプトテンプレート集
-- **[ACCESSIBILITY.md](./ACCESSIBILITY.md)** - アクセシビリティガイド（WCAG 2.1 AA準拠）
-- **[NAMING_CONVENTIONS.md](./NAMING_CONVENTIONS.md)** - クラス名の命名規則
-- **[TAILWIND_INTEGRATION.md](./TAILWIND_INTEGRATION.md)** - Tailwind CSSとの併用ガイド
+- **[guides/components.md](./guides/components.md)** - AI/開発者向けの詳細なコンポーネントAPIリファレンス
+- **[guides/ai-prompts.md](./guides/ai-prompts.md)** - AI生成用プロンプトテンプレート集
+- **[guides/accessibility.md](./guides/accessibility.md)** - アクセシビリティガイド（WCAG 2.1 AA準拠）
+- **[guides/tailwind-integration.md](./guides/tailwind-integration.md)** - Tailwind CSSとの併用ガイド
+- **[guides/migration.md](./guides/migration.md)** - バージョン間の移行ガイド
 - **[CONTRIBUTING.md](./CONTRIBUTING.md)** - プロジェクトへの貢献方法
 
 リファレンスには以下が含まれています：
@@ -465,8 +466,8 @@ hamburger.addEventListener("click", () => {
 #### 基本的な入力
 
 ```html
-<!-- ラベルには自動的に◆マーカーが表示されます -->
-<label class="wf-label" for="email">メールアドレス</label>
+<!-- wf-label-mark を足すと和風の◆マーカーが付きます（読み上げはされません） -->
+<label class="wf-label wf-label-mark" for="email">メールアドレス</label>
 <input type="email" id="email" class="wf-input" placeholder="name@example.com" />
 
 <label class="wf-label" for="comment">コメント</label>
@@ -935,7 +936,7 @@ wafoo-cssはCSS変数（カスタムプロパティ）を使用しており、�
   --wf-color-accent: #6a5c7c; /* アクセントカラー */
   --wf-color-bg: #e7ddd4; /* 背景色 */
   --wf-primary-bg: #4f4560; /* ボタンのプライマリカラー */
-  /* ... その他多数（詳細はREFERENCE.mdを参照） */
+  /* ... その他多数（詳細は guides/reference.md を参照） */
 }
 ```
 
@@ -1033,10 +1034,13 @@ document.body.classList.add("theme-koori");
 
 ## ブラウザサポート
 
-wafoo-cssは以下のブラウザをサポートしています：
+wafoo-cssは以下のブラウザをサポートしています（配色トークンに `light-dark()` を使用しているため）：
 
-- **Chrome**: 最新版
-- **Safari**: 最新版
+- **Chrome / Edge**: 123 以上
+- **Safari**: 17.5 以上
+- **Firefox**: 120 以上
+
+これより古いブラウザに対応する必要がある場合は v1.1.0 を使用してください。
 
 ### フォントのフォールバック
 

@@ -6,6 +6,10 @@ set -e
 
 echo "Starting wafoo-css build process..."
 
+# 0. 配色のコントラスト検証とトークン JSON の生成
+node scripts/check-contrast.js
+node scripts/generate-tokens-json.js > /dev/null
+
 # 1. Core をビルド
 bash scripts/build-core.sh
 
@@ -20,6 +24,7 @@ FILES=(
   "src/tokens.css"
   "src/themes.css"
   "src/base.css"
+  "src/components/container.css"
   "src/components/buttons.css"
   "src/components/stamp.css"
   "src/components/cards.css"
@@ -60,6 +65,9 @@ FILES=(
   "src/components/input-group.css"
   "src/components/floating-label.css"
   "src/components/file.css"
+  "src/components/snackbar.css"
+  "src/components/data-table.css"
+  "src/components/autocomplete.css"
   "src/utilities-core.css"
   "src/utilities-extras.css"
 )

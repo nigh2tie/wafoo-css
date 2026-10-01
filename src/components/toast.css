@@ -63,36 +63,36 @@
 
   /* Toast variants */
   .wf-toast--success {
-    border-left-color: var(--wf-success);
+    border-left-color: var(--wf-success-text);
     background: var(--wf-surface-base);
   }
 
   .wf-toast--success .wf-toast__title {
-    color: var(--wf-success);
+    color: var(--wf-success-text);
   }
 
   .wf-toast--warning {
-    border-left-color: var(--wf-warning);
+    border-left-color: var(--wf-warning-text);
     background: var(--wf-surface-base);
   }
 
   .wf-toast--warning .wf-toast__title {
-    color: var(--wf-warning);
+    color: var(--wf-warning-text);
   }
 
   .wf-toast--danger {
-    border-left-color: var(--wf-danger);
+    border-left-color: var(--wf-danger-text);
     background: var(--wf-surface-base);
   }
 
   .wf-toast--danger .wf-toast__title {
-    color: var(--wf-danger);
+    color: var(--wf-danger-text);
   }
 
   /* Toast container (for positioning multiple toasts) */
   .wf-toast-container {
     position: fixed;
-    z-index: 9999;
+    z-index: var(--wf-z-toast);
     display: flex;
     flex-direction: column;
     gap: var(--wf-space-3);

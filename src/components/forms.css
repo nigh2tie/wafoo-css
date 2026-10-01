@@ -18,9 +18,10 @@
     letter-spacing: 0.1em;
   }
 
-  /* Japanese decorative marker (和風装飾) */
-  .wf-label::before {
+  /* 和風の装飾記号（任意）。読み上げ対象から外すため代替テキストを空にする */
+  .wf-label-mark::before {
     content: "◆";
+    content: "◆" / "";
     color: var(--wf-color-accent);
     margin-right: 0.5rem;
   }
@@ -32,6 +33,7 @@
     border: 1px solid var(--wf-color-border-strong);
     border-radius: var(--wf-radius-md);
     background: var(--wf-surface-base);
+    color: var(--wf-color-text);
   }
   .wf-textarea {
     min-height: var(--wf-textarea-min-h);
@@ -43,10 +45,14 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%236a5c7c' d='M1.41 0L6 4.58L10.59 0L12 1.41l-6 6l-6-6z'/%3E%3C/svg%3E");
+    background-image:
+      linear-gradient(45deg, transparent 50%, var(--wf-color-accent) 50%),
+      linear-gradient(135deg, var(--wf-color-accent) 50%, transparent 50%);
     background-repeat: no-repeat;
-    background-position: right var(--wf-space-3) center;
-    background-size: 12px;
+    background-position:
+      right calc(var(--wf-space-3) + 6px) center,
+      right var(--wf-space-3) center;
+    background-size: 6px 6px;
     padding-right: calc(var(--wf-space-3) + 20px);
   }
 
@@ -113,8 +119,8 @@
   }
 
   .wf-select option:checked {
-    background: var(--wf-color-accent);
-    color: var(--wf-surface-base);
+    background: var(--wf-primary-bg);
+    color: var(--wf-primary-fg);
     font-weight: 700;
   }
 
@@ -160,7 +166,7 @@
     top: var(--wf-checkbox-check-top);
     width: var(--wf-checkbox-check-width);
     height: var(--wf-checkbox-check-height);
-    border: solid var(--wf-surface-base);
+    border: solid var(--wf-color-accent-fg);
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
   }
@@ -173,7 +179,7 @@
   }
 
   .wf-checkbox:disabled:checked {
-    background: var(--wf-color-muted);
+    background: var(--wf-disabled-fg);
   }
 
   /* Custom radio */
@@ -224,7 +230,7 @@
   }
 
   .wf-radio:disabled:checked::after {
-    background: var(--wf-color-muted);
+    background: var(--wf-disabled-fg);
   }
 
   .wf-check {
@@ -239,41 +245,49 @@
   .wf-select:disabled {
     background: var(--wf-disabled-bg);
     color: var(--wf-disabled-fg);
+    border-color: var(--wf-color-border);
+  }
+  /* 入力欄の直後に置く補足・検証メッセージ。入力欄に密着しないよう上に余白を取る */
+  .wf-help,
+  .wf-error,
+  .wf-success,
+  .wf-warning {
+    margin-top: var(--wf-space-1);
   }
   .wf-help {
     color: var(--wf-color-muted);
     font-size: var(--wf-font-sm);
   }
   .wf-error {
-    color: var(--wf-danger);
+    color: var(--wf-danger-text);
     font-size: var(--wf-font-sm);
   }
   .wf-input.is-invalid,
   .wf-textarea.is-invalid,
   .wf-select.is-invalid {
-    border-color: var(--wf-danger);
+    border-color: var(--wf-danger-text);
   }
   .wf-label .wf-required {
-    color: var(--wf-danger);
+    color: var(--wf-danger-text);
     margin-left: var(--wf-space-1);
   }
 
   /* Success/Warning states */
   .wf-success {
-    color: var(--wf-success);
+    color: var(--wf-success-text);
   }
   .wf-warning {
-    color: var(--wf-warning);
+    color: var(--wf-warning-text);
   }
   .wf-input.is-success,
   .wf-textarea.is-success,
   .wf-select.is-success {
-    border-color: var(--wf-success);
+    border-color: var(--wf-success-text);
   }
   .wf-input.is-warning,
   .wf-textarea.is-warning,
   .wf-select.is-warning {
-    border-color: var(--wf-warning);
+    border-color: var(--wf-warning-text);
   }
 
   /* Accessibility: Reduced motion */

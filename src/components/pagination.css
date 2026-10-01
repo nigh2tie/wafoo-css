@@ -27,9 +27,11 @@
     background: var(--wf-surface-muted);
   }
   .wf-page-link.is-active {
-    background: var(--wf-color-accent);
-    color: var(--wf-surface-base);
+    background: var(--wf-primary-bg);
+    color: var(--wf-primary-fg);
+    /* 淡いテーマ色の塗りでも選択状態が分かるよう、枠線は文字用のアクセント色にする */
     border-color: var(--wf-color-accent);
+    font-weight: 700;
   }
   .wf-page-link.is-disabled {
     opacity: 0.5;

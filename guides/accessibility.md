@@ -37,6 +37,40 @@ wafoo-cssは、WCAG 2.1 Level AA準拠を目標としています。以下の原
    - マークアップは有効で、支援技術と互換性がある
    - ARIA属性を適切に使用
 
+### 配色とコントラスト
+
+wafoo-css が提供する配色は、既定テーマと全10テーマのライト／ダーク両モードで次の基準を満たすよう検証しています。
+
+- 文字: 背景に対して 4.5:1 以上
+- フォーム部品の枠線・フォーカスリング・選択状態・進捗バーなどの UI 部品: 3:1 以上
+
+検証は2段階です。
+
+1. `npm run check:contrast` — トークンの組み合わせ（前景 × 背景）を計算で検証します（`npm run lint` と `npm run build` でも実行されます）
+2. `tests/a11y/color-contrast.spec.js` — [配色チェックページ](../docs/color-check.html)で全コンポーネントを実際に描画し、computed style から検証します
+
+独自の配色を組む場合は、次の規則に従うと基準を保ちやすくなります。
+
+- 塗りの上の文字には、その塗りと対になる前景トークンを使う（`--wf-primary-bg` には `--wf-primary-fg`、`--wf-warning` には `--wf-warning-fg`）
+- 状態色を文字や細い線に使うときは `-text` トークン（`--wf-success-text` など）を使う。塗り用の `--wf-success` は文字に使わない
+- 階調トークン（`--wf-ink-*`、`--wf-accent-*`）はダークモードで切り替わらないため、文字色・背景色には使わない
+- 背景用のトークン（`--wf-surface-base` など）を文字色として流用しない
+
+### ダークモード
+
+配色トークンは `light-dark()` で定義しており、既定では OS の設定に従います。`data-theme` 属性（または `.theme-light` / `.theme-dark` クラス）で固定できます。任意の要素に付けると、その要素以下だけが切り替わります。
+
+```html
+<html data-theme="dark">
+  <!-- 常にダーク -->
+</html>
+<section data-theme="light">
+  <!-- この中だけ常にライト -->
+</section>
+```
+
+色テーマ（`.theme-sakura` など）もライト／ダーク両方の値を持っているため、ダークモードと組み合わせて使えます。
+
 ---
 
 ## ARIA属性の使い方
@@ -458,6 +492,8 @@ closeButton.addEventListener('click', closeModal);
 - [Colour Contrast Analyser](https://www.tpgi.com/color-contrast-checker/)
 
 通常のテキストは4.5:1以上、大きなテキスト（18pt以上、または14pt以上の太字）は3:1以上が必要です。
+
+wafoo-css のコンポーネントをテーマ・モードごとに確認するには、[配色チェックページ](../docs/color-check.html)を開いてください。表示中のテーマとモードで各要素のコントラスト比を計算し、基準を下回る要素を赤枠で示します。
 
 ---
 

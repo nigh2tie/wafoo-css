@@ -17,26 +17,27 @@
     margin: 0 0 var(--wf-space-2);
     font-size: 1rem;
   }
+  /* 背景は半透明（veil）なので、文字色は -text トークンで veil 上の 4.5:1 を保証する */
   .wf-alert-secondary {
-    border-color: var(--wf-color-secondary);
-    background: rgba(22, 94, 131, 0.1); /* wf-ai with opacity */
-    color: var(--wf-color-secondary);
+    border-color: var(--wf-secondary-text);
+    background: var(--wf-secondary-veil);
+    color: var(--wf-secondary-text);
   }
   .wf-alert-info {
-    border-color: var(--wf-color-info);
-    background: rgba(56, 161, 219, 0.1); /* wf-tsuyukusa with opacity */
-    color: var(--wf-color-info);
+    border-color: var(--wf-info-text);
+    background: var(--wf-info-veil);
+    color: var(--wf-info-text);
   }
   .wf-alert-success {
-    border-color: var(--wf-success);
+    border-color: var(--wf-success-text);
     background: var(--wf-success-veil);
   }
   .wf-alert-warning {
-    border-color: var(--wf-warning);
+    border-color: var(--wf-warning-text);
     background: var(--wf-warning-veil);
   }
   .wf-alert-danger {
-    border-color: var(--wf-danger);
+    border-color: var(--wf-danger-text);
     background: var(--wf-danger-veil);
   }
   .wf-alert.has-icon {
@@ -68,11 +69,11 @@
   }
   .wf-badge-secondary {
     background: var(--wf-color-secondary);
-    color: #ffffff;
+    color: var(--wf-secondary-fg);
   }
   .wf-badge-info {
     background: var(--wf-color-info);
-    color: #ffffff;
+    color: var(--wf-info-fg);
   }
   .wf-badge-success {
     background: var(--wf-success);

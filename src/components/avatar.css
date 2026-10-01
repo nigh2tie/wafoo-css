@@ -3,7 +3,7 @@
  * @description Avatar component.
  * @selector .wf-avatar
  * @variants .wf-avatar-sm, .wf-avatar-lg, .wf-avatar-img, .wf-avatar-square, .wf-avatar-status
- * @variables --wf-accent-100, --wf-color-text, --wf-font-sm, --wf-font-lg, --wf-radius-md
+ * @variables --wf-color-accent-muted, --wf-color-text, --wf-font-sm, --wf-font-lg, --wf-radius-md
  */
 @layer components {
   /* Avatar */
@@ -14,7 +14,7 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: var(--wf-accent-100);
+    background: var(--wf-color-accent-muted);
     color: var(--wf-color-text);
     font-weight: 700;
     overflow: hidden;
@@ -40,6 +40,11 @@
   }
   .wf-avatar-status {
     position: relative;
+    /* 状態の点は円の外側にはみ出して描くので切り取らない（画像は角丸を継承して収める） */
+    overflow: visible;
+  }
+  .wf-avatar-status > .wf-avatar-img {
+    border-radius: inherit;
   }
   .wf-avatar-status::after {
     content: "";
@@ -49,7 +54,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--wf-success);
+    background: var(--wf-success-text);
     border: 2px solid var(--wf-surface-base);
   }
 }

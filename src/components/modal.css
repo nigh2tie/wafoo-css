@@ -15,7 +15,7 @@
   .wf-modal-overlay {
     position: fixed;
     inset: 0;
-    z-index: 9999;
+    z-index: var(--wf-z-modal);
     display: none;
     align-items: center;
     justify-content: center;
@@ -35,6 +35,26 @@
     border-radius: var(--wf-radius-md);
     border: 1px solid var(--wf-color-border);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+  }
+  /*
+   * ネイティブの <dialog class="wf-modal"> にも対応する（showModal() で開く）。
+   * 最前面への表示・フォーカスの閉じ込めと復元・Esc での終了はブラウザが行う。
+   */
+  dialog.wf-modal {
+    margin: auto; /* 画面中央に置く（モバイル用の margin より優先） */
+    padding: 0;
+    max-height: calc(100dvh - 2 * var(--wf-space-4));
+  }
+  dialog.wf-modal:not([open]) {
+    display: none;
+  }
+  /* showModal() 直後はダイアログ本体にフォーカスが移るため、本体の枠は出さない（中の要素には出る） */
+  dialog.wf-modal:focus-visible {
+    outline: none;
+  }
+  dialog.wf-modal::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(1px);
   }
   .wf-modal-sm {
     width: min(92vw, 420px);
@@ -117,6 +137,7 @@
   /* Scrollable body (long content) */
   .wf-modal--scroll .wf-modal__body {
     max-height: 80vh;
+    max-height: 80dvh;
     overflow: auto;
   }
 
@@ -124,6 +145,7 @@
   .wf-modal-fullscreen {
     width: 100vw;
     height: 100vh;
+    height: 100dvh; /* モバイルのアドレスバー伸縮に追従 */
     max-width: none;
     max-height: none;
     border-radius: 0;
@@ -140,7 +162,7 @@
     color: var(--wf-danger-fg);
   }
   .wf-modal--danger .wf-modal__footer {
-    border-top-color: var(--wf-danger);
+    border-top-color: var(--wf-danger-text);
   }
 
   .wf-modal--warning .wf-modal__header {
@@ -148,7 +170,7 @@
     color: var(--wf-warning-fg);
   }
   .wf-modal--warning .wf-modal__footer {
-    border-top-color: var(--wf-warning);
+    border-top-color: var(--wf-warning-text);
   }
 
   .wf-modal--success .wf-modal__header {
@@ -156,12 +178,12 @@
     color: var(--wf-success-fg);
   }
   .wf-modal--success .wf-modal__footer {
-    border-top-color: var(--wf-success);
+    border-top-color: var(--wf-success-text);
   }
 
   .wf-modal--info .wf-modal__header {
     background: var(--wf-color-accent);
-    color: var(--wf-primary-fg);
+    color: var(--wf-color-accent-fg);
   }
   .wf-modal--info .wf-modal__footer {
     border-top-color: var(--wf-color-accent);

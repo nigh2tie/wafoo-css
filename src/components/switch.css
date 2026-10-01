@@ -41,7 +41,7 @@
   .wf-switch:checked::after {
     /* Move horizontally by innerWidth - knobWidth - leftOffset*2 = 34 - 16 - 2*2 = 14px */
     transform: translate(14px, -50%);
-    background: var(--wf-surface-base);
+    background: var(--wf-color-accent-fg);
   }
   .wf-switch:focus {
     outline: 2px solid var(--wf-focus);

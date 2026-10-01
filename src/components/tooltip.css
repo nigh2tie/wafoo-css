@@ -9,7 +9,7 @@
   /* Tooltip */
   .wf-tooltip {
     position: absolute;
-    z-index: 1200;
+    z-index: var(--wf-z-tooltip);
     background: var(--wf-color-text);
     color: var(--wf-surface-base);
     padding: 6px 8px;
@@ -42,16 +42,17 @@
     height: 0;
     border: 6px solid transparent;
   }
+  /* 矢印は本体に接する側を塗り、先端を対象要素へ向ける */
   .wf-tooltip.is-top::after {
-    border-top-color: transparent;
-    border-bottom-color: var(--wf-color-text);
+    border-top-color: var(--wf-color-text);
+    border-bottom-color: transparent;
     top: 100%;
     left: calc(50% + var(--wf-arrow-x, 0px));
     transform: translateX(-50%);
   }
   .wf-tooltip.is-bottom::after {
-    border-bottom-color: transparent;
-    border-top-color: var(--wf-color-text);
+    border-top-color: transparent;
+    border-bottom-color: var(--wf-color-text);
     bottom: 100%;
     left: calc(50% + var(--wf-arrow-x, 0px));
     transform: translateX(-50%);

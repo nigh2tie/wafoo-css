@@ -94,8 +94,8 @@
   }
 
   .wf-code-copy.is-copied {
-    color: var(--wf-success);
-    border-color: var(--wf-success);
+    color: var(--wf-success-text);
+    border-color: var(--wf-success-text);
   }
 
   pre code,

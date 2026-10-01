@@ -3,7 +3,7 @@
  * @description Carousel component.
  * @selector .wf-carousel
  * @variants .wf-carousel-thumbnails, .wf-carousel-multiple, .wf-carousel-fade, .wf-carousel-16-9, .wf-carousel-4-3
- * @variables --wf-ink-100, --wf-duration-normal, --wf-space-4, --wf-space-2, --wf-font-lg
+ * @variables --wf-surface-muted, --wf-duration-base, --wf-space-4, --wf-space-2, --wf-font-lg
  */
 /**
  * Image/Carousel Component
@@ -16,13 +16,13 @@
     position: relative;
     overflow: hidden;
     border-radius: 8px;
-    background-color: var(--wf-ink-100);
+    background-color: var(--wf-surface-muted);
   }
 
   /* Carousel Track */
   .wf-carousel__track {
     display: flex;
-    transition: transform var(--wf-duration-normal) ease;
+    transition: transform var(--wf-duration-base) ease;
   }
 
   /* Carousel Item */
@@ -77,7 +77,7 @@
     cursor: pointer;
     transition: all var(--wf-duration-fast) ease;
     z-index: 2;
-    color: var(--wf-ink-900);
+    color: #1f1f1f;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
@@ -87,8 +87,10 @@
   }
 
   .wf-carousel__button:focus-visible {
-    outline: 2px solid var(--wf-accent-500);
+    /* 画像の上でも見えるよう白と墨の二重リングにする */
+    outline: 2px solid #ffffff;
     outline-offset: 2px;
+    box-shadow: 0 0 0 4px #1f1f1f;
   }
 
   .wf-carousel__button:disabled {
@@ -131,8 +133,10 @@
   }
 
   .wf-carousel__indicator:focus-visible {
-    outline: 2px solid var(--wf-accent-500);
+    /* 画像の上でも見えるよう白と墨の二重リングにする */
+    outline: 2px solid #ffffff;
     outline-offset: 2px;
+    box-shadow: 0 0 0 4px #1f1f1f;
   }
 
   .wf-carousel__indicator.is-active {
@@ -177,7 +181,7 @@
 
   .wf-carousel__thumb.is-active {
     opacity: 1;
-    border-color: var(--wf-accent-500);
+    border-color: var(--wf-color-accent);
   }
 
   .wf-carousel__thumb img {
@@ -187,14 +191,26 @@
     display: block;
   }
 
-  /* Autoplay Indicator */
-  .wf-carousel.is-playing .wf-carousel__button-play::before {
-    content: "■ ■";
-    letter-spacing: 0.1em;
+  /* Autoplay Indicator（文字ではなく図形で描き、読み上げ・フォント差の影響を受けないようにする） */
+  .wf-carousel__button-play::before {
+    content: "";
+    box-sizing: border-box;
   }
-
+  .wf-carousel.is-playing .wf-carousel__button-play::before {
+    /* 一時停止: 2 本の縦棒 */
+    width: 12px;
+    height: 14px;
+    border-left: 4px solid currentColor;
+    border-right: 4px solid currentColor;
+  }
   .wf-carousel:not(.is-playing) .wf-carousel__button-play::before {
-    content: "▶";
+    /* 再生: 右向きの三角形（見た目の重心を合わせるため少し右へ） */
+    width: 0;
+    height: 0;
+    margin-left: 3px;
+    border-left: 12px solid currentColor;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
   }
 
   /* Multiple Items Variant */
@@ -225,7 +241,7 @@
     top: 0;
     left: 0;
     opacity: 0;
-    transition: opacity var(--wf-duration-normal) ease;
+    transition: opacity var(--wf-duration-base) ease;
     pointer-events: none;
   }
 

@@ -845,11 +845,11 @@ wafoo-cssを使用して削除確認モーダルダイアログを作成して�
 
 ## 参考資料
 
-- [wafoo-css リファレンス](./REFERENCE.md)
-- [wafoo-css コンポーネントAPI](./COMPONENTS.md)
-- [wafoo-css アクセシビリティガイド](./ACCESSIBILITY.md)
-- [wafoo-css Tailwind統合ガイド](./TAILWIND_INTEGRATION.md)
-- [wafoo-css マイグレーションガイド](./MIGRATION.md)
+- [wafoo-css リファレンス](./reference.md)
+- [wafoo-css コンポーネントAPI](./components.md)
+- [wafoo-css アクセシビリティガイド](./accessibility.md)
+- [wafoo-css Tailwind統合ガイド](./tailwind-integration.md)
+- [wafoo-css マイグレーションガイド](./migration.md)
 
 ---
 

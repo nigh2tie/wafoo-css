@@ -196,13 +196,16 @@ function generateText() {
 function generateColorUtilities() {
   let css = "\n/* Color utilities (theme-aware) */\n";
 
+  // 文字色は背景に対して 4.5:1 を満たす -text / accent 系トークンを使う（塗り用の色は使わない）
   const textColors = {
     accent: "var(--wf-color-accent)",
-    primary: "var(--wf-primary-bg)",
+    primary: "var(--wf-color-accent)",
     muted: "var(--wf-color-muted)",
-    success: "var(--wf-success)",
-    warning: "var(--wf-warning)",
-    danger: "var(--wf-danger)",
+    success: "var(--wf-success-text)",
+    warning: "var(--wf-warning-text)",
+    danger: "var(--wf-danger-text)",
+    info: "var(--wf-info-text)",
+    secondary: "var(--wf-secondary-text)",
     link: "var(--wf-link-color)",
     white: "#ffffff",
     black: "#000000"
@@ -446,10 +449,11 @@ function generateShadowUtilities() {
 
 function generateResponsive() {
   let css = "\n/* Responsive (min-width) */\n";
-  const breakpoints = ["sm", "md", "lg", "xl"]; // Added xl
+  // メディアクエリには var() を書けないため、トークン（--wf-breakpoint-*）と同じ値を直接展開する
+  const breakpoints = { sm: "600px", md: "900px", lg: "1200px", xl: "1440px" };
 
-  for (const bp of breakpoints) {
-    css += `@media (min-width: var(--wf-breakpoint-${bp})) {\n`;
+  for (const [bp, width] of Object.entries(breakpoints)) {
+    css += `@media (min-width: ${width}) {\n`;
 
     // Display
     css += `  .wf-${bp}-hidden { display: none; }\n`;

@@ -4,3 +4,7 @@ node_modules/
 .git/
 .claude/
 
+docs/wafoo.css
+docs/wafoo.min.css
+docs/wafoo.js
+docs/wafoo.min.js

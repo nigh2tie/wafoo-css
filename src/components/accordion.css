@@ -27,18 +27,35 @@
     align-items: center;
     justify-content: space-between;
   }
-  /* Visual marker for open/closed state */
-  .wf-accordion__header::after {
-    content: "▼";
-    font-weight: 700;
-    color: var(--wf-color-muted);
-    font-size: 14px;
-    line-height: 1;
-    transition: color 0.2s ease;
+  /* ネイティブの <details> / <summary> でも同じ見た目で使える */
+  summary.wf-accordion__header {
+    list-style: none;
   }
-  .wf-accordion__header[aria-expanded="true"]::after {
-    content: "▲";
+  summary.wf-accordion__header::-webkit-details-marker {
+    display: none;
+  }
+  /* 開閉の矢印。文字ではなく線で描き、回転で状態を表す（読み上げ対象にならない） */
+  .wf-accordion__header::after {
+    content: "";
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-left: var(--wf-space-3);
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    color: var(--wf-color-muted);
+    translate: 0 -2px;
+    rotate: 45deg;
+    transition:
+      rotate calc(var(--wf-enable-motion, 1) * 0.2s) ease,
+      translate calc(var(--wf-enable-motion, 1) * 0.2s) ease,
+      color 0.2s ease;
+  }
+  .wf-accordion__header[aria-expanded="true"]::after,
+  details[open] > .wf-accordion__header::after {
     color: var(--wf-color-text);
+    translate: 0 2px;
+    rotate: 225deg;
   }
   .wf-accordion__header:hover,
   .wf-accordion__header:focus-visible {

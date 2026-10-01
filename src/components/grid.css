@@ -53,7 +53,7 @@
   }
 
   /* sm以上（600px以上）でグリッド幅を適用 */
-  @media (min-width: var(--wf-breakpoint-sm)) {
+  @media (min-width: 600px) {
     .wf-col-1 {
       width: 8.333333%;
     }
@@ -93,13 +93,24 @@
   }
 
   /* Row alignment variants */
-  .wf-row-stretch { align-items: stretch; }
-  .wf-row-start   { align-items: flex-start; }
-  .wf-row-center  { align-items: center; }
-  .wf-row-end     { align-items: flex-end; }
+  .wf-row-stretch {
+    align-items: stretch;
+  }
+  .wf-row-start {
+    align-items: flex-start;
+  }
+  .wf-row-center {
+    align-items: center;
+  }
+  .wf-row-end {
+    align-items: flex-end;
+  }
 
   /* Full-height column */
-  .wf-col-fill { align-self: stretch; min-height: 0; }
+  .wf-col-fill {
+    align-self: stretch;
+    min-height: 0;
+  }
 
   /* Auto layout (equal flexible columns) */
   .wf-col-auto {
@@ -108,7 +119,7 @@
   }
 
   /* Offsets - モバイルでは無効、sm以上で有効 */
-  @media (min-width: var(--wf-breakpoint-sm)) {
+  @media (min-width: 600px) {
     .wf-offset-1 {
       margin-left: 8.333333%;
     }
@@ -124,7 +135,7 @@
   }
 
   /* Breakpoint: sm */
-  @media (min-width: var(--wf-breakpoint-sm)) {
+  @media (min-width: 600px) {
     .wf-col-sm-1 {
       flex: 0 0 auto;
       width: 8.333333%;
@@ -192,7 +203,7 @@
   }
 
   /* Breakpoint: md */
-  @media (min-width: var(--wf-breakpoint-md)) {
+  @media (min-width: 900px) {
     .wf-col-md-1 {
       flex: 0 0 auto;
       width: 8.333333%;

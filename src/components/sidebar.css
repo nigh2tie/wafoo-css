@@ -3,7 +3,7 @@
  * @description Sidebar component.
  * @selector .wf-sidebar
  * @variants .wf-sidebar-backdrop
- * @variables --wf-color-bg, --wf-ink-200, --wf-duration-normal, --wf-space-4, --wf-font-lg
+ * @variables --wf-surface-base, --wf-color-border, --wf-duration-base, --wf-space-4, --wf-font-lg
  */
 /**
  * Sidebar Component
@@ -18,24 +18,24 @@
     left: 0;
     bottom: 0;
     width: 280px;
-    background-color: var(--wf-color-bg);
-    border-right: 1px solid var(--wf-ink-200);
+    background-color: var(--wf-surface-base);
+    border-right: 1px solid var(--wf-color-border);
     overflow-y: auto;
-    transition: transform var(--wf-duration-normal) ease;
-    z-index: 1000;
+    transition: transform var(--wf-duration-base) ease;
+    z-index: var(--wf-z-drawer);
   }
 
   /* Sidebar Header */
   .wf-sidebar__header {
     padding: var(--wf-space-4);
-    border-bottom: 1px solid var(--wf-ink-200);
+    border-bottom: 1px solid var(--wf-color-border);
   }
 
   .wf-sidebar__title {
     margin: 0;
     font-size: var(--wf-font-lg);
     font-weight: 600;
-    color: var(--wf-ink-900);
+    color: var(--wf-color-text);
   }
 
   /* Sidebar Body */
@@ -62,26 +62,26 @@
     gap: var(--wf-space-3);
     padding: var(--wf-space-3);
     border-radius: 8px;
-    color: var(--wf-ink-700);
+    color: var(--wf-color-muted);
     text-decoration: none;
     transition: all var(--wf-duration-fast) ease;
     font-weight: 500;
   }
 
   .wf-sidebar__link:hover {
-    background-color: var(--wf-ink-100);
-    color: var(--wf-ink-900);
+    background-color: var(--wf-surface-muted);
+    color: var(--wf-color-text);
   }
 
   .wf-sidebar__link:focus-visible {
-    outline: 2px solid var(--wf-accent-500);
+    outline: 2px solid var(--wf-focus);
     outline-offset: 2px;
   }
 
   /* Active Link */
   .wf-sidebar__link.is-active {
-    background-color: var(--wf-accent-100);
-    color: var(--wf-accent-700);
+    background-color: var(--wf-color-accent-muted);
+    color: var(--wf-color-accent);
     font-weight: 600;
   }
 
@@ -99,8 +99,8 @@
   .wf-sidebar__badge {
     margin-left: auto;
     padding: 2px 8px;
-    background-color: var(--wf-accent-500);
-    color: white;
+    background-color: var(--wf-primary-bg);
+    color: var(--wf-primary-fg);
     border-radius: 12px;
     font-size: var(--wf-font-sm);
     font-weight: 600;
@@ -115,7 +115,7 @@
     padding: var(--wf-space-2) var(--wf-space-3);
     font-size: var(--wf-font-sm);
     font-weight: 600;
-    color: var(--wf-ink-600);
+    color: var(--wf-color-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -146,8 +146,9 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: var(--wf-color-bg);
-    border: 1px solid var(--wf-ink-200);
+    background-color: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border-strong);
+    color: var(--wf-color-text);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -157,18 +158,18 @@
   }
 
   .wf-sidebar__toggle:hover {
-    background-color: var(--wf-ink-100);
+    background-color: var(--wf-surface-muted);
   }
 
   .wf-sidebar__toggle:focus-visible {
-    outline: 2px solid var(--wf-accent-500);
+    outline: 2px solid var(--wf-focus);
     outline-offset: 2px;
   }
 
   /* Sidebar Footer */
   .wf-sidebar__footer {
     padding: var(--wf-space-4);
-    border-top: 1px solid var(--wf-ink-200);
+    border-top: 1px solid var(--wf-color-border);
     margin-top: auto;
   }
 
@@ -190,9 +191,9 @@
       opacity: 0;
       visibility: hidden;
       transition:
-        opacity var(--wf-duration-normal) ease,
-        visibility var(--wf-duration-normal) ease;
-      z-index: 999;
+        opacity var(--wf-duration-base) ease,
+        visibility var(--wf-duration-base) ease;
+      z-index: var(--wf-z-drawer-backdrop);
     }
 
     .wf-sidebar-backdrop.is-visible {
@@ -218,13 +219,26 @@
     padding: 0;
     margin: 0;
     padding-left: var(--wf-space-6);
-    max-height: 0;
+    /*
+     * 実際の高さ（auto）まで補間する。interpolate-size 非対応のブラウザでは即時に開閉する。
+     * 閉じている間は visibility で隠し、中のリンクにフォーカスが移らないようにする。
+     */
+    /* stylelint-disable-next-line property-no-unknown -- 新しいプロパティのため stylelint が未対応 */
+    interpolate-size: allow-keywords;
+    height: 0;
     overflow: hidden;
-    transition: max-height var(--wf-duration-normal) ease;
+    visibility: hidden;
+    transition:
+      height var(--wf-duration-base) ease,
+      visibility 0s linear var(--wf-duration-base);
   }
 
   .wf-sidebar__item.is-expanded .wf-sidebar__submenu {
-    max-height: 500px;
+    height: auto;
+    visibility: visible;
+    transition:
+      height var(--wf-duration-base) ease,
+      visibility 0s;
   }
 
   .wf-sidebar__submenu .wf-sidebar__link {

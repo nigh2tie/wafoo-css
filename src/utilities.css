@@ -2426,7 +2426,7 @@
   }
 
   /* Responsive (min-width) */
-  @media (min-width: var(--wf-breakpoint-sm)) {
+  @media (min-width: 600px) {
     .wf-sm-hidden {
       display: none;
     }
@@ -2532,7 +2532,7 @@
       margin-bottom: auto;
     }
   }
-  @media (min-width: var(--wf-breakpoint-md)) {
+  @media (min-width: 900px) {
     .wf-md-hidden {
       display: none;
     }
@@ -2638,7 +2638,7 @@
       margin-bottom: auto;
     }
   }
-  @media (min-width: var(--wf-breakpoint-lg)) {
+  @media (min-width: 1200px) {
     .wf-lg-hidden {
       display: none;
     }

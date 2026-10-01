@@ -38,13 +38,20 @@ FILES=(
   "src/components/input-group.css"
   "src/components/floating-label.css"
   "src/components/file.css"
+  "src/components/snackbar.css"
+  "src/components/data-table.css"
+  "src/components/autocomplete.css"
   "src/utilities-extras.css"
   "src/components/stamp.css"
   "src/components/header.css"
 )
 
 # 結合
-cat "${FILES[@]}" > dist/wafoo-extras.css
+# core より先に読み込まれてもレイヤーの優先順位が逆転しないよう、先頭で順序を宣言する
+{
+  echo "@layer tokens, base, components, utilities;"
+  cat "${FILES[@]}"
+} > dist/wafoo-extras.css
 
 # Minify（PostCSS）
 npx postcss dist/wafoo-extras.css -o dist/wafoo-extras.min.css

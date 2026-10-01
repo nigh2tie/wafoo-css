@@ -9,6 +9,9 @@
   /* List Group */
   .wf-list-group {
     display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
     border: 1px solid var(--wf-color-border);
     border-radius: var(--wf-radius-md);
     background: var(--wf-surface-base);

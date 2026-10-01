@@ -9,7 +9,7 @@
   /* Popover */
   .wf-popover {
     position: absolute;
-    z-index: 1200;
+    z-index: var(--wf-z-popover);
     background: var(--wf-surface-base);
     color: var(--wf-color-text);
     border: 1px solid var(--wf-color-border);
@@ -30,25 +30,36 @@
     padding: var(--wf-space-4);
   }
 
-  /* Arrow */
-  .wf-popover::after {
+  /*
+   * Arrow: JS が付ける配置クラスに合わせて表示する（is-bottom = 対象の下に出る → 上辺に上向きの矢印）。
+   * is-arrow-top / is-arrow-bottom は手動配置用の別名。::before が枠線色、::after が本体色。
+   */
+  .wf-popover:is(.is-bottom, .is-arrow-top)::before,
+  .wf-popover:is(.is-bottom, .is-arrow-top)::after,
+  .wf-popover:is(.is-top, .is-arrow-bottom)::before,
+  .wf-popover:is(.is-top, .is-arrow-bottom)::after {
     content: "";
     position: absolute;
+    left: calc(50% + var(--wf-arrow-x, 0px));
     width: 0;
     height: 0;
     border: 8px solid transparent;
-  }
-  /* JS controls position; use transform translateX(-50%) so arrow aligns center */
-  .wf-popover.is-arrow-top::after {
-    border-top-color: var(--wf-surface-base);
-    top: -8px;
-    left: calc(50% + var(--wf-arrow-x, 0px));
     transform: translateX(-50%);
   }
-  .wf-popover.is-arrow-bottom::after {
+  .wf-popover:is(.is-bottom, .is-arrow-top)::before {
+    bottom: 100%;
+    border-bottom-color: var(--wf-color-border);
+  }
+  .wf-popover:is(.is-bottom, .is-arrow-top)::after {
+    bottom: calc(100% - 1px);
     border-bottom-color: var(--wf-surface-base);
-    bottom: -8px;
-    left: calc(50% + var(--wf-arrow-x, 0px));
-    transform: translateX(-50%);
+  }
+  .wf-popover:is(.is-top, .is-arrow-bottom)::before {
+    top: 100%;
+    border-top-color: var(--wf-color-border);
+  }
+  .wf-popover:is(.is-top, .is-arrow-bottom)::after {
+    top: calc(100% - 1px);
+    border-top-color: var(--wf-surface-base);
   }
 }

@@ -11,6 +11,7 @@ FILES=(
   "src/tokens.css"
   "src/themes.css"
   "src/base.css"
+  "src/components/container.css"
   "src/components/buttons.css"
   "src/components/cards.css"
   "src/components/forms.css"

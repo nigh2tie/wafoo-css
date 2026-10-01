@@ -200,7 +200,8 @@ This document provides a detailed reference for AI agents to understand and gene
 ---
 
 ### Accordion (`src/components/accordion.css`)
-- **Classes**: `.wf-accordion`, `.wf-accordion__item`, `.wf-accordion__header`, `.wf-accordion__content`
+- **Classes**: `.wf-accordion`, `.wf-accordion__item`, `.wf-accordion__header`, `.wf-accordion__panel`
+- **Native**: `<details class="wf-accordion__item"><summary class="wf-accordion__header">` にも対応
 - **Usage**: Collapsible content sections.
 
 ---

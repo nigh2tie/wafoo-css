@@ -28,12 +28,12 @@
     height: 16px;
   }
   .wf-progress-success .wf-progress__bar {
-    background: var(--wf-success);
+    background: var(--wf-success-text);
   }
   .wf-progress-warning .wf-progress__bar {
-    background: var(--wf-warning);
+    background: var(--wf-warning-text);
   }
   .wf-progress-danger .wf-progress__bar {
-    background: var(--wf-danger);
+    background: var(--wf-danger-text);
   }
 }

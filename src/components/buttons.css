@@ -56,7 +56,7 @@
   .wf-btn-gradient {
     background: linear-gradient(135deg, var(--wf-gradient-start), var(--wf-gradient-end));
     border-color: transparent;
-    color: #ffffff;
+    color: var(--wf-gradient-fg);
     font-weight: 700;
     letter-spacing: 0.1em;
     position: relative;
@@ -111,12 +111,12 @@
   }
   .wf-btn-secondary {
     background: var(--wf-color-secondary);
-    color: #ffffff;
+    color: var(--wf-secondary-fg);
     border-color: transparent;
   }
   .wf-btn-info {
     background: var(--wf-color-info);
-    color: #ffffff;
+    color: var(--wf-info-fg);
     border-color: transparent;
   }
 
@@ -134,24 +134,24 @@
     background: var(--wf-surface-base);
   }
   .wf-btn-outline-secondary {
-    color: var(--wf-color-secondary);
-    border-color: var(--wf-color-secondary);
+    color: var(--wf-secondary-text);
+    border-color: var(--wf-secondary-text);
   }
   .wf-btn-outline-info {
-    color: var(--wf-color-info);
-    border-color: var(--wf-color-info);
+    color: var(--wf-info-text);
+    border-color: var(--wf-info-text);
   }
   .wf-btn-outline-success {
-    color: var(--wf-success);
-    border-color: var(--wf-success);
+    color: var(--wf-success-text);
+    border-color: var(--wf-success-text);
   }
   .wf-btn-outline-warning {
-    color: var(--wf-warning);
-    border-color: var(--wf-warning);
+    color: var(--wf-warning-text);
+    border-color: var(--wf-warning-text);
   }
   .wf-btn-outline-danger {
-    color: var(--wf-danger);
-    border-color: var(--wf-danger);
+    color: var(--wf-danger-text);
+    border-color: var(--wf-danger-text);
   }
 
   /* Sizes */
@@ -191,26 +191,32 @@
   .wf-btn.is-loading {
     position: relative;
     pointer-events: none;
-    color: transparent;
+    /* 文字だけ隠し、color は残してスピナーをボタンの前景色で描く */
+    -webkit-text-fill-color: transparent;
+  }
+  .wf-btn.is-loading > * {
+    visibility: hidden;
   }
   .wf-btn.is-loading::after {
     content: "";
     position: absolute;
-    inset: 50% auto auto 50%;
-    transform: translate(-50%, -50%);
+    /* 中央寄せに transform を使わない（アニメーションの transform と競合してずれるため） */
+    inset: 0;
+    margin: auto;
     width: 16px;
     height: 16px;
     border-radius: 50%;
-    border: 2px solid rgba(0, 0, 0, 0.15);
+    border: 2px solid color-mix(in srgb, currentColor 25%, transparent);
     border-top-color: currentColor;
-    animation-name: wf-spin;
+    animation-name: wf-btn-spin;
     animation-duration: calc(var(--wf-enable-motion, 1) * 0.8s);
     animation-timing-function: linear;
     animation-iteration-count: infinite;
   }
-  @keyframes wf-spin {
+  /* spinner.css の wf-spin と同名にすると、後から読み込まれた定義で上書きされる */
+  @keyframes wf-btn-spin {
     to {
-      transform: translate(-50%, -50%) rotate(360deg);
+      transform: rotate(360deg);
     }
   }
   @media (prefers-reduced-motion: reduce) {

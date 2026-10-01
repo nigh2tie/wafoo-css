@@ -2,7 +2,7 @@
 
 このドキュメントは、wafoo-cssで利用可能な全てのコンポーネント、CSS変数、ユーティリティクラスの完全なリファレンスです。
 
-**開発者向け**: より詳細なコンポーネントAPI仕様は [COMPONENTS.md](./COMPONENTS.md) を参照してください。
+**開発者向け**: より詳細なコンポーネントAPI仕様は [components.md](./components.md) を参照してください。
 
 ## 目次
 
@@ -34,7 +34,9 @@ OSやブラウザの設定がダークモードの場合、自動的にダーク
 
 ### 手動切り替え
 
-`<html>` または `<body>` タグに `theme-dark` クラス、または `data-theme="dark"` 属性を付与することで、強制的にダークモードを適用できます。Tailwind CSSの `dark` クラス運用と共存しやすい設計になっています。
+`theme-dark` クラス、または `data-theme="dark"` 属性を付与すると、強制的にダークモードを適用できます。逆に `theme-light` クラス、または `data-theme="light"` 属性を付与すると、OS がダークモードでもライトモードに固定できます。付与した要素以下だけが切り替わるので、ページの一部だけをダーク表示にすることもできます。Tailwind CSSの `dark` クラス運用と共存しやすい設計になっています。
+
+色テーマ（`theme-sakura` など）もライト／ダーク両方の配色を持っているため、ダークモードと組み合わせて使えます。
 
 ```html
 <!-- クラスによる切り替え -->
@@ -46,6 +48,11 @@ OSやブラウザの設定がダークモードの場合、自動的にダーク
 <body data-theme="dark">
   ...
 </body>
+
+<!-- OS の設定によらずライトモードに固定 -->
+<html data-theme="light">
+  ...
+</html>
 ```
 
 ---
@@ -191,8 +198,8 @@ OSやブラウザの設定がダークモードの場合、自動的にダーク
 #### 基本的な入力フィールド
 
 ```html
-<!-- テキスト入力 -->
-<label class="wf-label" for="name">名前</label>
+<!-- テキスト入力（wf-label-mark で和風の◆マーカーを付けられる。マーカーは読み上げられない） -->
+<label class="wf-label wf-label-mark" for="name">名前</label>
 <input type="text" id="name" class="wf-input" placeholder="名前を入力">
 
 <!-- メールアドレス -->
@@ -340,6 +347,16 @@ OSやブラウザの設定がダークモードの場合、自動的にダーク
 | `wf-modal__footer` | モーダルフッター | `<div class="wf-modal__footer">...</div>` |
 | `wf-modal__close` | 閉じるボタン | `<button class="wf-modal__close">×</button>` |
 | `is-open` | 開いた状態 | `<div class="wf-modal-overlay is-open">...</div>` |
+
+ネイティブの `<dialog>` でも使えます。`showModal()` で開くと、最前面への表示・フォーカスの閉じ込め・Esc での終了をブラウザが行います（オーバーレイ要素は不要です）。
+
+```html
+<dialog class="wf-modal" id="confirm">
+  <div class="wf-modal__header"><h2 class="wf-modal__title">確認</h2></div>
+  <div class="wf-modal__body">本文</div>
+</dialog>
+<script>document.getElementById("confirm").showModal();</script>
+```
 
 ### テーブル
 
@@ -496,78 +513,104 @@ WFUI.snackbar.show({
 
 ## CSS変数リファレンス
 
+### 重なり順（z-index）
+
+部品どうしの前後関係はトークンで決まっています。独自の要素を重ねるときもこの値を使ってください。
+
+| トークン | 値 | 対象 |
+| --- | --- | --- |
+| `--wf-z-dropdown` | 1000 | ドロップダウン、オートコンプリート |
+| `--wf-z-sticky` | 1100 | 追従ヘッダー |
+| `--wf-z-drawer-backdrop` / `--wf-z-drawer` | 1190 / 1200 | サイドバー、モバイルのナビドロワー |
+| `--wf-z-modal` | 1300 | モーダル |
+| `--wf-z-popover` | 1400 | ポップオーバー |
+| `--wf-z-tooltip` | 1500 | ツールチップ |
+| `--wf-z-toast` | 1600 | トースト、スナックバー |
+
+ブレークポイントは sm 600px / md 900px / lg 1200px / xl 1440px です。`--wf-breakpoint-*` は参照用で、`@media` の中では `var()` が使えないため値を直接書いてください。
+
 ### カラー
+
+意味を持つ配色トークンは `light-dark(ライト, ダーク)` で定義されており、`color-scheme` に応じて自動で切り替わります（既定は OS 設定に追従。`data-theme="light|dark"` で固定可能）。
+文字に使うトークンは背景に対して 4.5:1、枠線・フォーカスリングは 3:1 を満たすことを `npm run check:contrast` で検証しています。
 
 #### インク（グレースケール）
 
 ```css
---wf-ink-50: #f9fafb;
---wf-ink-100: #f3f4f6;
---wf-ink-200: #e5e7eb;
---wf-ink-300: #d1d5db;
---wf-ink-400: #9ca3af;
---wf-ink-500: #6b7280;
---wf-ink-600: #4b5563;
---wf-ink-700: #374151;
---wf-ink-800: #1f2937;
---wf-ink-900: #111827;
+--wf-ink-50: #fafafa;
+--wf-ink-100: #e5e5e5;
+--wf-ink-200: #cccccc;
+--wf-ink-300: #999999;
+--wf-ink-400: #808080;
+--wf-ink-500: #666666;
+--wf-ink-600: #555555;
+--wf-ink-700: #444444;
+--wf-ink-800: #333333;
+--wf-ink-900: #1f1f1f;
 ```
 
 #### アクセントカラー（藤紫ベース）
 
 ```css
---wf-accent-50: #faf5ff;
---wf-accent-100: #f3e8ff;
---wf-accent-200: #e9d5ff;
---wf-accent-300: #d8b4fe;
---wf-accent-400: #c084fc;
---wf-accent-500: #a855f7;  /* 藤紫 */
---wf-accent-600: #9333ea;
---wf-accent-700: #7e22ce;
---wf-accent-800: #6b21a8;
---wf-accent-900: #581c87;
+--wf-accent-50: #f0ecf3;
+--wf-accent-100: #e2dcef;
+--wf-accent-200: #cfc7e3;
+--wf-accent-300: #b9afd2;
+--wf-accent-400: #8f82a8;
+--wf-accent-500: #6a5c7c; /* 藤紫 */
+--wf-accent-600: #5e516f;
+--wf-accent-700: #4f4560;
+--wf-accent-800: #413a50;
+--wf-accent-900: #332f41;
 ```
+
+階調トークン（`--wf-ink-*` / `--wf-accent-*` / `--wf-success-*` など）はモードで変化しません。コンポーネントやアプリの配色には、下のセマンティックトークンを使ってください。
 
 #### セマンティックカラー
 
 ```css
-/* テキスト・背景 */
---wf-color-text: var(--wf-ink-900);
---wf-color-text-muted: var(--wf-ink-600);
---wf-color-bg: var(--wf-ink-50);
---wf-surface-base: #ffffff;
---wf-surface-muted: var(--wf-ink-100);
---wf-surface-subtle: var(--wf-accent-50);
+/* ページ・面 */
+--wf-color-bg: light-dark(#e7ddd4, #121212); /* 灰桜 */
+--wf-surface-base: light-dark(#ffffff, #1f1f1f);
+--wf-surface-subtle: light-dark(#faf7f5, #2a2a2a);
+--wf-surface-muted: light-dark(#f5f2ef, #333333);
 
-/* リンク・アクセント */
---wf-link-color: var(--wf-accent-600);
---wf-link-hover: var(--wf-accent-700);
---wf-color-accent: var(--wf-accent-500);
+/* 文字 */
+--wf-color-text: light-dark(var(--wf-ink-900), #e5e5e5);
+--wf-color-muted: light-dark(var(--wf-ink-700), #a3a3a3);
 
-/* ボーダー */
---wf-color-border: var(--wf-ink-200);
---wf-color-border-focus: var(--wf-accent-400);
+/* アクセント（文字に使える濃さ）と淡い面 */
+--wf-color-accent: light-dark(var(--wf-accent-500), var(--wf-accent-300));
+--wf-color-accent-fg: light-dark(#ffffff, #1f1f1f); /* アクセント色で塗った面の上の前景 */
+--wf-color-accent-subtle: light-dark(var(--wf-accent-50), #29252f);
+--wf-color-accent-muted: light-dark(var(--wf-accent-100), #373043);
+--wf-link-color: light-dark(var(--wf-accent-600), var(--wf-accent-300));
+--wf-link-color-hover: light-dark(var(--wf-accent-700), var(--wf-accent-200));
 
-/* ステータス */
---wf-success: #10b981;
---wf-success-fg: #ffffff;
---wf-warning: #f59e0b;
---wf-warning-fg: #ffffff;
---wf-danger: #ef4444;
---wf-danger-fg: #ffffff;
---wf-info: var(--wf-accent-500);
---wf-info-fg: #ffffff;
+/* 枠線（strong はフォーム部品用で 3:1 以上） */
+--wf-color-border: var(--wf-color-border-subtle);
+--wf-color-border-subtle: light-dark(#ddd5cd, #333333);
+--wf-color-border-strong: light-dark(#767676, #929292);
+--wf-focus: light-dark(var(--wf-accent-700), var(--wf-accent-300));
 
-/* プライマリー（ボタン等） */
---wf-primary-bg: var(--wf-accent-600);
---wf-primary-fg: #ffffff;
---wf-primary-hover: var(--wf-accent-700);
-
-/* セカンダリー */
---wf-secondary-bg: var(--wf-ink-600);
---wf-secondary-fg: #ffffff;
---wf-secondary-hover: var(--wf-ink-700);
+/* プライマリー（塗りボタン・選択状態） */
+--wf-primary-bg: light-dark(var(--wf-accent-700), var(--wf-accent-300));
+--wf-primary-bg-hover: light-dark(var(--wf-accent-800), var(--wf-accent-200));
+--wf-primary-bg-active: light-dark(var(--wf-accent-900), var(--wf-accent-100));
+--wf-primary-fg: light-dark(#ffffff, #1f1f1f);
 ```
+
+#### ステータスカラー
+
+状態色はそれぞれ 4 つのトークンを持ちます。塗り（`--wf-success` など）の上には必ず対の `-fg` を、文字や細い線には `-text` を使ってください。
+
+| 状態 | 塗り | 塗りの上の文字 `-fg` | 文字・線 `-text`（ライト / ダーク） | 半透明の背景 `-veil` |
+| --- | --- | --- | --- | --- |
+| success | `--wf-success`（常盤 #007b43） | #ffffff | #006436 / #3fcf8e | `--wf-success-veil` |
+| warning | `--wf-warning`（杏 #f7b977） | #1f1f1f | #8f4e08 / #f8bf83 | `--wf-warning-veil` |
+| danger | `--wf-danger`（茜 #b7282e） | #ffffff | #a22329 / #ec9599 | `--wf-danger-veil` |
+| info | `--wf-color-info`（露草 #38a1db） | #1f1f1f | #196088 / #81c4e8 | `--wf-info-veil` |
+| secondary | `--wf-color-secondary`（藍 #165e83） | #ffffff | #145a7e / #7fc0e6 | `--wf-secondary-veil` |
 
 ### タイポグラフィ
 
@@ -801,7 +844,7 @@ wafoo-cssは、Tailwind CSSの命名規則を採用していますが、`wf-` �
 
 ### 詳細な命名規則
 
-完全な命名規則のリファレンスは、[docs/naming-conventions.md](./docs/naming-conventions.md)を参照してください。
+完全な命名規則のリファレンスは、[CONTRIBUTING.md の CSS命名規則](../CONTRIBUTING.md#css命名規則)を参照してください。
 
 ---
 
@@ -923,7 +966,7 @@ wafoo-cssは、WCAG 2.1 Level AA準拠を目標としています。アクセシ
 
 ### アクセシビリティガイド
 
-詳細なアクセシビリティガイドは、[docs/accessibility.md](./docs/accessibility.md)を参照してください。
+詳細なアクセシビリティガイドは、[accessibility.md](./accessibility.md)を参照してください。
 
 ガイドには以下の内容が含まれています：
 
@@ -999,9 +1042,9 @@ wafoo-cssは、WCAG 2.1 Level AA準拠を目標としています。アクセシ
 
 より詳しい使用方法やサンプルコードは、以下をご覧ください：
 
-- [メインドキュメント (README.md)](./README.md)
+- [メインドキュメント (README.md)](../README.md)
 - [ブラウザ版リファレンス (docs/reference.html)](https://nigh2tie.github.io/wafoo-css/reference.html)
-- [アクセシビリティガイド (docs/accessibility.md)](./docs/accessibility.md)
+- [アクセシビリティガイド (accessibility.md)](./accessibility.md)
 - [デモサイト (docs/index.html)](https://nigh2tie.github.io/wafoo-css/)
 
 ---

@@ -1,3 +1,4 @@
+@layer tokens, base, components, utilities;
 /*!
  * @component Modal
  * @description Modal component.
@@ -15,7 +16,7 @@
   .wf-modal-overlay {
     position: fixed;
     inset: 0;
-    z-index: 9999;
+    z-index: var(--wf-z-modal);
     display: none;
     align-items: center;
     justify-content: center;
@@ -35,6 +36,26 @@
     border-radius: var(--wf-radius-md);
     border: 1px solid var(--wf-color-border);
     box-shadow: 0 10px 24px rgba(0, 0, 0, 0.16);
+  }
+  /*
+   * ネイティブの <dialog class="wf-modal"> にも対応する（showModal() で開く）。
+   * 最前面への表示・フォーカスの閉じ込めと復元・Esc での終了はブラウザが行う。
+   */
+  dialog.wf-modal {
+    margin: auto; /* 画面中央に置く（モバイル用の margin より優先） */
+    padding: 0;
+    max-height: calc(100dvh - 2 * var(--wf-space-4));
+  }
+  dialog.wf-modal:not([open]) {
+    display: none;
+  }
+  /* showModal() 直後はダイアログ本体にフォーカスが移るため、本体の枠は出さない（中の要素には出る） */
+  dialog.wf-modal:focus-visible {
+    outline: none;
+  }
+  dialog.wf-modal::backdrop {
+    background: rgba(0, 0, 0, 0.4);
+    backdrop-filter: blur(1px);
   }
   .wf-modal-sm {
     width: min(92vw, 420px);
@@ -117,6 +138,7 @@
   /* Scrollable body (long content) */
   .wf-modal--scroll .wf-modal__body {
     max-height: 80vh;
+    max-height: 80dvh;
     overflow: auto;
   }
 
@@ -124,6 +146,7 @@
   .wf-modal-fullscreen {
     width: 100vw;
     height: 100vh;
+    height: 100dvh; /* モバイルのアドレスバー伸縮に追従 */
     max-width: none;
     max-height: none;
     border-radius: 0;
@@ -140,7 +163,7 @@
     color: var(--wf-danger-fg);
   }
   .wf-modal--danger .wf-modal__footer {
-    border-top-color: var(--wf-danger);
+    border-top-color: var(--wf-danger-text);
   }
 
   .wf-modal--warning .wf-modal__header {
@@ -148,7 +171,7 @@
     color: var(--wf-warning-fg);
   }
   .wf-modal--warning .wf-modal__footer {
-    border-top-color: var(--wf-warning);
+    border-top-color: var(--wf-warning-text);
   }
 
   .wf-modal--success .wf-modal__header {
@@ -156,12 +179,12 @@
     color: var(--wf-success-fg);
   }
   .wf-modal--success .wf-modal__footer {
-    border-top-color: var(--wf-success);
+    border-top-color: var(--wf-success-text);
   }
 
   .wf-modal--info .wf-modal__header {
     background: var(--wf-color-accent);
-    color: var(--wf-primary-fg);
+    color: var(--wf-color-accent-fg);
   }
   .wf-modal--info .wf-modal__footer {
     border-top-color: var(--wf-color-accent);
@@ -188,7 +211,7 @@
   /* Tooltip */
   .wf-tooltip {
     position: absolute;
-    z-index: 1200;
+    z-index: var(--wf-z-tooltip);
     background: var(--wf-color-text);
     color: var(--wf-surface-base);
     padding: 6px 8px;
@@ -221,16 +244,17 @@
     height: 0;
     border: 6px solid transparent;
   }
+  /* 矢印は本体に接する側を塗り、先端を対象要素へ向ける */
   .wf-tooltip.is-top::after {
-    border-top-color: transparent;
-    border-bottom-color: var(--wf-color-text);
+    border-top-color: var(--wf-color-text);
+    border-bottom-color: transparent;
     top: 100%;
     left: calc(50% + var(--wf-arrow-x, 0px));
     transform: translateX(-50%);
   }
   .wf-tooltip.is-bottom::after {
-    border-bottom-color: transparent;
-    border-top-color: var(--wf-color-text);
+    border-top-color: transparent;
+    border-bottom-color: var(--wf-color-text);
     bottom: 100%;
     left: calc(50% + var(--wf-arrow-x, 0px));
     transform: translateX(-50%);
@@ -261,7 +285,7 @@
   /* Popover */
   .wf-popover {
     position: absolute;
-    z-index: 1200;
+    z-index: var(--wf-z-popover);
     background: var(--wf-surface-base);
     color: var(--wf-color-text);
     border: 1px solid var(--wf-color-border);
@@ -282,26 +306,37 @@
     padding: var(--wf-space-4);
   }
 
-  /* Arrow */
-  .wf-popover::after {
+  /*
+   * Arrow: JS が付ける配置クラスに合わせて表示する（is-bottom = 対象の下に出る → 上辺に上向きの矢印）。
+   * is-arrow-top / is-arrow-bottom は手動配置用の別名。::before が枠線色、::after が本体色。
+   */
+  .wf-popover:is(.is-bottom, .is-arrow-top)::before,
+  .wf-popover:is(.is-bottom, .is-arrow-top)::after,
+  .wf-popover:is(.is-top, .is-arrow-bottom)::before,
+  .wf-popover:is(.is-top, .is-arrow-bottom)::after {
     content: "";
     position: absolute;
+    left: calc(50% + var(--wf-arrow-x, 0px));
     width: 0;
     height: 0;
     border: 8px solid transparent;
-  }
-  /* JS controls position; use transform translateX(-50%) so arrow aligns center */
-  .wf-popover.is-arrow-top::after {
-    border-top-color: var(--wf-surface-base);
-    top: -8px;
-    left: calc(50% + var(--wf-arrow-x, 0px));
     transform: translateX(-50%);
   }
-  .wf-popover.is-arrow-bottom::after {
+  .wf-popover:is(.is-bottom, .is-arrow-top)::before {
+    bottom: 100%;
+    border-bottom-color: var(--wf-color-border);
+  }
+  .wf-popover:is(.is-bottom, .is-arrow-top)::after {
+    bottom: calc(100% - 1px);
     border-bottom-color: var(--wf-surface-base);
-    bottom: -8px;
-    left: calc(50% + var(--wf-arrow-x, 0px));
-    transform: translateX(-50%);
+  }
+  .wf-popover:is(.is-top, .is-arrow-bottom)::before {
+    top: 100%;
+    border-top-color: var(--wf-color-border);
+  }
+  .wf-popover:is(.is-top, .is-arrow-bottom)::after {
+    top: calc(100% - 1px);
+    border-top-color: var(--wf-surface-base);
   }
 }
 /*!
@@ -336,7 +371,7 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
     padding: var(--wf-space-2) 0;
     display: none;
-    z-index: 1000;
+    z-index: var(--wf-z-dropdown);
   }
   .wf-dropdown.is-open .wf-dropdown__menu {
     display: block;
@@ -526,18 +561,35 @@
     align-items: center;
     justify-content: space-between;
   }
-  /* Visual marker for open/closed state */
-  .wf-accordion__header::after {
-    content: "▼";
-    font-weight: 700;
-    color: var(--wf-color-muted);
-    font-size: 14px;
-    line-height: 1;
-    transition: color 0.2s ease;
+  /* ネイティブの <details> / <summary> でも同じ見た目で使える */
+  summary.wf-accordion__header {
+    list-style: none;
   }
-  .wf-accordion__header[aria-expanded="true"]::after {
-    content: "▲";
+  summary.wf-accordion__header::-webkit-details-marker {
+    display: none;
+  }
+  /* 開閉の矢印。文字ではなく線で描き、回転で状態を表す（読み上げ対象にならない） */
+  .wf-accordion__header::after {
+    content: "";
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    margin-left: var(--wf-space-3);
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    color: var(--wf-color-muted);
+    translate: 0 -2px;
+    rotate: 45deg;
+    transition:
+      rotate calc(var(--wf-enable-motion, 1) * 0.2s) ease,
+      translate calc(var(--wf-enable-motion, 1) * 0.2s) ease,
+      color 0.2s ease;
+  }
+  .wf-accordion__header[aria-expanded="true"]::after,
+  details[open] > .wf-accordion__header::after {
     color: var(--wf-color-text);
+    translate: 0 2px;
+    rotate: 225deg;
   }
   .wf-accordion__header:hover,
   .wf-accordion__header:focus-visible {
@@ -571,7 +623,7 @@
     max-width: 100%;
   }
 
-  @media (min-width: var(--wf-breakpoint-md)) {
+  @media (min-width: 900px) {
     .wf-calendar {
       padding: var(--wf-space-6);
     }
@@ -602,7 +654,7 @@
   }
 
   .wf-calendar__nav-btn:hover {
-    background: var(--wf-accent-100);
+    background: var(--wf-color-accent-muted);
     color: var(--wf-color-accent);
   }
 
@@ -619,7 +671,7 @@
     flex: 1;
   }
 
-  @media (min-width: var(--wf-breakpoint-md)) {
+  @media (min-width: 900px) {
     .wf-calendar__title {
       font-size: var(--wf-font-xl);
     }
@@ -667,7 +719,7 @@
     min-height: 36px;
   }
 
-  @media (min-width: var(--wf-breakpoint-md)) {
+  @media (min-width: 900px) {
     .wf-calendar__day {
       font-size: var(--wf-font-md);
       min-height: 40px;
@@ -675,13 +727,13 @@
   }
 
   .wf-calendar__day:hover:not(.is-disabled) {
-    background: var(--wf-accent-50);
+    background: var(--wf-color-accent-subtle);
     border-color: var(--wf-color-accent);
     color: var(--wf-color-accent);
   }
 
   .wf-calendar__day.is-today {
-    background: var(--wf-accent-100);
+    background: var(--wf-color-accent-muted);
     border-color: var(--wf-color-accent);
     color: var(--wf-color-accent);
     font-weight: 700;
@@ -702,14 +754,14 @@
   .wf-calendar__day.is-selected {
     background: var(--wf-primary-bg);
     color: var(--wf-primary-fg);
-    border-color: var(--wf-primary-bg-hover);
+    border-color: var(--wf-color-accent);
     box-shadow: var(--wf-shadow-sm);
     font-weight: 700;
   }
 
   .wf-calendar__day.is-selected:hover {
     background: var(--wf-primary-bg-hover);
-    border-color: var(--wf-primary-bg-active);
+    border-color: var(--wf-color-accent);
   }
 
   .wf-calendar__day.is-disabled {
@@ -727,7 +779,7 @@
 
   .wf-calendar__day.is-other-month {
     color: var(--wf-color-muted);
-    opacity: 0.4;
+    background: var(--wf-surface-subtle);
   }
 
   .wf-calendar__day:focus {
@@ -740,6 +792,7 @@
   .wf-calendar__day.is-range-start {
     background: var(--wf-primary-bg);
     color: var(--wf-primary-fg);
+    border-color: var(--wf-color-accent);
     border-top-left-radius: var(--wf-radius-md);
     border-bottom-left-radius: var(--wf-radius-md);
   }
@@ -747,17 +800,18 @@
   .wf-calendar__day.is-range-end {
     background: var(--wf-primary-bg);
     color: var(--wf-primary-fg);
+    border-color: var(--wf-color-accent);
     border-top-right-radius: var(--wf-radius-md);
     border-bottom-right-radius: var(--wf-radius-md);
   }
 
   .wf-calendar__day.is-in-range {
-    background: var(--wf-accent-50);
-    border-color: var(--wf-accent-200);
+    background: var(--wf-color-accent-subtle);
+    border-color: var(--wf-color-accent-muted);
   }
 
   .wf-calendar__day.is-in-range:hover {
-    background: var(--wf-accent-100);
+    background: var(--wf-color-accent-muted);
   }
 }
 /*!
@@ -1004,27 +1058,29 @@
   .wf-schedule__time-slot.is-selected {
     background: var(--wf-primary-bg);
     color: var(--wf-primary-fg);
-    border-color: var(--wf-primary-bg-active);
+    border-color: var(--wf-color-accent);
     box-shadow: var(--wf-shadow-sm);
   }
 
   .wf-schedule__time-slot.is-range-start {
-    background: linear-gradient(135deg, var(--wf-warning), var(--wf-warning));
-    color: var(--wf-surface-base);
-    border-color: var(--wf-warning);
-    animation-name: pulse;
+    background: var(--wf-warning);
+    color: var(--wf-warning-fg);
+    border-color: var(--wf-warning-text);
+    animation-name: wf-schedule-pulse;
     animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-pulse-duration, 4s));
     animation-iteration-count: infinite;
     box-shadow: var(--wf-shadow-md);
   }
 
-  @keyframes pulse {
+  @keyframes wf-schedule-pulse {
     0%,
     100% {
-      opacity: 1;
+      outline: 2px solid transparent;
+      outline-offset: 0;
     }
     50% {
-      opacity: 0.7;
+      outline: 2px solid var(--wf-warning-text);
+      outline-offset: 2px;
     }
   }
 
@@ -1138,15 +1194,15 @@
   .wf-schedule__week-time-slot.is-selected {
     background: var(--wf-primary-bg);
     color: var(--wf-primary-fg);
-    border-color: var(--wf-primary-bg-active);
+    border-color: var(--wf-color-accent);
     box-shadow: var(--wf-shadow-sm);
   }
 
   .wf-schedule__week-time-slot.is-range-start {
-    background: linear-gradient(135deg, var(--wf-warning), var(--wf-warning));
-    color: var(--wf-surface-base);
-    border-color: var(--wf-warning);
-    animation-name: pulse;
+    background: var(--wf-warning);
+    color: var(--wf-warning-fg);
+    border-color: var(--wf-warning-text);
+    animation-name: wf-schedule-pulse;
     animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-pulse-duration, 4s));
     animation-iteration-count: infinite;
     box-shadow: var(--wf-shadow-md);
@@ -1243,7 +1299,7 @@
  * @description Carousel component.
  * @selector .wf-carousel
  * @variants .wf-carousel-thumbnails, .wf-carousel-multiple, .wf-carousel-fade, .wf-carousel-16-9, .wf-carousel-4-3
- * @variables --wf-ink-100, --wf-duration-normal, --wf-space-4, --wf-space-2, --wf-font-lg
+ * @variables --wf-surface-muted, --wf-duration-base, --wf-space-4, --wf-space-2, --wf-font-lg
  */
 /**
  * Image/Carousel Component
@@ -1256,13 +1312,13 @@
     position: relative;
     overflow: hidden;
     border-radius: 8px;
-    background-color: var(--wf-ink-100);
+    background-color: var(--wf-surface-muted);
   }
 
   /* Carousel Track */
   .wf-carousel__track {
     display: flex;
-    transition: transform var(--wf-duration-normal) ease;
+    transition: transform var(--wf-duration-base) ease;
   }
 
   /* Carousel Item */
@@ -1317,7 +1373,7 @@
     cursor: pointer;
     transition: all var(--wf-duration-fast) ease;
     z-index: 2;
-    color: var(--wf-ink-900);
+    color: #1f1f1f;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
   }
 
@@ -1327,8 +1383,10 @@
   }
 
   .wf-carousel__button:focus-visible {
-    outline: 2px solid var(--wf-accent-500);
+    /* 画像の上でも見えるよう白と墨の二重リングにする */
+    outline: 2px solid #ffffff;
     outline-offset: 2px;
+    box-shadow: 0 0 0 4px #1f1f1f;
   }
 
   .wf-carousel__button:disabled {
@@ -1371,8 +1429,10 @@
   }
 
   .wf-carousel__indicator:focus-visible {
-    outline: 2px solid var(--wf-accent-500);
+    /* 画像の上でも見えるよう白と墨の二重リングにする */
+    outline: 2px solid #ffffff;
     outline-offset: 2px;
+    box-shadow: 0 0 0 4px #1f1f1f;
   }
 
   .wf-carousel__indicator.is-active {
@@ -1417,7 +1477,7 @@
 
   .wf-carousel__thumb.is-active {
     opacity: 1;
-    border-color: var(--wf-accent-500);
+    border-color: var(--wf-color-accent);
   }
 
   .wf-carousel__thumb img {
@@ -1427,14 +1487,26 @@
     display: block;
   }
 
-  /* Autoplay Indicator */
-  .wf-carousel.is-playing .wf-carousel__button-play::before {
-    content: "■ ■";
-    letter-spacing: 0.1em;
+  /* Autoplay Indicator（文字ではなく図形で描き、読み上げ・フォント差の影響を受けないようにする） */
+  .wf-carousel__button-play::before {
+    content: "";
+    box-sizing: border-box;
   }
-
+  .wf-carousel.is-playing .wf-carousel__button-play::before {
+    /* 一時停止: 2 本の縦棒 */
+    width: 12px;
+    height: 14px;
+    border-left: 4px solid currentColor;
+    border-right: 4px solid currentColor;
+  }
   .wf-carousel:not(.is-playing) .wf-carousel__button-play::before {
-    content: "▶";
+    /* 再生: 右向きの三角形（見た目の重心を合わせるため少し右へ） */
+    width: 0;
+    height: 0;
+    margin-left: 3px;
+    border-left: 12px solid currentColor;
+    border-top: 7px solid transparent;
+    border-bottom: 7px solid transparent;
   }
 
   /* Multiple Items Variant */
@@ -1465,7 +1537,7 @@
     top: 0;
     left: 0;
     opacity: 0;
-    transition: opacity var(--wf-duration-normal) ease;
+    transition: opacity var(--wf-duration-base) ease;
     pointer-events: none;
   }
 
@@ -1565,7 +1637,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid var(--wf-color-border);
+    border: 2px solid var(--wf-color-border-strong);
     background: var(--wf-surface-base);
     color: var(--wf-color-muted);
     font-size: var(--wf-step-bullet-font);
@@ -1588,14 +1660,14 @@
   }
   .wf-step.is-done .wf-step__bullet {
     background: var(--wf-color-accent);
-    color: var(--wf-surface-base);
+    color: var(--wf-color-accent-fg);
     border-color: var(--wf-color-accent);
   }
   .wf-step::after {
     content: "";
     width: var(--wf-step-line-width);
     height: var(--wf-step-line-height);
-    background: var(--wf-color-border);
+    background: var(--wf-color-border-strong);
     display: inline-block;
   }
   .wf-step:last-child::after {
@@ -1605,7 +1677,7 @@
     background: var(--wf-color-accent);
   }
   .wf-step.is-current::after {
-    background: var(--wf-link-color);
+    background: var(--wf-color-border-strong);
   }
 
   /* Mobile responsive */
@@ -1654,9 +1726,11 @@
     background: var(--wf-surface-muted);
   }
   .wf-page-link.is-active {
-    background: var(--wf-color-accent);
-    color: var(--wf-surface-base);
+    background: var(--wf-primary-bg);
+    color: var(--wf-primary-fg);
+    /* 淡いテーマ色の塗りでも選択状態が分かるよう、枠線は文字用のアクセント色にする */
     border-color: var(--wf-color-accent);
+    font-weight: 700;
   }
   .wf-page-link.is-disabled {
     opacity: 0.5;
@@ -1706,13 +1780,13 @@
     height: 16px;
   }
   .wf-progress-success .wf-progress__bar {
-    background: var(--wf-success);
+    background: var(--wf-success-text);
   }
   .wf-progress-warning .wf-progress__bar {
-    background: var(--wf-warning);
+    background: var(--wf-warning-text);
   }
   .wf-progress-danger .wf-progress__bar {
-    background: var(--wf-danger);
+    background: var(--wf-danger-text);
   }
 }
 /*!
@@ -1728,8 +1802,8 @@
     width: 20px;
     height: 20px;
     border-radius: 50%;
-    /* Track uses theme border color; indicator uses accent */
-    border: 2px solid var(--wf-color-border);
+    /* トラックは文字色を薄めた色（装飾用の枠線色は背景とほぼ同色で見えないため）。インジケーターはアクセント色 */
+    border: 2px solid color-mix(in srgb, var(--wf-color-text) 18%, transparent);
     border-top-color: var(--wf-color-accent);
     animation-name: wf-spin;
     animation-duration: calc(var(--wf-enable-motion, 1) * 0.8s);
@@ -1743,13 +1817,13 @@
   }
   /* Status variants */
   .wf-spinner-success {
-    border-top-color: var(--wf-success);
+    border-top-color: var(--wf-success-text);
   }
   .wf-spinner-warning {
-    border-top-color: var(--wf-warning);
+    border-top-color: var(--wf-warning-text);
   }
   .wf-spinner-danger {
-    border-top-color: var(--wf-danger);
+    border-top-color: var(--wf-danger-text);
   }
   .wf-spinner-lg {
     width: 28px;
@@ -1831,36 +1905,36 @@
 
   /* Toast variants */
   .wf-toast--success {
-    border-left-color: var(--wf-success);
+    border-left-color: var(--wf-success-text);
     background: var(--wf-surface-base);
   }
 
   .wf-toast--success .wf-toast__title {
-    color: var(--wf-success);
+    color: var(--wf-success-text);
   }
 
   .wf-toast--warning {
-    border-left-color: var(--wf-warning);
+    border-left-color: var(--wf-warning-text);
     background: var(--wf-surface-base);
   }
 
   .wf-toast--warning .wf-toast__title {
-    color: var(--wf-warning);
+    color: var(--wf-warning-text);
   }
 
   .wf-toast--danger {
-    border-left-color: var(--wf-danger);
+    border-left-color: var(--wf-danger-text);
     background: var(--wf-surface-base);
   }
 
   .wf-toast--danger .wf-toast__title {
-    color: var(--wf-danger);
+    color: var(--wf-danger-text);
   }
 
   /* Toast container (for positioning multiple toasts) */
   .wf-toast-container {
     position: fixed;
-    z-index: 9999;
+    z-index: var(--wf-z-toast);
     display: flex;
     flex-direction: column;
     gap: var(--wf-space-3);
@@ -1978,7 +2052,7 @@
  * @description Message component.
  * @selector .wf-message
  * @variants .wf-message-sent, .wf-message-system, .wf-icon, .wf-message-compact
- * @variables --wf-space-3, --wf-space-4, --wf-ink-200, --wf-ink-600, --wf-font-sm
+ * @variables --wf-space-3, --wf-space-4, --wf-color-border, --wf-color-muted, --wf-font-sm
  */
 /**
  * Chat/Message Component
@@ -2001,11 +2075,11 @@
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
-    background-color: var(--wf-ink-200);
+    background-color: var(--wf-color-accent-muted);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--wf-ink-600);
+    color: var(--wf-color-text);
     font-weight: 600;
     font-size: var(--wf-font-sm);
   }
@@ -2033,19 +2107,19 @@
 
   .wf-message__name {
     font-weight: 600;
-    color: var(--wf-ink-900);
+    color: var(--wf-color-text);
     font-size: var(--wf-font-sm);
   }
 
   .wf-message__time {
     font-size: var(--wf-font-sm);
-    color: var(--wf-ink-500);
+    color: var(--wf-color-muted);
   }
 
   /* Message Bubble */
   .wf-message__bubble {
-    background-color: var(--wf-color-bg);
-    border: 1px solid var(--wf-ink-200);
+    background-color: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border);
     border-radius: 12px;
     padding: var(--wf-space-3);
     word-wrap: break-word;
@@ -2054,7 +2128,7 @@
 
   /* Message Body */
   .wf-message__body {
-    color: var(--wf-ink-800);
+    color: var(--wf-color-text);
     line-height: 1.5;
     font-size: var(--wf-font-md);
   }
@@ -2063,7 +2137,7 @@
   .wf-message__footer {
     margin-top: var(--wf-space-2);
     font-size: var(--wf-font-sm);
-    color: var(--wf-ink-600);
+    color: var(--wf-color-muted);
   }
 
   /* Sent Message (Right Aligned) */
@@ -2082,13 +2156,13 @@
   }
 
   .wf-message-sent .wf-message__bubble {
-    background-color: var(--wf-accent-500);
-    border-color: var(--wf-accent-600);
-    color: white;
+    background-color: var(--wf-primary-bg);
+    border-color: var(--wf-primary-bg-hover);
+    color: var(--wf-primary-fg);
   }
 
   .wf-message-sent .wf-message__body {
-    color: white;
+    color: var(--wf-primary-fg);
   }
 
   /* System Message (Centered) */
@@ -2107,17 +2181,17 @@
   }
 
   .wf-message-system .wf-message__bubble {
-    background-color: var(--wf-ink-100);
-    border-color: var(--wf-ink-200);
+    background-color: var(--wf-surface-muted);
+    border-color: var(--wf-color-border);
     display: inline-block;
     font-size: var(--wf-font-sm);
-    color: var(--wf-ink-600);
+    color: var(--wf-color-muted);
   }
 
   /* Message Status Indicators */
   .wf-message__status {
     font-size: var(--wf-font-sm);
-    color: var(--wf-ink-500);
+    color: var(--wf-color-muted);
     margin-top: var(--wf-space-1);
   }
 
@@ -2126,7 +2200,7 @@
   }
 
   .wf-message.is-read .wf-message__status {
-    color: var(--wf-accent-500);
+    color: var(--wf-color-accent);
   }
 
   .wf-message.is-sending .wf-message__bubble {
@@ -2176,6 +2250,9 @@
   /* List Group */
   .wf-list-group {
     display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
     border: 1px solid var(--wf-color-border);
     border-radius: var(--wf-radius-md);
     background: var(--wf-surface-base);
@@ -2246,7 +2323,7 @@
  * @description Avatar component.
  * @selector .wf-avatar
  * @variants .wf-avatar-sm, .wf-avatar-lg, .wf-avatar-img, .wf-avatar-square, .wf-avatar-status
- * @variables --wf-accent-100, --wf-color-text, --wf-font-sm, --wf-font-lg, --wf-radius-md
+ * @variables --wf-color-accent-muted, --wf-color-text, --wf-font-sm, --wf-font-lg, --wf-radius-md
  */
 @layer components {
   /* Avatar */
@@ -2257,7 +2334,7 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background: var(--wf-accent-100);
+    background: var(--wf-color-accent-muted);
     color: var(--wf-color-text);
     font-weight: 700;
     overflow: hidden;
@@ -2283,6 +2360,11 @@
   }
   .wf-avatar-status {
     position: relative;
+    /* 状態の点は円の外側にはみ出して描くので切り取らない（画像は角丸を継承して収める） */
+    overflow: visible;
+  }
+  .wf-avatar-status > .wf-avatar-img {
+    border-radius: inherit;
   }
   .wf-avatar-status::after {
     content: "";
@@ -2292,7 +2374,7 @@
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background: var(--wf-success);
+    background: var(--wf-success-text);
     border: 2px solid var(--wf-surface-base);
   }
 }
@@ -2579,8 +2661,8 @@
   }
 
   .wf-code-copy.is-copied {
-    color: var(--wf-success);
-    border-color: var(--wf-success);
+    color: var(--wf-success-text);
+    border-color: var(--wf-success-text);
   }
 
   pre code,
@@ -2648,7 +2730,7 @@
  * @description Rating component.
  * @selector .wf-rating
  * @variants .wf-rating-sm, .wf-rating-lg
- * @variables --wf-space-1, --wf-icon-md, --wf-ink-200, --wf-duration-fast, --wf-accent-500
+ * @variables --wf-space-1, --wf-icon-md, --wf-color-border-strong, --wf-duration-fast, --wf-color-accent
  */
 /**
  * Rating/Star Component
@@ -2670,20 +2752,20 @@
     height: var(--wf-icon-md);
     font-size: var(--wf-icon-md);
     line-height: 1;
-    color: var(--wf-ink-200);
+    color: var(--wf-color-border-strong);
     transition: color var(--wf-duration-fast) ease;
     cursor: default;
   }
 
   /* Filled Star */
   .wf-rating__star.is-filled {
-    color: var(--wf-accent-500);
+    color: var(--wf-color-accent);
   }
 
   /* Half Star */
   .wf-rating__star.is-half {
     position: relative;
-    color: var(--wf-ink-200);
+    color: var(--wf-color-border-strong);
   }
 
   .wf-rating__star.is-half::before {
@@ -2693,7 +2775,7 @@
     left: 0;
     width: 50%;
     overflow: hidden;
-    color: var(--wf-accent-500);
+    color: var(--wf-color-accent);
   }
 
   /* Interactive Rating (Editable) */
@@ -2703,12 +2785,12 @@
 
   .wf-rating.is-interactive .wf-rating__star:hover,
   .wf-rating.is-interactive .wf-rating__star:focus-visible {
-    color: var(--wf-accent-400);
+    color: var(--wf-link-color-hover);
     transform: scale(1.1);
   }
 
   .wf-rating.is-interactive .wf-rating__star:focus-visible {
-    outline: 2px solid var(--wf-accent-500);
+    outline: 2px solid var(--wf-focus);
     outline-offset: 2px;
     border-radius: 2px;
   }
@@ -2730,7 +2812,7 @@
   .wf-rating__value {
     margin-left: var(--wf-space-2);
     font-size: var(--wf-font-sm);
-    color: var(--wf-ink-600);
+    color: var(--wf-color-muted);
   }
 
   /* Disabled State */
@@ -2769,7 +2851,7 @@
  * @description Timeline component.
  * @selector .wf-timeline
  * @variants .wf-timeline-horizontal
- * @variables --wf-space-4, --wf-space-8, --wf-space-6, --wf-ink-200, --wf-accent-500
+ * @variables --wf-space-4, --wf-space-8, --wf-space-6, --wf-color-border, --wf-color-accent
  */
 /**
  * Timeline Component
@@ -2803,7 +2885,7 @@
     top: 28px;
     bottom: 0;
     width: 2px;
-    background-color: var(--wf-ink-200);
+    background-color: var(--wf-color-border-strong);
   }
 
   .wf-timeline__item:last-child::before {
@@ -2818,20 +2900,20 @@
     width: 28px;
     height: 28px;
     border-radius: 50%;
-    background-color: var(--wf-accent-500);
+    background-color: var(--wf-color-accent);
     border: 3px solid var(--wf-color-bg);
-    box-shadow: 0 0 0 2px var(--wf-accent-500);
+    box-shadow: 0 0 0 2px var(--wf-color-accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--wf-color-accent-fg);
     font-size: var(--wf-font-sm);
   }
 
   /* Timeline Content */
   .wf-timeline__content {
-    background-color: var(--wf-color-bg);
-    border: 1px solid var(--wf-ink-200);
+    background-color: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border);
     border-radius: 8px;
     padding: var(--wf-space-4);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
@@ -2847,41 +2929,53 @@
 
   .wf-timeline__title {
     font-weight: 600;
-    color: var(--wf-ink-900);
+    color: var(--wf-color-text);
     margin: 0;
     font-size: var(--wf-font-md);
   }
 
   .wf-timeline__date {
     font-size: var(--wf-font-sm);
-    color: var(--wf-ink-600);
+    color: var(--wf-color-muted);
   }
 
   /* Timeline Body */
   .wf-timeline__body {
-    color: var(--wf-ink-700);
+    color: var(--wf-color-text);
     line-height: 1.6;
   }
 
   /* Timeline State Variants */
   .wf-timeline__item.is-current .wf-timeline__marker {
-    background-color: var(--wf-accent-600);
+    background-color: var(--wf-color-accent);
     box-shadow:
-      0 0 0 2px var(--wf-accent-600),
-      0 0 0 4px var(--wf-accent-200);
-    animation-name: wf-pulse;
+      0 0 0 2px var(--wf-color-accent),
+      0 0 0 4px var(--wf-color-accent-muted);
+    animation-name: wf-timeline-pulse;
     animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-pulse-duration, 4s));
     animation-iteration-count: infinite;
   }
 
   .wf-timeline__item.is-done .wf-timeline__marker {
-    background-color: var(--wf-success);
-    box-shadow: 0 0 0 2px var(--wf-success);
+    background-color: var(--wf-success-text);
+    box-shadow: 0 0 0 2px var(--wf-success-text);
   }
 
   .wf-timeline__item.is-pending .wf-timeline__marker {
-    background-color: var(--wf-ink-300);
-    box-shadow: 0 0 0 2px var(--wf-ink-300);
+    background-color: var(--wf-surface-muted);
+    box-shadow: 0 0 0 2px var(--wf-color-border-strong);
+    color: var(--wf-color-muted);
+  }
+
+  /* transform ではなく scale を使う（横並びではマーカーを transform で中央寄せしているため） */
+  @keyframes wf-timeline-pulse {
+    0%,
+    100% {
+      scale: 1;
+    }
+    50% {
+      scale: 1.05;
+    }
   }
 
   /* Horizontal Timeline */
@@ -2891,21 +2985,28 @@
     padding: var(--wf-space-6) 0;
   }
 
+  /* 左右の余白をそろえ、マーカー（項目の中央）がカードの中央に来るようにする */
   .wf-timeline-horizontal .wf-timeline__item {
     flex: 0 0 auto;
     min-width: 200px;
-    padding: var(--wf-space-8) var(--wf-space-6) 0 0;
+    padding: var(--wf-space-10) var(--wf-space-3) 0;
   }
 
+  /* 線はマーカーの中心の高さ（28px / 2 - 線の太さ / 2）に引く */
   .wf-timeline-horizontal .wf-timeline__item::before {
-    inset: 12px 0 auto;
+    inset: 13px 0 auto;
     width: auto;
     height: 2px;
   }
 
+  /* 線は最初のマーカーの中心から最後のマーカーの中心まで */
+  .wf-timeline-horizontal .wf-timeline__item:first-child::before {
+    left: 50%;
+  }
+
   .wf-timeline-horizontal .wf-timeline__item:last-child::before {
     display: block;
-    right: var(--wf-space-6);
+    right: 50%;
   }
 
   .wf-timeline-horizontal .wf-timeline__marker {
@@ -2949,7 +3050,7 @@
  * @description Sidebar component.
  * @selector .wf-sidebar
  * @variants .wf-sidebar-backdrop
- * @variables --wf-color-bg, --wf-ink-200, --wf-duration-normal, --wf-space-4, --wf-font-lg
+ * @variables --wf-surface-base, --wf-color-border, --wf-duration-base, --wf-space-4, --wf-font-lg
  */
 /**
  * Sidebar Component
@@ -2964,24 +3065,24 @@
     left: 0;
     bottom: 0;
     width: 280px;
-    background-color: var(--wf-color-bg);
-    border-right: 1px solid var(--wf-ink-200);
+    background-color: var(--wf-surface-base);
+    border-right: 1px solid var(--wf-color-border);
     overflow-y: auto;
-    transition: transform var(--wf-duration-normal) ease;
-    z-index: 1000;
+    transition: transform var(--wf-duration-base) ease;
+    z-index: var(--wf-z-drawer);
   }
 
   /* Sidebar Header */
   .wf-sidebar__header {
     padding: var(--wf-space-4);
-    border-bottom: 1px solid var(--wf-ink-200);
+    border-bottom: 1px solid var(--wf-color-border);
   }
 
   .wf-sidebar__title {
     margin: 0;
     font-size: var(--wf-font-lg);
     font-weight: 600;
-    color: var(--wf-ink-900);
+    color: var(--wf-color-text);
   }
 
   /* Sidebar Body */
@@ -3008,26 +3109,26 @@
     gap: var(--wf-space-3);
     padding: var(--wf-space-3);
     border-radius: 8px;
-    color: var(--wf-ink-700);
+    color: var(--wf-color-muted);
     text-decoration: none;
     transition: all var(--wf-duration-fast) ease;
     font-weight: 500;
   }
 
   .wf-sidebar__link:hover {
-    background-color: var(--wf-ink-100);
-    color: var(--wf-ink-900);
+    background-color: var(--wf-surface-muted);
+    color: var(--wf-color-text);
   }
 
   .wf-sidebar__link:focus-visible {
-    outline: 2px solid var(--wf-accent-500);
+    outline: 2px solid var(--wf-focus);
     outline-offset: 2px;
   }
 
   /* Active Link */
   .wf-sidebar__link.is-active {
-    background-color: var(--wf-accent-100);
-    color: var(--wf-accent-700);
+    background-color: var(--wf-color-accent-muted);
+    color: var(--wf-color-accent);
     font-weight: 600;
   }
 
@@ -3045,8 +3146,8 @@
   .wf-sidebar__badge {
     margin-left: auto;
     padding: 2px 8px;
-    background-color: var(--wf-accent-500);
-    color: white;
+    background-color: var(--wf-primary-bg);
+    color: var(--wf-primary-fg);
     border-radius: 12px;
     font-size: var(--wf-font-sm);
     font-weight: 600;
@@ -3061,7 +3162,7 @@
     padding: var(--wf-space-2) var(--wf-space-3);
     font-size: var(--wf-font-sm);
     font-weight: 600;
-    color: var(--wf-ink-600);
+    color: var(--wf-color-muted);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -3092,8 +3193,9 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: var(--wf-color-bg);
-    border: 1px solid var(--wf-ink-200);
+    background-color: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border-strong);
+    color: var(--wf-color-text);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -3103,18 +3205,18 @@
   }
 
   .wf-sidebar__toggle:hover {
-    background-color: var(--wf-ink-100);
+    background-color: var(--wf-surface-muted);
   }
 
   .wf-sidebar__toggle:focus-visible {
-    outline: 2px solid var(--wf-accent-500);
+    outline: 2px solid var(--wf-focus);
     outline-offset: 2px;
   }
 
   /* Sidebar Footer */
   .wf-sidebar__footer {
     padding: var(--wf-space-4);
-    border-top: 1px solid var(--wf-ink-200);
+    border-top: 1px solid var(--wf-color-border);
     margin-top: auto;
   }
 
@@ -3136,9 +3238,9 @@
       opacity: 0;
       visibility: hidden;
       transition:
-        opacity var(--wf-duration-normal) ease,
-        visibility var(--wf-duration-normal) ease;
-      z-index: 999;
+        opacity var(--wf-duration-base) ease,
+        visibility var(--wf-duration-base) ease;
+      z-index: var(--wf-z-drawer-backdrop);
     }
 
     .wf-sidebar-backdrop.is-visible {
@@ -3164,13 +3266,26 @@
     padding: 0;
     margin: 0;
     padding-left: var(--wf-space-6);
-    max-height: 0;
+    /*
+     * 実際の高さ（auto）まで補間する。interpolate-size 非対応のブラウザでは即時に開閉する。
+     * 閉じている間は visibility で隠し、中のリンクにフォーカスが移らないようにする。
+     */
+    /* stylelint-disable-next-line property-no-unknown -- 新しいプロパティのため stylelint が未対応 */
+    interpolate-size: allow-keywords;
+    height: 0;
     overflow: hidden;
-    transition: max-height var(--wf-duration-normal) ease;
+    visibility: hidden;
+    transition:
+      height var(--wf-duration-base) ease,
+      visibility 0s linear var(--wf-duration-base);
   }
 
   .wf-sidebar__item.is-expanded .wf-sidebar__submenu {
-    max-height: 500px;
+    height: auto;
+    visibility: visible;
+    transition:
+      height var(--wf-duration-base) ease,
+      visibility 0s;
   }
 
   .wf-sidebar__submenu .wf-sidebar__link {
@@ -3242,7 +3357,7 @@
   .wf-switch:checked::after {
     /* Move horizontally by innerWidth - knobWidth - leftOffset*2 = 34 - 16 - 2*2 = 14px */
     transform: translate(14px, -50%);
-    background: var(--wf-surface-base);
+    background: var(--wf-color-accent-fg);
   }
   .wf-switch:focus {
     outline: 2px solid var(--wf-focus);
@@ -3260,7 +3375,7 @@
  * @description Range component.
  * @selector .wf-range
  * @variants 
- * @variables --wf-color-border, --wf-radius-full, --wf-color-accent, --wf-surface-base, --wf-focus
+ * @variables --wf-color-border-strong, --wf-radius-full, --wf-color-accent, --wf-color-accent-fg, --wf-focus
  */
 @layer components {
   /* Range */
@@ -3278,7 +3393,7 @@
   /* WebKit track */
   .wf-range::-webkit-slider-runnable-track {
     height: var(--_track-h);
-    background: var(--wf-color-border);
+    background: var(--wf-color-border-strong);
     border-radius: var(--wf-radius-full);
   }
   .wf-range::-webkit-slider-thumb {
@@ -3288,7 +3403,7 @@
     border-radius: 50%;
     background: var(--wf-color-accent);
     cursor: pointer;
-    border: 2px solid var(--wf-surface-base);
+    border: 2px solid var(--wf-color-accent-fg);
     /* center the thumb over the track */
     margin-top: calc((var(--_thumb) - var(--_track-h)) / -2);
   }
@@ -3297,12 +3412,12 @@
     box-shadow: 0 0 0 3px var(--wf-focus);
   }
   .wf-range:focus-visible::-webkit-slider-runnable-track {
-    background: var(--wf-color-border-strong);
+    background: var(--wf-color-accent);
   }
   /* Firefox track */
   .wf-range::-moz-range-track {
     height: var(--_track-h);
-    background: var(--wf-color-border);
+    background: var(--wf-color-border-strong);
     border-radius: var(--wf-radius-full);
   }
   .wf-range::-moz-range-thumb {
@@ -3311,14 +3426,14 @@
     border-radius: 50%;
     background: var(--wf-color-accent);
     cursor: pointer;
-    border: 2px solid var(--wf-surface-base);
+    border: 2px solid var(--wf-color-accent-fg);
   }
   /* Focus visible (Firefox) */
   .wf-range:focus-visible::-moz-range-thumb {
     box-shadow: 0 0 0 3px var(--wf-focus);
   }
   .wf-range:focus-visible::-moz-range-track {
-    background: var(--wf-color-border-strong);
+    background: var(--wf-color-accent);
   }
 }
 /*!
@@ -3339,6 +3454,7 @@
   .wf-input-group > .wf-select,
   .wf-input-group > .wf-textarea {
     flex: 1 1 auto;
+    min-width: 0;
     border-radius: 0;
   }
   .wf-input-group > .wf-input:first-child {
@@ -3364,6 +3480,11 @@
   .wf-input-group__append .wf-input-group__text {
     border-top-right-radius: var(--wf-radius-md);
     border-bottom-right-radius: var(--wf-radius-md);
+  }
+  .wf-input-group > .wf-btn,
+  .wf-input-group > .wf-input-group__text {
+    flex: 0 0 auto;
+    white-space: nowrap;
   }
   .wf-input-group > .wf-btn {
     border-radius: 0;
@@ -3451,6 +3572,488 @@
     border: 1px solid var(--wf-color-border-strong);
     border-radius: var(--wf-radius-md);
     background: var(--wf-surface-base);
+  }
+}
+/*!
+ * @component Snackbar
+ * @description Snackbar component.
+ * @selector .wf-snackbar-container
+ * @variants .wf-snackbar-container--top-left, .wf-snackbar-container--top-right, .wf-snackbar-container--bottom-left, .wf-snackbar-container--bottom-right, .wf-snackbar-container--top-center
+ * @variables --wf-space-2, --wf-space-4, --wf-space-3, --wf-surface-base, --wf-color-border
+ */
+@layer components {
+  /* Snackbar - Stack-managed notifications */
+  .wf-snackbar-container {
+    position: fixed;
+    z-index: var(--wf-z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: var(--wf-space-2);
+    padding: var(--wf-space-4);
+    pointer-events: none;
+    max-width: 400px;
+  }
+
+  .wf-snackbar-container--top-left {
+    top: 0;
+    left: 0;
+  }
+
+  .wf-snackbar-container--top-right {
+    top: 0;
+    right: 0;
+  }
+
+  .wf-snackbar-container--bottom-left {
+    bottom: 0;
+    left: 0;
+  }
+
+  .wf-snackbar-container--bottom-right {
+    bottom: 0;
+    right: 0;
+  }
+
+  .wf-snackbar-container--top-center {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .wf-snackbar-container--bottom-center {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  .wf-snackbar {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    gap: var(--wf-space-3);
+    padding: var(--wf-space-3) var(--wf-space-4);
+    background: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border);
+    border-left: 3px solid var(--wf-color-accent);
+    border-radius: var(--wf-radius-md);
+    box-shadow: var(--wf-shadow-md);
+    min-width: 280px;
+    max-width: 400px;
+    pointer-events: auto;
+    animation-name: wf-snackbar-in;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-duration-base));
+    animation-timing-function: var(--wf-ease-out);
+  }
+
+  .wf-snackbar__content {
+    flex: 1;
+    font-size: var(--wf-font-sm);
+    line-height: var(--wf-leading-normal);
+    color: var(--wf-color-text);
+  }
+
+  .wf-snackbar__message {
+    margin: 0;
+  }
+
+  .wf-snackbar__close {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    background: transparent;
+    border: none;
+    color: var(--wf-color-muted);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--wf-radius-sm);
+    transition: color var(--wf-duration-fast) var(--wf-ease-out);
+  }
+
+  .wf-snackbar__close:hover {
+    color: var(--wf-color-text);
+    background: var(--wf-surface-muted);
+  }
+
+  .wf-snackbar__close:focus-visible {
+    outline: 2px solid var(--wf-focus);
+    outline-offset: 2px;
+  }
+
+  /* Variants */
+  .wf-snackbar--success {
+    border-left-color: var(--wf-success-text);
+  }
+
+  .wf-snackbar--success .wf-snackbar__message {
+    color: var(--wf-success-text);
+  }
+
+  .wf-snackbar--warning {
+    border-left-color: var(--wf-warning-text);
+  }
+
+  .wf-snackbar--warning .wf-snackbar__message {
+    color: var(--wf-warning-text);
+  }
+
+  .wf-snackbar--danger {
+    border-left-color: var(--wf-danger-text);
+  }
+
+  .wf-snackbar--danger .wf-snackbar__message {
+    color: var(--wf-danger-text);
+  }
+
+  .wf-snackbar--info {
+    border-left-color: var(--wf-color-accent);
+  }
+
+  .wf-snackbar--info .wf-snackbar__message {
+    color: var(--wf-color-accent);
+  }
+
+  /* Animation */
+  .wf-snackbar.is-removing {
+    animation-name: wf-slide-up-reverse;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-duration-base));
+    animation-timing-function: var(--wf-ease-in);
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes wf-snackbar-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes wf-slide-up-reverse {
+    from {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    to {
+      opacity: 0;
+      transform: translateY(-8px) scale(0.95);
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .wf-snackbar {
+      animation: none;
+    }
+
+    .wf-snackbar.is-removing {
+      animation: none;
+      opacity: 0;
+    }
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 600px) {
+    .wf-snackbar-container {
+      left: var(--wf-space-2);
+      right: var(--wf-space-2);
+      max-width: none;
+      padding: var(--wf-space-2);
+    }
+
+    .wf-snackbar {
+      min-width: 0;
+      max-width: none;
+    }
+
+    .wf-snackbar-container--top-center,
+    .wf-snackbar-container--bottom-center {
+      left: var(--wf-space-2);
+      right: var(--wf-space-2);
+      transform: none;
+    }
+  }
+}
+/*!
+ * @component Data Table
+ * @description Data Table component.
+ * @selector .wf-data-table
+ * @variants .wf-data-table--striped, .wf-data-table--bordered
+ * @variables --wf-surface-base, --wf-space-4, --wf-color-border, --wf-space-2, --wf-space-3
+ */
+@layer components {
+  /* Data Table - Enhanced table with sort and filter */
+  .wf-data-table {
+    width: 100%;
+    background: var(--wf-surface-base);
+  }
+
+  .wf-data-table__toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--wf-space-4);
+    padding: var(--wf-space-4);
+    border-bottom: 1px solid var(--wf-color-border);
+    flex-wrap: wrap;
+  }
+
+  .wf-data-table__search {
+    flex: 1;
+    min-width: 200px;
+    max-width: 400px;
+  }
+
+  .wf-data-table__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--wf-space-2);
+  }
+
+  .wf-data-table__wrapper {
+    overflow-x: auto;
+  }
+
+  .wf-data-table__table {
+    width: 100%;
+    min-width: 500px;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: var(--wf-surface-base);
+  }
+
+  .wf-data-table__table th,
+  .wf-data-table__table td {
+    padding: var(--wf-space-3) var(--wf-space-4);
+    border-bottom: 1px solid var(--wf-color-border);
+    text-align: left;
+  }
+
+  .wf-data-table__table thead th {
+    background: var(--wf-surface-base);
+    position: relative;
+    font-weight: 700;
+    user-select: none;
+  }
+
+  .wf-data-table__sort {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--wf-space-1);
+    background: none;
+    border: 0;
+    padding: 0;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+  }
+
+  .wf-data-table__sort:hover {
+    color: var(--wf-color-accent);
+  }
+
+  .wf-data-table__sort-icon {
+    font-size: 0.75em;
+    color: var(--wf-color-muted);
+    opacity: 0;
+    transition: opacity var(--wf-duration-fast) var(--wf-ease-out);
+  }
+
+  .wf-data-table__table th:hover .wf-data-table__sort-icon,
+  .wf-data-table__table th[aria-sort] .wf-data-table__sort-icon {
+    opacity: 1;
+  }
+
+  .wf-data-table__table th[aria-sort="ascending"] .wf-data-table__sort-icon::before {
+    content: "▲";
+  }
+
+  .wf-data-table__table th[aria-sort="descending"] .wf-data-table__sort-icon::before {
+    content: "▼";
+  }
+
+  .wf-data-table__table tbody tr {
+    transition: background-color var(--wf-duration-fast) var(--wf-ease-out);
+  }
+
+  .wf-data-table__table tbody tr:hover {
+    background: var(--wf-surface-subtle);
+  }
+
+  .wf-data-table__table tbody tr.is-selected {
+    background: var(--wf-surface-muted);
+  }
+
+  .wf-data-table__checkbox {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+  }
+
+  .wf-data-table__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--wf-space-4);
+    padding: var(--wf-space-4);
+    border-top: 1px solid var(--wf-color-border);
+    flex-wrap: wrap;
+  }
+
+  .wf-data-table__info {
+    color: var(--wf-color-muted);
+    font-size: var(--wf-font-sm);
+  }
+
+  .wf-data-table__pagination {
+    display: flex;
+    align-items: center;
+    gap: var(--wf-space-2);
+  }
+
+  .wf-data-table__empty {
+    padding: var(--wf-space-8);
+    text-align: center;
+    color: var(--wf-color-muted);
+  }
+
+  /* Variants */
+  .wf-data-table--striped tbody tr:nth-child(odd) {
+    background: var(--wf-surface-muted);
+  }
+
+  .wf-data-table--bordered {
+    border: 1px solid var(--wf-color-border);
+  }
+
+  .wf-data-table--bordered th,
+  .wf-data-table--bordered td {
+    border-right: 1px solid var(--wf-color-border);
+  }
+
+  .wf-data-table--bordered td:last-child,
+  .wf-data-table--bordered th:last-child {
+    border-right: 0;
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 600px) {
+    .wf-data-table__toolbar {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .wf-data-table__search {
+      max-width: none;
+    }
+
+    .wf-data-table__footer {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .wf-data-table__pagination {
+      justify-content: center;
+    }
+  }
+}
+/*!
+ * @component Autocomplete
+ * @description Autocomplete component.
+ * @selector .wf-autocomplete
+ * @variants 
+ * @variables --wf-space-1, --wf-surface-base, --wf-color-border, --wf-radius-md, --wf-shadow-lg
+ */
+@layer components {
+  /* Autocomplete */
+  .wf-autocomplete {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+  }
+
+  .wf-autocomplete__input {
+    width: 100%;
+  }
+
+  .wf-autocomplete__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    z-index: var(--wf-z-dropdown);
+    margin-top: var(--wf-space-1);
+    background: var(--wf-surface-base);
+    border: 1px solid var(--wf-color-border);
+    border-radius: var(--wf-radius-md);
+    box-shadow: var(--wf-shadow-lg);
+    max-height: 300px;
+    overflow-y: auto;
+    display: none;
+  }
+
+  @keyframes wf-autocomplete-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .wf-autocomplete__menu.is-open {
+    display: block;
+    animation-name: wf-autocomplete-in;
+    animation-duration: calc(var(--wf-enable-motion, 1) * var(--wf-duration-fast));
+    animation-timing-function: var(--wf-ease-out);
+  }
+
+  .wf-autocomplete__item {
+    display: block;
+    padding: var(--wf-space-3) var(--wf-space-4);
+    color: var(--wf-color-text);
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color var(--wf-duration-fast) var(--wf-ease-out);
+  }
+
+  .wf-autocomplete__item:hover,
+  .wf-autocomplete__item.is-highlighted {
+    background: var(--wf-surface-subtle);
+    color: var(--wf-color-text);
+  }
+
+  .wf-autocomplete__item.is-selected {
+    background: var(--wf-surface-muted);
+    color: var(--wf-color-accent);
+  }
+
+  .wf-autocomplete__empty {
+    padding: var(--wf-space-4);
+    text-align: center;
+    color: var(--wf-color-muted);
+    font-size: var(--wf-font-sm);
+  }
+
+  .wf-autocomplete__loading {
+    padding: var(--wf-space-4);
+    text-align: center;
+    color: var(--wf-color-muted);
+    font-size: var(--wf-font-sm);
+  }
+
+  /* Mobile responsive */
+  @media (max-width: 600px) {
+    .wf-autocomplete__menu {
+      max-height: 200px;
+    }
   }
 }
 @layer utilities {
@@ -3966,62 +4569,27 @@
  * @description Header component.
  * @selector .wf-header
  * @variants .wf-header--no-stripe, .wf-header-noren
- * @variables --wf-sumi, --wf-surface-base, --wf-color-accent, --wf-surface-subtle
+ * @variables --wf-header-bg, --wf-header-fg, --wf-color-accent, --wf-surface-subtle
  */
 @layer components {
   /* Header - Default style with noren (暖簾) design */
-  /* 墨色グラデーション + ストライプ装飾がデフォルト */
-  .wf-header {
-    background: linear-gradient(180deg, var(--wf-sumi) 0%, rgba(44, 44, 44, 0.95) 100%);
-    color: var(--wf-surface-base);
-    padding: 2rem 0;
-    position: relative;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-
-  .wf-header h1,
-  .wf-header h2 {
-    margin: 0;
-    font-weight: 900;
-    letter-spacing: 0.2em;
-  }
-
-  /* Theme color stripe (テーマカラーストライプ) - デフォルトで全ヘッダーに適用 */
-  .wf-header::after {
-    content: "";
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 4px;
-    background: repeating-linear-gradient(
-      90deg,
-      var(--wf-color-accent),
-      var(--wf-color-accent) 10px,
-      var(--wf-surface-subtle) 10px,
-      var(--wf-surface-subtle) 20px,
-      var(--wf-color-accent) 20px,
-      var(--wf-color-accent) 30px
-    );
-  }
-
-  /* Modifier: ストライプなしヘッダー */
-  .wf-header--no-stripe::after {
-    display: none;
-  }
-
-  /* Alias: .wf-header-noren (後方互換性のため維持) */
-  /* 既存のコードで .wf-header-noren を使用している場合も動作します */
+  /* 墨色グラデーション + ストライプ装飾がデフォルト。墨色はモードによらず固定なので、文字色も固定の --wf-header-fg を使う */
+  /* .wf-header-noren は後方互換のためのエイリアス */
+  .wf-header,
   .wf-header-noren {
-    background: linear-gradient(180deg, var(--wf-sumi) 0%, rgba(44, 44, 44, 0.95) 100%);
-    color: var(--wf-surface-base);
+    background: linear-gradient(
+      180deg,
+      var(--wf-header-bg) 0%,
+      color-mix(in srgb, var(--wf-header-bg) 95%, transparent) 100%
+    );
+    color: var(--wf-header-fg);
     padding: 2rem 0;
     position: relative;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
   }
-
+  .wf-header h1,
+  .wf-header h2,
   .wf-header-noren h1,
   .wf-header-noren h2 {
     margin: 0;
@@ -4029,6 +4597,8 @@
     letter-spacing: 0.2em;
   }
 
+  /* Theme color stripe (テーマカラーストライプ) - デフォルトで全ヘッダーに適用 */
+  .wf-header::after,
   .wf-header-noren::after {
     content: "";
     position: absolute;
@@ -4038,12 +4608,17 @@
     height: 4px;
     background: repeating-linear-gradient(
       90deg,
-      var(--wf-color-accent),
-      var(--wf-color-accent) 10px,
-      var(--wf-surface-subtle) 10px,
-      var(--wf-surface-subtle) 20px,
-      var(--wf-color-accent) 20px,
-      var(--wf-color-accent) 30px
+      var(--wf-primary-bg),
+      var(--wf-primary-bg) 10px,
+      var(--wf-header-fg) 10px,
+      var(--wf-header-fg) 20px,
+      var(--wf-primary-bg) 20px,
+      var(--wf-primary-bg) 30px
     );
+  }
+
+  /* Modifier: ストライプなしヘッダー */
+  .wf-header--no-stripe::after {
+    display: none;
   }
 }

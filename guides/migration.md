@@ -1,15 +1,71 @@
-# Migration Guide: v1.0.0 → v1.1.0
-
-このガイドは wafoo-css v1.0.0 から v1.1.0 への移行方法を説明します。
+# Migration Guide
 
 ## 目次
 
-- [新機能概要](#新機能概要)
-- [tokens.json の拡充](#tokensjson-の拡充)
-- [新機能の活用](#新機能の活用)
-- [移行チェックリスト](#移行チェックリスト)
+- [v1.x → v2.0.0](#v1x--v200)
+  - [対応ブラウザ](#対応ブラウザ)
+  - [配色トークンの変更](#配色トークンの変更)
+  - [レイアウト・部品の変更](#レイアウト部品の変更)
+  - [ファイル名の変更](#ファイル名の変更)
+- [v1.0.0 → v1.1.0](#v100--v110)
+  - [新機能概要](#新機能概要)
+  - [tokens.json の拡充](#tokensjson-の拡充)
+  - [新機能の活用](#新機能の活用)
+  - [移行チェックリスト](#移行チェックリスト)
 
 ---
+
+## v1.x → v2.0.0
+
+v2.0.0 は、配色を WCAG 2.1 AA に合わせて作り直し、効いていなかったレスポンシブ指定などの不具合を修正したリリースです。見た目と対応ブラウザが変わるため、次の点を確認してください。変更の一覧は [CHANGELOG](../CHANGELOG.md) にあります。
+
+### 対応ブラウザ
+
+配色トークンを `light-dark()` で定義しているため、**Chrome / Edge 123+、Safari 17.5+、Firefox 120+** が必要です。これより古いブラウザをサポートする必要がある場合は v1.1.0 を使い続けてください。
+
+### 配色トークンの変更
+
+配色のコントラストを WCAG 2.1 AA に合わせるため、次の点が変わります。独自 CSS でトークンを参照している場合は確認してください。
+
+| 以前の書き方                                          | 推奨する書き方                                            | 理由                                                            |
+| ----------------------------------------------------- | --------------------------------------------------------- | --------------------------------------------------------------- |
+| `color: var(--wf-success)`（warning / danger も同様） | `color: var(--wf-success-text)`                           | 塗り用の色は文字として読めない場合がある（杏は白背景で 1.73:1） |
+| `background: var(--wf-warning); color: #fff`          | `color: var(--wf-warning-fg)`                             | warning / info の塗りの上は暗色の文字になる                     |
+| `color: var(--wf-surface-base)`（塗りの上の文字）     | `var(--wf-primary-fg)` または `var(--wf-color-accent-fg)` | ダークモードで surface が暗色になり読めなくなる                 |
+| `var(--wf-ink-900)` などの階調を文字色・背景に使う    | `var(--wf-color-text)` など意味を持つトークン             | 階調はダークモードで切り替わらない                              |
+
+- 色テーマの `--wf-color-accent` / `--wf-link-color` は、テーマ色そのものではなく「文字に使える濃さに調整した色」になりました。淡いテーマ色は `--wf-primary-bg` に入っています。
+- 配色トークンは `light-dark()` で定義しています。ダークモードの固定は `data-theme="dark"`、ライトの固定は `data-theme="light"` です。
+- 各テーマの `--wf-info` / `--wf-secondary` は削除しました。`--wf-color-info` / `--wf-color-secondary` を使ってください。
+- `--wf-success-*` / `--wf-warning-*` / `--wf-danger-*` の階調は、500 が各伝統色（常盤・杏・茜）になるよう値が変わりました。
+
+### レイアウト・部品の変更
+
+| 変更                                                                      | 対応                                                                                                                  |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `.wf-label` の◆マーカーが既定では出なくなった                             | 残したい場合は `class="wf-label wf-label-mark"` にする                                                                |
+| グリッド・レスポンシブユーティリティが正しく効くようになった              | これまで全幅で縦に並んでいた `.wf-col-*` が、600px 以上で指定どおりの幅になる。縦積みを前提に組んでいた画面は確認する |
+| z-index の値が変わった（モーダル 9999 → 1300、トースト 9999 → 1600 など） | 独自要素の z-index を固定値で合わせていた場合は `var(--wf-z-*)` を使う                                                |
+| ポップオーバーの `is-arrow-top` / `is-arrow-bottom`                       | JS で配置する場合は不要（`is-top` / `is-bottom` に連動して矢印が出る）                                                |
+
+### ファイル名の変更
+
+ルート直下にあったガイドは `guides/` に移動しました。npm パッケージ内の `REFERENCE.md` を参照していた場合は `guides/reference.md` に変更してください。
+
+| 以前                      | 現在                             |
+| ------------------------- | -------------------------------- |
+| `REFERENCE.md`            | `guides/reference.md`            |
+| `COMPONENTS.md`           | `guides/components.md`           |
+| `ACCESSIBILITY.md`        | `guides/accessibility.md`        |
+| `MIGRATION.md`            | `guides/migration.md`            |
+| `TAILWIND_INTEGRATION.md` | `guides/tailwind-integration.md` |
+| `AI_PROMPTS.md`           | `guides/ai-prompts.md`           |
+
+---
+
+## v1.0.0 → v1.1.0
+
+このセクションは wafoo-css v1.0.0 から v1.1.0 への移行方法を説明します。
 
 ## 新機能概要
 
@@ -328,8 +384,7 @@ v2.0.0 では `scripts/validate-tokens.js` を使用してトークンファイ�
 質問や問題がある場合は、以下のリソースを活用してください：
 
 - [GitHub Issues](https://github.com/nigh2tie/wafoo-css/issues)
-- [CHANGELOG.md](./CHANGELOG.md)
-- [トークン命名規則](./private_docs/TOKEN_NAMING_CONVENTION.md)
+- [CHANGELOG.md](../CHANGELOG.md)
 
 ---
 

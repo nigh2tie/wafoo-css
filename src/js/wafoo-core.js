@@ -2001,10 +2001,13 @@
 
           const button = document.createElement("button");
           button.className = "wf-data-table__sort";
-          button.innerHTML = `${th.textContent || ""}<span class="wf-data-table__sort-icon"></span>`;
-          button.setAttribute("aria-label", `ソート: ${th.textContent || ""}`);
-          th.innerHTML = "";
-          th.appendChild(button);
+          // 見出し文字列は textContent のまま扱う（innerHTML に戻すと HTML として解釈される）
+          const label = th.textContent || "";
+          const icon = document.createElement("span");
+          icon.className = "wf-data-table__sort-icon";
+          button.append(label, icon);
+          button.setAttribute("aria-label", `ソート: ${label}`);
+          th.replaceChildren(button);
 
           button.addEventListener("click", () => {
             if (currentSort.column === col.key) {

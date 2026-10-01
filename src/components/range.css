@@ -3,7 +3,7 @@
  * @description Range component.
  * @selector .wf-range
  * @variants 
- * @variables --wf-color-border, --wf-radius-full, --wf-color-accent, --wf-surface-base, --wf-focus
+ * @variables --wf-color-border-strong, --wf-radius-full, --wf-color-accent, --wf-color-accent-fg, --wf-focus
  */
 @layer components {
   /* Range */
@@ -21,7 +21,7 @@
   /* WebKit track */
   .wf-range::-webkit-slider-runnable-track {
     height: var(--_track-h);
-    background: var(--wf-color-border);
+    background: var(--wf-color-border-strong);
     border-radius: var(--wf-radius-full);
   }
   .wf-range::-webkit-slider-thumb {
@@ -31,7 +31,7 @@
     border-radius: 50%;
     background: var(--wf-color-accent);
     cursor: pointer;
-    border: 2px solid var(--wf-surface-base);
+    border: 2px solid var(--wf-color-accent-fg);
     /* center the thumb over the track */
     margin-top: calc((var(--_thumb) - var(--_track-h)) / -2);
   }
@@ -40,12 +40,12 @@
     box-shadow: 0 0 0 3px var(--wf-focus);
   }
   .wf-range:focus-visible::-webkit-slider-runnable-track {
-    background: var(--wf-color-border-strong);
+    background: var(--wf-color-accent);
   }
   /* Firefox track */
   .wf-range::-moz-range-track {
     height: var(--_track-h);
-    background: var(--wf-color-border);
+    background: var(--wf-color-border-strong);
     border-radius: var(--wf-radius-full);
   }
   .wf-range::-moz-range-thumb {
@@ -54,13 +54,13 @@
     border-radius: 50%;
     background: var(--wf-color-accent);
     cursor: pointer;
-    border: 2px solid var(--wf-surface-base);
+    border: 2px solid var(--wf-color-accent-fg);
   }
   /* Focus visible (Firefox) */
   .wf-range:focus-visible::-moz-range-thumb {
     box-shadow: 0 0 0 3px var(--wf-focus);
   }
   .wf-range:focus-visible::-moz-range-track {
-    background: var(--wf-color-border-strong);
+    background: var(--wf-color-accent);
   }
 }

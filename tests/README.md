@@ -16,10 +16,21 @@
 
 WCAG 2.1 AA準拠をチェックします。
 
-- コントラスト比
+- コントラスト比（`color-contrast.spec.js` は `docs/color-check.html` の全コンポーネントを全テーマ × ライト／ダークで検証）
 - ARIA属性
 - キーボードナビゲーション
 - フォーカス管理
+
+### 視覚回帰テスト (`visual.spec.js`)
+
+docs のページをスクリーンショットで比較します。比較用の画像は OS・ブラウザごとに描画が異なるため、リポジトリには含めていません（`.gitignore` 対象）。画像がない環境ではスキップされ、CI でも実行しません。
+
+手元で使うときは、変更前に基準画像を作成してから比較します。
+
+```bash
+npm run test:visual:update   # 基準画像を作成（tests/visual.spec.js-snapshots/）
+npm test                     # 変更後に比較
+```
 
 ### テストフィクスチャ (`tests/fixtures/`)
 

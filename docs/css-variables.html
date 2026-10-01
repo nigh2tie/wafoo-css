@@ -428,7 +428,7 @@
             </tr>
             <tr>
               <td><span class="var-name">--wf-accent-400</span></td>
-              <td><span class="var-value">#9f93bd</span></td>
+              <td><span class="var-value">#8f82a8</span></td>
               <td>-</td>
               <td><span class="color-swatch" style="background: var(--wf-accent-400)"></span></td>
             </tr>
@@ -480,43 +480,51 @@
           <tbody>
             <tr>
               <td><span class="var-name">--wf-color-text</span></td>
-              <td><span class="var-value">var(--wf-ink-900)</span></td>
+              <td><span class="var-value">light-dark(var(--wf-ink-900), #e5e5e5)</span></td>
               <td>メインテキスト色</td>
               <td><span style="color: var(--wf-color-text)">サンプル</span></td>
             </tr>
             <tr>
               <td><span class="var-name">--wf-color-muted</span></td>
-              <td><span class="var-value">var(--wf-ink-500)</span></td>
+              <td><span class="var-value">light-dark(var(--wf-ink-700), #a3a3a3)</span></td>
               <td>控えめなテキスト</td>
               <td><span style="color: var(--wf-color-muted)">サンプル</span></td>
             </tr>
             <tr>
               <td><span class="var-name">--wf-color-accent</span></td>
-              <td><span class="var-value">var(--wf-accent-500)</span></td>
+              <td>
+                <span class="var-value">
+                  light-dark(var(--wf-accent-500), var(--wf-accent-300))
+                </span>
+              </td>
               <td>アクセントカラー</td>
               <td><span class="color-swatch" style="background: var(--wf-color-accent)"></span></td>
             </tr>
             <tr>
               <td><span class="var-name">--wf-link-color</span></td>
-              <td><span class="var-value">var(--wf-accent-600)</span></td>
+              <td>
+                <span class="var-value">
+                  light-dark(var(--wf-accent-600), var(--wf-accent-300))
+                </span>
+              </td>
               <td>リンク色</td>
               <td><a href="#" style="color: var(--wf-link-color)">リンク</a></td>
             </tr>
             <tr>
               <td><span class="var-name">--wf-color-bg</span></td>
-              <td><span class="var-value">#e7ddd4</span></td>
+              <td><span class="var-value">light-dark(#e7ddd4, #121212)</span></td>
               <td>背景色（灰桜）</td>
               <td><span class="color-swatch" style="background: var(--wf-color-bg)"></span></td>
             </tr>
             <tr>
               <td><span class="var-name">--wf-surface-base</span></td>
-              <td><span class="var-value">#ffffff</span></td>
+              <td><span class="var-value">light-dark(#ffffff, #1f1f1f)</span></td>
               <td>カード背景</td>
               <td><span class="color-swatch" style="background: var(--wf-surface-base)"></span></td>
             </tr>
             <tr>
               <td><span class="var-name">--wf-surface-subtle</span></td>
-              <td><span class="var-value">#faf7f5</span></td>
+              <td><span class="var-value">light-dark(#faf7f5, #2a2a2a)</span></td>
               <td>控えめな背景</td>
               <td>
                 <span class="color-swatch" style="background: var(--wf-surface-subtle)"></span>
@@ -524,7 +532,7 @@
             </tr>
             <tr>
               <td><span class="var-name">--wf-surface-muted</span></td>
-              <td><span class="var-value">#f5f2ef</span></td>
+              <td><span class="var-value">light-dark(#f5f2ef, #333333)</span></td>
               <td>強調された背景</td>
               <td>
                 <span class="color-swatch" style="background: var(--wf-surface-muted)"></span>
@@ -546,19 +554,19 @@
           <tbody>
             <tr>
               <td><span class="var-name">--wf-success</span></td>
-              <td><span class="var-value">#2e7d32</span></td>
+              <td><span class="var-value">var(--wf-tokiwa) #007b43</span></td>
               <td>成功メッセージ</td>
               <td><span class="color-swatch" style="background: var(--wf-success)"></span></td>
             </tr>
             <tr>
               <td><span class="var-name">--wf-warning</span></td>
-              <td><span class="var-value">#b26a00</span></td>
+              <td><span class="var-value">var(--wf-anzu) #f7b977</span></td>
               <td>警告メッセージ</td>
               <td><span class="color-swatch" style="background: var(--wf-warning)"></span></td>
             </tr>
             <tr>
               <td><span class="var-name">--wf-danger</span></td>
-              <td><span class="var-value">#b00020</span></td>
+              <td><span class="var-value">var(--wf-akane) #b7282e</span></td>
               <td>エラーメッセージ</td>
               <td><span class="color-swatch" style="background: var(--wf-danger)"></span></td>
             </tr>

@@ -3,7 +3,7 @@
  * @description Rating component.
  * @selector .wf-rating
  * @variants .wf-rating-sm, .wf-rating-lg
- * @variables --wf-space-1, --wf-icon-md, --wf-ink-200, --wf-duration-fast, --wf-accent-500
+ * @variables --wf-space-1, --wf-icon-md, --wf-color-border-strong, --wf-duration-fast, --wf-color-accent
  */
 /**
  * Rating/Star Component
@@ -25,20 +25,20 @@
     height: var(--wf-icon-md);
     font-size: var(--wf-icon-md);
     line-height: 1;
-    color: var(--wf-ink-200);
+    color: var(--wf-color-border-strong);
     transition: color var(--wf-duration-fast) ease;
     cursor: default;
   }
 
   /* Filled Star */
   .wf-rating__star.is-filled {
-    color: var(--wf-accent-500);
+    color: var(--wf-color-accent);
   }
 
   /* Half Star */
   .wf-rating__star.is-half {
     position: relative;
-    color: var(--wf-ink-200);
+    color: var(--wf-color-border-strong);
   }
 
   .wf-rating__star.is-half::before {
@@ -48,7 +48,7 @@
     left: 0;
     width: 50%;
     overflow: hidden;
-    color: var(--wf-accent-500);
+    color: var(--wf-color-accent);
   }
 
   /* Interactive Rating (Editable) */
@@ -58,12 +58,12 @@
 
   .wf-rating.is-interactive .wf-rating__star:hover,
   .wf-rating.is-interactive .wf-rating__star:focus-visible {
-    color: var(--wf-accent-400);
+    color: var(--wf-link-color-hover);
     transform: scale(1.1);
   }
 
   .wf-rating.is-interactive .wf-rating__star:focus-visible {
-    outline: 2px solid var(--wf-accent-500);
+    outline: 2px solid var(--wf-focus);
     outline-offset: 2px;
     border-radius: 2px;
   }
@@ -85,7 +85,7 @@
   .wf-rating__value {
     margin-left: var(--wf-space-2);
     font-size: var(--wf-font-sm);
-    color: var(--wf-ink-600);
+    color: var(--wf-color-muted);
   }
 
   /* Disabled State */
